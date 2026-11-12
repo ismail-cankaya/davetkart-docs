@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gökyüzü Rüyası — video arka plan onayı</title>
+<style>
+  :root{
+    --ink:#2f3b46; --muted:#7b8794; --line:#e4e7ea; --bg:#f6f7f8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  header{padding:32px 28px 8px;max-width:1180px;margin:0 auto}
+  h1{margin:0 0 6px;font-size:22px;font-weight:600;letter-spacing:-.01em}
+  header p{margin:0;color:var(--muted);font-size:14px}
+  .bar{max-width:1180px;margin:18px auto 0;padding:0 28px;display:flex;gap:10px;flex-wrap:wrap}
+  button{border:1px solid var(--line);background:#fff;border-radius:999px;
+         padding:7px 16px;font-size:13px;color:var(--ink);cursor:pointer}
+  button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .stage{max-width:1180px;margin:26px auto 60px;padding:0 28px;
+         display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:34px;align-items:start}
+  @media (max-width:900px){.stage{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+  .label{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+  .meta{font-size:12px;color:var(--muted);margin-top:10px}
+
+  /* Cihaz çerçeveleri */
+  .laptop{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000}
+  .phone{position:relative;width:268px;aspect-ratio:9/19.5;border-radius:34px;overflow:hidden;
+         background:#000;border:9px solid #12161a;box-shadow:0 18px 40px rgba(20,30,40,.22)}
+  video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
+  /* Davetiye metni — okunabilirlik testi için */
+  .overlay{position:absolute;inset:0;display:flex;flex-direction:column;
+           align-items:center;justify-content:center;text-align:center;
+           font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;color:#2b3a4f}
+  .overlay.hidden{display:none}
+  /* DugunGokyuzu.tsx içindeki scrim ile birebir aynı */
+  .scrim{position:absolute;inset:0;
+         background:linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.10) 50%,rgba(255,255,255,.55))}
+  .scrim.off{display:none}
+  .ov-in{position:relative;padding:0 8%}
+  .kicker{font-size:.72em;letter-spacing:.42em;text-transform:uppercase;color:#bd8078}
+  .names{font-size:3.1em;line-height:1.1;margin:.28em 0 .18em;font-weight:500}
+  .rule{width:52px;height:1px;background:currentColor;opacity:.45;margin:14px auto}
+  .date{letter-spacing:.28em;font-size:.86em;opacity:.85}
+  .laptop .overlay{font-size:20px}
+  .phone .overlay{font-size:15px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Gökyüzü Rüyası — davetiye arka plan videosu</h1>
+  <p>Aynı tasarımın iki bağımsız renderı: solda 1280×720 masaüstü, sağda 720×1280 mobil.
+     Videolar 15 sn, 24 fps, kusursuz döngülü, sessiz.</p>
+</header>
+
+<div class="bar">
+  <button id="btnText" aria-pressed="true">Davetiye metni</button>
+  <button id="btnScrim" aria-pressed="true">Okunabilirlik katmanı (scrim)</button>
+  <button id="btnCrop" aria-pressed="false">Mobilde masaüstü videosunu kullan (yanlış yöntem)</button>
+</div>
+
+<div class="stage">
+  <section class="card">
+    <div class="label">Masaüstü · gokyuzu-desktop.mp4</div>
+    <div class="laptop">
+      <video id="vDesk" autoplay muted loop playsinline preload="metadata"
+             poster="gokyuzu-desktop-poster.jpg">
+        <source src="gokyuzu-desktop.webm" type="video/webm" />
+        <source src="gokyuzu-desktop.mp4" type="video/mp4" />
+      </video>
+      <div class="scrim"></div>
+      <div class="overlay">
+        <div class="ov-in">
+          <div class="kicker">Düğün Davetiyemize</div>
+          <div class="names">Elif &amp; Mert</div>
+          <div class="rule"></div>
+          <div class="date">12 EYLÜL 2026 · 18.00</div>
+        </div>
+      </div>
+    </div>
+    <div class="meta">362 KB mp4 · 95 KB webm · poster 18 KB</div>
+  </section>
+
+  <section class="card">
+    <div class="label">Mobil · gokyuzu-mobile.mp4</div>
+    <div class="phone">
+      <video id="vPhone" autoplay muted loop playsinline preload="metadata"
+             poster="gokyuzu-mobile-poster.jpg">
+        <source src="gokyuzu-mobile.webm" type="video/webm" />
+        <source src="gokyuzu-mobile.mp4" type="video/mp4" />
+      </video>
+      <div class="scrim"></div>
+      <div class="overlay">
+        <div class="ov-in">
+          <div class="kicker">Düğün Davetiyemize</div>
+          <div class="names">Elif &amp; Mert</div>
+          <div class="rule"></div>
+          <div class="date">12 EYLÜL 2026 · 18.00</div>
+        </div>
+      </div>
+    </div>
+    <div class="meta">259 KB mp4 · 78 KB webm · poster 17 KB</div>
+  </section>
+</div>
+
+<script>
+  const phone = document.getElementById('vPhone');
+  const mobileSrc = [['gokyuzu-mobile.webm','video/webm'],['gokyuzu-mobile.mp4','video/mp4']];
+  const deskSrc   = [['gokyuzu-desktop.webm','video/webm'],['gokyuzu-desktop.mp4','video/mp4']];
+
+  function setPhoneSources(list, poster){
+    phone.innerHTML = '';
+    for (const [src,type] of list){
+      const s = document.createElement('source'); s.src = src; s.type = type; phone.appendChild(s);
+    }
+    phone.poster = poster;
+    phone.load();
+  }
+
+  function toggle(btn, fn){
+    btn.addEventListener('click', () => {
+      const on = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', String(!on));
+      fn(!on);
+    });
+  }
+
+  toggle(document.getElementById('btnText'), on =>
+    document.querySelectorAll('.overlay').forEach(e => e.classList.toggle('hidden', !on)));
+
+  toggle(document.getElementById('btnScrim'), on =>
+    document.querySelectorAll('.scrim').forEach(e => e.classList.toggle('off', !on)));
+
+  // Karşılaştırma: yatay videoyu telefona koyunca kadrajın ~%65'i kırpılır.
+  toggle(document.getElementById('btnCrop'), on =>
+    on ? setPhoneSources(deskSrc, 'gokyuzu-desktop-poster.jpg')
+       : setPhoneSources(mobileSrc, 'gokyuzu-mobile-poster.jpg'));
+</script>
+</body>
+</html>

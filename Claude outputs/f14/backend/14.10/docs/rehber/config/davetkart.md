@@ -1,0 +1,740 @@
+# `config/davetkart.php` — Eğitim Dokümanı
+
+> **Kapsanan dosya:** `davetkart-backend-php-laravel/config/davetkart.php`
+> **Yol haritasındaki yeri:** Adım 2 (ilk dosya)
+> **Ön koşul bilgi:** Yok. Bu doküman PHP'ye sıfırdan başlayan biri için yazıldı.
+
+---
+
+## 0. Bir dakikalık özet
+
+Bu dosya, uygulamanın **iş sabitlerini** tutan bir *ayar defteri*dir. Plan fiyatları,
+LCV kotası, dosya boyutu limitleri, cache süreleri burada yaşar. Hiç kod
+çalıştırmaz — sadece bir **PHP dizisi döndürür**. Laravel bu diziyi açılışta okur,
+hafızada tutar ve uygulamanın her yerinden `config('davetkart.tiers.gold.price')`
+gibi bir çağrıyla erişilebilir hâle getirir.
+
+Amaç tek cümleyle: **"Değişebilecek sayıları koddan ayır."**
+
+---
+
+## 1. PHP temelleri — dosyayı satır satır okumak
+
+Frontend'den (TypeScript) geliyorsun, o yüzden karşılıklarıyla anlatıyorum.
+
+### 1.1 `<?php`
+
+```php
+<?php
+```
+
+PHP dosyaları, "buradan itibarası PHP kodudur" anlamına gelen bu etiketle başlar.
+PHP tarihsel olarak HTML'in içine gömülen bir dildi (`<p><?php echo $ad; ?></p>`),
+bu yüzden böyle bir işarete ihtiyaç duyar.
+
+**Önemli kural:** Sadece PHP içeren dosyalarda **kapanış etiketi `?>` yazılmaz.**
+Yazarsan, etiketten sonraki görünmez bir boşluk/satır sonu tarayıcıya "çıktı" olarak
+gider ve `Headers already sent` hatası alırsın. PSR-12 standardı da bunu yasaklar.
+
+### 1.2 `declare(strict_types=1);`
+
+```php
+declare(strict_types=1);
+```
+
+PHP varsayılan olarak **gevşek tiplidir**: bir fonksiyon `int` beklerken `"5"`
+(string) gönderirsen PHP bunu sessizce `5`'e çevirir. Kulağa pratik gelir ama
+hataları saklar: `"5 adet"` gönderirsen o da `5` olur.
+
+`strict_types=1`, bu otomatik dönüşümü **kapatır**. Yanlış tip gönderirsen
+`TypeError` fırlar. TypeScript'teki `strict: true`'nun karşılığıdır.
+
+Bu satır **dosya bazlıdır** — her yeni PHP dosyasının başına yazacağız. Projede
+kural: istisnasız her dosyada bulunur.
+
+### 1.3 `return [ ... ];`
+
+```php
+return [
+    'currency' => 'TRY',
+];
+```
+
+Bu dosyanın **tek işi** budur: bir dizi döndürmek.
+
+- `[ ... ]` → PHP'nin dizi (array) sözdizimi. JS'teki `[]` ve `{}` bunun *ikisi
+  birden*dir; PHP'de tek bir `array` tipi hem liste hem sözlük görevi görür.
+- `'anahtar' => 'değer'` → JS'te `{ anahtar: 'değer' }` demek. PHP'de iki nokta
+  yerine **ok işareti** (`=>`) kullanılır.
+- Sonda `;` var çünkü `return` bir **deyimdir** (statement), her deyim noktalı
+  virgülle biter.
+- Son elemandan sonraki virgül (*trailing comma*) serbesttir ve **tercih edilir**:
+  yeni satır eklerken git diff'inde tek satır değişir.
+
+**"Bir dosya nasıl değer döndürür?"** PHP'de `include`/`require` ile çağrılan bir
+dosya, içindeki `return` ifadesinin sonucunu çağırana verir. Laravel tam olarak
+bunu yapar:
+
+```php
+$ayarlar = require 'config/davetkart.php';   // $ayarlar artık o dizi
+```
+
+### 1.4 Tek tırnak vs çift tırnak
+
+```php
+'TRY'        // tek tırnak: içeriği aynen alınır, hızlıdır
+"Merhaba $ad" // çift tırnak: içindeki değişkeni yerine koyar
+```
+
+Değişken enterpolasyonuna ihtiyaç yoksa **tek tırnak** kullanılır. Bu dosyada
+hepsi tek tırnak.
+
+### 1.5 İç içe diziler
+
+```php
+'tiers' => [
+    'standart' => ['rank' => 0, 'price' => 249, 'rsvp_limit' => 100],
+],
+```
+
+Dizinin değeri yine bir dizi olabilir. Burada `tiers` → `standart` → `price`
+şeklinde üç seviyeli bir ağaç kurduk. Laravel bu ağaçta **nokta notasyonuyla**
+gezinmemize izin verecek: `config('davetkart.tiers.standart.price')`.
+
+### 1.6 `null` ne demek?
+
+```php
+'rsvp_limit' => null,
+```
+
+`null` = "değer yok". `0` ile karıştırma: `0` bir sayıdır ve "sıfır misafir"
+anlamına gelirdi. Biz "sınırsız" demek istiyoruz, yani *limit diye bir şey yok* →
+`null`. Kodda kontrolü şöyle olacak:
+
+```php
+if ($limit !== null && $toplam > $limit) { /* kota aşıldı */ }
+```
+
+### 1.7 `60 * 60 * 6`
+
+```php
+'public_invitation_ttl' => 60 * 60 * 6, // saniye
+```
+
+PHP bu çarpımı dosya okunurken **bir kez** hesaplar; sonuç `21600`. Neden doğrudan
+`21600` yazmadık? Çünkü `60 * 60 * 6` okurken "6 saat" diye okunur, `21600` okunmaz.
+Bu, **kendini belgeleyen kod** (self-documenting code) örneğidir.
+
+---
+
+## 2. Laravel tarafı — bu dosya neden `config/` klasöründe?
+
+### 2.1 `config/` klasörü nedir?
+
+Laravel açılırken `config/` içindeki **her `.php` dosyasını** okur ve dosya adını
+anahtar yaparak tek bir büyük konfigürasyon dizisi oluşturur:
+
+```
+config/app.php        → config('app.name')
+config/database.php   → config('database.default')
+config/davetkart.php  → config('davetkart.currency')     ← bizimki
+```
+
+Yani dosyayı bu klasöre koymak, onu kaydetmeye yeter. Ekstra bir `register`
+işlemi yok — **convention over configuration** (kural, ayardan üstündür) ilkesi.
+
+### 2.2 `config()` yardımcı fonksiyonu
+
+```php
+config('davetkart.tiers.gold.price');        // 399
+config('davetkart.module_tiers');            // dizinin tamamı
+config('davetkart.yok.olan', 'varsayılan');  // anahtar yoksa 2. argüman döner
+```
+
+Noktalar dizinin katmanlarıdır. Bu okumalar **hafızadan** yapılır, diskten değil —
+maliyeti yok denecek kadar azdır.
+
+### 2.3 🔴 En kritik kural: kod içinde `env()` çağrılmaz
+
+`.env` dosyası, makineye özgü sırları tutar (veritabanı şifresi, API anahtarı).
+`env('X')` fonksiyonu bu dosyayı okur.
+
+Üretimde performans için `php artisan config:cache` çalıştırılır. Bu komut tüm
+config dizisini tek bir dosyaya derler ve **`.env` bir daha hiç okunmaz.**
+
+Sonuç:
+
+| Nerede | `env()` çağrısı | Sonuç |
+|---|---|---|
+| `config/*.php` içinde | ✅ Güvenli | Değer cache'e gömülür |
+| Controller/Action/Model içinde | ❌ Tehlikeli | `config:cache` sonrası **`null`** döner |
+
+Bu, Laravel'de en sık yaşanan sessiz üretim hatasıdır: yerelde çalışır, sunucuda
+`null` döner, hata mesajı vermez. Bizim dosyada tek `env()` çağrısı var
+(`DAVETKART_MEDIA_DISK`) ve doğru yerde.
+
+### 2.4 12-Factor App ilkesi
+
+Bu ayrım rastgele değil; **12-Factor App** metodolojisinin III. maddesidir:
+*"Konfigürasyonu ortamda sakla."* Pratik karşılığı:
+
+- **Ortama göre değişen** (DB şifresi, API anahtarı, disk adı) → `.env`
+- **Ortamdan bağımsız ama değişebilen** (fiyat, kota, limit) → `config/`
+- **Asla değişmeyen** (matematiksel sabitler) → koda gömülebilir
+
+Fiyatı `.env`'e koysaydık her sunucuda ayrı fiyat riski doğardı. Koda gömseydik
+fiyat değişiminde deploy gerekirdi. `config/` doğru orta nokta.
+
+---
+
+## 3. Bölüm bölüm: hangi ayar neyi çözüyor?
+
+### 3.1 `tiers` — plan tanımları
+
+```php
+'tiers' => [
+    'standart' => ['rank' => 0, 'price' => 249, 'rsvp_limit' => 100],
+    'gold'     => ['rank' => 1, 'price' => 399, 'rsvp_limit' => null],
+    'elit'     => ['rank' => 2, 'price' => 549, 'rsvp_limit' => null],
+],
+```
+
+**`rank` neden var?**
+
+Sık sorulacak soru şu: *"Kullanıcının satın aldığı plan, davetiyenin gerektirdiği
+planı karşılıyor mu?"*
+
+String ile karşılaştıramayız — alfabetik sırada `"elit" < "gold"`, yani Elit alan
+kullanıcı Gold içerik yayınlayamazdı. Sayısal `rank` sorunu tek satıra indirir:
+
+```php
+$sahipOlunan->rank() >= $gereken->rank()
+```
+
+Bu, "sıralanabilir kategori" problemine standart çözümdür.
+
+**`price` neden burada, istemcide değil?**
+
+Ödeme başlatılırken tutar **sunucuda** belirlenir. İstemciden gelen bir `amount`
+alanına güvenirsek, kullanıcı DevTools'tan `549` yerine `1` gönderir ve Elit planı
+1 liraya alır. Fiyatın tek doğru kaynağı bu dosyadır.
+
+**`rsvp_limit` ve kota metriği**
+
+`null` = sınırsız. Standart planda 100.
+
+🔴 Bu 100 sayısı **misafir sayısıdır, kayıt sayısı değildir.** Frontend'deki
+`LiveRsvpPanel` toplamı `reduce((s, r) => s + r.guestCount, 0)` ile hesaplıyor.
+Backend `COUNT(*)` kullanırsa 100 kayıt × 4 kişi = **400 misafir** sızar. Doğru
+sorgu:
+
+```php
+Rsvp::where('invitation_id', $id)->sum('guest_count');
+```
+
+Aynı iş kuralının iki tarafta **aynı metrikle** ölçülmesi zorunludur.
+
+---
+
+### 3.2 `module_tiers` — paywall haritası
+
+```php
+'module_tiers' => [
+    'show_gallery'  => 'elit',
+    'show_gift'     => 'elit',
+    'show_envelope' => 'gold',
+    'show_timeline' => 'gold',
+    'show_timer'    => 'standart',
+    'show_rsvp'     => 'standart',
+],
+```
+
+Bu, frontend'deki `getRequiredTier()` fonksiyonunun **sunucu ikizidir**:
+
+```ts
+// frontend — sadece arayüz kararı için
+export function getRequiredTier(invitation: Invitation): SubscriptionTier {
+  if (invitation.showGallery || invitation.showGift) return 'elit';
+  if (invitation.showEnvelope || invitation.showTimeline) return 'gold';
+  return 'standart';
+}
+```
+
+**Neden aynısını sunucuda tekrar yazıyoruz?** Çünkü tarayıcıdaki hiçbir kontrol
+güvenlik değildir. Kullanıcı DevTools'tan `showGallery = true` yapıp Standart
+planla yayınlamayı deneyebilir. Frontend kontrolü **kullanıcı deneyimi**dir;
+güvenlik kararı sunucuda yeniden hesaplanır.
+
+**Neden `if` zinciri değil de harita?**
+
+Plan dokümanındaki taslak `if/else` zinciriydi. Haritaya çevirmenin kazancı:
+"Galeri artık Gold'a dahil" kararı geldiğinde **kod değil, konfigürasyon** değişir.
+Bu, SOLID'in **O**'sudur — *Open/Closed*: sınıf davranış eklemeye açık, değişime
+kapalı olmalı.
+
+`TierResolver` bu haritayı şöyle tüketecek (Adım 12'de yazacağız):
+
+```php
+// davetiyede açık olan modüllerin en yüksek rank'lısı = gereken plan
+foreach (config('davetkart.module_tiers') as $kolon => $tier) {
+    if ($invitation->{$kolon}) { /* en yükseği tut */ }
+}
+```
+
+Sınıfın kendisi hangi modülün hangi plana ait olduğunu **bilmez** — bilgiyi
+dışarıdan alır. Buna *veri odaklı tasarım* (data-driven design) denir.
+
+---
+
+### 3.3 `rsvp` — LCV savunma parametreleri
+
+```php
+'rsvp' => [
+    'max_guests_per_entry' => 10,
+    'rate_limit' => [
+        'per_ip_per_minute'       => 10,
+        'per_invitation_per_hour' => 60,
+    ],
+    'poll_interval_seconds' => 15,
+],
+```
+
+Public LCV endpoint'i sistemin **en savunmasız noktasıdır**: giriş gerektirmez ve
+dosya kabul eder. Katmanlı savunmanın sayısal parametreleri burada.
+
+| Ayar | Hangi saldırıyı kesiyor |
+|---|---|
+| `max_guests_per_entry: 10` | Tek formda "500 kişi geliyoruz" yazıp kotayı bir istekte tüketmek |
+| `per_ip_per_minute: 10` | Tek makineden gelen bot seli |
+| `per_invitation_per_hour: 60` | Farklı IP'lerden gelen dağıtık sel (botnet) |
+| `poll_interval_seconds: 15` | Sahip panelinin sorgu sıklığı — throttle ve Cache-Control bununla hizalanır |
+
+İki ayrı rate limit olması tesadüf değil: biri **kaynağı** (IP), diğeri **hedefi**
+(davetiye) korur. Tek başına IP limiti botnet'i durduramaz.
+
+---
+
+### 3.4 `media` — yükleme limitleri
+
+```php
+'media' => [
+    'disk' => env('DAVETKART_MEDIA_DISK', 'public'),
+    'gallery' => [
+        'max_size_kb'        => 5120,
+        'mimes'              => ['image/jpeg', 'image/png', 'image/webp'],
+        'max_per_invitation' => 30,
+    ],
+    // ...
+],
+```
+
+**`max_size_kb` — birim neden isimde?**
+
+Laravel'in `max:5120` doğrulama kuralı **KB** bekler. Değişken adı `max_size`
+olsaydı, kullanan kişi "byte mı, MB mi?" diye tahmin ederdi. Birimi isme yazmak
+tahmini ortadan kaldırır — Clean Code'un *"isim niyeti açıklamalı"* ilkesi.
+
+**`mimes` — neden uzantı değil?**
+
+Dosya adı kullanıcı girdisidir ve yalandır. `zararli.php` dosyasını `resim.jpg`
+diye adlandırmak saniyelik iştir. Bu yüzden Laravel'de:
+
+- `mimes:jpg,png` → **uzantıya** bakar ⚠️ zayıf
+- `mimetypes:image/jpeg,image/png` → dosyanın **ilk baytlarına** bakar ✅ güçlü
+
+Biz ikincisini kullanacağız; bu dizi ona beslenecek.
+
+**Public limitlerin daha düşük olması**
+
+`rsvp_photo` 2 MB, `gallery` 5 MB. Sebep: galeri yüklemesini **kimliği belli**
+kullanıcı yapar; LCV fotoğrafını **kim olduğunu bilmediğimiz** misafir yükler.
+Kimliksiz yüklemede depolama tüketimi bir saldırı vektörüdür.
+
+**`disk` — depolama soyutlaması**
+
+Laravel'in Filesystem katmanı, "yerel disk", "S3", "FTP" gibi hedefleri aynı
+arayüzün arkasına koyar. Kod `Storage::disk(config('davetkart.media.disk'))` der;
+yerelden S3'e geçiş tek `.env` satırıdır. Bu, **Ports & Adapters** (Hexagonal
+Architecture) deseninin küçük bir uygulamasıdır: iş kodu, dış dünyanın somut
+tipini bilmez.
+
+---
+
+### 3.5 `cache` — public davetiye önbelleği
+
+```php
+'cache' => [
+    'public_invitation_ttl' => 60 * 60 * 6, // saniye
+    'key_prefix'            => 'davetkart',
+],
+```
+
+Davetiye linki WhatsApp grubuna düşer, 500 kişi 2 dakikada açar. Veri ise
+neredeyse hiç değişmez. Bu, klasik **okuma-ağırlıklı** (read-heavy) yüktür ve
+cache'in en verimli olduğu senaryodur.
+
+**TTL neden 6 saat gibi uzun?**
+
+Cache'te iki tazeleme stratejisi vardır:
+
+1. **Zaman tabanlı (TTL):** "5 dakikada bir yenilensin." Basit ama ya bayat veri
+   gösterirsin ya da boşuna sorgu atarsın.
+2. **Olay tabanlı (event-based invalidation):** "Davetiye güncellenince cache'i
+   sil." Her zaman taze, sıfır gereksiz sorgu.
+
+Biz **ikincisini** kullanıyoruz (`InvitationPublished` event → `ClearInvitationCache`
+listener). TTL burada yalnızca **emniyet ağıdır**: bir event kaçarsa veri en fazla
+6 saat bayat kalır, sonsuza kadar değil.
+
+**`key_prefix` neden var?**
+
+Aynı Redis/cache sunucusunu başka bir uygulama da kullanabilir. Önek, anahtar
+çakışmasını önler: `davetkart:invitation:01H...`.
+
+---
+
+### 3.6 `auth`
+
+```php
+'auth' => [
+    'login_rate_limit_per_minute' => 5,
+    'token_name'                  => 'davetkart-spa',
+],
+```
+
+**5 deneme/dakika** — brute-force (şifre deneme) savunması. Sınır, IP + e-posta
+ikilisi başına uygulanacak; sadece IP'ye koyarsak aynı ofisten giren masum
+kullanıcılar birbirini kilitler.
+
+**`token_name`** — Sanctum her token'a bir etiket ister. Bunu koda gömmek yerine
+buraya almak, ileride "mobil uygulama token'ı" gibi ikinci bir istemci
+eklediğimizde tek yerden yönetmemizi sağlar.
+
+---
+
+### 3.7 `assistant`
+
+```php
+'assistant' => [
+    'daily_message_limit_per_user' => 30,
+    'max_prompt_chars'             => 2000,
+],
+```
+
+AI çağrısı **paraya mal olur**. Kotasız bırakılan bir AI endpoint'i, teknik bir
+açık değil doğrudan **finansal** açıktır: bir betik gece boyunca istek atar, fatura
+sabah gelir.
+
+Dikkat: burada **API anahtarı yok**. Anahtar `config/ai.php` içinde duracak. Bu
+dosya yalnızca *iş kuralı* taşır; sır yönetimi ayrı dosyanın işidir — **Separation
+of Concerns**.
+
+---
+
+## 4. Sık yapılan hatalar
+
+| Hata | Sonucu | Doğrusu |
+|---|---|---|
+| Controller'da `env('DAVETKART_MEDIA_DISK')` | Üretimde `null` | `config('davetkart.media.disk')` |
+| Fiyatı istemciden almak | Kullanıcı 1 ₺'ye Elit alır | Fiyatı config'ten oku |
+| Kotayı `COUNT(*)` ile ölçmek | 4 katı misafir sızar | `SUM(guest_count)` |
+| Dosya tipini uzantıdan doğrulamak | `.php` dosyası yüklenir | `mimetypes` kuralı |
+| Dosya sonuna `?>` koymak | `Headers already sent` | Kapanış etiketi yazma |
+| `strict_types` unutmak | Tip hataları sessizce geçer | Her dosyanın başında |
+
+---
+
+## 5. Kendin dene
+
+Terminalde (proje kökünde):
+
+```powershell
+php artisan tinker
+```
+
+Açılan kabukta:
+
+```php
+config('davetkart.tiers.gold.price');        // 399
+config('davetkart.module_tiers.show_gift');  // "elit"
+config('davetkart.cache.public_invitation_ttl'); // 21600
+config('davetkart.tiers.elit.rsvp_limit');   // null
+```
+
+`null` dönüyorsa dosya adını veya anahtar yolunu kontrol et. Config cache'i
+açtıysan (`config:cache`), değişiklik sonrası `php artisan config:clear`
+çalıştırmayı unutma — yoksa eski değerleri görürsün.
+
+---
+
+## 6. Bu dosyayı kimler tüketecek?
+
+| Tüketen | Ne okuyacak | Hangi adımda |
+|---|---|---|
+| `SubscriptionTier` enum | `tiers.*.rank`, `price`, `rsvp_limit` | Adım 2 |
+| `TierResolver` | `module_tiers` | Adım 12 |
+| `StoreRsvpRequest` | `rsvp.max_guests_per_entry` | Adım 10 |
+| `SubmitRsvpAction` | `tiers.*.rsvp_limit` | Adım 10 |
+| `routes/api.php` (throttle) | `rsvp.rate_limit`, `auth.login_rate_limit_per_minute` | Adım 10 |
+| `MediaController` / `StoreUploadedMediaAction` | `media.*` | Adım 11 |
+| `PublicInvitationController` | `cache.*` | Adım 9 |
+| `AuthController` | `auth.token_name` | Adım 6 |
+| `AssistantController` | `assistant.*` | Adım 12 |
+
+---
+
+## 7. Sözlük
+
+| Terim | Anlamı |
+|---|---|
+| **Config** | Uygulamanın davranışını belirleyen, koddan ayrılmış ayar değerleri |
+| **Env** | Ortama (makineye) özgü değişkenler; sırlar burada tutulur |
+| **TTL** | *Time To Live* — bir cache kaydının yaşam süresi |
+| **Rate limit** | Belirli sürede izin verilen istek sayısı üst sınırı |
+| **MIME type** | Dosyanın gerçek türünü belirten içerik etiketi (`image/jpeg`) |
+| **Paywall** | Ücretli özelliğin ödeme yapılmadan kullanılmasını engelleyen kontrol |
+| **Idempotans** | Aynı işlemin birden çok kez çalışmasının tek kez çalışmasıyla aynı sonucu vermesi |
+| **12-Factor App** | Modern uygulamalar için 12 maddelik tasarım metodolojisi |
+| **Open/Closed** | SOLID'in O'su: genişlemeye açık, değişikliğe kapalı tasarım |
+| **Ports & Adapters** | İş kodunun dış sistemleri somut tipleriyle değil arayüzle tanıması |
+
+---
+
+## 🆕 Faz 9 eklemesi — `orders.release_window_days`
+
+```php
+'orders' => [
+    'release_window_days' => 3,
+],
+```
+
+Yayınlanmış bir davetiye silindiğinde, o davetiye için ödenmiş **tekil**
+siparişin hakkı geri alınabilir mi? Pencere **yayın anından** itibaren sayılır;
+kapalıysa hak yanar. Kuralı uygulayan yer:
+[`../app/Actions/Invitation/DeleteInvitationAction.md`](../app/Actions/Invitation/DeleteInvitationAction.md).
+
+### 🔴 Neden `env()` yok?
+
+Bu dosyadaki `default_timezone` `env()` okuyor, bu okumuyor — ve fark bilinçli:
+
+| | `default_timezone` | `release_window_days` |
+|---|---|---|
+| Ne | Kurulumun bulunduğu **pazarın** varsayılanı | Kullanıcıya verilmiş **ticari söz** |
+| Ortama göre değişir mi | Evet (farklı pazar = farklı varsayılan) | **Hayır** |
+| `env()`'e bağlansaydı | Doğru davranış | 🔴 Staging'de 30, üretimde 3 olabilir ve ikisi sessizce ayrışır |
+
+"Kaç gün" sorusunun tek bir doğru cevabı var ve o cevap **repoda**, değişiklik
+geçmişiyle birlikte durmalı. `env()`'e bağlanan bir ticari söz, sunucudaki bir
+dosyada sessizce değişebilir ve hiçbir commit bunu göstermez.
+
+> **Y1** (*kod içinde `env()` çağrılmaz*) `env()`'in **nerede** çağrılacağını
+> söyler, **neyin** `env()` olacağını değil. İkincisi ayrı bir karardır:
+> ortamlar arasında farklılaşması **gereken** şey `env()`'e gider, ticari bir
+> sabit gitmez.
+
+---
+
+## 🆕 Faz 9 eklemesi — `media.optimize` ve 15 MB'lık fotoğraflar
+
+### 1. Yeni sınırlar
+
+| Anahtar | Faz 6 | Faz 9 |
+|---|---|---|
+| `media.gallery.max_size_kb` | 5 120 (5 MB) | **15 360 (15 MB)** |
+| `media.rsvp_photo.max_size_kb` | 2 048 (2 MB) | **15 360 (15 MB)** |
+
+LCV fotoğrafı galeriyle aynı sınıra çıktı: misafirin telefonu sahibin
+telefonundan daha küçük fotoğraf üretmiyor. Misafir tarafındaki farkı **kota**
+(`max_per_invitation`) ve **hız sınırı** taşıyor; dosya boyutu o farkı taşıyan
+doğru araç değildi.
+
+> 🔴 **Bu sınır tek başına yeterli değil.** PHP'nin `upload_max_filesize` ve
+> `post_max_size` değerleri bundan büyük olmalı, yoksa dosya Laravel'e **hiç
+> ulaşmaz** — uygulama 15 MB der, PHP 2 MB'da keser ve yanıt "dosya
+> yüklenemedi" olur. Kurulum notları: `docs/06` (yerel) ve `docs/10` (üretim).
+
+### 2. `media.optimize` — yedi anahtar, hepsi bir ölçüme dayanıyor
+
+```php
+'optimize' => [
+    'max_edge_px' => 2000,
+    'max_dimension_px' => 8192,
+    'target_kb' => 2048,
+    'jpeg_quality' => 82,
+    'webp_quality' => 80,
+    'min_quality' => 60,
+    'memory_limit' => '512M',
+    'replaced_file_grace_hours' => 24,
+],
+```
+
+| Anahtar | Neyi belirler | Sayı nereden geliyor |
+|---|---|---|
+| `max_edge_px` | En uzun kenar sınırı | Galeri en fazla 448 CSS px genişlikte gösteriliyor (`Gallery.tsx`, `max-w-md`); 3× ekranda 1344 px yeter |
+| `max_dimension_px` | 🔴 Doğrulamanın **ve** işin piksel tavanı | 8192² ≈ 67 MP ≈ 270 MB çözme belleği — 512 MB'lık bütçenin altında |
+| `target_kb` | Hedef çıktı boyutu | Ürün kararı: davetiye sayfası mobilde açılacak |
+| `jpeg_quality` / `webp_quality` | Başlangıç kalitesi | 2000 px'de JPEG q82 ≈ 600 KB, WebP q80 ≈ 400 KB (ölçüldü) |
+| `min_quality` | Kalitenin inebileceği taban | Altında bozulma görünür hâle gelir; hedefe inmek için fotoğrafı harcamaya değmez |
+| `memory_limit` | İşin çözme bütçesi | GD megapiksel başına ~4 MB ister; 24 MP = 99 MB, 48 MP = 187 MB (ölçüldü) |
+| `replaced_file_grace_hours` | Eski dosyanın yaşama süresi | Editördeki açık sekme eski URL'i elinde tutuyor |
+
+### 3. 🔴 `max_width_px` neden `max_edge_px` oldu?
+
+Faz 6'daki anahtar yalnızca **genişliği** sınırlıyordu. 2000×3000'lik dikey bir
+fotoğraf *"genişliği 2000, sınır 2000"* diye hiç küçültülmüyordu — oysa 6 MP'lik
+bir dosyaydı ve telefonla çekilen fotoğrafların çoğunluğu dikeydir.
+
+Ad değişikliği bilinçli: `max_width_px` değeri korunup anlamı değiştirilseydi,
+config'i okuyan biri hâlâ "genişlik" okuyacaktı. **Birimi ve konusu adında
+taşımak** (`max_size_kb` kararıyla aynı ilke) bu yüzden ayrı bir isim istedi.
+
+### 4. `memory_limit` bir config anahtarı — neden `php.ini` değil?
+
+`php.ini` **makineye** aittir, depoya girmez. Ekipteki her geliştirici ve her
+sunucu aynı çökmeyle yeniden karşılaşırdı. İşin ihtiyacı koddan okunabilir
+olmalı; iş bu değeri **geçici olarak** yükseltir ve bitince eski sınırı geri
+yükler ([`../app/Jobs/OptimizeUploadedImage.md`](../app/Jobs/OptimizeUploadedImage.md) §6).
+
+> ⚠️ Barındırma bu kadar belleğe izin vermiyorsa (paylaşımlı hosting sıkça
+> 256 MB'da durur) doğru hamle `memory_limit`'i düşürmek **ve**
+> `max_dimension_px`'i onunla birlikte indirmektir. İkisi birbirine bağlı:
+> piksel tavanı, belleğin ne kadarının gerekeceğini belirliyor.
+
+---
+
+## 🆕 Faz 10 eklemesi — `frontend` ve `mail` (10.30)
+
+```php
+'frontend' => [
+    'url' => env('FRONTEND_URL', 'http://localhost:3000'),
+    'password_reset_path' => '/sifre-sifirla',
+],
+
+'mail' => [
+    'locale' => 'tr',
+],
+```
+
+| Anahtar | Ne | Neden burada |
+|---|---|---|
+| `frontend.url` | Frontend'in kök adresi | Maildeki bağlantılar **mutlak** olmalı. Ortama göre değişir (yerel 3000, üretim gerçek alan adı), bu yüzden `env()` |
+| `frontend.password_reset_path` | Sıfırlama sayfasının yolu | Frontend rotasıyla (`/sifre-sifirla`) birlikte değişen bir sözleşme. Ortama göre değişmez, bu yüzden `env()` **yok** |
+| `mail.locale` | Kullanıcıya giden mailin dili | **K96**: Türkçe, K21'in bilinçli istisnası. Bir ürün kararı (E6), ortam farkı değil |
+
+**Neden `APP_URL` değil?** `APP_URL` **API'nin** adresi (`api.davetkart.com`):
+medya URL'leri ve Laravel'in ürettiği bağlantılar onu kullanır. Parola sıfırlama
+sayfası ise **frontend'de** (`davetkart.com/sifre-sifirla`). İki adres farklı alan
+adlarında; birini öbürüne vekil saymak üretimde kırık bir bağlantı demek.
+
+**Neden `CORS_ALLOWED_ORIGINS`'ten türetilmiyor?** O bir **liste** (birden çok origin
+olabilir: önizleme ortamları, yerel). Hangisinin maile yazılacağını bir listeden
+tahmin etmek, açık bir ayardan daha kırılgan.
+
+**Yerel varsayılan neden 3000?** Frontend `vite --port=3000` ile açılıyor ve API'yi
+Vite proxy'si üzerinden çağırıyor (`vite.config.ts`). Yerelde tarayıcının gördüğü
+adres 3000.
+
+---
+
+## 🆕 Faz 10 eklemesi — `retention` (10.42 · K98)
+
+```php
+'retention' => [
+    'deleted_invitation_days' => 30,
+    'guest_data_months_after_event' => 6,
+    'contact_message_months' => 12,
+],
+```
+
+| Anahtar | Ne siliniyor | Sayaç neye göre |
+|---|---|---|
+| `deleted_invitation_days` | Çöp kutusundaki davetiye, kalıcı ve dosyalarıyla | `deleted_at` |
+| `guest_data_months_after_event` | LCV satırları + misafirin foto/videosu | `event_at` |
+| `contact_message_months` | İletişim formu mesajı | `created_at` |
+
+İsmail'in kararı (S-1 → K98, 1 Ekim 2026). Uygulayan: `data:purge` (gece 03:45).
+
+**Neden `env()` yok?** `release_window_days` ile aynı gerekçe: bir ortam farkı değil,
+kullanıcıya verilmiş bir söz. KVKK aydınlatma metni bu sayıları yazacak. Staging'de
+başka, üretimde başka bir süre, metnin bir ortamda yalan söylemesi demek.
+
+**Değiştirmek:** sayı burada değişir ve test **bilerek** kırılır
+(`MaintenanceTest`'in sınır tarihleri sabit yazıldı, 10.49'un dersi). Aydınlatma metni
+aynı commit'te güncellenmeli.
+
+---
+
+## 🆕 Faz 10 (10.60 · K104) — LCV ve misafir medyası hız sınırları büyüdü
+
+| Anahtar | Önce | Şimdi |
+|---|---|---|
+| `rsvp.rate_limit.per_ip_per_minute` | 10 | 20 |
+| `rsvp.rate_limit.per_invitation_per_hour` | 60 | 300 |
+| `media.rate_limit.guest_per_ip_per_minute` | 5 | 15 |
+| `media.rate_limit.guest_per_invitation_per_hour` | 40 | 150 |
+
+Gerekçe ve testler: `tests/Feature/RateLimitTest.md`. Kısaca: 300 kişilik bir davetiye aynı
+akşam gönderiliyor ve salonda herkes aynı Wi-Fi'da.
+
+---
+
+## 🆕 Faz 10 (10.66 · K102) — `branding` ve `preset_tiers`
+
+| Anahtar | Değer | Ne |
+|---|---|---|
+| `branding.white_label_tier` | `elit` | Bu plan ve üstü ödenmiş davetiyede misafir sayfası *"DavetKart ile hazırlandı"* göstermez (`ResolveBrandingAction.md`) |
+| `preset_tiers` | 13 videolu tema → `gold` | Premium tema en az Gold ister (`TierResolver.md` → *Faz 10*) |
+
+İkisi de satış kararı (E6): fiyat kartı değişirse yalnızca burası değişir. Testler listeyi ve
+eşikleri sabit yazdığı için değişiklik bilerek yapılmak zorunda.
+
+---
+
+## 🆕 Faz 11 (11.8): `gift_codes.rate_limit`
+
+```php
+'gift_codes' => [
+    'rate_limit' => [
+        'per_user_per_minute' => 10,
+        'per_user_per_hour' => 30,
+    ],
+],
+```
+
+Hediye kodu denemelerinin hız sınırı: önizleme ve kodlu checkout aynı kovayı paylaşır.
+Gerekçe: `docs/rehber/app/Providers/AppServiceProvider.md` → "Faz 11". `env()` yok: bir ortam
+farkı değil, ürün kararı. Testler değeri `Config::set` ile küçültüyor.
+
+---
+
+## 🆕 Faz 13 (13.1 · K130) — `pricing.first_publish_percent`
+
+```php
+'pricing' => [
+    'first_publish_percent' => 60,
+],
+```
+
+Hiç ödenmiş siparişi olmayan kullanıcının (K131) siparişine uygulanan yüzde. `0` kapatır.
+`tiers.*.price` artık **liste fiyatı**: müşteriye gösterilen ve tahsil edilen tutarı
+`QuotePriceAction` hesaplar ve frontend onu API'den okur (K128–K129).
+
+- **`env()` yok.** `release_window_days` ile aynı gerekçe: bu oran müşteriye verilmiş bir
+  ticari söz, ortamdan ortama değişmez. Değiştirmek bir commit, yani geçmişi olan bir karar.
+- **Üst sınır 90.** Tutar indirimle 0'a inemez: `orders_gift_amount_check` kısıtı "0 tutarlı
+  sipariş yalnızca hediye siparişi olabilir" der. Ücretsiz yayın hediye kodunun işi.
+- Manuel kampanyalar config'te **değil**, veritabanında (`price_campaigns`) ve artisan
+  komutlarıyla yönetilir (K132). İşletme kılavuzu: `docs/rehber/FIYAT-VE-INDIRIM-YONETIMI.md`.
+
+---
+
+## 🆕 Faz 14 (14.3 · K139): `refunds.window_days`
+
+Kullanılmamış, ücretli bir hakkın ödeme anından itibaren kaç gün içinde iptal edilip iade
+istenebileceği. Varsayılan 14 (mesafeli satış cayma süresi). `release_window_days` ile aynı
+gerekçeyle `env()` yok: ticari söz, ortam farkı değil.
+
+## 🆕 Faz 14 (14.10 · K144): `auth.email_change_expire_minutes`, `frontend.email_change_path`
+
+E-posta değişikliği onay bağlantısı 60 dakika geçerli (parola sıfırlamayla aynı) ve frontend'in
+`/eposta-onay` sayfasına gider. Yol frontend'deki rotayla birlikte değişir.

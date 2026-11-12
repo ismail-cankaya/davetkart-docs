@@ -1,0 +1,170 @@
+{
+    "generatedAt": "2026-10-25T13:48:45+00:00",
+    "count": 28,
+    "codes": {
+        "ASSISTANT_QUOTA_EXCEEDED": {
+            "status": 429,
+            "params": [
+                "retryAfter",
+                "limit"
+            ],
+            "retryable": true
+        },
+        "EMAIL_CHANGE_INVALID": {
+            "status": 422,
+            "params": [],
+            "retryable": false
+        },
+        "FILE_TOO_LARGE": {
+            "status": 413,
+            "params": [
+                "max"
+            ],
+            "retryable": false
+        },
+        "GIFT_CODE_ALREADY_USED": {
+            "status": 422,
+            "params": [],
+            "retryable": false
+        },
+        "GIFT_CODE_INVALID": {
+            "status": 422,
+            "params": [],
+            "retryable": false
+        },
+        "GIFT_CODE_NOT_APPLICABLE": {
+            "status": 422,
+            "params": [
+                "tier"
+            ],
+            "retryable": false
+        },
+        "INVALID_CREDENTIALS": {
+            "status": 401,
+            "params": [],
+            "retryable": false
+        },
+        "INVITATION_ALREADY_PUBLISHED": {
+            "status": 409,
+            "params": [],
+            "retryable": false
+        },
+        "INVITATION_LOCKED": {
+            "status": 403,
+            "params": [],
+            "retryable": false
+        },
+        "MALFORMED_REQUEST": {
+            "status": 400,
+            "params": [],
+            "retryable": false
+        },
+        "MEDIA_QUOTA_EXCEEDED": {
+            "status": 403,
+            "params": [
+                "limit"
+            ],
+            "retryable": false
+        },
+        "PASSWORD_RESET_INVALID": {
+            "status": 422,
+            "params": [],
+            "retryable": false
+        },
+        "PAYMENT_METHOD_DISABLED": {
+            "status": 403,
+            "params": [
+                "method"
+            ],
+            "retryable": false
+        },
+        "PAYMENT_PROVIDER_ERROR": {
+            "status": 502,
+            "params": [],
+            "retryable": true
+        },
+        "PAYMENT_REQUIRED": {
+            "status": 402,
+            "params": [
+                "requiredTier"
+            ],
+            "retryable": false
+        },
+        "PAYWALL_TIER_INSUFFICIENT": {
+            "status": 402,
+            "params": [
+                "requiredTier"
+            ],
+            "retryable": false
+        },
+        "PROVIDER_UNAVAILABLE": {
+            "status": 503,
+            "params": [
+                "retryAfter"
+            ],
+            "retryable": true
+        },
+        "RATE_LIMITED": {
+            "status": 429,
+            "params": [
+                "retryAfter"
+            ],
+            "retryable": true
+        },
+        "REFUND_NOT_ALLOWED": {
+            "status": 409,
+            "params": [
+                "reason"
+            ],
+            "retryable": false
+        },
+        "REGISTRATION_FAILED": {
+            "status": 422,
+            "params": [],
+            "retryable": false
+        },
+        "RESOURCE_NOT_FOUND": {
+            "status": 404,
+            "params": [],
+            "retryable": false
+        },
+        "RSVP_DEADLINE_PASSED": {
+            "status": 403,
+            "params": [],
+            "retryable": false
+        },
+        "RSVP_QUOTA_EXCEEDED": {
+            "status": 403,
+            "params": [
+                "remaining",
+                "limit"
+            ],
+            "retryable": false
+        },
+        "SERVER_ERROR": {
+            "status": 500,
+            "params": [],
+            "retryable": false
+        },
+        "SLUG_TAKEN": {
+            "status": 409,
+            "params": [],
+            "retryable": false
+        },
+        "TOKEN_EXPIRED": {
+            "status": 401,
+            "params": [],
+            "retryable": false
+        },
+        "UNAUTHENTICATED": {
+            "status": 401,
+            "params": [],
+            "retryable": false
+        },
+        "VALIDATION_FAILED": {
+            "status": 422,
+            "params": [],
+            "retryable": false
+        }
+    }
+}

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DavetKart — videolu düğün davetiyeleri</title>
+<style>
+  :root{--ink:#2f3b46;--muted:#7b8794;--line:#e4e7ea;--bg:#f6f7f8}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font:15px/1.6 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  header{padding:32px 28px 4px;max-width:1220px;margin:0 auto}
+  h1{margin:0 0 6px;font-size:22px;font-weight:600;letter-spacing:-.01em}
+  header p{margin:0;color:var(--muted);font-size:14px}
+  .bar{max-width:1220px;margin:16px auto 0;padding:0 28px;display:flex;gap:10px;flex-wrap:wrap}
+  button{border:1px solid var(--line);background:#fff;border-radius:999px;
+         padding:7px 16px;font-size:13px;color:var(--ink);cursor:pointer}
+  button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+  main{max-width:1220px;margin:8px auto 70px;padding:0 28px}
+  .row{background:#fff;border:1px solid var(--line);border-radius:16px;padding:18px;margin-top:22px;
+       display:grid;grid-template-columns:minmax(0,1fr) 292px;gap:28px;align-items:start}
+  @media (max-width:900px){.row{grid-template-columns:1fr}}
+  .head{grid-column:1/-1;display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
+  .title{font-size:16px;font-weight:600}
+  .sub{font-size:12.5px;color:var(--muted)}
+  .laptop{position:relative;width:100%;aspect-ratio:16/9;border-radius:10px;overflow:hidden;background:#000}
+  .phone{position:relative;width:268px;aspect-ratio:9/19.5;border-radius:34px;overflow:hidden;
+         background:#000;border:9px solid #12161a;box-shadow:0 18px 40px rgba(20,30,40,.20)}
+  video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .scrim{position:absolute;inset:0}
+  .scrim.off{display:none}
+  .overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;
+           font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif}
+  .overlay.hidden{display:none}
+  .ov-in{padding:0 9%}
+  .kicker{font-size:.72em;letter-spacing:.42em;text-transform:uppercase}
+  .names{font-size:3.05em;line-height:1.1;margin:.26em 0 .16em;font-weight:500}
+  .rule{width:52px;height:1px;margin:14px auto;opacity:.5}
+  .date{letter-spacing:.28em;font-size:.85em;opacity:.9}
+  .laptop .overlay{font-size:20px}
+  .phone .overlay{font-size:15px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Videolu davetiye temaları — 11 konsept</h1>
+  <p>İlk dördü düğün, kalan yedisi kına · nişan · sünnet · doğum günü · mezuniyet · baby shower · parti.
+     Her konsept iki bağımsız render: solda 1280×720, sağda 720×1280. Videolar 10–15 sn,
+     24 fps, sessiz, kusursuz döngülü. Metin ve renkler şablon dosyalarındaki paletle birebir.</p>
+</header>
+
+<div class="bar">
+  <button id="btnText" aria-pressed="true">Davetiye metni</button>
+  <button id="btnScrim" aria-pressed="true">Okunabilirlik katmanı (scrim)</button>
+</div>
+
+<main id="stage"></main>
+
+<script>
+  const ROOT = '../../davetkart-frontent/public/videos/templates';
+
+  const CONCEPTS = [
+    { slug:'gokyuzu-ruyasi', title:'Gökyüzü Rüyası', sub:'şafak göğü, süzülen bulutlar · dugun-gokyuzu',
+      ink:'#2b3a4f', accent:'#bd8078', page:'#eef3f9',
+      scrim:'linear-gradient(180deg,rgba(255,255,255,.45),rgba(255,255,255,.10) 50%,rgba(255,255,255,.55))' },
+    { slug:'mum-isigi', title:'Mum Işığı', sub:'gece nikâhı, altın bokeh · dugun-mum-isigi',
+      ink:'#f7edd8', accent:'#e3b878', page:'#0a0d14',
+      scrim:'linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.15) 50%,rgba(0,0,0,.55))' },
+    { slug:'gul-yapraklari', title:'Gül Yaprakları', sub:'pudra zemin, düşen yapraklar · dugun-gul-yapraklari',
+      ink:'#48302f', accent:'#bf7f88', page:'#fdf4f2',
+      scrim:'linear-gradient(180deg,rgba(255,255,255,.35),rgba(255,255,255,.15) 50%,rgba(255,255,255,.45))' },
+    { slug:'deniz-isiltisi', title:'Deniz Işıltısı', sub:'su yüzeyi ışık ağı · dugun-deniz-isiltisi',
+      ink:'#22403f', accent:'#c0985c', page:'#eef7f6',
+      scrim:'linear-gradient(180deg,rgba(255,255,255,.40),rgba(255,255,255,.20) 50%,rgba(255,255,255,.50))' },
+
+    { slug:'kina-bordo', title:'Bordo İpek — Kına', sub:'şarap ipek + altın süzülme · kina-bordo',
+      ink:'#f2ded3', accent:'#e8c07a', page:'#1d0710', dark:true },
+    { slug:'nisan-sampanya', title:'Şampanya İpek — Nişan', sub:'fildişi ipek + altın toz · nisan-sampanya',
+      ink:'#3b342a', accent:'#b08d57', page:'#faf6ee' },
+    { slug:'sunnet-yildiz', title:'Yıldız Tozu — Sünnet', sub:'gece mavisi + titreşen yıldızlar · sunnet-yildiz',
+      ink:'#e2eafa', accent:'#f2d79b', page:'#060f26', dark:true },
+    { slug:'dogum-gunu-konfeti', title:'Konfeti — Doğum Günü', sub:'krem zemin + dönen konfeti · dogum-gunu-konfeti',
+      ink:'#37271f', accent:'#e8705f', page:'#fffaf6' },
+    { slug:'mezuniyet-lacivert', title:'Tören Işığı — Mezuniyet', sub:'lacivert + çapraz ışık huzmesi · mezuniyet-lacivert',
+      ink:'#dee7f4', accent:'#f0c761', page:'#071328', dark:true },
+    { slug:'baby-shower-kabarcik', title:'Kabarcıklar — Baby Shower', sub:'pastel degrade + yükselen kabarcıklar · baby-shower-kabarcik',
+      ink:'#38504b', accent:'#e2a08c', page:'#f4faf7' },
+    { slug:'parti-aurora', title:'Neon Aurora — Parti', sub:'gece siyahı + neon şeritler · parti-aurora',
+      ink:'#ece8fa', accent:'#35e0ff', page:'#06060c', dark:true }
+  ];
+
+  // Şablon dosyalarındaki scrim ile aynı: koyu temalarda siyah, açıkta beyaz yıkama.
+  const LIGHT_SCRIM = 'linear-gradient(180deg,rgba(255,255,255,.40),rgba(255,255,255,.15) 50%,rgba(255,255,255,.50))';
+  const DARK_SCRIM = 'linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,.15) 50%,rgba(0,0,0,.55))';
+  CONCEPTS.forEach((c) => { if (!c.scrim) c.scrim = c.dark ? DARK_SCRIM : LIGHT_SCRIM; });
+
+  const overlay = (c) => `
+    <div class="scrim" style="background:${c.scrim}"></div>
+    <div class="overlay" style="color:${c.ink}">
+      <div class="ov-in">
+        <div class="kicker" style="color:${c.accent}">Düğün Davetiyemize</div>
+        <div class="names">Elif &amp; Mert</div>
+        <div class="rule" style="background:${c.accent}"></div>
+        <div class="date">12 EYLÜL 2026 · 18.00</div>
+      </div>
+    </div>`;
+
+  const media = (c, variant) => `
+    <video autoplay muted loop playsinline preload="metadata"
+           poster="${ROOT}/${c.slug}/${c.slug}-${variant}-poster.jpg">
+      <source src="${ROOT}/${c.slug}/${c.slug}-${variant}.mp4" type="video/mp4" />
+      <source src="${ROOT}/${c.slug}/${c.slug}-${variant}.webm" type="video/webm" />
+    </video>`;
+
+  document.getElementById('stage').innerHTML = CONCEPTS.map((c) => `
+    <section class="row" style="border-top:3px solid ${c.accent}">
+      <div class="head">
+        <div>
+          <div class="title">${c.title}</div>
+          <div class="sub">${c.sub}</div>
+        </div>
+        <div class="sub">sayfa zemini <code>${c.page}</code></div>
+      </div>
+      <div class="laptop">${media(c,'desktop')}${overlay(c)}</div>
+      <div class="phone">${media(c,'mobile')}${overlay(c)}</div>
+    </section>`).join('');
+
+  const toggle = (btn, fn) => btn.addEventListener('click', () => {
+    const on = btn.getAttribute('aria-pressed') === 'true';
+    btn.setAttribute('aria-pressed', String(!on));
+    fn(!on);
+  });
+
+  toggle(document.getElementById('btnText'), (on) =>
+    document.querySelectorAll('.overlay').forEach((e) => e.classList.toggle('hidden', !on)));
+  toggle(document.getElementById('btnScrim'), (on) =>
+    document.querySelectorAll('.scrim').forEach((e) => e.classList.toggle('off', !on)));
+</script>
+</body>
+</html>

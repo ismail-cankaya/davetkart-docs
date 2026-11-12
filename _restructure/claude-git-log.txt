@@ -1,0 +1,5 @@
+c2525ac 2026-09-04 docs: Update the context repo for the end of Phase 7 (payment and paywall)
+d94778e 2026-08-28 4.12 - docs: Rewrite the starting prompt for Phase 5 and record the frontend state
+aa51053 2026-08-27 4.10 - docs: Update the handoff file for the end of Phase 4
+537ca8e 2026-07-29 first commit
+1f3ed3b 2026-07-29 Initial commit

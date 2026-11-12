@@ -1,0 +1,9 @@
+# Yerel kod anlık görüntüleri (.tgz/.tar/.bundle). Bazılarının içinde .env var:
+# diskte kalır, depoya asla girmez.
+_snap/
+_to_delete/
+local-snapshots/
+*.tgz
+*.tar
+*.bundle
+*.bundle.lock

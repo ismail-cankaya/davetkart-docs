@@ -1,0 +1,1053 @@
+# `routes/api.php` — Eğitim Dokümanı
+
+> **Kapsanan dosya:** `routes/api.php`
+> **Yol haritasındaki yeri:** Faz 1, dosya 1.4 · **Faz 2, dosya 2.7** (auth grubu)
+> **Bağlantılı:** [`bootstrap/app.md`](../bootstrap/app.md) ·
+> [`ForceJsonResponse.md`](../app/Http/Middleware/ForceJsonResponse.md) ·
+> [`AuthController.md`](../app/Http/Controllers/Api/V1/AuthController.md)
+
+---
+
+## 0. Bir dakikalık özet
+
+Bu dosya bir **telefon rehberi**dir: hangi URL'nin hangi kodu çağıracağını söyler.
+Başka hiçbir iş yapmaz — mantık, doğrulama, yetki kontrolü buraya yazılmaz.
+
+Faz 1 sonunda içinde tek bir rota var:
+
+```php
+Route::get('/ping', fn () => ['status' => 'ok'])->name('health.ping');
+```
+
+Faz 9 sonunda 20 rota olacak. Dosyanın **işi** değişmeyecek.
+
+---
+
+## 0.1 Faz 2 eklemesi — auth grubu 🎯
+
+```php
+Route::prefix('auth')->name('auth.')->group(function (): void {
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+});
+```
+
+Bu üç satır, Faz 2'de yazılan **yedi dosyayı birbirine bağlayan** halkadır.
+`/api/auth/register` adresi bu satırla var olur; öncesinde uygulamada böyle bir
+adres yoktu.
+
+### Üretilen rota
+
+| Method | URI | Ad | Controller |
+|---|---|---|---|
+| POST | `api/auth/register` | `auth.register` | `AuthController@register` |
+
+`prefix('auth')` URI'ye, `name('auth.')` rota adına önek ekler. Sonuç:
+`/api` (bootstrap'tan) + `/auth` (buradan) + `/register`.
+
+### 🔴 `group(function () { ... })` — R1'i ihlal ediyor mu?
+
+**Hayır.** Bu ayrım kafa karıştırıcıdır, netleştirelim.
+
+**R1:** *"Rota dosyasına closure yazılmaz, controller referansı yazılır."*
+Gerekçesi `route:cache`'in closure'ları serileştirememesiydi (Faz 9).
+
+Ama iki farklı closure türü var:
+
+| Closure | Ne zaman çalışır | `route:cache` | Örnek |
+|---|---|---|---|
+| **Rota eylemi** | Her istekte | 🔴 **Kırar** | `Route::get('/x', fn () => ...)` |
+| **Grup tanımı** | Yalnızca **kayıt anında** | ✅ Sorunsuz | `Route::prefix(...)->group(fn () => ...)` |
+
+Grup closure'ı, rotalar kaydedilirken **bir kez** çalışır ve içindeki
+`Route::post(...)` satırlarını tanımlar. İşi bittiğinde atılır — `Route`
+nesnesinde saklanmaz, dolayısıyla serileştirilecek bir şey kalmaz.
+
+Serileştirilen şey **rota eylemidir** (`[AuthController::class, 'register']`)
+ve o bir dizi, closure değil.
+
+> **Genel ders:** Bir kuralı uygularken **lafzını değil gerekçesini** takip et.
+> R1'in gerekçesi "closure yasak" değil, *"`route:cache` kırılmasın"*dı. Gerekçe
+> sağlanıyorsa lafzın ihlali görünürdedir, gerçek değildir.
+
+### Grup neden tek rota için kuruldu?
+
+2.8 ve 2.9'da üç rota daha gelecek ve ikisi `auth:sanctum` middleware'i
+isteyecek:
+
+```php
+Route::prefix('auth')->name('auth.')->group(function (): void {
+    Route::post('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/login', [AuthController::class, 'login'])->name('login');
+
+    Route::middleware('auth:sanctum')->group(function (): void {
+        Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+        Route::get('/me', [AuthController::class, 'me'])->name('me');
+    });
+});
+```
+
+Şekli şimdi kurmak, sonraki iki adımı **satır eklemeye** indirger.
+
+### ⚠️ Bilinen boşluk — rate limiting yok
+
+Laravel 11+ ile `api` middleware grubu **varsayılan olarak throttle içermez**;
+`bootstrap/app.php`'de `$middleware->throttleApi()` çağrılmadıkça hız sınırı
+yoktur. Bizde çağrılmıyor.
+
+Bugün için kabul edilebilir, ama `POST /auth/login` eklendiğinde bu bir
+**brute-force açığı** hâline gelir: saldırgan dakikada binlerce parola
+deneyebilir. Yol haritası rate limit kaydını Faz 5'e koyuyor — 2.8'de bu takvimi
+yeniden değerlendireceğiz.
+
+---
+
+## 0.2 Faz 3 eklemesi — davetiye koleksiyonu
+
+```php
+Route::middleware('auth:sanctum')->group(function (): void {
+    Route::apiResource('invitations', InvitationController::class)
+        ->where(['invitation' => '[0-9A-HJKMNP-TV-Z]{26}']);
+});
+```
+
+Tek satır beş rota üretir (K37 — tam REST koleksiyonu):
+
+| Method | Path | Controller | Policy | Yanıt |
+|---|---|---|---|---|
+| GET | `/api/invitations` | `index` | `viewAny` | `200` · `{data: [...]}` |
+| POST | `/api/invitations` | `store` | `create` | `201` · `{data: {...}}` |
+| GET | `/api/invitations/{invitation}` | `show` | `view` | `200` · `{data: {...}}` |
+| PUT/PATCH | `/api/invitations/{invitation}` | `update` | `update` | `200` · `{data: {...}}` |
+| DELETE | `/api/invitations/{invitation}` | `destroy` | `delete` | `204` · gövde yok |
+
+Rota adları da otomatik: `invitations.index`, `invitations.store`… Testlerde
+`route('invitations.show', $invitation)` diye çağıracağız — URL'yi elle yazmak
+yerine (R3).
+
+`apiResource`, `resource`'tan farklı olarak `create` ve `edit` rotalarını
+**üretmez**; onlar HTML form sayfaları içindir ve bizde frontend ayrı çalışıyor.
+
+### ⚠️ Rota sırası tuzağı
+
+Laravel rotaları **kayıt sırasına** göre eşleştirir; ilk eşleşen kazanır. Yarın
+sabit segmentli bir rota eklenirse:
+
+```php
+Route::apiResource('invitations', InvitationController::class);
+Route::get('/invitations/count', [...]);        // ❌ ASLA calismaz
+```
+
+`/invitations/count` isteği önce `{invitation}` desenine takılır ve `count`
+bir davetiye kimliği sanılır. Sonuç: 404 — ve sebebi kodu okurken görünmez.
+
+Doğrusu, sabit rotayı **üste** yazmaktır:
+
+```php
+Route::get('/invitations/count', [...]);        // ✅ once sabit
+Route::apiResource('invitations', InvitationController::class);
+```
+
+### `whereUlid` kısıtı bu riski neden azaltıyor?
+
+```php
+->whereUlid('invitation')
+```
+
+`{invitation}` parametresini **ULID biçimine** sınırlıyor. İki kazancı var:
+
+1. `/invitations/count` artık `{invitation}`'a **eşleşmez**; sıra hatası yapsan
+   bile rota doğru çalışır
+2. Geçersiz biçimli bir kimlik veritabanına hiç gitmez — 404 rota katmanında
+   verilir, sorgu açılmaz
+
+Bu, savunmayı "hatırlamaya" değil **yapıya** bağlamanın bir örneği daha.
+
+### 🔴 Faz 4 düzeltmesi: bu kısıt elle yazılmıştı ve HİÇBİR ŞEYE eşleşmiyordu
+
+Faz 3'te bu satır şöyle yazılmıştı:
+
+```php
+->where(['invitation' => '[0-9A-HJKMNP-TV-Z]{26}'])   // ❌ yalnızca BÜYÜK harf
+```
+
+Regex doğru görünüyor: Crockford Base32 alfabesi (`0-9` ve `A-Z`, ama `I`, `L`,
+`O`, `U` yok — sırasıyla `1`, `1`, `0` ile karışmasınlar diye), 26 karakter.
+Kâğıt üzerinde kusursuz. Ama Laravel'in ürettiği ULID'ler **küçük harflidir**:
+
+```php
+// vendor/laravel/framework/src/Illuminate/Database/Eloquent/Concerns/HasUlids.php:16
+public function newUniqueId()
+{
+    return strtolower((string) Str::ulid());
+}
+```
+
+Sonuç: `{invitation}` parametreli **hiçbir rota hiçbir istekle eşleşmedi.**
+`Router::findRoute()` başarısız oldu, `NotFoundHttpException` fırladı,
+`ApiExceptionRenderer::fromStatus(404)` onu `RESOURCE_NOT_FOUND`'a çevirdi.
+
+#### 🔴 Asıl bedel: testler boş yeşil yandı
+
+`show`, `update`, `destroy` uçları **404** dönüyordu — ve Faz 3'ün güvenlik
+testleri tam olarak 404 bekliyordu:
+
+| Test | Beklenen | Aldığı | Neden geçti |
+|---|---|---|---|
+| `owner cannot read another users invitation` | 404 | 404 | **Rota eşleşmediği için** — Policy hiç çalışmadı |
+| `owner cannot update another users invitation` | 404 | 404 | aynı |
+| `missing and forbidden invitations are indistinguishable` | 404 = 404 | ✓ | biri rota, diğeri binding — **iki farklı sebep** |
+| `owner can read their own invitation` | 200 | **404** | ← tek gerçek sinyal buydu |
+
+Yani `app/Policies/InvitationPolicy.php` dosyasını tamamen silseydin bu üç test
+yine geçerdi. Faz 3'ün **güvenlik dosyası bir kez bile çalışmamıştı**.
+
+Bu, Faz 2'nin 24. dersinin (`actingAs()` guard'ı atlar → boş yeşil test) rota
+katmanındaki ikizi. Ortak kalıp: *"beklediğim yanıtı aldım"* ile *"beklediğim
+sebeple aldım"* farklı şeylerdir.
+
+#### Doğrusu: framework'ün kısıtını kullan
+
+Laravel bu deseni zaten üretiyor:
+
+```php
+// vendor/laravel/framework/src/Illuminate/Routing/CreatesRegularExpressionRouteConstraints.php:52
+return $this->assignExpressionToParameters(
+    $parameters,
+    '[0-7][0-9a-hjkmnp-tv-zA-HJKMNP-TV-Z]{25}',
+);
+```
+
+Elle yazdığımızdan **iki yönden daha iyi**:
+
+| | Elle yazılan | `whereUlid()` |
+|---|---|---|
+| Harf durumu | yalnızca büyük | **büyük ve küçük** |
+| İlk karakter | `0-9A-Z` (herhangi) | **`0-7`** — 48 bitlik zaman damgasının taşamayacağı aralık |
+
+`PendingResourceRegistration` sınıfı `CreatesRegularExpressionRouteConstraints`
+trait'ini kullandığı için `apiResource(...)->whereUlid('invitation')` doğrudan
+çalışır.
+
+> **Kural (R6):** Framework'ün hazır bir kısıtı varsa deseni elle yazma.
+> Elle yazılan desen **sessizce yanlış** olabilir; framework'ünki, kimliği
+> üreten kodla aynı depoda durduğu için onunla birlikte değişir.
+
+> **Ders:** Bir regex'i "okuyup doğru görmek" onu test etmek değildir. Bu desen
+> aylarca doğru göründü çünkü onu doğrulayan tek test (`owner can read their
+> own`) hiç koşmamıştı — PHPStan zinciri daha önce kırıyordu.
+
+### Neden `auth:sanctum` grubu, `public` değil?
+
+K12: auth gerektirmeyen rotalar `/api/public/` önekiyle gruplanır. Davetiye
+CRUD'u **sahibine** aittir, dolayısıyla korumalı grupta.
+
+Misafirin göreceği okuma ucu (`/api/public/invitations/{slug}`) Faz 4'te ayrı
+bir grupta yazılacak — aynı veriye iki farklı kapı, iki farklı yetki modeli.
+
+---
+
+## 0.3 Faz 4 eklemesi — `/api/public/` grubu 🔴
+
+```php
+Route::prefix('public')->name('public.')->group(function (): void {
+    Route::get('/invitations/{id}', [PublicInvitationController::class, 'show'])
+        ->whereUlid('id')
+        ->name('invitations.show');
+});
+```
+
+### Üretilen rota
+
+| Method | URI | İsim | Auth |
+|---|---|---|:---:|
+| GET | `/api/public/invitations/{id}` | `public.invitations.show` | — |
+
+Frontend'in `/invite/:id` sayfası bu ucu çağıracak (4.8).
+
+### 🔴 Önek neden var? (K12)
+
+Bu projedeki tüm rotalar arasında **auth gerektirmeyen** olanlar bir avuç. Onları
+ayrı bir önek altında toplamanın gerekçesi kolaylık değil, **fail-safe
+tasarım**.
+
+İki dünyayı karşılaştır:
+
+| Öneksiz dünya | Önekli dünya |
+|---|---|
+| Rota yazarken `auth:sanctum`'u **eklemek** gerekir | Rota yazarken `public/` altına **koymak** gerekir |
+| Unutmanın sonucu: davetiye herkese açık | Unutmanın sonucu: uç **çalışmaz** (401) |
+| Hata sessizdir, üretimde fark edilir | Hata gürültülüdür, ilk denemede fark edilir |
+
+Kritik fark, **unutmanın hangi yöne düştüğü**. Öneksiz düzende varsayılan
+"açık"tır ve güvenlik bir hatırlama işidir. Önekli düzende varsayılan
+"kapalı"dır; açmak için ayrıca bir şey yapman gerekir.
+
+Buna *fail-safe* denir: sistem arızalandığında **güvenli tarafa** düşmesi.
+Asansörün elektrik kesilince frenlemesi gibi.
+
+> Aynı ilkenin projedeki diğer örnekleri: `$fillable` beyaz listesi (S3),
+> Resource'un beyaz liste olması (C1), Policy reddinin 404 olması (H7).
+> Hepsi **varsayılanı kapalı** tutar.
+
+### ⚠️ Bu grup bir kapı — buraya rota eklemek onu internete açmaktır
+
+Dosyadaki yorum bu yüzden bir uyarı taşıyor. Buraya bir satır eklerken
+sorulacak soru şudur:
+
+> *"Bu veriyi, kimliği bilinmeyen herhangi biri görebilir mi?"*
+
+Cevap "duruma göre" ise rota buraya **gelmez** — koşul bir Policy'ye veya
+sorgunun kapsamına aittir. Bizim durumumuzda cevap net: *yayınlanmış* bir
+davetiye zaten linki olan herkese açıktır, ve "yayınlanmış mı?" sorusu
+`ResolvePublicInvitationAction`'ın sorgusunda cevaplanıyor (4.1).
+
+### `whereUlid('id')` — R6 burada da geçerli
+
+Faz 3'ün elle yazılmış regex'i hiçbir isteğe eşleşmiyordu (§0.2). Aynı hatayı
+yeni bir rotada tekrarlamamak için framework'ün kısıtını kullanıyoruz.
+
+İki kazancı var:
+
+1. Biçimsiz bir kimlik **veritabanına hiç gitmez** — 404 rota katmanında verilir
+2. Cache anahtarı da kirlenmez: `Cache::remember()` ancak geçerli biçimli bir
+   ULID ile çağrılabilir
+
+İkincisi düşünüldüğünden önemli. Kısıt olmasaydı
+`/api/public/invitations/<10.000 karakterlik çöp>` isteği bir cache anahtarı
+üretirdi. Saldırgan farklı çöplerle cache'i **şişirebilirdi** (cache flooding).
+Rota kısıtı bunu daha kapıda kesiyor.
+
+### `name('public.')` neden var?
+
+**R2:** her rota isimlendirilir. Grup öneki isme de uygulanıyor, sonuç
+`public.invitations.show`.
+
+İsim, testlerin URL metnine değil rotanın kendisine bağlanmasını sağlar:
+
+```php
+$this->getJson(route('public.invitations.show', $inv));   // ✅
+$this->getJson('/api/public/invitations/'.$inv->id);      // ❌ metne bağlı
+```
+
+Ad alanı ayrımı ayrıca okunabilirlik veriyor: `invitations.show` sahibin ucu,
+`public.invitations.show` misafirinki. İsimler de sözleşmenin bir parçası.
+
+### Grup neden `auth:sanctum` grubunun ALTINDA?
+
+Sıra burada bir tuzak üretmiyor — `/api/public/invitations/...` ile
+`/api/invitations/...` farklı yollar, birbirini yutamazlar (§0.2'deki tuzak
+aynı önek altında sabit segment ile parametre çakışınca doğuyordu).
+
+Dosyanın sonunda durmasının sebebi okunabilirlik: dosya yukarıdan aşağı
+"korumalı uçlar → açık uçlar" diye okunuyor ve istisna en görünür yerde,
+kendi uyarı bloğuyla duruyor.
+
+---
+
+## 1. `/api` öneki nereden geliyor?
+
+Dosyada `/ping` yazıyor ama endpoint `/api/ping`. Önek bu dosyada değil,
+`bootstrap/app.php`'de tanımlı:
+
+```php
+->withRouting(
+    api: __DIR__.'/../routes/api.php',   // ← bu dosyayı 'api' grubuna yükler
+)
+```
+
+Laravel `api` grubuna yüklenen her rotaya otomatik olarak `/api` önekini ekler.
+
+🔴 **K10'un mümkün olmasının sebebi budur.** Sözleşme gereği rotalar `/api/...`
+olmalı, `/api/v1/...` **olmamalı** — frontend'in `baseURL`'i `'/api'`. Sürüm
+bilgisi controller namespace'inde taşınır:
+
+```
+URL:       /api/auth/login                      ← düz, sürümsüz
+Namespace: App\Http\Controllers\Api\V1\AuthController   ← sürüm burada
+```
+
+Yarın v2 gerekirse `Api\V2\` namespace'i açılır ve `/api/v2/...` **ek** olarak
+tanımlanır; `/api/...` v1 olarak yaşamaya devam eder. Bugünkü frontend kırılmaz.
+
+---
+
+## 2. Kod okuması
+
+### 2.1 `Route::get(...)` — cephe (facade) nedir?
+
+```php
+use Illuminate\Support\Facades\Route;
+```
+
+`Route` bir **facade**'dır: arkasındaki gerçek nesneye statik görünümlü bir kısayol
+sağlar. `Route::get()` yazdığında Laravel bunu perde arkasında
+`app('router')->get()` çağrısına çevirir.
+
+Neden böyle? Okunabilirlik. Alternatifi her rota satırında konteynerden router
+çekmek olurdu. Facade'ler Laravel'in imza özelliklerinden biridir.
+
+### 2.2 Dizi döndürmek neden yeterli?
+
+```php
+fn () => ['status' => 'ok']
+```
+
+`response()->json([...])` yazılmadı. Laravel bir rotadan dizi döndüğünü görürse
+onu **otomatik olarak** `JsonResponse`'a çevirir, `Content-Type: application/json`
+başlığını ekler ve `200` durum kodu verir.
+
+Aynı otomatik dönüşüm `Arrayable` ve `JsonSerializable` arayüzlerini uygulayan
+nesneler için de çalışır — Faz 2'den itibaren `UserResource` döndürebilmemizin
+sebebi budur.
+
+### 2.3 `->name(...)` neden var?
+
+```php
+->name('health.ping');
+```
+
+Rotaya bir **isim** verir. Faydası testlerde ve kod içinde görülür:
+
+```php
+$this->getJson(route('health.ping'));   // ✅ URL değişse de test çalışır
+$this->getJson('/api/ping');            // ❌ URL değişince test kırılır
+```
+
+İsimlendirme kuralı `nokta.ile.gruplama`: `health.ping`, `auth.login`,
+`invitations.store`. Modül adı önce gelir — bir modülün tüm rotalarını aramak
+kolaylaşır.
+
+### 2.4 `fn () =>` — ok fonksiyonu
+
+PHP 7.4 ile geldi. `function () { return ...; }`'ın kısa hâlidir ve **tek ifade**
+içerir; `return` yazılmaz.
+
+```php
+fn () => ['status' => 'ok']
+// eşdeğeri:
+function () { return ['status' => 'ok']; }
+```
+
+---
+
+## 3. Tasarım kararları
+
+### 3.1 🔴 Varsayılan `/user` rotası neden silindi?
+
+Laravel iskeleti şu rotayla gelir:
+
+```php
+// ❌ Silindi
+Route::get('/user', fn (Request $request) => $request->user())
+    ->middleware('auth:sanctum');
+```
+
+İki sorunu vardı:
+
+**1. Ham modeli döndürüyor.** `$request->user()` bir `User` **modelidir**. JSON'a
+çevrildiğinde `$hidden` dizisinde olmayan **tüm** kolonlar dışarı çıkar. Bugün
+zararsız görünür; Faz 7'de `users` tablosuna bir `stripe_customer_id` veya
+`admin_notes` kolonu eklendiğinde o da sessizce sızar.
+
+Sözleşme gereği alan adları **camelCase** olmalı ve dönüşüm **yalnızca Resource
+katmanında** yapılmalı. Bu rota `full_name` döndürürdü — snake_case, yani
+sözleşme ihlali.
+
+**2. Belgesiz bir endpoint.** Endpoint tablosunda (`03` §4.3) `/api/user` yok;
+`GET /api/auth/me` var. İkisi aynı işi yapıyor ama biri planda, biri kazara orada.
+
+> **Genel kural:** Framework iskeletinden gelen örnek kodlar **silinir**. "Zararsız,
+> dursun" diyerek bırakılan her satır bir gün bir sürprizin kaynağı olur.
+
+Karşılığı Faz 2'de `AuthController::me()` olarak, `UserResource` ile birlikte
+yazılacak.
+
+### 3.2 `/ping` yanıtı neden `{data: ...}` zarfında değil?
+
+K11 der ki: auth endpoint'leri zarfsız, **diğerleri** `{data: ...}` zarfıyla.
+`/ping` ise düz `{"status":"ok"}` dönüyor. Çelişki mi?
+
+Hayır. Zarf kuralı **kaynak temsilleri** (resource representations) içindir —
+bir davetiye, bir kullanıcı, bir LCV listesi. `/ping` bir kaynak döndürmez; bir
+**canlılık sondası**dır (liveness probe). Frontend onu hiç çağırmaz.
+
+`{data: {status: 'ok'}}` yazmak, kuralı anlamadan uygulamak olurdu.
+
+### 3.3 🔴 `/ping` yanıtına sürüm bilgisi neden eklenmedi?
+
+Sağlık endpoint'lerine sürüm eklemek yaygın bir alışkanlıktır:
+
+```php
+// ❌ Yapmadığımız
+fn () => ['status' => 'ok', 'version' => app()->version(), 'php' => PHP_VERSION]
+```
+
+`08` §3.3 bunu açıkça yasaklar: *"Sürüm bilgisi (PHP, Laravel) → hiçbir yere."*
+
+Sebep: bilinen bir güvenlik açığı yayınlandığında saldırganlar **savunmasız sürümü
+çalıştıran sunucuları taramak** için tam olarak bu bilgiyi kullanır. Kimliği
+doğrulanmamış bir endpoint'ten sürüm yayınlamak, bu taramaya gönüllü olmaktır.
+
+Sürüm bilgisine ihtiyaç duyulursa: kimlik doğrulamalı bir yönetim endpoint'i veya
+sunucu tarafı log'lar.
+
+### 3.4 `/up` ile `/api/ping` farkı
+
+`bootstrap/app.php` içinde `health: '/up'` tanımlı — Laravel'in hazır sağlık
+kontrolü. Neden ikisi birden?
+
+| | `/up` | `/api/ping` |
+|---|---|---|
+| Kim yazdı | Laravel | Biz |
+| Neyi doğrular | **Framework** ayakta mı | **Bizim API sözleşmemiz** çalışıyor mu |
+| Neyden geçer | Web grubu | `api` grubu → `ForceJsonResponse` |
+| Yanıt | HTML | JSON |
+
+`/api/ping` çalışıyorsa yalnızca PHP ayakta değil; middleware zinciri, rota grubu
+ve JSON dönüşümü de doğrulanmış olur. Yük dengeleyici sondası olarak da bu
+kullanılır.
+
+---
+
+## 4. ⚠️ Bilinen borç: closure ve `route:cache`
+
+```php
+Route::get('/ping', fn () => ['status' => 'ok'])   // ← closure
+```
+
+Faz 9'da (`9.2`) üretim optimizasyonu olarak `php artisan route:cache` çalıştırılacak.
+Bu komut rotaları serileştirip diske yazar — ve **closure'lar serileştirilemez**:
+
+```
+LogicException: Unable to prepare route [api/ping] for serialization. Uses Closure.
+```
+
+Yani bu satır Faz 9'da komutu **kırar**.
+
+### Çözüm seçenekleri
+
+| Seçenek | Maliyet | Ne zaman |
+|---|---|---|
+| **A** — `HealthController` (invokable) yaz | +1 dosya (~12 satır) | Şimdi |
+| **B** — Faz 9'da dönüştür | 0 | Faz 9 |
+
+> **Neden şimdi karar veriliyor?** Faz 9'da bu satırın varlığı unutulacak; komut
+> hata verdiğinde sebebi aramak zaman kaybı olur. Karar ne olursa olsun **kayda
+> geçmesi** gerekir — bu bölüm o kayıttır.
+
+**Genel kural (Faz 2'den itibaren):** Rota dosyalarına closure yazılmaz, controller
+referansı yazılır. `/ping` bu kuralın bilinçli ve tek istisnasıdır.
+
+---
+
+## 5. Rota dosyasına ne yazılır, ne yazılmaz?
+
+| ✅ Yazılır | ❌ Yazılmaz |
+|---|---|
+| URL → controller eşlemesi | İş mantığı |
+| Middleware ataması | Veritabanı sorgusu |
+| Rota grupları ve önekler | `if` blokları |
+| Rota isimleri | Doğrulama |
+| Model binding tanımları | Yanıt biçimlendirme |
+
+Rota dosyası **okunduğunda API'nin yüzeyi anlaşılmalıdır**. 40 satırlık bir closure
+oraya konursa dosya haritalık işlevini kaybeder.
+
+---
+
+## 6. Faz 1 sonrası nasıl büyüyecek?
+
+```php
+// Faz 2
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/auth/me', [AuthController::class, 'me']);
+
+    // Faz 3
+    Route::apiResource('invitations', InvitationController::class);
+});
+
+// Faz 4 — K12: auth'suz rotalar açıkça işaretli
+Route::prefix('public')->group(function () {
+    Route::get('/invitations/{slug}', [PublicInvitationController::class, 'show']);
+});
+```
+
+🔴 **`auth:sanctum` grubunun varsayılan olması bilinçli.** Yeni bir rota yazan kişi
+onu grup içine koyarsa korumalı olur; dışına koymak **açık bir eylem** gerektirir.
+`/api/public/` öneki bu açıklığı görünür kılar — K12'nin fail-safe tasarımı.
+
+---
+
+## 7. Sık yapılan hatalar
+
+| Hata | Sonuç | Doğrusu |
+|---|---|---|
+| `/api/v1/ping` yazmak | Frontend `baseURL='/api'` — anında kırılır | `/ping` |
+| Dosyada `/api` öneki tekrarlamak | `/api/api/ping` | Önek `withRouting()`'de |
+| Closure içine iş mantığı yazmak | Test edilemez, `route:cache` kırılır | Controller |
+| `/ping`'e sürüm bilgisi eklemek | Sürüm taraması için hedef olur | Eklenmez |
+| Ham model döndürmek | Yeni kolonlar sessizce sızar | Resource katmanı |
+| Rotayı `auth:sanctum` grubunun dışına koymak | Korumasız endpoint | Grup içine, istisna `/public/` |
+| Rota ismi vermemek | Testler URL'e bağlanır | `->name(...)` |
+
+---
+
+## 8. Kendin dene
+
+```powershell
+php artisan serve
+```
+
+```powershell
+curl.exe http://localhost:8000/api/ping
+# {"status":"ok"}
+
+curl.exe -H "Accept: text/html" http://localhost:8000/api/olmayan
+# {"error":{"code":"RESOURCE_NOT_FOUND",...}}     ← HTML değil
+
+curl.exe -X POST http://localhost:8000/api/ping
+# {"error":{"code":"RESOURCE_NOT_FOUND"}}          ← yanlış metot da 404 (H7)
+```
+
+Kayıtlı rotaları listele:
+
+```powershell
+php artisan route:list --path=api
+```
+
+Çıktıda `GET|HEAD  api/ping  health.ping` görünmeli. `HEAD` otomatik gelir —
+HTTP'de her `GET` gövdesiz karşılığını da tanımlar.
+
+**Kasten kır:** `->name('health.ping')` kısmını sil ve `php artisan route:list`
+çalıştır. İsim sütununun boşaldığını göreceksin; 1.5'te yazacağımız test
+`route('health.ping')` çağırdığı için o test de patlar. Sonra geri ekle.
+
+---
+
+## 9. Sözlük
+
+| Terim | Anlamı |
+|---|---|
+| **Rota (route)** | URL + HTTP metodu → çalışacak kod eşlemesi |
+| **Facade** | Konteynerdeki nesneye statik görünümlü kısayol (`Route::`) |
+| **Ok fonksiyonu** | `fn () => ifade` — tek ifadelik anonim fonksiyon |
+| **Rota grubu** | Ortak önek/middleware paylaşan rota kümesi |
+| **Liveness probe** | Servisin ayakta olduğunu doğrulayan basit endpoint |
+| **`route:cache`** | Rotaları serileştirip önbelleğe alan üretim optimizasyonu |
+| **Invokable controller** | Tek `__invoke()` metodu olan controller |
+| **Fail-safe** | Unutulduğunda güvenli tarafa düşen tasarım |
+
+---
+
+## 🆕 Faz 5 eklemeleri — LCV uçları ve hız sınırı
+
+> **Eklendi:** 28 Ağustos 2026 · **Dosya:** 5.11
+
+### Üç yeni rota
+
+| Method | Path | Grup | Middleware |
+|---|---|---|---|
+| `POST` | `/api/public/invitations/{invitation}/rsvps` | public (auth **yok**) | `SetEtag` (etkisiz), `throttle:rsvp` |
+| `GET` | `/api/invitations/{invitation}/rsvps` | `auth:sanctum` | `SetEtag` |
+| `DELETE` | `/api/rsvps/{rsvp}` | `auth:sanctum` | — |
+
+### 🔴 Neden iç içe kaynak (`/invitations/{id}/rsvps`)?
+
+Düz bir `/api/public/rsvps` ucu da yazılabilirdi; frontend'in bugünkü servisi
+(`src/services/rsvps.ts`) zaten öyle çağırıyor. Yazmıyoruz:
+
+> Bir LCV yanıtı **her zaman** bir davetiyeye aittir. Düz uçta bu aidiyet
+> **gövdeden** gelirdi — yani istemcinin sözüne kalırdı.
+
+İç içe URL'de aidiyet **yapısaldır**: `SubmitRsvpAction` davetiyeyi URL'den
+alır, `$invitation->rsvps()->make(...)` ile yazar ve istemcinin gönderdiği
+hiçbir alan aidiyeti değiştiremez (**N1**).
+
+Bu, Faz 3'te `timeline_events` için verilen kararın aynısı — ve orada olduğu
+gibi burada da frontend uyarlanacak (`FAZ-5.md` §8).
+
+### `throttle:rsvp` neden yalnızca POST'ta?
+
+Okuma ucu (`GET .../rsvps`) **15 saniyede bir** çağrılıyor. `throttle:rsvp`
+dakikada 10 istek veriyor — panel açık kalan bir sahip birkaç dakikada `429`
+yerdi.
+
+İki uç, iki farklı tehdit modeli:
+
+| Uç | Tehdit | Savunma |
+|---|---|---|
+| `POST` (auth yok) | Spam, kota doldurma, bot | `throttle:rsvp` — dar |
+| `GET` (auth'lu) | Yok denecek kadar az | `throttle:api` (60/dk) + `SetEtag` |
+
+### `SetEtag` public gruba takılı ama POST'a etki etmiyor
+
+Public grup zaten `SetEtag` middleware'ini taşıyordu (Faz 4). Yeni `POST` ucu
+da o grubun içinde, ama middleware ilk satırında kendini devre dışı bırakıyor:
+
+```php
+if (! $request->isMethodCacheable() || $response->getStatusCode() !== Response::HTTP_OK) {
+    return $response;
+}
+```
+
+`POST` cache'lenebilir bir metot değil ve yanıt `201`. Yani **hiçbir şey
+yapmıyor** — bilerek. Bir middleware'in "burada bana iş düşmüyor" diyebilmesi,
+grubu bölmekten iyidir.
+
+### Genel API tavanı (`throttleApi`)
+
+`bootstrap/app.php`'ye eklendi:
+
+```php
+$middleware->throttleApi();
+```
+
+**FAZ-4 §9.2'nin açık borcuydu:** public davetiye ucunda 404'ler
+cache'lenmiyor, yani rastgele ULID yağdıran biri her istekte bir sorgu
+açtırabiliyordu. Ayrıca `logout`/`me` uçlarının hiçbir sınırı yoktu (Faz 2'den
+beri açık madde).
+
+Sıra önemli: `ForceJsonResponse` **prepend** ile başta duruyor, `throttleApi()`
+gruba **eklendiği** için ondan sonra çalışıyor. Böylece `429` yanıtı da JSON
+zarfıyla dönüyor (**M3**: koruyucu middleware zincirin başına konur).
+
+---
+
+## 🆕 Faz 6 eklemeleri — iki medya ucu ve `throttle:media`
+
+### İki yeni rota
+
+| Method | Path | Grup | Throttle |
+|---|---|---|---|
+| POST | `/api/invitations/{invitation}/media` | `auth:sanctum` | `throttle:api` (grup tavanı) |
+| POST | `/api/public/invitations/{invitation}/media` | `/api/public/` (**K12**) | 🔴 `throttle:media` |
+
+Uç noktalar bir **kaynak listesi** değil, iki farklı **kapı**: aynı işi
+(dosya kaydetme) yapıyorlar ama farklı tehdit modelleri altında.
+
+### 🔴 `docs/09`'un `/media/upload` notu geçersiz kılındı
+
+Plan şöyle diyordu:
+
+> `POST /api/media/upload` — ⚠️ Plan `/api/media` diyordu; **frontend
+> kazanır**, o böyle çağırıyor.
+
+O not misafirin medya yüklemesini **hesaba katmadan** yazılmıştı. Düz bir
+`/media/upload` ucunda davetiye kimliği **gövdeden** gelirdi — yani istemcinin
+sözüne kalırdı. **N1**: *aidiyet, doğrulanacak bir girdi olmaktan çıkıp yapısal
+garanti olmalıdır.*
+
+İç içe kaynakta aidiyet URL'nin **yapısında** durur ve `whereUlid()` biçimsiz
+kimliği veritabanına hiç ulaştırmaz (**O6**).
+
+Sonuç: `davetkart-frontent/src/services/media.ts` uyarlanacak (Faz 6 §8).
+Faz 3 ve Faz 5'te de aynı sınıftan bir frontend borcu doğmuştu.
+
+### `throttle:media` neden `throttle:rsvp`'den dar?
+
+| | `throttle:rsvp` | `throttle:media` |
+|---|---|---|
+| IP başına | 10 / dakika | **5 / dakika** |
+| Davetiye başına | 60 / saat | **40 / saat** |
+
+İki sebep:
+
+1. 🔴 **Honeypot yok.** Faz 5'te bot, görünmez alanı doldurduğu anda tek bir
+   sorgu bile açtırmadan eleniyordu. Dosya yüklemede görünmez alan diye bir şey
+   yok — bu limiter, orada honeypot'un yaptığı işi de üstlenmek zorunda.
+2. **İstek başına maliyet on kat.** Bir LCV satırı birkaç yüz bayt; bir video
+   20 MB + MIME analizi + kuyrukta yeniden kodlama.
+
+Kova kalıbı `rsvp` ile aynı (IP + davetiye), çünkü iki saldırı şekli aynı: tek
+kaynaktan seri gönderim, ve botnet'ten tek davetiyeye yağmur.
+
+### Sahibin ucunda neden ayrı throttle yok?
+
+Çünkü tehdit modeli farklı: uç `auth:sanctum` arkasında, yani istek yapan
+kişinin bir hesabı ve bir token'ı var. Grubun `throttle:api` tavanı (dakikada
+60/IP) yeterli. Sınırsız yükleme yine mümkün değil — `max_per_invitation = 30`
+kotası onu kapatıyor (**L3**: limit ≠ kota).
+
+### `SetEtag` misafir ucunda ne yapıyor?
+
+**Hiçbir şey.** `/api/public/` grubuna takılı olduğu için istek onun içinden
+geçiyor, ama:
+
+```php
+if (! $request->isMethodCacheable() || $response->getStatusCode() !== Response::HTTP_OK) {
+    return $response;
+}
+```
+
+`POST` cacheable değil ve yanıt `201`. İki koşuldan ikisi de eleniyor, middleware
+erken dönüyor. Faz 5'te aynı durum LCV gönderimi için de vardı.
+
+---
+
+## 🆕 Faz 7 eklemeleri — yayın, ödeme ve webhook
+
+Dört yeni uç; üçü auth'lu, biri sistemin **üçüncü auth'suz yazma yolu**.
+
+| Method | Path | Auth | Ne yapar |
+|---|---|:---:|---|
+| POST | `/api/invitations/{invitation}/publish` | ✅ | 🔴 Paywall kapısı |
+| POST | `/api/invitations/{invitation}/checkout` | ✅ | Tekil alım (K42) |
+| POST | `/api/payments/checkout` | ✅ | Paket alım (K42) |
+| POST | `/api/public/payments/webhook` | — | 🔴 Sağlayıcı bildirimi |
+
+---
+
+### 1. 🔴 `publish` — üç faz sonra açılan rota
+
+Bu rota Faz 3'te açılmadı ve gerekçesi **K47** olarak kaydedildi:
+
+> *"Şimdi yazılırsa paywall'sız bir 'bedava yayın' yolu açılır ve K42/K43
+> bozulur."*
+
+`docs/09` §Faz 3'ün uç tablosunda satır hâlâ duruyor: *"⚠️ **AÇILMADI — Faz
+7'ye taşındı**."* Kapıyı kilitleyecek anahtarlar (`TierResolver`,
+`PublishEntitlementResolver`) ancak bugün var; rota da bugün açılıyor.
+
+**Ders:** bir rotayı erken açmak, onu korumasız açmaktır. Boş bir
+`PublishInvitationAction` iskeleti üç faz boyunca kimseyi yanıltmadı; açık bir
+rota yanıltırdı.
+
+#### `POST`, `PUT` değil — neden?
+
+Yayın bir **durum geçişidir**, bir alan güncellemesi değil. `PUT` semantik
+olarak **idempotan** olmalıdır (aynı istek aynı sonucu vermeli); ikinci yayın
+isteği ise bilerek **409** döner (7.12 §4).
+
+`PATCH /invitations/{id}` ile `{status: 'published'}` göndermek de bir seçenekti
+ve reddedildi: `status`, `Invitation`'ın `#[Fillable]` listesinde **bilerek**
+yok. Sunucunun sahibi olduğu bir alanı istek gövdesinden okumak, K42/K43'ün
+tamamını atlatırdı.
+
+---
+
+### 2. İç içe checkout — N1'in üçüncü uygulaması
+
+```php
+Route::post('/invitations/{invitation}/checkout', …)   // tekil
+Route::post('/payments/checkout', …)                   // paket
+```
+
+`docs/09` düz bir `POST /api/payments/checkout` öngörmüştü ve davetiye kimliği
+gövdede taşınacaktı. Değiştirildi — **N1** (Faz 3):
+
+> *"Alt kayıt her zaman üst kaydın ilişkisinden oluşturulur."*
+
+Faz 6 bu kararı medya uçlarında bir kez vermiş ve `docs/09`'un `POST
+/media/upload` önerisini geçersiz kılmıştı. Aynı gerekçe:
+
+| | Gövdede kimlik | URL'de kimlik ✅ |
+|---|---|---|
+| Var olmayan kayıt | Elle sorgu + `firstOrFail` | **Rota bağlaması** → 404 |
+| Biçimsiz kimlik | `'ulid'` doğrulama kuralı | **`whereUlid()`** → hiç eşleşmez (O6) |
+| Aidiyet | Controller'da elle | `Gate::authorize('publish', …)` |
+| `exists` kuralı cazibesi | Var → kimlik uzayı taranabilir (A1) | Yok |
+
+#### Çakışma riski var mı?
+
+`apiResource('invitations')` `{invitation}` parametresini kullanıyor ama onun
+ürettiği rotaların hiçbiri **iki segment** taşımıyor
+(`/invitations/{invitation}` ≠ `/invitations/{invitation}/publish`). Faz 6'nın
+medya rotası da aynı kalıpta ve sorunsuz çalışıyor.
+
+`/payments/checkout` ise farklı bir önek altında — `{invitation}` onu yutamaz.
+
+---
+
+### 3. 🔴 Webhook `/api/public/` altında — K12 planı ezdi
+
+`docs/09` bu ucu `POST /api/payments/webhook` diye planlamıştı. **K12**:
+
+> *"Auth gerektirmeyen rotalar `/api/public/` öneki altında gruplanır. Bu
+> **fail-safe** tasarımdır: `auth:sanctum` unutulursa bir kaynak herkese
+> açılır. Önek, 'açık olmak'ı bir UNUTMANIN sonucu olmaktan çıkarıp AÇIKÇA
+> İŞARETLENMİŞ bir istisna yapar."*
+
+Sağlayıcı bu URL'yi bir kez yapılandırır; hangi yolda olduğu onun için
+farksızdır. Bizim için ise auth'suz uçların **tek yerde** toplanması demek —
+`routes/api.php`'yi okuyan biri internete açık yüzeyin tamamını tek bakışta
+görür.
+
+#### Üç auth'suz yazma yolu, üç farklı savunma
+
+| Faz | Uç | Yazan | Savunma |
+|---|---|---|---|
+| 5 | LCV | Anonim misafir | honeypot + `throttle:rsvp` + son tarih + kota |
+| 6 | Medya | Anonim misafir | `throttle:media` + MIME + tür izni + kota |
+| **7** | **Webhook** | **Bilinen makine** | 🔴 **yalnızca imza** |
+
+Tek katman bir zayıflık değil, doğru katman olmasının sonucu: imza gönderenin
+kim olduğunu **kriptografik olarak** kanıtlar; diğer ikisinde böyle bir kanıt
+hiç yoktu.
+
+#### Neden özel bir `throttle` kovası yok?
+
+Meşru bildirim hacmi **öngörülemez**: bir kampanya gününde yüzlerce bildirim
+gelebilir ve dar bir limit **gerçek ödemeleri** düşürürdü. `throttleApi`
+tavanı (60/dk, IP başına) geçerli.
+
+> ⚠️ **B6 — bunun kapatmadığı şey:** sağlayıcı tek bir çıkış IP'sinden yoğun
+> gönderirse bu tavana çarpar ve 429 alır. Sağlayıcılar 429'da retry ettiği
+> için veri kaybolmaz, ama üretimde sağlayıcı IP'lerini muaf tutmak gerekecek.
+> **Faz 9 borcu.**
+
+#### CSRF muafiyeti: yazılacak satır yok
+
+Laravel 11+ iskeletinde `VerifyCsrfToken` **yalnızca `web` grubunda** kayıtlı;
+`api` grubu onu hiç taşımaz. `docs/09`'un *"CSRF muaf"* notu **zaten
+sağlanmış** durumda.
+
+🔴 `$middleware->validateCsrfTokens(except: [...])` yazmak gereksiz **ve
+zararlıdır**: var olmayan bir muafiyet, okuyucuya CSRF korumasının burada
+geçerli olduğunu düşündürür.
+
+---
+
+### 4. `SetEtag` webhook ucunda ne yapıyor?
+
+Hiçbir şey — `POST` cacheable değil ve yanıt `204`. Faz 5 ve 6'daki aynı
+durum. Grup middleware'i olarak geliyor, erken dönüyor.
+
+---
+
+## 🆕 Faz 10 eklemesi — siparişler (10.23)
+
+```php
+Route::apiResource('orders', OrderController::class)
+    ->only(['index', 'show'])
+    ->whereUlid('order');
+```
+
+| Metot | Yol | Grup | Ne |
+|---|---|---|---|
+| `GET` | `/api/orders` | `auth:sanctum` | Kullanıcının **kendi** siparişleri, en yeni üstte |
+| `GET` | `/api/orders/{order}` | `auth:sanctum` | Tek sipariş; başkasınınki **404** (H7) |
+
+- **`only(['index', 'show'])`:** Yazma ucu yok. Siparişi checkout ucu açıyor,
+  durumunu imzalı webhook değiştiriyor. `apiResource` tek başına `store`,
+  `update` ve `destroy` rotalarını da üretirdi; controller'da metot olmasa bile
+  rota tablosunda görünür ve bir gün birisi o metodu yazdığında sessizce
+  açılırlardı.
+- **`whereUlid('order')`:** `orders.id` ULID (`HasUlids`). Biçimsiz kimlik
+  veritabanına hiç ulaşmaz (O6, R6).
+- **`/payments/checkout` ile çakışmaz:** farklı önek (`/orders` ve `/payments`).
+- **Neden `SetEtag` yok?** Dönüş sayfası `show`'u **birkaç saniye** yokluyor, LCV
+  panelinin saatlerce süren 15 saniyelik yoklaması gibi değil. Yanıt birkaç
+  yüz bayt. ETag'in kazandıracağı şey ölçülemeyecek kadar küçük.
+
+Ayrıntı: [`OrderController.md`](../app/Http/Controllers/Api/V1/OrderController.md).
+
+---
+
+## 🆕 Faz 10 eklemesi — parola sıfırlama (10.35)
+
+```php
+Route::post('/forgot-password', [AuthController::class, 'forgotPassword'])->name('password.forgot');
+Route::post('/reset-password', [AuthController::class, 'resetPassword'])->name('password.reset');
+```
+
+İkisi de `auth` önekinin `throttle:auth` grubunda, `register` ve `login`'in yanında.
+Ortak noktaları: **kimliksiz** ve **e-posta alan** uçlar. Aynı kova (e-posta + IP
+başına 5/dk, IP başına 20/dk) üç tehdidi birden kesiyor: parola deneme, hesap tarama,
+mail bombalama.
+
+`/api/public/` öneki **yok**: K12'nin öneki misafire açık *içerik* uçları için
+(davetiye, LCV, iletişim). Kimlik uçları Faz 2'den beri `auth/` altında; kimliksiz
+olmaları onları misafir ucu yapmıyor.
+
+⚠️ Mutasyonla kanıtlandı (`PasswordResetTest`, M7): `forgot-password` grubun
+**dışına** taşınınca yalnızca hız sınırı testi kırılıyor. Rotanın yeri bir güvenlik
+kararı, düzen tercihi değil.
+
+### Hesap silme (10.40)
+
+```php
+Route::delete('/me', [AuthController::class, 'destroy'])
+    ->middleware('throttle:auth')
+    ->name('destroy');
+```
+
+`auth:sanctum` grubunda (kimlik şart) **ve** `throttle:auth` altında. Kimlikli uçların
+çoğunda auth sınırı yok (`AuthTest`'in kapsam testi bunu korur), çünkü onlar kimlik
+bilgisi kabul etmiyor. Bu uç ise parola alıyor: çalınmış bir token'la parola tahmini
+bir tehdit. Gövdede e-posta olmadığı için kova `anonim|IP` (5/dk) ve IP (20/dk).
+
+---
+
+## 🆕 Faz 10 (10.59 · K101) — `PUT /api/public/invitations/{invitation}/rsvps/{rsvp}`
+
+Misafir kendi LCV'sini ilk gönderimde aldığı düzenleme koduyla günceller. `public` grubunda,
+`throttle:rsvp` altında (gönderimle **aynı** kova: güncelleme de bir yazma). İki parametre
+`whereUlid` ile biçim denetiminden geçiyor; biçimsiz kimlik veritabanına gitmiyor.
+Ayrıntı: `PublicRsvpController.md` → *Faz 10*.
+
+---
+
+## 🆕 Faz 11 (11.8): hediye kodu
+
+| Rota | Ad | Ara katman |
+|---|---|---|
+| `POST /api/gift-codes/preview` | `gift-codes.preview` | `auth:sanctum`, `throttle:gift-code` |
+| `POST /api/invitations/{invitation}/checkout` | `invitations.checkout` | + `throttle:gift-code` |
+| `POST /api/payments/checkout` | `payments.checkout` | + `throttle:gift-code` |
+
+Önizleme yalnızca okur. Kodu **kullanmak** ayrı bir uç değil: iki checkout ucunun gövdesindeki
+`giftCode` alanı (`GiftCodeController.md`). Limiter kodsuz checkout'u saymaz.
+
+Prompt `/api/v1/gift-codes/preview` yazıyordu. Projede sürüm URL'de değil namespace'te
+(CLAUDE.md §2), bu yüzden `/api/gift-codes/preview`.
+
+---
+
+## 🆕 Faz 12 (12.7): Shopier'in iki ucu
+
+```php
+Route::post('/payments/shopier/callback', ShopierCallbackController::class)->name('payments.shopier.callback');
+Route::post('/payments/shopier/osb',      ShopierOsbController::class)->name('payments.shopier.osb');
+```
+
+İkisi de `public` grubunda (K12): auth'suz her yazma yolu tek önekte. Sistemin
+**beşinci ve altıncı** auth'suz yazma yolları.
+
+| Uç | Gönderen | Savunma | Yanıt |
+|---|---|---|---|
+| `callback` | Kullanıcının tarayıcısı | İmza (`random_nr + platform_order_id`) + mod (K117) | 303 |
+| `osb` | Shopier sunucusu | İmza (bütün gövde) + tutar (K126) | `200 success` |
+
+- **CSRF:** callback bir tarayıcı form POST'u, ama `api` grubunda `VerifyCsrfToken` yok;
+  muafiyet yine yapısal. Olsaydı Shopier'in formu (bizim token'ımızı bilmediği için)
+  her seferinde 419 alırdı.
+- **Yol sabiti:** forma yazılan adres `ShopierGateway::CALLBACK_PATH`. Rota yolu
+  değişirse `ShopierCallbackTest::the_callback_route_is_the_address_written_into_the_form` kırılır.
+- Fake'in `/payments/webhook` ucu yerinde: geliştirmede `PAYMENT_PROVIDER=fake` ile
+  akış Shopier olmadan denenebilsin.
+
+---
+
+## 🆕 Faz 13 (13.6) — fiyat kataloğu
+
+| Rota | Ad | Grup |
+|---|---|---|
+| `GET /api/public/plans` | `public.plans.index` | public (`SetEtag`) |
+| `GET /api/pricing` | `pricing.show` | `auth:sanctum` + `SetEtag` |
+
+Frontend'de fiyat yok (K128): fiyat kartları, paywall ve ödeme sayfası sayıları bu iki
+uçtan okur. Ayrıntı: `app/Http/Controllers/Api/V1/PricingController.md`.
+
+---
+
+## 🆕 Faz 14 — hesap ayarları
+
+| Rota | Ad | Grup | Adım |
+|---|---|---|---|
+| `GET /api/account/entitlements` | `account.entitlements` | `auth:sanctum` + `SetEtag` | 14.4 |
+| `POST /api/orders/{order}/refund-request` | `orders.refund-request.store` | `auth:sanctum` | 14.5 |
+| `DELETE /api/orders/{order}/refund-request` | `orders.refund-request.destroy` | `auth:sanctum` | 14.5 |
