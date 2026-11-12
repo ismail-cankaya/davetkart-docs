@@ -1,3 +1,4 @@
+# > 🗄️ ARŞİV (2026-11-12) — Yerine geçen: yok (iş bitti; betik backend'e ait). Neden: Faz 0 iskeleti kuruldu, hedef yol davetkart-backend\ artık yok.
 # =============================================================================
 #  DavetKart Backend — Mimari Klasör İskeleti
 # =============================================================================

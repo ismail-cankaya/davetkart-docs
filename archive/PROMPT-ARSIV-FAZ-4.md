@@ -1,3 +1,5 @@
+> 🗄️ ARŞİV (2026-11-12) — Yerine geçen: `archive/PROMPT.md` (o da arşivde; güncel giriş `README.md`). Neden: Faz 4'e kadarki başlangıç prompt'u.
+
 # Yeni AI Asistanı İçin Başlangıç Prompt'u
 
 > Yeni bir sohbet açtığınızda aşağıdaki bloğu olduğu gibi kopyalayıp yapıştırın.

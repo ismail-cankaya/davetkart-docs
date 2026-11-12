@@ -1,3 +1,5 @@
+> 🗄️ ARŞİV (2026-11-12) — Yerine geçen: `context/PHP-LARAVEL-SETUP.md` ve `prompts/`. Neden: 4 Eylül 2026 durumunu (Faz 7) anlatıyor; sonrasında Faz 8–14 yazıldı.
+
 # Yeni AI Asistanı İçin Başlangıç Prompt'u
 
 > **Son güncelleme:** 4 Eylül 2026
