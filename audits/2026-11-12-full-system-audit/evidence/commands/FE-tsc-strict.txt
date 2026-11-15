@@ -1,0 +1,13 @@
+# Komut : npx tsc --noEmit --strict (kopya frontend-tst 44caa49; tsconfig değişmedi, bayrak komut satırında) · 2026-11-15 13:56
+     11 error TS18047
+      4 error TS2345
+      4 error TS2322
+# toplam hata satırı: 19
+# çekirdek (templates dışı): 3  · şablonlar: 16
+# en çok hata veren 10 dosya:
+     15 src/components/templates/shared/effects/particleEngine.ts
+      2 src/components/preview/PreviewSection.tsx
+      1 src/components/templates/lazyPresets.ts
+      1 src/components/create/EditorWorkspace.tsx
+# --- strictNullChecks tek başına:
+18

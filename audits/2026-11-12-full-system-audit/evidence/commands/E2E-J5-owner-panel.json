@@ -1,0 +1,46 @@
+{
+ "journey": "J5-owner-panel",
+ "ranAt": "2026-11-15T11:22:05.526Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /dashboard",
+   "url": "/dashboard"
+  },
+  {
+   "a": "wait:1500",
+   "url": "/dashboard"
+  },
+  {
+   "a": "fullshot:J5-panel-lcv-1440",
+   "url": "/dashboard",
+   "r": "screenshots/J5-panel-lcv-1440.png"
+  },
+  {
+   "a": "eval:[...document.querySelectorAll('main table tr, main [role=row], main li')].map(e=>e.innerText.replace(/\\s+/g,' ').trim()).filter(t=>t.includes('Ayşe')).slice(0,3)",
+   "url": "/dashboard",
+   "r": []
+  },
+  {
+   "a": "eval:document.querySelector('main').innerText.replace(/\\s+/g,' ').slice(0,900)",
+   "url": "/dashboard",
+   "r": "ÜYE PANELİ Hoş Geldiniz, Elif Yıldırım Davetiyelerinizi yönetin, taslaklarınıza devam edin ve misafir yanıtlarını gerçek zamanlı takip edin. Hesap Ayarları Yeni Davetiye Oluştur Yayında Olanlar 1 Kaydedilenler 3 DÜĞÜN Yayında Zeynep & Emre Zeynep & Emre · Düğün 12 Haziran 2027 Zarif Sadelik şablonu Görüntüle Kopyala Düzenle Sil GERÇEK ZAMANLI TAKİP Canlı Katılım Paneli Misafirlerinizin katılım durumlarını anlık olarak izleyin. Menü tercihlerini, kişi sayılarını ve yanıt durumlarını tek panelden yönetin. Zeynep & Emre davetiyesine gelen yanıtlar Misafir Takip Panosu Misafirlerinizin katılım yanıtları bu panele eşzamanlı yansır Yenile KATILIYOR 3 kişi BELİRSİZ 0 kişi KATILAMAYACAK 0 kişi AY Ayşe Demir 3 Kişi • Et Menü Katılıyor Yukarıdaki telefon önizlemesinden Katılım bildirerek bu paneli canlı test edebilirsiniz!"
+  },
+  {
+   "a": "mobile",
+   "url": "/dashboard",
+   "r": {
+    "overflowX": 0
+   }
+  },
+  {
+   "a": "shot:J5-panel-lcv-390",
+   "url": "/dashboard",
+   "r": "screenshots/J5-panel-lcv-390.png"
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [],
+ "command": "--rec J5-owner-panel dashboard wait:1500 fullshot:J5-panel-lcv-1440 eval:[...document.querySelectorAll('main table tr, main [role=row], main li')].map(e=>e.innerText.replace(/\\s+/g,' ').trim()).filter(t=>t.includes('Ayşe')).slice(0,3) eval:document.querySelector('main').innerText.replace(/\\s+/g,' ').slice(0,900) mobile shot:J5-panel-lcv-390"
+}

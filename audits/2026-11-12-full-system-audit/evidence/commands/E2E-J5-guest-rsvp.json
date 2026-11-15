@@ -1,0 +1,107 @@
+{
+ "journey": "J5-guest-rsvp",
+ "ranAt": "2026-11-15T11:21:18.938Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /invite/01m7feq65yzmgxjzrewf7resqf",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:1200",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:Davetiyeyi aç",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:3500",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "shot:J5-misafir-acik-390",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J5-misafir-acik-390.png"
+  },
+  {
+   "a": "fullshot:J5-misafir-tam-390",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J5-misafir-tam-390.png"
+  },
+  {
+   "a": "clickany:Katılımımı Bildir",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:800",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "shot:J5-lcv-bos-390",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J5-lcv-bos-390.png"
+  },
+  {
+   "a": "fillcss:#rsvp-name=Ayşe Demir",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:^\\+$",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:^Katılıyorum$",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:Katılımımı Bildir",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "writes": [
+    "201 POST /api/public/invitations/01m7feq65yzmgxjzrewf7resqf/rsvps"
+   ]
+  },
+  {
+   "a": "wait:2500",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "shot:J5-lcv-gonderildi-390",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J5-lcv-gonderildi-390.png"
+  },
+  {
+   "a": "dump:body",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": {
+    "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+    "h": [
+     "Zeynep & Emre",
+     "Nikâhtan Düğüne",
+     "Nikâh Töreni",
+     "Yemek ve Kutlama",
+     "Düğün Adresi",
+     "Lütfen Cevap Veriniz",
+     "Başarıyla katılımınız oluşturuldu"
+    ],
+    "inputs": [],
+    "buttons": [
+     "Apple Takvim'e Ekle (.ics)"
+    ],
+    "links": [],
+    "alerts": []
+   }
+  },
+  {
+   "a": "eval:Object.keys(localStorage).join(',')",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": "davetkart_rsvp_receipt:01m7feq65yzmgxjzrewf7resqf,davetkart-language"
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [
+  "201 POST /api/public/invitations/01m7feq65yzmgxjzrewf7resqf/rsvps"
+ ],
+ "command": "--anon --mobile --rec J5-guest-rsvp invite/01m7feq65yzmgxjzrewf7resqf wait:1200 clickany:Davetiyeyi aç wait:3500 shot:J5-misafir-acik-390 fullshot:J5-misafir-tam-390 clickany:Katılımımı Bildir wait:800 shot:J5-lcv-bos-390 fillcss:#rsvp-name=Ayşe Demir clickany:^\\+$ clickany:^Katılıyorum$ clickany:Katılımımı Bildir wait:2500 shot:J5-lcv-gonderildi-390 dump:body eval:Object.keys(localStorage).join(',')"
+}

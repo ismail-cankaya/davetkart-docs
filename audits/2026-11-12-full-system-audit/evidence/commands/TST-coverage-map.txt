@@ -1,0 +1,144 @@
+﻿# Komut : php evidence/scripts/tst-coverage-map.php
+# Dizin : _audit-snap\backend-tst (d810410) · 2026-11-15 13:49:27
+# Not   : kapsam surucusu yok (php -m: xdebug/pcov bos); statik yaklasim
+# ---
+# 1) ROTALAR (48 rota) — fiil+URI eşleşmesi | yalnız URI eşleşmesi | rota adı | dosyalar
+GET     /api/account/entitlements                               0 |    0 |  5 | 
+POST    /api/assistant/chat                                     0 |    0 |  6 | 
+POST    /api/auth/email-change                                  0 |    0 |  2 | 
+POST    /api/auth/forgot-password                               0 |    0 |  1 | 
+POST    /api/auth/login                                         0 |    0 | 23 | 
+POST    /api/auth/logout                                        0 |    0 |  2 | 
+GET     /api/auth/me                                            0 |    0 | 15 | 
+PATCH   /api/auth/me                                            0 |    0 |  4 | 
+DELETE  /api/auth/me                                            0 |    0 |  4 | 
+PUT     /api/auth/password                                      0 |    0 |  7 | 
+POST    /api/auth/register                                      0 |    0 |  9 | 
+POST    /api/auth/reset-password                                0 |    0 |  1 | 
+GET     /api/auth/sessions                                      0 |    0 |  4 | 
+DELETE  /api/auth/sessions                                      0 |    0 |  1 | 
+DELETE  /api/auth/sessions/{session}                            0 |    0 |  2 | 
+POST    /api/gift-codes/preview                                 0 |    0 |  5 | 
+GET     /api/invitations                                        0 |    0 |  6 | 
+POST    /api/invitations                                        0 |    0 |  9 | 
+GET     /api/invitations/{invitation}                           0 |    0 | 10 | 
+PUT     /api/invitations/{invitation}                           0 |    0 | 24 | 
+DELETE  /api/invitations/{invitation}                           0 |    0 |  2 | 
+POST    /api/invitations/{invitation}/checkout                  1 |    1 |  5 | PaywallTest.php
+POST    /api/invitations/{invitation}/media                     0 |    0 |  1 | 
+DELETE  /api/invitations/{invitation}/media/{media}             0 |    0 |  1 | 
+POST    /api/invitations/{invitation}/publish                   0 |    0 | 27 | 
+GET     /api/invitations/{invitation}/rsvps                     0 |    0 |  8 | 
+GET     /api/orders                                             0 |    1 |  5 | OrderTest.php
+GET     /api/orders/{order}                                     1 |    1 |  9 | OrderTest.php
+POST    /api/orders/{order}/refund-request                      0 |    0 |  2 | 
+DELETE  /api/orders/{order}/refund-request                      0 |    0 |  3 | 
+POST    /api/payments/checkout                                  0 |    0 | 15 | 
+GET     /api/ping                                               1 |    2 |  2 | HardeningTest.php,PricingTest.php
+GET     /api/pricing                                            0 |    0 |  3 | 
+POST    /api/public/contact                                     0 |    0 |  7 | 
+POST    /api/public/email-change/confirm                        0 |    0 |  2 | 
+GET     /api/public/invitations/{id}                            1 |    1 | 12 | PublicInvitationTest.php
+POST    /api/public/invitations/{invitation}/media              0 |    0 |  2 | 
+POST    /api/public/invitations/{invitation}/rsvps              1 |    1 |  9 | RsvpTest.php
+PUT     /api/public/invitations/{invitation}/rsvps/{rsvp}       0 |    0 |  3 | 
+POST    /api/public/payments/shopier/callback                   0 |    0 |  2 | 
+POST    /api/public/payments/shopier/osb                        0 |    0 |  1 | 
+POST    /api/public/payments/webhook                            0 |    0 |  3 | 
+GET     /api/public/plans                                       0 |    0 |  9 | 
+DELETE  /api/rsvps/{rsvp}                                       0 |    0 |  6 | 
+
+# Hiç eşleşmeyen rotalar (0):
+(yok)
+
+# 2) app/Actions: 59 dosya · testlerde adı geçen 15 · geçmeyen 44
+  app/Actions/Account/ConfirmEmailChangeAction.php                       ← app/Http/Controllers/Api/V1/PublicEmailChangeController.php
+  app/Actions/Account/EntitlementRight.php                               ← app/Actions/Account/EntitlementSummary.php, app/Actions/Account/SummarizeEntitlementsAction.php, app/Http/Resources/EntitlementSummaryResource.php
+  app/Actions/Account/RequestEmailChangeAction.php                       ← app/Actions/Account/ConfirmEmailChangeAction.php, app/Http/Controllers/Api/V1/EmailChangeController.php, app/Http/Requests/Account/ConfirmEmailChangeRequest.php, …
+  app/Actions/Account/TierEntitlements.php                               ← app/Actions/Account/EntitlementSummary.php, app/Actions/Account/SummarizeEntitlementsAction.php, app/Http/Resources/EntitlementSummaryResource.php
+  app/Actions/Assistant/AskAssistantAction.php                           ← app/Http/Controllers/Api/V1/AssistantController.php, app/Models/AssistantUsage.php, app/Services/Ai/AiProvider.php
+  app/Actions/Auth/DeleteAccountAction.php                               ← app/Http/Controllers/Api/V1/AuthController.php
+  app/Actions/Auth/RegisterUserAction.php                                ← app/Http/Controllers/Api/V1/AuthController.php, app/Http/Requests/Auth/RegisterRequest.php
+  app/Actions/Auth/ResetPasswordAction.php                               ← app/Actions/Account/ChangePasswordAction.php, app/Http/Controllers/Api/V1/AuthController.php
+  app/Actions/Auth/RevokeOtherSessionsAction.php                         ← app/Http/Controllers/Api/V1/SessionController.php
+  app/Actions/Auth/RevokeSessionAction.php                               ← app/Http/Controllers/Api/V1/SessionController.php
+  app/Actions/Auth/RevokeTokenAction.php                                 ← app/Http/Controllers/Api/V1/AuthController.php, routes/console.php
+  app/Actions/Auth/SendPasswordResetLinkAction.php                       ← app/Http/Controllers/Api/V1/AuthController.php, app/Notifications/ResetPasswordNotification.php
+  app/Actions/Contact/SubmitContactAction.php                            ← app/Http/Controllers/Api/V1/PublicContactController.php, app/Http/Requests/Contact/ContactRequest.php
+  app/Actions/GiftCode/CreateGiftCodeAction.php                          ← app/Actions/GiftCode/GenerateGiftCodeBatchAction.php, app/Console/Commands/CreateGiftCode.php
+  app/Actions/GiftCode/DisableGiftCodeAction.php                         ← app/Actions/Pricing/StopPriceCampaignAction.php, app/Console/Commands/DisableGiftCode.php
+  app/Actions/GiftCode/GiftCodeQuote.php                                 ← app/Actions/GiftCode/QuoteGiftCodeAction.php, app/Actions/GiftCode/ReserveGiftCodeAction.php, app/Actions/Payment/StartCheckoutAction.php, …
+  app/Actions/GiftCode/PreviewGiftCodeAction.php                         ← app/Http/Controllers/Api/V1/GiftCodeController.php, app/Services/Payment/PaymentMethods.php
+  app/Actions/GiftCode/ReserveGiftCodeAction.php                         ← app/Actions/GiftCode/GiftCodeQuote.php, app/Actions/GiftCode/QuoteGiftCodeAction.php, app/Actions/Payment/StartCheckoutAction.php
+  app/Actions/Invitation/CreateInvitationAction.php                      ← app/Http/Controllers/Api/V1/InvitationController.php
+  app/Actions/Invitation/PublishInvitationAction.php                     ← app/Actions/Invitation/DeleteInvitationAction.php, app/Actions/Invitation/UpdateInvitationAction.php, app/Actions/Invitation/WithdrawUncoveredInvitationAction.php, …
+  app/Actions/Invitation/ResolveBrandingAction.php                       ← app/Http/Controllers/Api/V1/InvitationController.php, app/Http/Controllers/Api/V1/PublicInvitationController.php, app/Http/Resources/InvitationPayloadResource.php, …
+  app/Actions/Invitation/ResolvePublicInvitationAction.php               ← app/Actions/Media/StoreUploadedMediaAction.php, app/Actions/Rsvp/ResolveOpenRsvpInvitationAction.php, app/Http/Controllers/Api/V1/PublicInvitationController.php
+  app/Actions/Invitation/SyncTimelineEventsAction.php                    ← app/Actions/Invitation/CreateInvitationAction.php, app/Actions/Invitation/UpdateInvitationAction.php
+  app/Actions/Invitation/WithdrawUncoveredInvitationAction.php           ← app/Actions/Payment/HandlePaymentCallbackAction.php
+  app/Actions/Media/DeleteGalleryMediaAction.php                         ← app/Http/Controllers/Api/V1/MediaController.php, app/Jobs/OptimizeUploadedImage.php, routes/api.php
+  app/Actions/Media/StoreUploadedMediaAction.php                         ← app/Actions/Media/DeleteGalleryMediaAction.php, app/Actions/Media/StoreGuestMediaAction.php, app/Http/Controllers/Api/V1/MediaController.php, …
+  app/Actions/Payment/CheckoutResult.php                                 ← app/Actions/Payment/StartCheckoutAction.php, app/Http/Controllers/Api/V1/PaymentController.php, app/Http/Resources/OrderResource.php, …
+  app/Actions/Payment/ClaimReleasedOrderAction.php                       ← app/Actions/Invitation/PublishInvitationAction.php, app/Actions/Payment/StartCheckoutAction.php, app/Actions/Refund/RequestRefundAction.php, …
+  app/Actions/Payment/StartCheckoutAction.php                            ← app/Actions/Payment/CheckoutResult.php, app/Console/Commands/ExpireStaleOrders.php, app/Http/Controllers/Api/V1/PaymentController.php, …
+  app/Actions/Pricing/PriceCampaignSpec.php                              ← app/Actions/Pricing/QuotePriceAction.php, app/Actions/Pricing/StartPriceCampaignAction.php, app/Console/Commands/StartPriceCampaign.php
+  app/Actions/Pricing/PricingOverview.php                                ← app/Actions/Pricing/ShowPricingAction.php, app/Http/Resources/PricingResource.php
+  app/Actions/Pricing/Promotion.php                                      ← app/Actions/Pricing/PriceQuote.php, app/Actions/Pricing/QuotePriceAction.php
+  app/Actions/Pricing/ShowPricingAction.php                              ← app/Actions/Pricing/PricingOverview.php, app/Http/Controllers/Api/V1/PricingController.php
+  app/Actions/Pricing/StartPriceCampaignAction.php                       ← app/Actions/Pricing/PriceCampaignSpec.php, app/Actions/Pricing/StopPriceCampaignAction.php, app/Console/Commands/StartPriceCampaign.php
+  app/Actions/Pricing/StopPriceCampaignAction.php                        ← app/Console/Commands/StopPriceCampaign.php
+  app/Actions/Refund/RequestRefundAction.php                             ← app/Actions/Refund/WithdrawRefundRequestAction.php, app/Exceptions/RefundNotAllowedException.php, app/Http/Controllers/Api/V1/RefundRequestController.php, …
+  app/Actions/Refund/ResolveRefundRequestAction.php                      ← app/Console/Commands/ApproveRefundRequest.php, app/Console/Commands/Concerns/ResolvesRefundRequests.php, app/Console/Commands/RejectRefundRequest.php, …
+  app/Actions/Refund/WithdrawRefundRequestAction.php                     ← app/Http/Controllers/Api/V1/RefundRequestController.php
+  app/Actions/Rsvp/EnsureRsvpQuotaAction.php                             ← app/Actions/Rsvp/SubmitRsvpAction.php, app/Actions/Rsvp/UpdateRsvpAction.php
+  app/Actions/Rsvp/ResolveGuestMediaAction.php                           ← app/Actions/Rsvp/SubmitRsvpAction.php, app/Actions/Rsvp/UpdateRsvpAction.php
+  app/Actions/Rsvp/ResolveOpenRsvpInvitationAction.php                   ← app/Actions/Media/StoreGuestMediaAction.php, app/Actions/Rsvp/SubmitRsvpAction.php, app/Actions/Rsvp/UpdateRsvpAction.php, …
+  app/Actions/Rsvp/RsvpSubmission.php                                    ← app/Actions/Rsvp/SubmitRsvpAction.php, app/Actions/Rsvp/UpdateRsvpAction.php
+  app/Actions/Rsvp/SubmitRsvpAction.php                                  ← app/Actions/Contact/SubmitContactAction.php, app/Actions/Rsvp/EnsureRsvpQuotaAction.php, app/Actions/Rsvp/ResolveGuestMediaAction.php, …
+  app/Actions/Rsvp/UpdateRsvpAction.php                                  ← app/Actions/Rsvp/EnsureRsvpQuotaAction.php, app/Actions/Rsvp/ResolveGuestMediaAction.php, app/Http/Controllers/Api/V1/PublicRsvpController.php
+
+# 2) app/Jobs: 3 dosya · testlerde adı geçen 2 · geçmeyen 1
+  app/Jobs/OptimizedImage.php                                            ← app/Jobs/OptimizeUploadedImage.php
+
+# 2) app/Console/Commands: 17 dosya · testlerde adı geçen 2 · geçmeyen 15
+  app/Console/Commands/ApproveRefundRequest.php                          ← (çağıran yok!)
+  app/Console/Commands/Concerns/ResolvesRefundRequests.php               ← app/Console/Commands/ApproveRefundRequest.php, app/Console/Commands/RejectRefundRequest.php
+  app/Console/Commands/DisableGiftCode.php                               ← (çağıran yok!)
+  app/Console/Commands/ExpireStaleOrders.php                             ← app/Console/Commands/NormalizeUserEmails.php
+  app/Console/Commands/ExportErrorCodes.php                              ← (çağıran yok!)
+  app/Console/Commands/GenerateGiftCodes.php                             ← (çağıran yok!)
+  app/Console/Commands/ListContactMessages.php                           ← app/Console/Commands/ListGiftCodes.php, app/Console/Commands/ListRefundRequests.php
+  app/Console/Commands/ListPriceCampaigns.php                            ← (çağıran yok!)
+  app/Console/Commands/ListRefundRequests.php                            ← (çağıran yok!)
+  app/Console/Commands/NormalizeUserEmails.php                           ← (çağıran yok!)
+  app/Console/Commands/PruneOrphanMedia.php                              ← app/Actions/Media/DeleteGalleryMediaAction.php, app/Console/Commands/PurgeExpiredData.php, app/Jobs/DeleteReplacedMediaFile.php
+  app/Console/Commands/PurgeExpiredData.php                              ← (çağıran yok!)
+  app/Console/Commands/RejectRefundRequest.php                           ← (çağıran yok!)
+  app/Console/Commands/StartPriceCampaign.php                            ← (çağıran yok!)
+  app/Console/Commands/StopPriceCampaign.php                             ← (çağıran yok!)
+
+# 2) app/Http/Middleware: 4 dosya · testlerde adı geçen 2 · geçmeyen 2
+  app/Http/Middleware/SecurityHeaders.php                                ← bootstrap/app.php
+  app/Http/Middleware/SetEtag.php                                        ← app/Http/Controllers/Api/V1/RsvpController.php, routes/api.php
+
+# 2) app/Policies: 3 dosya · testlerde adı geçen 0 · geçmeyen 3
+  app/Policies/InvitationPolicy.php                                      ← app/Http/Controllers/Api/V1/InvitationController.php, app/Http/Controllers/Api/V1/MediaController.php, app/Models/Invitation.php, …
+  app/Policies/OrderPolicy.php                                           ← app/Http/Controllers/Api/V1/RefundRequestController.php, app/Http/Requests/Refund/StoreRefundRequestRequest.php
+  app/Policies/RsvpPolicy.php                                            ← app/Http/Controllers/Api/V1/MediaController.php
+
+# 2) app/Services: 22 dosya · testlerde adı geçen 14 · geçmeyen 8
+  app/Services/Payment/BankTransferAccount.php                           ← app/Actions/Pricing/PricingOverview.php, app/Services/Payment/PaymentMethods.php
+  app/Services/Payment/CheckoutAction.php                                ← app/Actions/Payment/CheckoutResult.php, app/Http/Resources/OrderResource.php, app/Services/Payment/CheckoutSession.php, …
+  app/Services/Payment/PaymentGatewayResolver.php                        ← app/Actions/Payment/StartCheckoutAction.php
+  app/Services/Payment/Shopier/ShopierCallback.php                       ← app/Services/Payment/ShopierGateway.php
+  app/Services/Payment/Shopier/ShopierConfirmation.php                   ← app/Services/Payment/ShopierGateway.php
+  app/Services/Pricing/OrderEntitlementResolver.php                      ← app/Actions/Payment/ClaimReleasedOrderAction.php, app/Providers/AppServiceProvider.php
+  app/Services/Refund/RefundEligibility.php                              ← app/Actions/Account/SummarizeEntitlementsAction.php, app/Actions/Refund/RequestRefundAction.php, app/Enums/RefundBlocker.php
+  app/Services/Rsvp/SubscriptionRsvpQuotaResolver.php                    ← app/Contracts/PublishEntitlementResolver.php, app/Providers/AppServiceProvider.php
+
+# 2) app/Support: 8 dosya · testlerde adı geçen 7 · geçmeyen 1
+  app/Support/EmailChangeLink.php                                        ← app/Actions/Account/ConfirmEmailChangeAction.php, app/Actions/Account/RequestEmailChangeAction.php, routes/api.php
+
+# 2) app/Notifications: 5 dosya · testlerde adı geçen 5 · geçmeyen 0
+
+# 2) app/Listeners: 1 dosya · testlerde adı geçen 1 · geçmeyen 0

@@ -1,0 +1,57 @@
+{
+ "journey": "J5-guest-duplicate",
+ "ranAt": "2026-11-15T11:22:17.562Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /invite/01m7feq65yzmgxjzrewf7resqf",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:1000",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:Davetiyeyi aç",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:3000",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "fillcss:#rsvp-name=Ayşe Demir",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:^Katılıyorum$",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "clickany:Katılımımı Bildir",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "writes": [
+    "201 POST /api/public/invitations/01m7feq65yzmgxjzrewf7resqf/rsvps"
+   ]
+  },
+  {
+   "a": "wait:2000",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "eval:[...document.querySelectorAll('h1,h2,h3,[role=alert]')].map(e=>e.innerText.trim()).slice(-3)",
+   "url": "/invite/01m7feq65yzmgxjzrewf7resqf",
+   "r": [
+    "Düğün Adresi",
+    "Lütfen Cevap Veriniz",
+    "Başarıyla katılımınız oluşturuldu"
+   ]
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [
+  "201 POST /api/public/invitations/01m7feq65yzmgxjzrewf7resqf/rsvps"
+ ],
+ "command": "--anon --mobile --rec J5-guest-duplicate invite/01m7feq65yzmgxjzrewf7resqf wait:1000 clickany:Davetiyeyi aç wait:3000 fillcss:#rsvp-name=Ayşe Demir clickany:^Katılıyorum$ clickany:Katılımımı Bildir wait:2000 eval:[...document.querySelectorAll('h1,h2,h3,[role=alert]')].map(e=>e.innerText.trim()).slice(-3)"
+}

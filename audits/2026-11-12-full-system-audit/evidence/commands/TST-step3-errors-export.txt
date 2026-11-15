@@ -1,0 +1,10 @@
+﻿# Komut : php artisan errors:export --check
+# Dizin : D:\Projects\davetkart\_audit-snap\backend-tst
+# Ortam : PHPSTAN_TURBO=0
+# Baslangic: 2026-11-13 12:31:00
+# Sure  : 1.7 sn (Measure-Command)
+# Cikis kodu: 0
+# ---------------------------------------------------------------
+
+ INFO Katalog guncel. 
+

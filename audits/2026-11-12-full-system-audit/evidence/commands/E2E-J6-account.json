@@ -1,0 +1,181 @@
+{
+ "journey": "J6-account",
+ "ranAt": "2026-11-15T11:22:36.527Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /hesap",
+   "url": "/hesap"
+  },
+  {
+   "a": "shot:J6-hesap-genel-1440",
+   "url": "/hesap",
+   "r": "screenshots/J6-hesap-genel-1440.png"
+  },
+  {
+   "a": "dump",
+   "url": "/hesap",
+   "r": {
+    "url": "/hesap",
+    "h": [
+     "Hesap Ayarları",
+     "Profil",
+     "Plan haklarım"
+    ],
+    "inputs": [
+     "text|#profile-first-name|AD|Elif",
+     "text|#profile-last-name|SOYAD|Yıldırım"
+    ],
+    "buttons": [
+     "Kaydet"
+    ],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "Ayrıntılar→/hesap/planlarim"
+    ],
+    "alerts": []
+   }
+  },
+  {
+   "a": "goto:hesap/planlarim",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "shot:J6-planlarim-1440",
+   "url": "/hesap/planlarim",
+   "r": "screenshots/J6-planlarim-1440.png"
+  },
+  {
+   "a": "text:main",
+   "url": "/hesap/planlarim",
+   "r": "HESABIM Hesap Ayarları Elif Yıldırım · elif.yildirim.aud996311@example.com Genel Bakış Planlarım Siparişlerim Giriş ve Güvenlik Gizlilik ve Hesap Planlarım Şu an kullanılabilir hakkınız yok. Davetiyenizi yayınlarken ya da fiyatlar sayfasından plan alabilirsiniz. Planları gör STANDART 0 kullanılabilir hak GOLD 0 kullanılabilir hak Kullanımda 1 ELİT 0 kullanılabilir hak Haklarım Kullanılmamış ve ödemesi yapılmış bir hakkı, ödemeden itibaren 14 gün içinde iptal edip iade isteyebilirsiniz. Gold Kullanımda Ödeme: 15 Kas 2026 · ₺127,68 Davetiye: HAYATIMIZIN EN ANLAMLI GÜNÜ"
+  },
+  {
+   "a": "dump",
+   "url": "/hesap/planlarim",
+   "r": {
+    "url": "/hesap/planlarim",
+    "h": [
+     "Hesap Ayarları",
+     "Planlarım",
+     "Haklarım"
+    ],
+    "inputs": [],
+    "buttons": [],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "Planları gör→/pricing",
+     "HAYATIMIZIN EN ANLAMLI GÜNÜ→/dashboard"
+    ],
+    "alerts": []
+   }
+  },
+  {
+   "a": "goto:hesap/siparisler",
+   "url": "/hesap/siparisler"
+  },
+  {
+   "a": "shot:J6-siparisler-1440",
+   "url": "/hesap/siparisler",
+   "r": "screenshots/J6-siparisler-1440.png"
+  },
+  {
+   "a": "text:main",
+   "url": "/hesap/siparisler",
+   "r": "HESABIM Hesap Ayarları Elif Yıldırım · elif.yildirim.aud996311@example.com Genel Bakış Planlarım Siparişlerim Giriş ve Güvenlik Gizlilik ve Hesap Siparişlerim Bütün ödeme denemeleriniz. Tutarlar sipariş anındaki fiyattır. Gold plan Ödendi 15 Kas 2026 14:19 İlk yayın indirimi: −₺239,40 Hediye kodu: −₺31,92 #NXS8BZEE ₺127,68 ₺399"
+  },
+  {
+   "a": "goto:hesap/guvenlik",
+   "url": "/hesap/guvenlik"
+  },
+  {
+   "a": "shot:J6-guvenlik-1440",
+   "url": "/hesap/guvenlik",
+   "r": "screenshots/J6-guvenlik-1440.png"
+  },
+  {
+   "a": "dump",
+   "url": "/hesap/guvenlik",
+   "r": {
+    "url": "/hesap/guvenlik",
+    "h": [
+     "Hesap Ayarları",
+     "Parola",
+     "E-posta adresi",
+     "Aktif oturumlar"
+    ],
+    "inputs": [
+     "password|#password-current|MEVCUT PAROLA|",
+     "password|#password-new|YENİ PAROLA|",
+     "password|#password-repeat|YENİ PAROLA (TEKRAR)|",
+     "email|#email-new|YENİ E-POSTA|",
+     "password|#email-password|MEVCUT PAROLA|"
+    ],
+    "buttons": [
+     "Parolayı Değiştir",
+     "Onay Bağlantısı Gönder",
+     "Çıkış Yap",
+     "Kapat",
+     "Diğer bütün cihazlardan çık"
+    ],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "Mevcut parolamı hatırlamıyorum→/sifremi-unuttum"
+    ],
+    "alerts": []
+   }
+  },
+  {
+   "a": "goto:hesap/gizlilik",
+   "url": "/hesap/gizlilik"
+  },
+  {
+   "a": "shot:J6-gizlilik-1440",
+   "url": "/hesap/gizlilik",
+   "r": "screenshots/J6-gizlilik-1440.png"
+  },
+  {
+   "a": "dump",
+   "url": "/hesap/gizlilik",
+   "r": {
+    "url": "/hesap/gizlilik",
+    "h": [
+     "Hesap Ayarları",
+     "Kişisel verileriniz",
+     "Hesabımı sil"
+    ],
+    "inputs": [],
+    "buttons": [
+     "Hesabımı Sil"
+    ],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "Gizlilik politikası→/privacy",
+     "Çerez politikası→/cookies",
+     "Veri talebi için bize yazın→/contact"
+    ],
+    "alerts": []
+   }
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [],
+ "command": "--rec J6-account hesap shot:J6-hesap-genel-1440 dump goto:hesap/planlarim shot:J6-planlarim-1440 text:main dump goto:hesap/siparisler shot:J6-siparisler-1440 text:main goto:hesap/guvenlik shot:J6-guvenlik-1440 dump goto:hesap/gizlilik shot:J6-gizlilik-1440 dump"
+}

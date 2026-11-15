@@ -1,0 +1,23 @@
+# AUD-2026-11-12 canlı güvenlik sondası 2 · 2026-11-13 09:40:54 · koşu cf1e08
+# İlk sondanın (SEC-api-probe.txt) iki satırı için değerlendirme düzeltmesi:
+#  P60: ACIK değil. Laravel tek izinli origin tanımlıyken ACAO başlığını isteğin Origin'inden bağımsız, sabit olarak yollar;
+#       tarayıcı ACAO ≠ Origin olduğu için yabancı origin'in yanıtı okumasına izin vermez. Sonda denetimi yanlış yazılmıştı.
+#  P81: "sipariş.user_id='satır yok'" ifadesi yanıltıcı: satır VAR, user_id NULL (PHP ?? işleci NULL'da da yedeğe düşer).
+
+## E-posta değişikliği (K144)
+[BILGI] Q01 — başkasına ait adrese değişiklik talebi (numaralandırma) — 202 
+[BILGI] Q02 — talep ve posta — 202  · bağlantı bulundu=true · parametreler=email,expires,old,user,signature
+[OK] Q03 — imzalı bağlantıda e-postayı değiştirme — 422 EMAIL_CHANGE_INVALID
+[OK] Q04 — imzalı bağlantıda kullanıcı kimliğini değiştirme — 422 EMAIL_CHANGE_INVALID
+[OK] Q05 — imzalı bağlantıda süreyi uzatma — 422 EMAIL_CHANGE_INVALID
+[OK] Q06 — geçerli bağlantı: adres değişti, bütün oturumlar kapandı — 204  değişti=true eski token 401 UNAUTHENTICATED email_verified_at dolu=true
+[OK] Q07 — aynı bağlantı ikinci kez (tek kullanımlık) — 422 EMAIL_CHANGE_INVALID
+[BILGI] Q08 — eski adrese bilgilendirme postası — eski adrese giden posta logda=true
+
+## Parola sıfırlama
+[BILGI] Q09 — talep ve posta — 202  · bağlantı bulundu=true · parametreler=token,email · token uzunluğu=64
+[OK] Q10 — bir kullanıcının token'ı başka kullanıcının e-postasıyla — 422 PASSWORD_RESET_INVALID
+[OK] Q11 — sıfırlamada kısa parola — 422 VALIDATION_FAILED
+[OK] Q12 — parola sıfırlandı, eski oturumlar kapandı, yeni parola çalışıyor — 204  eski token 401 UNAUTHENTICATED yeni giriş 200 
+[OK] Q13 — sıfırlama token'ı ikinci kez — 422 PASSWORD_RESET_INVALID
+[BILGI] Q14 — 60 sn içinde ikinci sıfırlama talebi (broker kısması, yanıt farkı var mı) — 429 RATE_LIMITED

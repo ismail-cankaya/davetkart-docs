@@ -1,0 +1,14 @@
+# Komut : git (yalnızca okuma) · gerçek depolar · 2026-11-15 18:16
+## davetkart-backend-php-laravel
+origin/main                    03d3940 2026-10-26 fix(deploy): use cp --update=none instead of non-portable -n
+origin/release-v1.0            03d3940 2026-10-26 fix(deploy): use cp --update=none instead of non-portable -n
+origin/ccr-9a346997-bu6gve     d810410 2026-11-05 17.1 - feat(paywall): Make the nine Phase 17 premium templates gold
+rev-list --count origin/main..origin/ccr-9a346997-bu6gve = 4 · tersi = 0 · uzak dal 24 · etiket 0
+## davetkart-frontent
+origin/main                    47aedc8 2026-10-26 fix(deps): drop unused express/dotenv, move build tools to devDependencies, npm a
+origin/release-v1.0            
+origin/ccr-9a346997-bu6gve     44caa49 2026-11-05 feat(katalog): Faz 17'nin on bir şablonunu kaydet, kapaklar ve rehber
+rev-list --count origin/main..origin/ccr-9a346997-bu6gve = 71 · tersi = 1 · uzak dal 42 · etiket 0
+## backend preset_tiers ('=> gold' satırı): main 15 · denetlenen 34
+## frontend minimumTier sayısı: main 13 · denetlenen 32
+## frontend main'de lazyPresets var mı: yok

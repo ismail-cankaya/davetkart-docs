@@ -1,0 +1,88 @@
+{
+ "journey": "J1-auth",
+ "ranAt": "2026-11-15T11:13:18.811Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "step": "Doğru e-posta ve parolayla giriş",
+   "expected": "200, /dashboard",
+   "observed": "200, /dashboard",
+   "ok": true
+  },
+  {
+   "step": "Çıkış",
+   "expected": "logout 2xx, oturum anahtarı silinir",
+   "observed": "204, yol /login, localStorage oturumu yok",
+   "ok": true
+  },
+  {
+   "step": "Çıkıştan sonra eski token",
+   "expected": "401 (sunucuda iptal)",
+   "observed": "401",
+   "ok": true
+  },
+  {
+   "step": "Çıkıştan sonra /dashboard",
+   "expected": "/login’e yönlenir",
+   "observed": "/login",
+   "ok": true
+  },
+  {
+   "step": "Hatalı parola (1. deneme)",
+   "expected": "401 INVALID_CREDENTIALS, formda kalır, e-posta silinmez, Türkçe mesaj",
+   "observed": "{\"status\":401,\"code\":\"INVALID_CREDENTIALS\",\"msg\":null,\"path\":\"/login\",\"emailKept\":\"elif.yildirim.aud996311@example.com\"}",
+   "ok": true,
+   "note": "Mesaj toast olarak çıkıyor; betiğin metin deseni toast'ı kapsamıyordu. Metin ekran görüntüsünden okundu (screenshots/J1-hiz-siniri-1440.png): \"E-posta veya parola hatalı. Kontrol edip tekrar deneyin.\""
+  },
+  {
+   "step": "Hız sınırı",
+   "expected": "5 hatalı denemeden sonra 429 RATE_LIMITED + Retry-After + süreli mesaj",
+   "observed": "{\"attempt\":5,\"code\":\"RATE_LIMITED\",\"retryAfterHeader\":\"45\",\"params\":{\"retryAfter\":45},\"msg\":null}",
+   "ok": true,
+   "note": "Metin ekran görüntüsünden okundu: \"Çok hızlı ilerliyorsunuz. 45 saniye sonra tekrar deneyin.\" (screenshots/J1-hiz-siniri-1440.png, J1-hiz-siniri-390.png). 429 beşinci giriş isteğinde geldi (1 doğru + 4 hatalı sayıldı)."
+  },
+  {
+   "step": "Mobil (390) giriş formu",
+   "expected": "yatay taşma yok",
+   "observed": "taşma 0 px",
+   "ok": true
+  },
+  {
+   "step": "Sınır dolduktan sonra doğru giriş",
+   "expected": "200, /dashboard",
+   "observed": "200, /dashboard",
+   "ok": true
+  }
+ ],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 429 (Too Many Requests)",
+  "error: Failed to load resource: the server responded with a status of 429 (Too Many Requests)"
+ ],
+ "net": [
+  "401 GET /api/account/entitlements",
+  "401 GET /api/invitations",
+  "401 GET /api/auth/me",
+  "401 POST /api/auth/login",
+  "401 POST /api/auth/login",
+  "401 POST /api/auth/login",
+  "401 POST /api/auth/login",
+  "429 POST /api/auth/login",
+  "429 POST /api/auth/login"
+ ],
+ "kayit": {
+  "betik": "scripts/e2e/j1a-register.js (Playwright MCP)",
+  "sonuc": "POST /api/auth/register 201 → /dashboard; boş gönderimde 4 alan tarayıcı doğrulamasına takıldı; 390 px yatay taşma yok; konsol ve ağ temiz",
+  "ekran": [
+   "screenshots/J1-kayit-form-390.png",
+   "screenshots/J1-kayit-form-1440.png",
+   "screenshots/J1-kayit-sonrasi-1440.png"
+  ]
+ }
+}

@@ -1,0 +1,139 @@
+# AUD-2026-11-12 canlı güvenlik sondası · 2026-11-13 09:38:41 · hedef http://127.0.0.1:8000 · kopya backend-e2e (d810410) · koşu 599ed1
+
+## Hazırlık
+[BILGI] S00 — iki kullanıcı ve A'nın davetiyesi — A#1 B#2 davetiye 01m7a4c5wbak96aa52x374ptvq durum saved
+
+## Kimliksiz erişim (API2)
+[OK] P01 — kimliksiz GET /api/invitations — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz GET /api/invitations/01m7a4c5wbak96aa52x374ptvq — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz GET /api/orders — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz GET /api/account/entitlements — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz GET /api/auth/me — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz GET /api/auth/sessions — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz POST /api/assistant/chat — 401 UNAUTHENTICATED
+[OK] P01 — kimliksiz GET /api/pricing — 401 UNAUTHENTICATED
+
+## Nesne düzeyinde yetki — B, A'nın nesnelerine (API1)
+[OK] P02 — B → GET A davetiyesi — 404 RESOURCE_NOT_FOUND
+[OK] P03 — B → PUT A davetiyesi — 404 RESOURCE_NOT_FOUND başlık=Zeynep & Emre
+[OK] P04 — B → publish A davetiyesi — 404 RESOURCE_NOT_FOUND
+[OK] P05 — B → checkout A davetiyesi — 404 RESOURCE_NOT_FOUND
+[OK] P06 — B → A'nın LCV listesi — 404 RESOURCE_NOT_FOUND
+[OK] P07 — B → DELETE A davetiyesi — 404 RESOURCE_NOT_FOUND
+[OK] P08 — B'nin listesi A'nın davetiyesini içermiyor — 200 adet=0
+
+## Toplu atama (API3)
+[OK] P09 — oluştururken status/userId/publishedAt enjeksiyonu — status=saved user_id=1 published_at=NULL
+[OK] P10 — PUT ile status/user_id enjeksiyonu — 200  status=saved user_id=1
+
+## Paywall ve fiyat (M6, K-1)
+[OK] P11 — ödeme yokken yayın — 402 PAYMENT_REQUIRED
+[OK] P12 — checkout gövdesinde fiyat/para birimi/durum enjeksiyonu — 201  amount_minor=9960 currency=TRY status=pending promotion={"kind":"first_publish","discountMinor":14940}
+[BILGI] P13a — ilk ödeme tamamlanmadan ikinci (paket) sipariş — 201  amount_minor=9960 promotion={"kind":"first_publish","discountMinor":14940}
+[ACIK] P13 — "ilk yayın" indirimi tek siparişle sınırlı — sipariş1 paid 9960 kuruş (first_publish) · sipariş2 paid 9960 kuruş (first_publish) · webhook 204/204
+[BILGI] P13b — ödeme sonrası üçüncü sipariş fiyatı — 201  totalMinor=24900 promotion=null
+[OK] P14 — Standart ödendi → yayın — 200  status=published
+[OK] P15 — yayındaki Standart davetiyede Elit modülü açma (showGallery) — 402 PAYWALL_TIER_INSUFFICIENT
+[OK] P15 — yayındaki Standart davetiyede Elit modülü açma (showGift) — 402 PAYWALL_TIER_INSUFFICIENT
+[OK] P15 — yayındaki Standart davetiyede Gold modülü açma (showEnvelope) — 402 PAYWALL_TIER_INSUFFICIENT
+[OK] P15 — yayındaki Standart davetiyede Gold modülü açma (showTimeline) — 402 PAYWALL_TIER_INSUFFICIENT
+[OK] P15 — yayındaki Standart davetiyede Gold şablonu (Faz 16) açma (imageTheme) — 402 PAYWALL_TIER_INSUFFICIENT
+[OK] P15 — yayındaki Standart davetiyede Gold şablonu (Faz 17) açma (imageTheme) — 402 PAYWALL_TIER_INSUFFICIENT
+[OK] P16 — misafir yanıtında üst plan modülü yok, IBAN anahtarı yok — 200 showGallery=false showGift=false imageTheme=dugun-klasik iban_anahtari=false showBranding=true
+[OK] P17 — yayındaki davetiyede olağan alan düzenleme — 200 
+[OK] P18 — ikinci yayın isteği — 409 INVITATION_ALREADY_PUBLISHED
+
+## Webhook (W1–W3, M8, K69, K89)
+[OK] P19 — geçersiz imzalı bildirim — 404 RESOURCE_NOT_FOUND
+[OK] P20 — imzalı ama bilinmeyen provider_ref — 204
+[OK] P21 — paid bildirimi tekrar oynatma — 204 status=paid paid_at değişti mi=false
+[OK] P22 — paid siparişe failed bildirimi — 204 status=paid
+[OK] P23 — süresi dolan siparişe geç gelen paid (K-4/K89) — önce=expired sonra=paid webhook=204
+
+## LCV: kota, düzenleme kodu, IP (K50, K101, K14)
+[OK] P24 — LCV kaydı: IP hash'li, X-Forwarded-For (güvenilmeyen vekil) yok sayıldı — 201 ip_hash==hash(127.0.0.1) yanıtta ip alanı=false
+[OK] P25 — yanlış düzenleme koduyla LCV güncelleme — 404 RESOURCE_NOT_FOUND ad=Ayşe Demir
+[OK] P26 — doğru kodla güncelleme yeni satır açmıyor — 200  satır=1
+[OK] P27 — B → A'nın LCV kaydını silme — 404 RESOURCE_NOT_FOUND
+[OK] P28 — Standart LCV kotası 100 kişi (SUM guest_count) — toplam kişi=93 son istek=403 RSVP_QUOTA_EXCEEDED
+[OK] P29 — yayınlanmamış davetiyeye LCV — 404 RESOURCE_NOT_FOUND
+[OK] P30 — yayınlanmamış davetiyenin misafir ucu — 404 RESOURCE_NOT_FOUND
+
+## Bozuk girdi (K91, K92, K-8)
+[OK] P31 — yarım JSON — 400 MALFORMED_REQUEST
+[OK] P32 — NUL baytı — 400 MALFORMED_REQUEST
+[OK] P33 — guestCount: true — 422 VALIDATION_FAILED
+[OK] P34 — guestCount: "3" — 422 VALIDATION_FAILED
+[OK] P35 — mapUrl şeması javascript:alert(1) — 422 VALIDATION_FAILED
+[OK] P35 — mapUrl şeması smb://sunucu/paylasim — 422 VALIDATION_FAILED
+[OK] P35 — mapUrl şeması data:text/html,<script>alert(1)</script> — 422 VALIDATION_FAILED
+[OK] P35 — mapUrl şeması ms-settings:privacy — 422 VALIDATION_FAILED
+[OK] P36 — başlıkta HTML + geçersiz IBAN — 422 VALIDATION_FAILED alanlar=["invitation.iban"]
+
+## Hediye kodu (K107–K113)
+[BILGI] P37 — kod önizleme (küçük harf + tire normalizasyonu) — 200  {"benefit":"free","tier":"standart","priceMinor":24900,"promotion":{"kind":"first_publish","percent":60,"discountMinor":14940,"endsAt":null},"discountMinor":249
+[OK] P38 — Standart "free" kodu Gold'da — 422 GIFT_CODE_NOT_APPLICABLE
+[OK] P39 — free kodla hediye siparişi — 201  status=paid amount=0 provider=gift
+[OK] P40 — aynı kullanıcı aynı kodu ikinci kez — 422 GIFT_CODE_ALREADY_USED
+[OK] P41 — max-uses=2: ikinci kişi alır, üçüncü alamaz — B 201  · A 422 GIFT_CODE_INVALID
+[BILGI] P42 — %100 indirim kodu (plan kısıtsız) Elit'te — 201  status=paid amount=0 provider=gift
+[OK] P43 — kod tahmini hız sınırı (10/dk) — ilk 429 istek no=11 Retry-After=59
+
+## İade / hak iptali (Faz 14)
+[OK] P44 — davetiyeye bağlı (kullanımda) sipariş için iade talebi — 409 REFUND_NOT_ALLOWED {"reason":"in_use"}
+[OK] P45 — B → D'nin siparişi için iade talebi — 404 RESOURCE_NOT_FOUND
+[OK] P46 — B → D'nin siparişini okuma — 404 RESOURCE_NOT_FOUND
+[ACIK] P47 — yayınla → misafir topla → 3 gün içinde sil → aynı hak için iade talebi reddedilmeli — yayın 200 · misafir ucu 200 · LCV 201 · silme 204 · iade talebi 201  · sipariş invitation_id=NULL consumed_at=NULL
+[OK] P48 — iade talebi açıkken hak donuk (yeni yayın açmıyor) — 402 PAYMENT_REQUIRED
+[BILGI] P49 — refunds:list yöneticiye hakkın daha önce yayınlandığını gösteriyor mu — çıktıda "yayın"/"publish"/"kullan" geçiyor mu=false · sütunlar: | Talep | Tarih | Durum | Plan | Tutar | Shopier ödeme | E-posta | Açıklama |
+
+## Dosya yükleme (F1–F5)
+[OK] P50 — PHP metni .jpg adıyla — 422 VALIDATION_FAILED
+[OK] P51 — SVG (misafir) — 422 VALIDATION_FAILED
+[OK] P52 — GIF başlıklı HTML .png adıyla — 422 VALIDATION_FAILED
+[OK] P53 — misafir ucundan galeri türü — 422 VALIDATION_FAILED
+[OK] P54 — EXIF + PHP kuyruğu taşıyan JPEG: sunucu adı üretiyor, uzantı güvenli — 201  path=media/rsvp_photo/78E9rLsxn2Icl7lr6h7EMrAdiVf3hao9RFLBI9QE.jpg mime=image/jpeg
+[OK] P55 — saklanan dosyada EXIF ve PHP kuyruğu kalmadı (kuyruk sync) — dosya okundu=true EXIF izi=false PHP kuyruğu=false · aynı klasörde iz taşıyan dosya=0
+[BILGI] P56 — medya URL'si ve disk — url=/storage/media/rsvp_photo/m2byatoEGnc9DICOrCg9at4Wl18MfZf0PpCGYgOp.jpg disk=public
+
+## Güvenlik başlıkları ve CORS (K85, K86)
+[OK] P57 — başlık x-content-type-options — nosniff
+[OK] P57 — başlık x-frame-options — DENY
+[OK] P57 — başlık referrer-policy — no-referrer
+[OK] P57 — başlık content-security-policy — default-src 'none'; frame-ancestors 'none'; base-uri 'none'
+[OK] P58 — HSTS düz HTTP'de gönderilmiyor — yok
+[ACIK] P59 — X-Powered-By sızıntısı (artisan serve; üretimde php.ini expose_php) — PHP/8.5.12
+[ACIK] P60 — CORS: yabancı origin — 204 ACAO=http://localhost:3000
+[BILGI] P61 — CORS: izinli origin — 204 ACAO=http://localhost:3000 ACAC=yok
+[BILGI] P62 — /up sağlık ucu — 200 gövde uzunluğu=15
+
+## Kimlik: numaralandırma, oturum, token ömrü (A1–A7, K90)
+[OK] P63 — giriş: olmayan hesap ↔ yanlış parola aynı yanıt — 401 INVALID_CREDENTIALS ↔ 401 INVALID_CREDENTIALS
+[OK] P64 — parola sıfırlama: olmayan ↔ var olan e-posta aynı yanıt — 202 ↔ 202
+[BILGI] P65 — kayıt: var olan e-posta (büyük harfle) — 422 REGISTRATION_FAILED → kayıt ucu e-postanın kayıtlı olduğunu genel kodla söylüyor fields=null
+[OK] P66 — Türkçe İ ile kayıt, küçük harfle giriş (K-3) — kayıt 201  · giriş 200  · saklanan=normalize
+[ACIK] P67 — zayıf parola kabulü: 12345678 — 201 
+[ACIK] P67 — zayıf parola kabulü: password — 201 
+[ACIK] P67 — zayıf parola kabulü: aaaaaaaa — 201 
+[OK] P68 — A → B'nin oturumunu kapatma — 404 RESOURCE_NOT_FOUND oturum sayısı=2
+[OK] P69 — çıkıştan sonra token geçersiz — 204 → me 401 UNAUTHENTICATED
+[OK] P70 — 31 günlük token reddediliyor (K90) — 401 UNAUTHENTICATED
+[BILGI] P71 — token deposu — tabloda düz token saklanmıyor: token kolonu uzunluğu=64 (sha256 hex 64)
+
+## Kimlik: e-posta değişikliği ve parola sıfırlama (Faz 10, Faz 14)
+[OK] P72 — e-posta değişikliği: yanlış mevcut parola — 422 VALIDATION_FAILED
+[BILGI] P73 — e-posta değişikliği talebi — 202  · postada imzalı bağlantı bulundu=false · yol= · parametreler=
+[BILGI] P77 — parola sıfırlama bağlantısı postada bulunamadı — bağlantı sayısı=0
+
+## Hesap silme (K97)
+[OK] P80 — hesap silme: yanlış parola — 422 VALIDATION_FAILED
+[OK] P81 — hesap silindi: kullanıcı, davetiye, LCV, medya dosyası yok; sipariş anonim kaldı — 204  kullanıcı=false davetiye=false LCV=0 dosya=false sipariş.user_id='satır yok'
+[OK] P82 — silinen hesabın davetiyesi misafir ucunda (cache temizlendi mi) — 404 RESOURCE_NOT_FOUND
+
+## Hız sınırları (K36, K93, K104)
+[OK] P83 — giriş kaba kuvvet: e-posta+IP başına 5/dk — ilk 429 istek no=6 Retry-After=59 gövde={"code":"RATE_LIMITED","params":{"retryAfter":59},"debug":{"message":"Too Many Attempts.","exception":"Illuminate\\Http\\Exceptions\\ThrottleRequestsException","file":"vendor\\laravel\\framework\\src\\Illuminate\\Routing\\Middleware\\ThrottleRequests.php","line":256}}
+[BILGI] P84 — kilitliyken DOĞRU parola (hesap sahibini kilitleme etkisi) — 429 RATE_LIMITED
+[BILGI] P85 — tek IP'den misafir sayfası okuma tavanı (genel api kovası 60/dk, IP anahtarlı) — ilk 429 istek no=61 Retry-After=58
+[ACIK] P86 — aynı IP'deki GİRİŞ YAPMIŞ kullanıcı da aynı kovada mı (misafir trafiği sahibi kilitliyor mu) — 429 RATE_LIMITED
+
+# Özet: OK 81 · ACIK 8 · BILGI 15

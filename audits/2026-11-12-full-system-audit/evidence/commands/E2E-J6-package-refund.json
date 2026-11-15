@@ -1,0 +1,90 @@
+{
+ "journey": "J6-package-refund",
+ "ranAt": "2026-11-15T11:23:41.210Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /odeme?tier=standart",
+   "url": "/odeme?tier=standart"
+  },
+  {
+   "a": "text:main",
+   "url": "/odeme?tier=standart",
+   "r": "Panelime dön Güvenli ödeme Ödemenizi tamamlayın Size uygun ödeme yöntemini seçin. Ödemeniz onaylandığında davetiyenizi hemen yayınlayabilirsiniz. Paket 2 Ödeme 3 Yayın SİPARİŞ ÖZETİ Standart Paket Zarif bir başlangıç için temel modüller Temel şablon koleksiyonu Harita & Konum yönlendirmesi Geri sayım sayacı LCV — maksimum 100 kişi Paket bedeli ₺249 Ödeme türü Tek seferlik Toplam ₺249 256-bit SSL ile şifreli bağlantı Kart bilgileri saklanmaz Ödemeyle ilgili bir sorun mu var? Bize yazın Hediye kodum var ÖDEME YÖNTEMİ Banka / Kredi Kartı Visa, Mastercard ve Troy kartlarla güvenli ödeme VISA troy "
+  },
+  {
+   "a": "tick:input[id$=-consent]",
+   "url": "/odeme?tier=standart"
+  },
+  {
+   "a": "click:Güvenli ödeme sayfasına geç",
+   "url": "/odeme?tier=standart"
+  },
+  {
+   "a": "wait:2500",
+   "url": "/odeme/basarili?order=01m7ff5dkn9a8z950v4nrrv7na",
+   "writes": [
+    "201 POST /api/payments/checkout"
+   ]
+  },
+  {
+   "a": "webhook:paid",
+   "url": "/odeme/basarili?order=01m7ff5dkn9a8z950v4nrrv7na",
+   "r": "webhook=204 order=01m7ff5dkn9a8z950v4nrrv7na before=pending after=paid"
+  },
+  {
+   "a": "wait:5000",
+   "url": "/odeme/basarili?order=01m7ff5dkn9a8z950v4nrrv7na"
+  },
+  {
+   "a": "shot:J6-paket-donus-1440",
+   "url": "/odeme/basarili?order=01m7ff5dkn9a8z950v4nrrv7na",
+   "r": "screenshots/J6-paket-donus-1440.png"
+  },
+  {
+   "a": "text:main",
+   "url": "/odeme/basarili?order=01m7ff5dkn9a8z950v4nrrv7na",
+   "r": "Ödemeniz onaylandı Planınız tanımlandı. Davetiyelerinizi panelinizden yayınlayabilirsiniz. Ödeme zamanı: 15 Kasım 2026 14:23 Ödenen tutar: ₺249 Panelime Git"
+  },
+  {
+   "a": "goto:hesap/planlarim",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "shot:J6-planlarim-hak-1440",
+   "url": "/hesap/planlarim",
+   "r": "screenshots/J6-planlarim-hak-1440.png"
+  },
+  {
+   "a": "dump",
+   "url": "/hesap/planlarim",
+   "r": {
+    "url": "/hesap/planlarim",
+    "h": [
+     "Hesap Ayarları",
+     "Planlarım",
+     "Haklarım"
+    ],
+    "inputs": [],
+    "buttons": [
+     "İptal Et"
+    ],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "HAYATIMIZIN EN ANLAMLI GÜNÜ→/dashboard"
+    ],
+    "alerts": []
+   }
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [
+  "201 POST /api/payments/checkout"
+ ],
+ "command": "--rec J6-package-refund odeme?tier=standart text:main tick:input[id$=-consent] click:Güvenli ödeme sayfasına geç wait:2500 webhook:paid wait:5000 shot:J6-paket-donus-1440 text:main goto:hesap/planlarim shot:J6-planlarim-hak-1440 dump"
+}

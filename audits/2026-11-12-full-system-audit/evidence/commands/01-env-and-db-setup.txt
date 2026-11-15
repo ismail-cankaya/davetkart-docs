@@ -1,0 +1,13 @@
+﻿PostgreSQL: 18.4
+oluşturuldu: davetkart_aud_arc
+oluşturuldu: davetkart_aud_arc_test
+oluşturuldu: davetkart_aud_sec
+oluşturuldu: davetkart_aud_sec_test
+oluşturuldu: davetkart_aud_tst
+oluşturuldu: davetkart_aud_tst_test
+oluşturuldu: davetkart_aud_e2e
+oluşturuldu: davetkart_aud_e2e_test
+backend: .env yazıldı (uygulama DB=davetkart_aud_arc), phpunit.xml test DB=davetkart_aud_arc_test (değişen satır: 1)
+backend-sec: .env yazıldı (uygulama DB=davetkart_aud_sec), phpunit.xml test DB=davetkart_aud_sec_test (değişen satır: 1)
+backend-tst: .env yazıldı (uygulama DB=davetkart_aud_tst), phpunit.xml test DB=davetkart_aud_tst_test (değişen satır: 1)
+backend-e2e: .env yazıldı (uygulama DB=davetkart_aud_e2e), phpunit.xml test DB=davetkart_aud_e2e_test (değişen satır: 1)

@@ -1,0 +1,42 @@
+# komut: grep -rhoE (CHECK|UNIQUE|index) database/migrations · float/decimal taraması · kopya _audit-snap/backend d810410
+      1 ADD CONSTRAINT assistant_usages_message_count_check CHECK
+      1 ADD CONSTRAINT contact_messages_subject_check CHECK
+      1 ADD CONSTRAINT gift_code_redemptions_discount_check CHECK
+      1 ADD CONSTRAINT gift_codes_amount_off_check CHECK
+      1 ADD CONSTRAINT gift_codes_benefit_check CHECK
+      1 ADD CONSTRAINT gift_codes_free_has_tier_check CHECK
+      1 ADD CONSTRAINT gift_codes_max_redemptions_check CHECK
+      1 ADD CONSTRAINT gift_codes_percent_check CHECK
+      1 ADD CONSTRAINT gift_codes_tier_check CHECK
+      1 ADD CONSTRAINT invitations_status_check CHECK
+      1 ADD CONSTRAINT media_kind_check CHECK
+      1 ADD CONSTRAINT media_size_bytes_check CHECK
+      3 ADD CONSTRAINT orders_amount_minor_check CHECK
+      1 ADD CONSTRAINT orders_consumed_at_check CHECK
+      1 ADD CONSTRAINT orders_discount_minor_check CHECK
+      1 ADD CONSTRAINT orders_promotion_campaign_check CHECK
+      1 ADD CONSTRAINT orders_promotion_check CHECK
+      1 ADD CONSTRAINT orders_promotion_discount_check CHECK
+      1 ADD CONSTRAINT orders_promotion_source_check CHECK
+      1 ADD CONSTRAINT orders_scope_check CHECK
+      2 ADD CONSTRAINT orders_status_check CHECK
+      1 ADD CONSTRAINT orders_tier_check CHECK
+      1 ADD CONSTRAINT price_campaigns_percent_check CHECK
+      1 ADD CONSTRAINT price_campaigns_tier_check CHECK
+      1 ADD CONSTRAINT price_campaigns_window_check CHECK
+      1 ADD CONSTRAINT refund_requests_resolved_check CHECK
+      1 ADD CONSTRAINT refund_requests_status_check CHECK
+      1 ADD CONSTRAINT rsvps_guest_count_check CHECK
+      1 ADD CONSTRAINT rsvps_status_check CHECK
+      1 CREATE UNIQUE INDEX refund_requests_one_open_per_order
+      1 index(['connection', 'queue', 'failed_at']
+      1 index(['gift_code_id', 'user_id']
+      1 index(['invitation_id', 'kind']
+      1 index(['invitation_id', 'sort_order']
+      2 index(['invitation_id', 'status']
+      1 index(['starts_at', 'ends_at']
+      3 index(['user_id', 'status']
+      6 unique()
+      1 unique(['disk', 'path'])
+      1 unique(['user_id', 'usage_date'])
+float/decimal kolon sayısı: 0

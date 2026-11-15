@@ -1,0 +1,172 @@
+{
+ "journey": "J4-k1-paywall",
+ "ranAt": "2026-11-15T11:20:29.558Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /dashboard",
+   "url": "/dashboard"
+  },
+  {
+   "a": "click:Düzenle",
+   "url": "/create"
+  },
+  {
+   "a": "wait:1200",
+   "url": "/create"
+  },
+  {
+   "a": "click:Tasarımını Düzenle",
+   "url": "/create"
+  },
+  {
+   "a": "wait:1200",
+   "url": "/create"
+  },
+  {
+   "a": "shot:J4-moduller-once-1440",
+   "url": "/create",
+   "r": "screenshots/J4-moduller-once-1440.png"
+  },
+  {
+   "a": "check:Fotoğraf Galerisi",
+   "url": "/create"
+  },
+  {
+   "a": "wait:3500",
+   "url": "/create",
+   "writes": [
+    "402 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf",
+    "200 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf"
+   ],
+   "net": [
+    "402 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf"
+   ],
+   "console": [
+    "error: Failed to load resource: the server responded with a status of 402 (Payment Required)"
+   ]
+  },
+  {
+   "a": "shot:J4-galeri-acildi-1440",
+   "url": "/create",
+   "r": "screenshots/J4-galeri-acildi-1440.png"
+  },
+  {
+   "a": "dump:body",
+   "url": "/create",
+   "r": {
+    "url": "/create",
+    "h": [
+     "Ne için davetiye oluşturmak istiyorsunuz?",
+     "Size en uygun temayı seçin",
+     "Davetiyenizin bilgilerini girin",
+     "Temel Bilgiler",
+     "Konum ve Ulaşım",
+     "Davetiye Bölümleri",
+     "Mevcut planınız bu davetiyeye yetmiyor",
+     "Standart Paket",
+     "Gold Paket",
+     "Elit Paket"
+    ],
+    "inputs": [
+     "text|#_r_3h_-0|GELİN ADI|Zeynep",
+     "text|#_r_3h_-1|DAMAT ADI|Emre",
+     "textarea|[name=subtitle]|Misafirlerinize iletmek istediğiniz |Sizleri de bu mutlu günü",
+     "datetime-local|#_r_3g_-date|ETKİNLİK TARİHİ & SAATİ|2027-06-12T19:00",
+     "select|||Europe/Istanbul",
+     "text|#_r_3g_-venue|DAVET KONUMU|Çırağan Sarayı Balo Salo",
+     "text|#_r_3i_-input|ULAŞIM BİLGİLERİ|",
+     "time||1. adımın saati|19:00",
+     "text||1. adımın başlığı|Nikâh Töreni",
+     "text||1. adımın açıklaması|",
+     "time||2. adımın saati|20:30",
+     "text||2. adımın başlığı|Yemek ve Kutlama",
+     "text||2. adımın açıklaması|",
+     "date|[name=rsvpDeadline]||",
+     "email||E-posta adresiniz|"
+    ],
+    "buttons": [
+     "TR",
+     "Çıkış Yap",
+     "Düğün Hayatınızın en özel gününe zarif bir davet",
+     "Kına Gecesi Geleneksel gecenize modern bir dokun",
+     "Nişan Mutluluğa atılan ilk adımı birlikte kutlay",
+     "Sünnet Şehzadenizin büyük günü için görkemli dav",
+     "Doğum Günü Yeni yaşınızı sevdiklerinizle karşıla",
+     "Mezuniyet Emeklerinizin taçlandığı anı paylaşın",
+     "Baby Shower Minik misafirinizi hep birlikte karş",
+     "Parti Unutulmaz bir gece için şık bir başlangıç",
+     "Kurumsal Etkinlik Lansman, zirve ve gala için pr",
+     "Seçili Zarif Sadelik Bu temayla devam et",
+     "Zümrüt Vadisi Bu temayla devam et",
+     "Altın Motif Bu temayla devam et",
+     "Gece Modası Bu temayla devam et",
+     "Zarif Çerçeve Bu temayla devam et",
+     "Pastel Buket Bu temayla devam et",
+     "Bordo Zambak Bu temayla devam et",
+     "Pembe Kemer Bu temayla devam et",
+     "Bahar Bahçesi Bu temayla devam et",
+     "Premium · Gold+ Gökyüzü Rüyası Bu temayla devam ",
+     "Premium · Gold+ Mum Işığı Bu temayla devam et",
+     "Premium · Gold+ Gül Yaprakları Bu temayla devam ",
+     "Premium · Gold+ Deniz Işıltısı Bu temayla devam ",
+     "Film Şeridi Bu temayla devam et",
+     "Mermer & Rölyef Bu temayla devam et",
+     "Gazete Manşeti Bu temayla devam et",
+     "Daha fazla tema göster (53)",
+     "Sizleri de bu mutlu günümüzde aramızda görmekten",
+     "Hayatımızın en özel anına tanıklık etmenizi yüre",
+     "Bir ömür boyu sürecek yolculuğumuzun ilk adımınd",
+     "Bu anlamlı günü sevdiklerimizle paylaşmak, mutlu",
+     "Harita üzerinden konum seç",
+     "Zarf Açılış Animasyonu Davetiyeniz açılmadan önc [true]",
+     "Geri Sayım Sayacı Etkinlik gününe kalan süreyi g [true]",
+     "Program Akışı (Timeline) Nikah, yemek, eğlence g [true]",
+     "1. adımı sil",
+     "2. adımı sil",
+     "Program Adımı Ekle",
+     "Fotoğraf Galerisi Özel anlarınızın yer aldığı bi [false]",
+     "Hediye / İBAN Bilgileri Banka hesap bilgileriniz [false]",
+     "Katılım Bildirimi (LCV / RSVP) Katılımcılardan k [true]",
+     "Menü tercihi sorulsun [true]",
+     "Davetiyeni Oluştur",
+     "Kayıt Ol",
+     "Asistanı aç",
+     "Kapat",
+     "Yükselt ve Ödemeye Geç"
+    ],
+    "links": [],
+    "alerts": [
+     "Yalnızca doldurduğunuz adımlar davetiyenizde gös"
+    ]
+   }
+  },
+  {
+   "a": "api:GET /invitations/01m7feq65yzmgxjzrewf7resqf",
+   "url": "/create",
+   "r": {
+    "status": 200,
+    "body": "{\"data\":{\"id\":\"01m7feq65yzmgxjzrewf7resqf\",\"status\":\"published\",\"updatedAt\":\"2026-11-15T11:19:47+00:00\",\"publishedAt\":\"2026-11-15T11:19:47+00:00\",\"releasableUntil\":\"2026-11-18T11:19:47+00:00\",\"invitation\":{\"title\":\"HAYATIMIZIN EN ANLAMLI G\\u00dcN\\u00dc\",\"subtitle\":\"Sizleri de bu mutlu g\\u00fcn\\u00fcm\\u00fczde aram\\u0131zda g\\u00f6rmekten onur duyar\\u0131z.\",\"names\":\"Zeynep & Emre\",\"date\":\"2027-06-12T19:00\",\"timezone\":\"Europe\\/Istanbul\",\"venue\":\"\\u00c7\\u0131ra\\u011fan Saray\\u0131 Balo Salonu, Be\\u015fikta\\u015f \\/ \\u0130stanbul\",\"mapUrl\":\"\",\"phoneBackground\":\"sade\",\"imageTheme\":\"sade\",\"categoryId\":\"dugun\",\"palette\":\"midnight\",\"showEnvelope\":true,\"showTimer\":true,\"showTimeline\":true,\"showGalle"
+   }
+  },
+  {
+   "a": "api:GET /public/invitations/01m7feq65yzmgxjzrewf7resqf",
+   "url": "/create",
+   "r": {
+    "status": 200,
+    "body": "{\"data\":{\"id\":\"01m7feq65yzmgxjzrewf7resqf\",\"invitation\":{\"title\":\"HAYATIMIZIN EN ANLAMLI G\\u00dcN\\u00dc\",\"subtitle\":\"Sizleri de bu mutlu g\\u00fcn\\u00fcm\\u00fczde aram\\u0131zda g\\u00f6rmekten onur duyar\\u0131z.\",\"names\":\"Zeynep & Emre\",\"date\":\"2027-06-12T19:00\",\"timezone\":\"Europe\\/Istanbul\",\"venue\":\"\\u00c7\\u0131ra\\u011fan Saray\\u0131 Balo Salonu, Be\\u015fikta\\u015f \\/ \\u0130stanbul\",\"mapUrl\":\"\",\"phoneBackground\":\"sade\",\"imageTheme\":\"sade\",\"categoryId\":\"dugun\",\"palette\":\"midnight\",\"showEnvelope\":true,\"showTimer\":true,\"showTimeline\":true,\"showGallery\":false,\"showGift\":false,\"showRSVP\":true,\"showBranding\":true,\"timelineEvents\":[{\"time\":\"19:00\",\"title\":\"Nik\\u00e2h T\\u00f6reni\",\"description\":\"\"},{"
+   }
+  }
+ ],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 402 (Payment Required)"
+ ],
+ "net": [
+  "402 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf"
+ ],
+ "writes": [
+  "402 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf",
+  "200 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf"
+ ],
+ "command": "--rec J4-k1-paywall dashboard click:Düzenle wait:1200 click:Tasarımını Düzenle wait:1200 shot:J4-moduller-once-1440 check:Fotoğraf Galerisi wait:3500 shot:J4-galeri-acildi-1440 dump:body api:GET /invitations/01m7feq65yzmgxjzrewf7resqf api:GET /public/invitations/01m7feq65yzmgxjzrewf7resqf"
+}

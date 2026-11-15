@@ -1,0 +1,44 @@
+{
+ "journey": "J2-create",
+ "ranAt": "2026-11-15T11:16:04.194Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "step": "Sihirbaz: Düğün → Zarif Sadelik → bilgiler → \"Davetiyeni Oluştur\"",
+   "expected": "POST /api/invitations 201, editör açılır",
+   "observed": "{\"api\":[\"200 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf\"],\"url\":\"/create\"}",
+   "ok": false
+  },
+  {
+   "step": "Sunucuda kayıt",
+   "expected": "1 davetiye, durum saved, adlar \"Zeynep & Emre\"",
+   "observed": "[{\"id\":\"01m7feq65yzmgxjzrewf7resqf\",\"status\":\"saved\",\"names\":\"Zeynep & Emre\",\"updatedAt\":\"2026-11-15T11:15:46+00:00\"},{\"id\":\"01m7fenqamh4rsac1vvx05a1st\",\"status\":\"saved\",\"names\":\"\",\"updatedAt\":\"2026-11-15T11:14:56+00:00\"},{\"id\":\"01m7femr2df6dr4fgzw06cyax8\",\"status\":\"saved\",\"names\":\"\",\"updatedAt\":\"2026-11-15T11:14:24+00:00\"},{\"id\":\"01m7femectcvp6beqk48zz03w2\",\"status\":\"saved\",\"names\":\"\",\"updatedAt\":\"2026-11-15T11:14:14+00:00\"}]",
+   "ok": false
+  },
+  {
+   "step": "Otomatik kaydetme: konum değiştirildi, \"Kaydet\"e basılmadı",
+   "expected": "PUT /api/invitations/{id} 200; sunucuda yeni değer",
+   "observed": "{\"put\":200,\"api\":[\"200 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf\"],\"server\":\"Çırağan Sarayı Balo Salonu, Beşiktaş / İstanbul\"}",
+   "ok": true
+  },
+  {
+   "step": "Sayfa yenilendi",
+   "expected": "editör aynı davetiyeyle açılır",
+   "observed": "{\"url\":\"/create\",\"valueKept\":false}",
+   "ok": false
+  },
+  {
+   "step": "Editör mobil (390)",
+   "expected": "yatay taşma yok",
+   "observed": "taşma 0 px",
+   "ok": true
+  }
+ ],
+ "console": [],
+ "net": [],
+ "api": [
+  "201 POST /api/invitations",
+  "200 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf",
+  "200 PUT /api/invitations/01m7feq65yzmgxjzrewf7resqf"
+ ]
+}

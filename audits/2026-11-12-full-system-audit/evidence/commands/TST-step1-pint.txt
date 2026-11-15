@@ -1,0 +1,8 @@
+﻿# Komut : php vendor/bin/pint --test
+# Dizin : D:\Projects\davetkart\_audit-snap\backend-tst
+# Ortam : PHPSTAN_TURBO=
+# Baslangic: 2026-11-13 12:29:39
+# Sure  : 1.2 sn (Measure-Command)
+# Cikis kodu: 1
+# ---------------------------------------------------------------
+{"tool":"pint","result":"fail","files":[{"path":"tests\\Feature\\TemplateCatalogueTest.php","fixers":["ordered_class_elements"]}]}

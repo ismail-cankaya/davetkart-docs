@@ -1,0 +1,12 @@
+# komut: git -C davetkart-docs check-ignore -v archive/local-snapshots/* ; arşiv sayımı (içerik AÇILMADI)
+# tarih: 2026-11-13 12:57
+dosya sayısı: 16
+arşiv sayısı: 15
+boyut: 148M	davetkart-docs/archive/local-snapshots
+git izliyor mu (ls-files sayısı): 0
+örnek check-ignore:
+.gitignore:5:local-snapshots/	archive/local-snapshots/_snap/f13-backend.tgz
+.env içeren arşiv sayısı (yalnızca dosya adı listesi okunur, içerik çıkarılmaz):
+3
+_backup klasörü:
+davetkart-claude.git

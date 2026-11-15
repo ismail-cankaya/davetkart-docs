@@ -1,0 +1,25 @@
+# Komut (Git Bash, cwd=_audit-snap/frontend-tst, commit 44caa49): npm audit --omit=dev --json
+# Tarih: 2026-11-13T06:50:02+03:00
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {},
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 0,
+      "high": 0,
+      "critical": 0,
+      "total": 0
+    },
+    "dependencies": {
+      "prod": 199,
+      "dev": 22,
+      "optional": 101,
+      "peer": 0,
+      "peerOptional": 0,
+      "total": 321
+    }
+  }
+}
+# Cikis kodu: 0

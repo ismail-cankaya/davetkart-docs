@@ -1,0 +1,152 @@
+# komut: bash evidence/scripts/arc-churn.sh
+# depo: /d/Projects/davetkart/davetkart-backend-php-laravel · ref: origin/ccr-9a346997-bu6gve = d810410 · commit sayisi: 327
+# ilk commit: 2026-07-28 15e14be · son commit: 2026-11-05 d810410
+
+## 1. En cok degisen 15 dosya (tum yollar)
+     33 routes/api.php
+     22 docs/rehber/routes/api.md
+     20 config/davetkart.php
+     19 bootstrap/app.php
+     18 app/Providers/AppServiceProvider.php
+     15 docs/07-GELISTIRME-YOL-HARITASI.md
+     14 tests/Feature/PaywallTest.php
+     13 docs/09-TUM-FAZLAR-PLANI.md
+     12 docs/rehber/app/Providers/AppServiceProvider.md
+     12 docs/10-URETIM-ENV-SABLONU.md
+     12 app/Models/Order.php
+     12 .env.example
+     11 docs/rehber/tests/Feature/PaywallTest.md
+     11 docs/rehber/config/davetkart.md
+     11 contracts/error-codes.json
+
+## 2. En cok degisen 15 URETIM KODU dosyasi (app/ routes/ config/ bootstrap/ database/)
+     33 routes/api.php
+     20 config/davetkart.php
+     19 bootstrap/app.php
+     18 app/Providers/AppServiceProvider.php
+     12 app/Models/Order.php
+     11 app/Models/Invitation.php
+     10 app/Models/User.php
+      9 app/Enums/ErrorCode.php
+      7 app/Http/Controllers/Api/V1/AuthController.php
+      7 app/Actions/Payment/StartCheckoutAction.php
+      6 routes/console.php
+      6 config/payment.php
+      6 app/Http/Resources/PublicInvitationResource.php
+      6 app/Http/Resources/OrderResource.php
+      6 app/Exceptions/ApiExceptionRenderer.php
+
+## 3. En cok degisen 15 test dosyasi
+     14 tests/Feature/PaywallTest.php
+      8 tests/Feature/MediaTest.php
+      8 tests/Feature/MaintenanceTest.php
+      7 tests/Feature/RsvpTest.php
+      7 tests/Feature/PublicInvitationTest.php
+      6 tests/Feature/InvitationTest.php
+      5 tests/TestCase.php
+      5 tests/Feature/AuthTest.php
+      4 tests/Feature/AssistantTest.php
+      3 tests/Unit/ExampleTest.php
+      3 tests/Feature/HardeningTest.php
+      3 tests/Feature/GiftCodeCheckoutTest.php
+      3 tests/Feature/ExampleTest.php
+      3 tests/Feature/ContactTest.php
+      2 tests/Unit/ShopierSignatureTest.php
+
+## 4. En cok degisen 15 dokuman (docs/ claude/ *.md)
+     22 docs/rehber/routes/api.md
+     15 docs/07-GELISTIRME-YOL-HARITASI.md
+     13 docs/09-TUM-FAZLAR-PLANI.md
+     12 docs/rehber/app/Providers/AppServiceProvider.md
+     12 docs/10-URETIM-ENV-SABLONU.md
+     11 docs/rehber/tests/Feature/PaywallTest.md
+     11 docs/rehber/config/davetkart.md
+     10 docs/rehber/fazlar/README.md
+      8 docs/rehber/app/Models/Order.md
+      7 docs/rehber/phpstan.md
+      7 docs/rehber/app/Models/Invitation.md
+      7 docs/rehber/app/Enums/ErrorCode.md
+      7 docs/rehber/app/Actions/Payment/StartCheckoutAction.md
+      7 docs/rehber/app/Actions/Payment/HandlePaymentCallbackAction.md
+      7 claude/FAZ-10-PLANI.md
+
+## 5. Son 60 gunde en cok degisen 15 uretim kodu dosyasi
+     15 routes/api.php
+     11 config/davetkart.php
+      9 bootstrap/app.php
+      8 app/Models/Order.php
+      7 app/Providers/AppServiceProvider.php
+      5 app/Http/Resources/OrderResource.php
+      5 app/Enums/ErrorCode.php
+      5 app/Actions/Payment/StartCheckoutAction.php
+      5 app/Actions/Payment/HandlePaymentCallbackAction.php
+      4 config/payment.php
+      3 routes/console.php
+      3 app/Models/Invitation.php
+      3 app/Http/Controllers/Api/V1/PaymentController.php
+      3 app/Http/Controllers/Api/V1/AuthController.php
+      3 app/Actions/Invitation/DeleteInvitationAction.php
+
+## 6. Dal hijyeni: yerel ve uzak dallar
+yerel dal sayisi: 24 · uzak dal sayisi: 23
+2026-11-05 origin/ccr-9a346997-bu6gve d810410
+2026-11-04 faz15-desing/claude-davetiye 82c7312
+2026-11-04 origin/audit/2026-11-12-full-system-audit 82c7312
+2026-11-04 origin/faz15-desing/claude-davetiye 82c7312
+2026-11-04 origin/test 82c7312
+2026-10-26 main 03d3940
+2026-10-26 release-v1.0 03d3940
+2026-10-26 origin 03d3940
+2026-10-26 origin/main 03d3940
+2026-10-26 origin/release-v1.0 03d3940
+2026-10-25 test 68abfad
+2026-10-25 faz-14-account-settings 62b7aeb
+2026-10-25 origin/faz-14-account-settings 62b7aeb
+2026-10-25 faz-13-payment-settings ec0ecb3
+2026-10-25 origin/faz-13-payment-settings ec0ecb3
+2026-10-25 faz-12-shopier-not-right 75b0aab
+2026-10-25 origin/faz-12-shopier 75b0aab
+2026-10-24 faz-11-hediye-kodu 83edc04
+2026-10-24 origin/faz-11-hediye-kodu 83edc04
+2026-10-23 faz-10 7c73c3c
+2026-10-23 origin/faz-10 7c73c3c
+2026-10-20 release-2026-10-20 14647d8
+2026-10-20 origin/release-2026-10-20 14647d8
+2026-10-14 copilot/fix-composer-check-job c620062
+2026-10-14 origin/copilot/fix-composer-check-job c620062
+2026-10-01 origin/faz-11 af20e38
+2026-09-25 edit-test b4a74c4
+2026-09-25 origin/edit-test b4a74c4
+2026-09-21 payment-servide c85dbc9
+2026-09-21 production-steps c85dbc9
+2026-09-21 origin/payment-servide c85dbc9
+2026-09-21 origin/production-steps c85dbc9
+2026-09-20 media-confugration 1c3ed4e
+2026-09-20 origin/media-confugration 1c3ed4e
+2026-09-17 faz-9 32beecb
+2026-09-17 origin/faz-9 32beecb
+2026-09-07 faz-8 4009d0a
+2026-09-07 origin/faz-8 4009d0a
+2026-09-04 faz-5-6-and-7 da0346e
+2026-09-04 origin/faz-5 da0346e
+2026-08-28 faz-4 d05a13f
+2026-08-28 origin/faz-4 d05a13f
+2026-07-29 Enums d4b9a6f
+2026-07-29 agents/faz-5-6-7-branch-renaming-testing d4b9a6f
+2026-07-29 agents/fix-git-error-fetch-phase5-files d4b9a6f
+2026-07-29 agents/fix-git-error-phase-5-update d4b9a6f
+2026-07-29 agents/git-hatasi-cozme-faz5-guncelleme d4b9a6f
+2026-07-29 origin/Enums d4b9a6f
+
+## 7. worktree listesi
+D:/Projects/davetkart/davetkart-backend-php-laravel                                                   82c7312 [faz15-desing/claude-davetiye]
+D:/Projects/davetkart/davetkart-backend-php-laravel.worktrees/agents-fix-git-error-fetch-phase5-files d4b9a6f [agents/fix-git-error-fetch-phase5-files]
+D:/Projects/davetkart/davetkart-backend-php-laravel.worktrees/agents-git-hatasi-cozme-faz5-guncelleme d4b9a6f [agents/git-hatasi-cozme-faz5-guncelleme]
+D:/Projects/davetkart/davetkart-backend-php-laravel.worktrees/faz-5-6-7-branch-renaming-testing       d4b9a6f [agents/faz-5-6-7-branch-renaming-testing]
+D:/Projects/davetkart/davetkart-backend-php-laravel.worktrees/fix-git-error-phase-5-update            d4b9a6f [agents/fix-git-error-phase-5-update]
+
+## 8. Denetlenen ref ile main / release-v1.0 farki (commit sayisi)
+origin/main..origin/ccr-9a346997-bu6gve ileride: 4 · geride: 0
+main..origin/ccr-9a346997-bu6gve ileride: 4 · geride: 0
+release-v1.0..origin/ccr-9a346997-bu6gve ileride: 4 · geride: 0
+release-2026-10-20..origin/ccr-9a346997-bu6gve ileride: 57 · geride: 0

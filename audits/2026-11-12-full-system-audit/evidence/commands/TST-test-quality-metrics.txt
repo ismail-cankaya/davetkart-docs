@@ -1,0 +1,106 @@
+# Komut : evidence/commands/TST-test-quality-metrics.txt (bash, grep sayımları) · kopya backend-tst d810410 · 2026-11-15 13:49
+# --- 1) Konsol komutları: imza ↔ testlerde artisan('<ad>') çağrısı
+refunds:approve              ApproveRefundRequest.php           test çağrısı: 3
+gift-codes:create            CreateGiftCode.php                 test çağrısı: 8
+gift-codes:disable           DisableGiftCode.php                test çağrısı: 5
+orders:expire                ExpireStaleOrders.php              test çağrısı: 10
+errors:export                ExportErrorCodes.php               test çağrısı: 0
+gift-codes:generate          GenerateGiftCodes.php              test çağrısı: 4
+contact:list                 ListContactMessages.php            test çağrısı: 1
+gift-codes:list              ListGiftCodes.php                  test çağrısı: 8
+pricing:campaign:list        ListPriceCampaigns.php             test çağrısı: 2
+refunds:list                 ListRefundRequests.php             test çağrısı: 4
+users:normalize-emails       NormalizeUserEmails.php            test çağrısı: 5
+media:prune-orphans          PruneOrphanMedia.php               test çağrısı: 10
+data:purge                   PurgeExpiredData.php               test çağrısı: 10
+refunds:reject               RejectRefundRequest.php            test çağrısı: 4
+pricing:campaign:start       StartPriceCampaign.php             test çağrısı: 4
+pricing:campaign:stop        StopPriceCampaign.php              test çağrısı: 3
+# --- zamanlanmış komutlar (routes/console.php)
+44:Schedule::command('orders:expire')
+45:    ->hourly()
+61:Schedule::command('media:prune-orphans')
+62:    ->dailyAt('03:15')
+82:Schedule::command('sanctum:prune-expired --hours=24')
+83:    ->daily()
+94:Schedule::command('data:purge')
+95:    ->dailyAt('03:45')
+# --- 2) Kimlik: actingAs ↔ gerçek token
+actingAs( : 3 (dosya: 2)
+Sanctum::actingAs : 0
+withToken( : 198 (dosya: 26)
+createToken( : 65
+forgetAuthState( : 67
+# --- 3) Etki doğrulaması (T14)
+assertDatabaseHas                                                      70
+assertDatabaseMissing                                                  7
+assertDatabaseCount                                                    55
+assertSoftDeleted                                                      1
+assertModelMissing                                                     6
+->fresh\(\)                                                            6
+->refresh\(\)                                                          129
+Storage::disk\([^)]*\)->assert(Exists|Missing)                         7
+assertStatus|assertOk|assertCreated|assertNotFound|assertForbidden|assertUnauthorized|assertUnprocessable|assertNoContent 550
+assertJson(Path|Structure|Fragment|Count|MissingPath)?\(               359
+assertExactJson                                                        7
+Notification::assert|Mail::assert                                      13
+Queue::assert|Bus::assert                                              5
+Event::assert                                                          11
+# Feature dosyaları: DB etkisi doğrulamayan (assertDatabase*/fresh/refresh/::count/->exists yok)
+  ExceptionReportingTest.php (5 test)
+  HardeningTest.php (9 test)
+  HealthTest.php (7 test)
+  LocalServerEnvironmentTest.php (2 test)
+  MalformedInputTest.php (9 test)
+  PaymentMethodsTest.php (7 test)
+  PricingTest.php (9 test)
+  PublicInvitationTest.php (33 test)
+  QuotePriceActionTest.php (18 test)
+  RateLimitTest.php (4 test)
+  ShopierGatewayTest.php (15 test)
+  TestSuiteIsolationTest.php (4 test)
+  TrustedProxiesTest.php (7 test)
+# --- 4) Dış dünya, sahteler, zaman
+Http::fake                                                             10
+Http::preventStrayRequests                                             1
+Http::assertSent|Http::assertNothingSent                               4
+Storage::fake                                                          11
+Mockery|->mock\(|->partialMock\(|->spy\(                               16
+markTestSkipped|markTestIncomplete                                     0
+\bsleep\(|usleep\(                                                     0
+travelTo\(|travel\(|Carbon::setTestNow|freezeTime|freezeSecond         53
+RefreshDatabase                                                        93
+DatabaseTransactions                                                   0
+#\[DataProvider|@dataProvider                                          49
+pcntl_fork|Process::|Symfony\\Component\\Process|DB::connection\(      0
+Concurrency::                                                          0
+# --- 5) Veri gerçekçiliği
+Türkçe harf içeren test dosyası: 61 / 61
+faker_locale: 87:    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+factory dosyaları: AssistantUsageFactory.php ContactMessageFactory.php GiftCodeFactory.php GiftCodeRedemptionFactory.php InvitationFactory.php MediaFactory.php OrderFactory.php PriceCampaignFactory.php RefundRequestFactory.php RsvpFactory.php TimelineEventFactory.php UserFactory.php 
+oyuncak veri izleri (foo|bar|baz|lorem|test@test|example.com|asdf|John Doe):      36 example.com;      1 foo;      1 bar;      1 Example.com;
+# --- 6) Dosya başına test metodu (ilk 12 ve son 8)
+77 tests/Feature/PaywallTest.php
+47 tests/Feature/RsvpTest.php
+47 tests/Feature/MediaTest.php
+33 tests/Feature/PublicInvitationTest.php
+33 tests/Feature/InvitationTest.php
+29 tests/Feature/MaintenanceTest.php
+22 tests/Feature/AssistantTest.php
+21 tests/Feature/GiftCodeCheckoutTest.php
+21 tests/Feature/ContactTest.php
+21 tests/Feature/AuthTest.php
+19 tests/Feature/OptimizeUploadedImageTest.php
+18 tests/Feature/QuotePriceActionTest.php
+...
+4 tests/Feature/ProfileUpdateTest.php
+4 tests/Feature/PaymentDriverResolutionTest.php
+3 tests/Unit/IpBucketTest.php
+3 tests/Unit/IbanTest.php
+2 tests/Unit/RefundRequestStatusTest.php
+2 tests/Unit/DeviceLabelTest.php
+2 tests/Feature/LocalServerEnvironmentTest.php
+1 tests/Unit/EmailChangedNotificationTest.php
+# --- 7) Üretim kodu boyutu
+app/ PHP dosyası: 235 · satır: 17893
+tests/ PHP dosyası: 62 · satır: 17054

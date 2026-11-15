@@ -1,0 +1,83 @@
+# komut: bash evidence/scripts/arc-largest-files.sh
+# kopya: /d/Projects/davetkart/_audit-snap/backend (backend d810410) · tarih: 2026-11-13T09:41Z
+
+## 1. Uretim kodu: en buyuk 15 PHP dosyasi (app/ routes/ config/ bootstrap/ database/)
+satir | kod | yorum | bos | yorum% | dosya
+664 | 301 | 264 | 99 | 39% | app/Jobs/OptimizeUploadedImage.php
+450 | 190 | 215 | 45 | 47% | app/Providers/AppServiceProvider.php
+437 | 332 | 68 | 37 | 15% | routes/api.php
+377 | 218 | 94 | 65 | 24% | app/Services/Payment/ShopierGateway.php
+333 | 169 | 117 | 47 | 35% | app/Actions/Payment/StartCheckoutAction.php
+327 | 148 | 141 | 38 | 43% | config/davetkart.php
+248 | 135 | 74 | 39 | 29% | app/Exceptions/ApiExceptionRenderer.php
+248 | 105 | 117 | 26 | 47% | app/Models/Invitation.php
+238 | 94 | 106 | 38 | 44% | app/Enums/ErrorCode.php
+238 | 102 | 107 | 29 | 44% | app/Models/Order.php
+235 | 166 | 32 | 37 | 13% | config/session.php
+212 | 92 | 87 | 33 | 41% | app/Http/Requests/Media/MediaRequest.php
+197 | 140 | 23 | 34 | 11% | app/Actions/GiftCode/GiftCodeSpec.php
+195 | 89 | 86 | 20 | 44% | app/Services/Ai/GeminiProvider.php
+186 | 153 | 10 | 23 | 5% | config/database.php
+
+## 2. Uretim kodu: KOD satirina gore en buyuk 15 (yorum ve bos satir haric)
+kod | satir | yorum% | dosya
+332 | 437 | 15% | routes/api.php
+301 | 664 | 39% | app/Jobs/OptimizeUploadedImage.php
+218 | 377 | 24% | app/Services/Payment/ShopierGateway.php
+190 | 450 | 47% | app/Providers/AppServiceProvider.php
+169 | 333 | 35% | app/Actions/Payment/StartCheckoutAction.php
+166 | 235 | 13% | config/session.php
+153 | 186 | 5% | config/database.php
+148 | 327 | 43% | config/davetkart.php
+140 | 197 | 11% | app/Actions/GiftCode/GiftCodeSpec.php
+135 | 248 | 29% | app/Exceptions/ApiExceptionRenderer.php
+111 | 141 | 5% | config/logging.php
+107 | 138 | 6% | config/cache.php
+105 | 248 | 47% | app/Models/Invitation.php
+103 | 131 | 6% | config/queue.php
+102 | 238 | 44% | app/Models/Order.php
+
+## 3. Testler: en buyuk 15 dosya
+satir | dosya
+1688 | tests/Feature/PaywallTest.php
+1174 | tests/Feature/RsvpTest.php
+1172 | tests/Feature/MediaTest.php
+836 | tests/Feature/InvitationTest.php
+758 | tests/Feature/MaintenanceTest.php
+662 | tests/Feature/PublicInvitationTest.php
+604 | tests/Feature/OptimizeUploadedImageTest.php
+512 | tests/Feature/GiftCodeCheckoutTest.php
+502 | tests/Feature/AssistantTest.php
+445 | tests/Feature/AuthTest.php
+392 | tests/Feature/ContactTest.php
+340 | tests/Feature/ShopierGatewayTest.php
+310 | tests/Feature/GiftCodeCreateCommandsTest.php
+300 | tests/Feature/OrderTest.php
+292 | tests/Feature/PasswordResetTest.php
+
+## 4. Toplamlar (klasor bazinda: dosya · satir · kod · yorum · yorum%)
+app | dosya=235 | satir=17893 | kod=8676 | yorum=6686 | yorum%=37%
+routes | dosya=3 | satir=544 | kod=388 | yorum=108 | yorum%=19%
+config | dosya=18 | satir=2294 | kod=1406 | yorum=526 | yorum%=22%
+bootstrap | dosya=2 | satir=76 | kod=43 | yorum=21 | yorum%=27%
+database/migrations | dosya=29 | satir=1755 | kod=916 | yorum=570 | yorum%=32%
+database/factories | dosya=12 | satir=914 | kod=535 | yorum=266 | yorum%=29%
+database/seeders | dosya=1 | satir=73 | kod=49 | yorum=12 | yorum%=16%
+tests | dosya=62 | satir=17054 | kod=11449 | yorum=2639 | yorum%=15%
+
+## 5. app/ alt klasorleri (dosya · satir · kod · yorum%)
+app/Actions | dosya=59 | satir=4494 | kod=2281 | yorum%=34%
+app/Console | dosya=17 | satir=1437 | kod=871 | yorum%=21%
+app/Contracts | dosya=2 | satir=98 | kod=18 | yorum%=72%
+app/Enums | dosya=14 | satir=1074 | kod=417 | yorum%=46%
+app/Events | dosya=1 | satir=25 | kod=10 | yorum%=44%
+app/Exceptions | dosya=18 | satir=1204 | kod=569 | yorum%=39%
+app/Http | dosya=69 | satir=4287 | kod=2097 | yorum%=36%
+app/Jobs | dosya=3 | satir=767 | kod=343 | yorum%=40%
+app/Listeners | dosya=1 | satir=32 | kod=14 | yorum%=43%
+app/Models | dosya=12 | satir=1253 | kod=587 | yorum%=41%
+app/Notifications | dosya=5 | satir=307 | kod=190 | yorum%=22%
+app/Policies | dosya=3 | satir=184 | kod=77 | yorum%=45%
+app/Providers | dosya=1 | satir=450 | kod=190 | yorum%=47%
+app/Services | dosya=22 | satir=1848 | kod=806 | yorum%=42%
+app/Support | dosya=8 | satir=433 | kod=206 | yorum%=37%

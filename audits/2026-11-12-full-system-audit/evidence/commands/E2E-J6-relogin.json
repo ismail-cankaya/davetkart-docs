@@ -1,0 +1,83 @@
+{
+ "journey": "J6-relogin",
+ "ranAt": "2026-11-15T14:55:02.740Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /login",
+   "url": "/login"
+  },
+  {
+   "a": "fillcss:#login-email=elif.yildirim.aud996311@example.com",
+   "url": "/login"
+  },
+  {
+   "a": "fillcss:#login-password=<AUD_TEST_PAROLASI>",
+   "url": "/login"
+  },
+  {
+   "a": "click:^Giriş Yap$",
+   "url": "/login",
+   "writes": [
+    "401 POST /api/auth/login"
+   ],
+   "net": [
+    "401 POST /api/auth/login"
+   ],
+   "console": [
+    "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+   ]
+  },
+  {
+   "a": "wait:2000",
+   "url": "/login"
+  },
+  {
+   "a": "fillcss:#login-email=elif.yildirim.yeni996311@example.com",
+   "url": "/login"
+  },
+  {
+   "a": "fillcss:#login-password=<AUD_TEST_PAROLASI>",
+   "url": "/login"
+  },
+  {
+   "a": "click:^Giriş Yap$",
+   "url": "/dashboard",
+   "writes": [
+    "200 POST /api/auth/login"
+   ]
+  },
+  {
+   "a": "wait:2500",
+   "url": "/dashboard"
+  },
+  {
+   "a": "goto:hesap/guvenlik",
+   "url": "/hesap/guvenlik"
+  },
+  {
+   "a": "shot:J6-oturumlar-1440",
+   "url": "/hesap/guvenlik",
+   "r": "screenshots/J6-oturumlar-1440.png"
+  },
+  {
+   "a": "eval:document.querySelector('main').innerText.replace(/\\s+/g,' ').match(/Şu anki adresiniz[^A]{0,60}|Aktif oturumlar.{0,260}/g)",
+   "url": "/hesap/guvenlik",
+   "r": [
+    "Şu anki adresiniz: elif.yildirim.yeni996311@example.com YENİ E-POST",
+    "Aktif oturumlar Hesabınıza giriş yapılmış cihazlar. Tanımadığınız bir cihaz görürseniz kapatın ve parolanızı değiştirin. Chrome · Windows BU CİHAZ Son kullanım: 15 Kas 2026 17:55 Çıkış Yap"
+   ]
+  }
+ ],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "net": [
+  "401 POST /api/auth/login"
+ ],
+ "writes": [
+  "401 POST /api/auth/login",
+  "200 POST /api/auth/login"
+ ],
+ "command": "--anon --keep --rec J6-relogin login fillcss:#login-email=elif.yildirim.aud996311@example.com fillcss:#login-password=<AUD_TEST_PAROLASI> click:^Giriş Yap$ wait:2000 fillcss:#login-email=elif.yildirim.yeni996311@example.com fillcss:#login-password=<AUD_TEST_PAROLASI> click:^Giriş Yap$ wait:2500 goto:hesap/guvenlik shot:J6-oturumlar-1440 eval:document.querySelector('main').innerText.replace(/\\s+/g,' ').match(/Şu anki adresiniz[^A]{0,60}|Aktif oturumlar.{0,260}/g)"
+}

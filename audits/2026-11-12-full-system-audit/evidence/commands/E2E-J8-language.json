@@ -1,0 +1,108 @@
+{
+ "journey": "J8-language",
+ "ranAt": "2026-11-15T15:03:08.481Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /dashboard",
+   "url": "/dashboard"
+  },
+  {
+   "a": "css:header button:has-text('TR')",
+   "url": "/dashboard"
+  },
+  {
+   "a": "wait:600",
+   "url": "/dashboard"
+  },
+  {
+   "a": "shot:J8-dil-menusu-1440",
+   "url": "/dashboard",
+   "r": "screenshots/J8-dil-menusu-1440.png"
+  },
+  {
+   "a": "clickany:العربية",
+   "url": "/dashboard"
+  },
+  {
+   "a": "wait:1200",
+   "url": "/dashboard"
+  },
+  {
+   "a": "eval:({lang:document.documentElement.lang,dir:document.documentElement.dir,nav:[...document.querySelectorAll('header a, header button')].map(e=>(e.innerText||'').trim()).filter(Boolean).slice(0,8),h:[...document.querySelectorAll('main h1,main h2,main h3')].map(e=>(e.innerText||'').trim()).slice(0,5),buttons:[...document.querySelectorAll('main button, main a')].map(e=>(e.innerText||'').trim()).filter(Boolean).slice(0,8)})",
+   "url": "/dashboard",
+   "r": {
+    "lang": "ar",
+    "dir": "rtl",
+    "nav": [
+     "DavetKart",
+     "الرئيسية",
+     "تصميم دعوة",
+     "لوحة الحضور",
+     "AR",
+     "تسجيل الخروج",
+     "Elif Yıldırım"
+    ],
+    "h": [
+     "Hoş Geldiniz, Elif Yıldırım",
+     "Zeynep & Emre · Düğün",
+     "Canlı Katılım Paneli",
+     "Misafir Takip Panosu"
+    ],
+    "buttons": [
+     "1 kullanılabilir hak",
+     "Hesap Ayarları",
+     "Yeni Davetiye Oluştur",
+     "Yayında Olanlar\n1",
+     "Kaydedilenler\n3",
+     "Görüntüle",
+     "Kopyala",
+     "Düzenle"
+    ]
+   }
+  },
+  {
+   "a": "shot:J8-arapca-panel-1440",
+   "url": "/dashboard",
+   "r": "screenshots/J8-arapca-panel-1440.png"
+  },
+  {
+   "a": "mobile",
+   "url": "/dashboard",
+   "r": {
+    "overflowX": 0
+   }
+  },
+  {
+   "a": "shot:J8-arapca-panel-390",
+   "url": "/dashboard",
+   "r": "screenshots/J8-arapca-panel-390.png"
+  },
+  {
+   "a": "desktop",
+   "url": "/dashboard"
+  },
+  {
+   "a": "goto:pricing",
+   "url": "/pricing"
+  },
+  {
+   "a": "shot:J8-arapca-fiyat-1440",
+   "url": "/pricing",
+   "r": "screenshots/J8-arapca-fiyat-1440.png"
+  },
+  {
+   "a": "goto:hesap",
+   "url": "/hesap"
+  },
+  {
+   "a": "shot:J8-arapca-hesap-1440",
+   "url": "/hesap",
+   "r": "screenshots/J8-arapca-hesap-1440.png"
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [],
+ "command": "--rec J8-language dashboard css:header button:has-text('TR') wait:600 shot:J8-dil-menusu-1440 clickany:العربية wait:1200 eval:({lang:document.documentElement.lang,dir:document.documentElement.dir,nav:[...document.querySelectorAll('header a, header button')].map(e=>(e.innerText||'').trim()).filter(Boolean).slice(0,8),h:[...document.querySelectorAll('main h1,main h2,main h3')].map(e=>(e.innerText||'').trim()).slice(0,5),buttons:[...document.querySelectorAll('main button, main a')].map(e=>(e.innerText||'').trim()).filter(Boolean).slice(0,8)}) shot:J8-arapca-panel-1440 mobile shot:J8-arapca-panel-390 desktop goto:pricing shot:J8-arapca-fiyat-1440 goto:hesap shot:J8-arapca-hesap-1440"
+}

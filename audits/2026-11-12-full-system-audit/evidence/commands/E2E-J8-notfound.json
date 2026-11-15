@@ -1,0 +1,93 @@
+{
+ "journey": "J8-notfound",
+ "ranAt": "2026-11-15T15:03:30.376Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /olmayan-sayfa",
+   "url": "/"
+  },
+  {
+   "a": "wait:800",
+   "url": "/"
+  },
+  {
+   "a": "shot:J8-404-1440",
+   "url": "/",
+   "r": "screenshots/J8-404-1440.png"
+  },
+  {
+   "a": "goto:invite/01zzzzzzzzzzzzzzzzzzzzzzzz",
+   "url": "/invite/01zzzzzzzzzzzzzzzzzzzzzzzz",
+   "net": [
+    "404 GET /api/public/invitations/01zzzzzzzzzzzzzzzzzzzzzzzz",
+    "404 GET /api/public/invitations/01zzzzzzzzzzzzzzzzzzzzzzzz"
+   ],
+   "console": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  },
+  {
+   "a": "wait:2000",
+   "url": "/invite/01zzzzzzzzzzzzzzzzzzzzzzzz"
+  },
+  {
+   "a": "shot:J8-davetiye-yok-1440",
+   "url": "/invite/01zzzzzzzzzzzzzzzzzzzzzzzz",
+   "r": "screenshots/J8-davetiye-yok-1440.png"
+  },
+  {
+   "a": "eval:document.body.innerText.replace(/\\s+/g,' ').slice(0,260)",
+   "url": "/invite/01zzzzzzzzzzzzzzzzzzzzzzzz",
+   "r": "Bu davetiye bulunamadı. Bağlantı hatalı olabilir ya da davetiye yayından kaldırılmış olabilir."
+  },
+  {
+   "a": "goto:invite/01m7fenqamh4rsac1vvx05a1st",
+   "url": "/invite/01m7fenqamh4rsac1vvx05a1st",
+   "net": [
+    "404 GET /api/public/invitations/01m7fenqamh4rsac1vvx05a1st",
+    "404 GET /api/public/invitations/01m7fenqamh4rsac1vvx05a1st"
+   ],
+   "console": [
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+    "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+   ]
+  },
+  {
+   "a": "wait:2000",
+   "url": "/invite/01m7fenqamh4rsac1vvx05a1st"
+  },
+  {
+   "a": "eval:document.body.innerText.replace(/\\s+/g,' ').slice(0,200)",
+   "url": "/invite/01m7fenqamh4rsac1vvx05a1st",
+   "r": "Bu davetiye bulunamadı. Bağlantı hatalı olabilir ya da davetiye yayından kaldırılmış olabilir."
+  },
+  {
+   "a": "mobile",
+   "url": "/invite/01m7fenqamh4rsac1vvx05a1st",
+   "r": {
+    "overflowX": 0
+   }
+  },
+  {
+   "a": "shot:J8-davetiye-yok-390",
+   "url": "/invite/01m7fenqamh4rsac1vvx05a1st",
+   "r": "screenshots/J8-davetiye-yok-390.png"
+  }
+ ],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)",
+  "error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+ ],
+ "net": [
+  "404 GET /api/public/invitations/01zzzzzzzzzzzzzzzzzzzzzzzz",
+  "404 GET /api/public/invitations/01zzzzzzzzzzzzzzzzzzzzzzzz",
+  "404 GET /api/public/invitations/01m7fenqamh4rsac1vvx05a1st",
+  "404 GET /api/public/invitations/01m7fenqamh4rsac1vvx05a1st"
+ ],
+ "writes": [],
+ "command": "--anon --rec J8-notfound olmayan-sayfa wait:800 shot:J8-404-1440 goto:invite/01zzzzzzzzzzzzzzzzzzzzzzzz wait:2000 shot:J8-davetiye-yok-1440 eval:document.body.innerText.replace(/\\s+/g,' ').slice(0,260) goto:invite/01m7fenqamh4rsac1vvx05a1st wait:2000 eval:document.body.innerText.replace(/\\s+/g,' ').slice(0,200) mobile shot:J8-davetiye-yok-390"
+}

@@ -1,0 +1,139 @@
+{
+ "journey": "J3-checkout",
+ "ranAt": "2026-11-15T11:19:54.574Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "click:Hediye kodum var",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "fill:Hediye kodu=AUDYUZDE20",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "click:Uygula",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf",
+   "writes": [
+    "200 POST /api/gift-codes/preview"
+   ]
+  },
+  {
+   "a": "wait:1500",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "shot:J3-odeme-kod-1440",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J3-odeme-kod-1440.png"
+  },
+  {
+   "a": "click:Güvenli ödeme sayfasına geç",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:800",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "shot:J3-odeme-onaysiz-1440",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J3-odeme-onaysiz-1440.png"
+  },
+  {
+   "a": "tick:input[id$=-consent]",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "mobile",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf",
+   "r": {
+    "overflowX": 0
+   }
+  },
+  {
+   "a": "shot:J3-odeme-390",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf",
+   "r": "screenshots/J3-odeme-390.png"
+  },
+  {
+   "a": "desktop",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "click:Güvenli ödeme sayfasına geç",
+   "url": "/odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf"
+  },
+  {
+   "a": "wait:2500",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "writes": [
+    "201 POST /api/invitations/01m7feq65yzmgxjzrewf7resqf/checkout"
+   ]
+  },
+  {
+   "a": "shot:J3-donus-dogrulaniyor-1440",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": "screenshots/J3-donus-dogrulaniyor-1440.png"
+  },
+  {
+   "a": "text:main",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": "Ödemeniz doğrulanıyor Ödeme sağlayıcısından onay bekliyoruz. Bu genellikle birkaç saniye sürer; lütfen sayfayı kapatmayın."
+  },
+  {
+   "a": "webhook:paid",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": "webhook=204 order=01m7feybh0anx7zeqgnxs8bzee before=pending after=paid"
+  },
+  {
+   "a": "wait:7000",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "writes": [
+    "200 POST /api/invitations/01m7feq65yzmgxjzrewf7resqf/publish"
+   ]
+  },
+  {
+   "a": "shot:J3-donus-yayinlandi-1440",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": "screenshots/J3-donus-yayinlandi-1440.png"
+  },
+  {
+   "a": "text:main",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": "Davetiyeniz yayında Ödemeniz onaylandı ve davetiyeniz yayına alındı. Katılım yanıtlarını panelinizden takip edebilirsiniz. Ödeme zamanı: 15 Kasım 2026 14:19 Ödenen tutar: ₺127,68 Davetiyeyi Görüntüle Panelime Git"
+  },
+  {
+   "a": "mobile",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": {
+    "overflowX": 0
+   }
+  },
+  {
+   "a": "shot:J3-donus-yayinlandi-390",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": "screenshots/J3-donus-yayinlandi-390.png"
+  },
+  {
+   "a": "api:GET /invitations/01m7feq65yzmgxjzrewf7resqf",
+   "url": "/odeme/basarili?order=01m7feybh0anx7zeqgnxs8bzee",
+   "r": {
+    "status": 200,
+    "body": "{\"data\":{\"id\":\"01m7feq65yzmgxjzrewf7resqf\",\"status\":\"published\",\"updatedAt\":\"2026-11-15T11:19:47+00:00\",\"publishedAt\":\"2026-11-15T11:19:47+00:00\",\"releasableUntil\":\"2026-11-18T11:19:47+00:00\",\"invitation\":{\"title\":\"HAYATIMIZIN EN ANLAMLI G\\u00dcN\\u00dc\",\"subtitle\":\"Sizleri de bu mutlu g\\u00fcn\\u00fcm\\u00fczde aram\\u0131zda g\\u00f6rmekten onur duyar\\u0131z.\",\"names\":\"Zeynep & Emre\",\"date\":\"2027-06-12T19:00\",\"timezone\":\"Europe\\/Istanbul\",\"venue\":\"\\u00c7\\u0131ra\\u011fan Saray\\u0131 Balo Salonu, Be\\u015fikta\\u015f \\/ \\u0130stanbul\",\"mapUrl\":\"\",\"phoneBackground\":\"sade\",\"imageTheme\":\"sade\",\"categoryId\":\"dugun\",\"palette\":\"midnight\",\"showEnvelope\":true,\"showTimer\":true,\"showTimeline\":true,\"showGalle"
+   }
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [
+  "200 POST /api/gift-codes/preview",
+  "201 POST /api/invitations/01m7feq65yzmgxjzrewf7resqf/checkout",
+  "200 POST /api/invitations/01m7feq65yzmgxjzrewf7resqf/publish"
+ ],
+ "command": "--rec J3-checkout odeme?tier=gold&invitation=01m7feq65yzmgxjzrewf7resqf click:Hediye kodum var fill:Hediye kodu=AUDYUZDE20 click:Uygula wait:1500 shot:J3-odeme-kod-1440 click:Güvenli ödeme sayfasına geç wait:800 shot:J3-odeme-onaysiz-1440 tick:input[id$=-consent] mobile shot:J3-odeme-390 desktop click:Güvenli ödeme sayfasına geç wait:2500 shot:J3-donus-dogrulaniyor-1440 text:main webhook:paid wait:7000 shot:J3-donus-yayinlandi-1440 text:main mobile shot:J3-donus-yayinlandi-390 api:GET /invitations/01m7feq65yzmgxjzrewf7resqf"
+}

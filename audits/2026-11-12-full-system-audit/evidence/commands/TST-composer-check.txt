@@ -1,0 +1,8 @@
+﻿# Komut : composer check
+# Dizin : D:\Projects\davetkart\_audit-snap\backend-tst
+# Ortam : PHPSTAN_TURBO=
+# Baslangic: 2026-11-13 06:49:42
+# Sure  : 47.7 sn (Measure-Command)
+# Cikis kodu: 1
+# ---------------------------------------------------------------
+{"tool":"pint","result":"fail","files":[{"path":"tests\\Feature\\TemplateCatalogueTest.php","fixers":["ordered_class_elements"]}]}Script @php vendor/bin/pint --test handling the check event returned with error code 1

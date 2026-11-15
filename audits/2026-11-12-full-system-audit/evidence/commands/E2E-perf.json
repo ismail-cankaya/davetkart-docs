@@ -1,0 +1,175 @@
+{
+ "tool": "playwright-core 1.61.1 + CDP",
+ "ranAt": "2026-11-15T15:09:15.526Z",
+ "conditions": "390x844, CPU 4x, 1.6 Mbps / 750 kbps / 150 ms RTT; 3 koşu ortanca; üretim build + gzip (perf-server.mjs)",
+ "rows": [
+  {
+   "page": "Ana sayfa",
+   "path": "/",
+   "throttled": true,
+   "fcp": 4240,
+   "lcp": 5680,
+   "cls": 0.182,
+   "tbt": 797,
+   "longTasks": 9,
+   "loadMs": 3729,
+   "bytes": {
+    "js": 469709,
+    "css": 134697,
+    "img": 327173,
+    "media": 206443,
+    "font": 440217,
+    "other": 695,
+    "total": 1578934,
+    "requests": 37
+   }
+  },
+  {
+   "page": "Ana sayfa",
+   "path": "/",
+   "throttled": false,
+   "fcp": 736,
+   "lcp": 760,
+   "cls": 0,
+   "tbt": 10,
+   "longTasks": 2,
+   "loadMs": 636,
+   "bytes": {
+    "js": 469709,
+    "css": 134695,
+    "img": 328168,
+    "media": 206443,
+    "font": 440314,
+    "other": 695,
+    "total": 1580024,
+    "requests": 38
+   }
+  },
+  {
+   "page": "Misafir sayfası",
+   "path": "/invite/<id>",
+   "throttled": true,
+   "fcp": 4452,
+   "lcp": 4452,
+   "cls": 0,
+   "tbt": 267,
+   "longTasks": 3,
+   "loadMs": 3707,
+   "bytes": {
+    "js": 451866,
+    "css": 134695,
+    "img": 0,
+    "media": 0,
+    "font": 356391,
+    "other": 695,
+    "total": 943647,
+    "requests": 15
+   }
+  },
+  {
+   "page": "Misafir sayfası",
+   "path": "/invite/<id>",
+   "throttled": false,
+   "fcp": 952,
+   "lcp": 952,
+   "cls": 0,
+   "tbt": 3,
+   "longTasks": 1,
+   "loadMs": 637,
+   "bytes": {
+    "js": 451866,
+    "css": 134695,
+    "img": 0,
+    "media": 0,
+    "font": 356599,
+    "other": 695,
+    "total": 943855,
+    "requests": 15
+   }
+  },
+  {
+   "page": "Giriş",
+   "path": "/login",
+   "throttled": true,
+   "fcp": 3940,
+   "lcp": 3940,
+   "cls": 0.329,
+   "tbt": 320,
+   "longTasks": 3,
+   "loadMs": 3712,
+   "bytes": {
+    "js": 451995,
+    "css": 134698,
+    "img": 0,
+    "media": 0,
+    "font": 308004,
+    "other": 695,
+    "total": 895392,
+    "requests": 15
+   }
+  },
+  {
+   "page": "Giriş",
+   "path": "/login",
+   "throttled": false,
+   "fcp": 668,
+   "lcp": 668,
+   "cls": 0,
+   "tbt": 2,
+   "longTasks": 1,
+   "loadMs": 621,
+   "bytes": {
+    "js": 451995,
+    "css": 134695,
+    "img": 0,
+    "media": 0,
+    "font": 308004,
+    "other": 695,
+    "total": 895389,
+    "requests": 15
+   }
+  },
+  {
+   "page": "Fiyatlar",
+   "path": "/pricing",
+   "throttled": true,
+   "fcp": 3936,
+   "lcp": 5180,
+   "cls": 0.625,
+   "tbt": 390,
+   "longTasks": 5,
+   "loadMs": 3719,
+   "bytes": {
+    "js": 458700,
+    "css": 134698,
+    "img": 0,
+    "media": 0,
+    "font": 305763,
+    "other": 695,
+    "total": 899856,
+    "requests": 21
+   }
+  },
+  {
+   "page": "Fiyatlar",
+   "path": "/pricing",
+   "throttled": false,
+   "fcp": 680,
+   "lcp": 992,
+   "cls": 0,
+   "tbt": 1,
+   "longTasks": 1,
+   "loadMs": 633,
+   "bytes": {
+    "js": 458700,
+    "css": 134695,
+    "img": 0,
+    "media": 0,
+    "font": 305763,
+    "other": 695,
+    "total": 899853,
+    "requests": 21
+   }
+  }
+ ]
+}

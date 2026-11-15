@@ -1,0 +1,68 @@
+$ node evidence/scripts/fe-error-codes-compare.mjs
+== ham bayt ==
+frontend  4319 bayt  sha256=49200993ce1d19fe194981c1f94d06c0f74233b49f5a79ab7b860e425d092798  CR=170 LF=170
+backend   4149 bayt  sha256=97b1b11aab52099d49d74ff56d630564aa395f9e3d7b8c7d7a4c099a90f2b6f1  CR=0 LF=170
+bayt bayt aynı mı: false
+
+== satır sonu normalize (CRLF→LF) ==
+frontend  sha256=97b1b11aab52099d49d74ff56d630564aa395f9e3d7b8c7d7a4c099a90f2b6f1
+backend   sha256=97b1b11aab52099d49d74ff56d630564aa395f9e3d7b8c7d7a4c099a90f2b6f1
+normalize sonrası aynı mı: true
+
+== JSON anlamsal ==
+anlamsal eşit mi: true
+kod sayısı: frontend 28 · backend 28
+yalnız frontend: -
+yalnız backend : -
+üst düzey anahtarlar: generatedAt, count, codes
+
+== kod tablosu (sözleşme) ==
+ASSISTANT_QUOTA_EXCEEDED           429  retryable=true  params=[retryAfter,limit]
+EMAIL_CHANGE_INVALID               422  retryable=false params=[]
+FILE_TOO_LARGE                     413  retryable=false params=[max]
+GIFT_CODE_ALREADY_USED             422  retryable=false params=[]
+GIFT_CODE_INVALID                  422  retryable=false params=[]
+GIFT_CODE_NOT_APPLICABLE           422  retryable=false params=[tier]
+INVALID_CREDENTIALS                401  retryable=false params=[]
+INVITATION_ALREADY_PUBLISHED       409  retryable=false params=[]
+INVITATION_LOCKED                  403  retryable=false params=[]
+MALFORMED_REQUEST                  400  retryable=false params=[]
+MEDIA_QUOTA_EXCEEDED               403  retryable=false params=[limit]
+PASSWORD_RESET_INVALID             422  retryable=false params=[]
+PAYMENT_METHOD_DISABLED            403  retryable=false params=[method]
+PAYMENT_PROVIDER_ERROR             502  retryable=true  params=[]
+PAYMENT_REQUIRED                   402  retryable=false params=[requiredTier]
+PAYWALL_TIER_INSUFFICIENT          402  retryable=false params=[requiredTier]
+PROVIDER_UNAVAILABLE               503  retryable=true  params=[retryAfter]
+RATE_LIMITED                       429  retryable=true  params=[retryAfter]
+REFUND_NOT_ALLOWED                 409  retryable=false params=[reason]
+REGISTRATION_FAILED                422  retryable=false params=[]
+RESOURCE_NOT_FOUND                 404  retryable=false params=[]
+RSVP_DEADLINE_PASSED               403  retryable=false params=[]
+RSVP_QUOTA_EXCEEDED                403  retryable=false params=[remaining,limit]
+SERVER_ERROR                       500  retryable=false params=[]
+SLUG_TAKEN                         409  retryable=false params=[]
+TOKEN_EXPIRED                      401  retryable=false params=[]
+UNAUTHENTICATED                    401  retryable=false params=[]
+VALIDATION_FAILED                  422  retryable=false params=[]
+
+== çeviri kapsaması (errors.json → codes.*) ==
+tr: eksik kod 0 [] · fazla kod 0 []
+   biçim: PAYMENT_METHOD_DISABLED: params var ama düz metin (detailed yok)
+   biçim: RSVP_QUOTA_EXCEEDED: params var ama düz metin (detailed yok)
+en: eksik kod 0 [] · fazla kod 0 []
+   biçim: PAYMENT_METHOD_DISABLED: params var ama düz metin (detailed yok)
+   biçim: RSVP_QUOTA_EXCEEDED: params var ama düz metin (detailed yok)
+es: errors.json YOK (fallbackLng=en metni gösterilir)
+fr: errors.json YOK (fallbackLng=en metni gösterilir)
+de: errors.json YOK (fallbackLng=en metni gösterilir)
+zh: errors.json YOK (fallbackLng=en metni gösterilir)
+hi: errors.json YOK (fallbackLng=en metni gösterilir)
+ar: errors.json YOK (fallbackLng=en metni gösterilir)
+ru: errors.json YOK (fallbackLng=en metni gösterilir)
+pt: errors.json YOK (fallbackLng=en metni gösterilir)
+
+== backend ErrorCode enum ↔ sözleşme ==
+enum dosyası: backend/app/Enums/ErrorCode.php · case sayısı 28
+enum'da olup sözleşmede olmayan: -
+sözleşmede olup enum'da olmayan: -

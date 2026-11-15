@@ -1,0 +1,33 @@
+﻿AUD-2026-11-12 artisan bootstrap 2026-11-13T00:09:10
+=== backend
+ INFO Application key set successfully. 
+
+ 2026_10_26_100000_add_consumed_at_to_orders_table .. 1.16ms DONE
+ 2026_10_26_110000_create_refund_requests_table .. 6.99ms DONE
+ 2026_10_26_120000_add_user_agent_to_personal_access_tokens_table .. 0.50ms DONE
+
+
+=== backend-sec
+ INFO Application key set successfully. 
+
+ 2026_10_26_100000_add_consumed_at_to_orders_table .. 1.72ms DONE
+ 2026_10_26_110000_create_refund_requests_table .. 19.66ms DONE
+ 2026_10_26_120000_add_user_agent_to_personal_access_tokens_table .. 0.59ms DONE
+
+
+=== backend-tst
+ INFO Application key set successfully. 
+
+ 2026_10_26_100000_add_consumed_at_to_orders_table .. 1.46ms DONE
+ 2026_10_26_110000_create_refund_requests_table .. 9.27ms DONE
+ 2026_10_26_120000_add_user_agent_to_personal_access_tokens_table .. 0.62ms DONE
+
+
+=== backend-e2e
+ INFO Application key set successfully. 
+
+ 2026_10_26_100000_add_consumed_at_to_orders_table .. 1.55ms DONE
+ 2026_10_26_110000_create_refund_requests_table .. 8.49ms DONE
+ 2026_10_26_120000_add_user_agent_to_personal_access_tokens_table .. 0.54ms DONE
+
+

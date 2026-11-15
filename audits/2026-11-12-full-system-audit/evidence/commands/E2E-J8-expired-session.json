@@ -1,0 +1,84 @@
+{
+ "journey": "J8-expired-session",
+ "ranAt": "2026-11-15T15:03:41.900Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /dashboard",
+   "url": "/dashboard"
+  },
+  {
+   "a": "eval:(()=>{const s=JSON.parse(localStorage.getItem('davetkart_auth_session'));s.token='99|gecersizgecersizgecersizgecersizgecersizgecersiz';localStorage.setItem('davetkart_auth_session',JSON.stringify(s));return 'token bozuldu'})()",
+   "url": "/dashboard",
+   "r": "token bozuldu"
+  },
+  {
+   "a": "goto:hesap/planlarim",
+   "url": "/login",
+   "writes": [
+    "401 POST /api/auth/logout"
+   ],
+   "net": [
+    "401 GET /api/auth/me",
+    "401 POST /api/auth/logout"
+   ],
+   "console": [
+    "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+    "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+   ]
+  },
+  {
+   "a": "wait:2500",
+   "url": "/login"
+  },
+  {
+   "a": "shot:J8-oturum-dustu-1440",
+   "url": "/login",
+   "r": "screenshots/J8-oturum-dustu-1440.png"
+  },
+  {
+   "a": "eval:({path:location.pathname,session:localStorage.getItem('davetkart_auth_session')===null?'silindi':'duruyor',toast:[...document.querySelectorAll('.fixed')].map(e=>(e.innerText||'').trim()).filter(Boolean).slice(0,3),h:[...document.querySelectorAll('main h1')].map(e=>e.innerText)})",
+   "url": "/login",
+   "r": {
+    "path": "/login",
+    "session": "silindi",
+    "toast": [],
+    "h": [
+     "Tekrar Hoş Geldiniz"
+    ]
+   }
+  },
+  {
+   "a": "fillcss:#login-email=elif.yildirim.yeni996311@example.com",
+   "url": "/login"
+  },
+  {
+   "a": "fillcss:#login-password=<AUD_TEST_PAROLASI>",
+   "url": "/login"
+  },
+  {
+   "a": "click:^Giriş Yap$",
+   "url": "/hesap/planlarim",
+   "writes": [
+    "200 POST /api/auth/login"
+   ]
+  },
+  {
+   "a": "wait:2500",
+   "url": "/hesap/planlarim"
+  }
+ ],
+ "console": [
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+  "error: Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+ ],
+ "net": [
+  "401 GET /api/auth/me",
+  "401 POST /api/auth/logout"
+ ],
+ "writes": [
+  "401 POST /api/auth/logout",
+  "200 POST /api/auth/login"
+ ],
+ "command": "--rec J8-expired-session dashboard eval:(()=>{const s=JSON.parse(localStorage.getItem('davetkart_auth_session'));s.token='99|gecersizgecersizgecersizgecersizgecersizgecersiz';localStorage.setItem('davetkart_auth_session',JSON.stringify(s));return 'token bozuldu'})() goto:hesap/planlarim wait:2500 shot:J8-oturum-dustu-1440 eval:({path:location.pathname,session:localStorage.getItem('davetkart_auth_session')===null?'silindi':'duruyor',toast:[...document.querySelectorAll('.fixed')].map(e=>(e.innerText||'').trim()).filter(Boolean).slice(0,3),h:[...document.querySelectorAll('main h1')].map(e=>e.innerText)}) fillcss:#login-email=elif.yildirim.yeni996311@example.com fillcss:#login-password=<AUD_TEST_PAROLASI> click:^Giriş Yap$ wait:2500"
+}

@@ -1,0 +1,825 @@
+﻿# Komut : npm run check
+# Dizin : D:\Projects\davetkart\_audit-snap\frontend-tst
+# Ortam : PHPSTAN_TURBO=0
+# Baslangic: 2026-11-13 12:33:26
+# Sure  : 39.3 sn (Measure-Command)
+# Cikis kodu: 0
+# ---------------------------------------------------------------
+
+> davetkart@0.0.0 check
+> npm run lint && npm run build && npm run verify
+
+
+> davetkart@0.0.0 lint
+> tsc --noEmit
+
+
+> davetkart@0.0.0 build
+> vite build
+
+vite v6.4.5 building for production...
+transforming...
+✓ 3090 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                          0.51 kB │ gzip:   0.33 kB
+dist/assets/baby-ufuk-kapak-BqJOLaiV.svg                 8.77 kB │ gzip:   2.39 kB
+dist/assets/leke-CcR4RjR2.webp                           8.95 kB
+dist/assets/murekkep-Bnj0AUyB.webp                       9.84 kB
+dist/assets/sunnet-ufuk-kapak-BdOntYAH.svg              12.18 kB │ gzip:   3.06 kB
+dist/assets/nisan-sampanya-kapak-DwhgJ3n4.jpg           15.74 kB
+dist/assets/mezuniyet-lacivert-kapak-DdgackAK.jpg       16.60 kB
+dist/assets/kina-bordo-kapak-CFof_Opj.jpg               16.92 kB
+dist/assets/baby-shower-kabarcik-kapak-BUPdnPzs.jpg     17.33 kB
+dist/assets/mum-isigi-kapak-CBolTgmE.jpg                17.71 kB
+dist/assets/mezuniyet-ufuk-kapak-6n_Ctg2s.svg           17.82 kB │ gzip:   3.59 kB
+dist/assets/dugun-ufuk-kapak-BfaQQjug.svg               18.02 kB │ gzip:   4.38 kB
+dist/assets/dugun-gokyuzu-kapak-BCqxswTB.jpg            18.29 kB
+dist/assets/dogum-gunu-ufuk-kapak-CrTCPYCc.svg          19.36 kB │ gzip:   4.70 kB
+dist/assets/deniz-isiltisi-kapak-D5hz8NQe.jpg           19.37 kB
+dist/assets/sunnet-yildiz-kapak-BX3X4PND.jpg            19.65 kB
+dist/assets/dogum-gunu-konfeti-kapak-BPD2o0yz.jpg       20.52 kB
+dist/assets/gul-yapraklari-kapak-BrXVVD2Y.jpg           21.77 kB
+dist/assets/kina-ufuk-kapak-BPQMBoAZ.svg                24.98 kB │ gzip:   4.80 kB
+dist/assets/kurumsal-ufuk-kapak-BOZ3QeIQ.svg            32.19 kB │ gzip:   4.95 kB
+dist/assets/parti-aurora-kapak-B0_TS00V.jpg             38.75 kB
+dist/assets/nisan-ufuk-kapak-DzghFZJt.svg               39.61 kB │ gzip:   6.66 kB
+dist/assets/parti-ufuk-kapak-Cq-fkTho.svg               46.96 kB │ gzip:   6.08 kB
+dist/assets/dugun5-bottom-BYLmGElg.png                 105.42 kB
+dist/assets/dugun2-buttom-E0pfrj6P.png                 122.79 kB
+dist/assets/dugun5-background-Wy8vB6vh.png             131.59 kB
+dist/assets/dugun2-top-DwLXCDqN.png                    141.35 kB
+dist/assets/dugun4-background-MKRz4eJD.png             156.01 kB
+dist/assets/dugun3-top-right-BL4ns1T4.png              221.57 kB
+dist/assets/dugun4-CRqck7S8.png                        234.31 kB
+dist/assets/dugun1-right-BZDNPdKf.png                  368.93 kB
+dist/assets/dugun1-left-C_Noh7_q.png                   379.60 kB
+dist/assets/dugun3-bottom-B2OZbFL2.png                 879.09 kB
+dist/assets/bg-CWA3MHtB.png                          1,166.49 kB
+dist/assets/index-B4g3laWs.css                       1,171.53 kB │ gzip: 132.84 kB
+dist/assets/use-motion-template-BwMend0O.js              0.22 kB │ gzip:   0.19 kB
+dist/assets/useAccountEntitlements-BjKWomyl.js           0.26 kB │ gzip:   0.20 kB
+dist/assets/minus-DeLqb260.js                            0.29 kB │ gzip:   0.24 kB
+dist/assets/currency-D5h20yMq.js                         0.29 kB │ gzip:   0.19 kB
+dist/assets/chevron-right-BkhFTUZ8.js                    0.30 kB │ gzip:   0.25 kB
+dist/assets/chevron-left-Dc-1fqso.js                     0.30 kB │ gzip:   0.25 kB
+dist/assets/LightLayer-BLfCVDy3.js                       0.31 kB │ gzip:   0.24 kB
+dist/assets/loader-circle-C3xGjJ0O.js                    0.31 kB │ gzip:   0.26 kB
+dist/assets/plus-CYBOY6qw.js                             0.33 kB │ gzip:   0.25 kB
+dist/assets/heroData-ChsC_GaN.js                         0.33 kB │ gzip:   0.24 kB
+dist/assets/clock-CmhVG8_N.js                            0.34 kB │ gzip:   0.27 kB
+dist/assets/user-round-DfSKHA5o.js                       0.35 kB │ gzip:   0.28 kB
+dist/assets/Adlar-DW_jex88.js                            0.36 kB │ gzip:   0.28 kB
+dist/assets/checkoutRoute-f-GC-FwS.js                    0.37 kB │ gzip:   0.26 kB
+dist/assets/rotate-ccw-BZAjTUz6.js                       0.37 kB │ gzip:   0.29 kB
+dist/assets/undo-2-v3g9m6Xd.js                           0.38 kB │ gzip:   0.28 kB
+dist/assets/mail-DaqvLSlp.js                             0.39 kB │ gzip:   0.31 kB
+dist/assets/useTemplateFont-DndRJq7X.js                  0.39 kB │ gzip:   0.30 kB
+dist/assets/copy-D5rITXYP.js                             0.40 kB │ gzip:   0.31 kB
+dist/assets/log-in-DoJL73JD.js                           0.40 kB │ gzip:   0.29 kB
+dist/assets/message-circle-BOn_mfvL.js                   0.41 kB │ gzip:   0.32 kB
+dist/assets/external-link-DO6yNhhz.js                    0.42 kB │ gzip:   0.30 kB
+dist/assets/map-pin-KgFRZq9r.js                          0.43 kB │ gzip:   0.33 kB
+dist/assets/leaf-DAiRT2Cc.js                             0.44 kB │ gzip:   0.33 kB
+dist/assets/mail-check-CrnjdGa4.js                       0.45 kB │ gzip:   0.33 kB
+dist/assets/link-2-off-BXdAoEq2.js                       0.47 kB │ gzip:   0.32 kB
+dist/assets/cloud-off-Bkduokyj.js                        0.48 kB │ gzip:   0.33 kB
+dist/assets/shield-check-JjsDzW13.js                     0.49 kB │ gzip:   0.35 kB
+dist/assets/ticket-qeKtGM8G.js                           0.49 kB │ gzip:   0.32 kB
+dist/assets/refresh-cw-BPP5LFxa.js                       0.49 kB │ gzip:   0.33 kB
+dist/assets/trash-2-CWTdP-BG.js                          0.50 kB │ gzip:   0.32 kB
+dist/assets/gem-EcyI26vX.js                              0.51 kB │ gzip:   0.35 kB
+dist/assets/useStageActive-g82Ik2k0.js                   0.52 kB │ gzip:   0.31 kB
+dist/assets/key-round-ClFlhsPr.js                        0.52 kB │ gzip:   0.36 kB
+dist/assets/badge-percent-jXLiS7Pz.js                    0.56 kB │ gzip:   0.34 kB
+dist/assets/useTilt-42kGlJid.js                          0.66 kB │ gzip:   0.36 kB
+dist/assets/calendar-days-BOEnKrDM.js                    0.67 kB │ gzip:   0.37 kB
+dist/assets/palette-BxndkfXu.js                          0.68 kB │ gzip:   0.38 kB
+dist/assets/ScrollCue-qoofsRFA.js                        0.73 kB │ gzip:   0.47 kB
+dist/assets/HeroCountdown-VZWf51F7.js                    0.76 kB │ gzip:   0.49 kB
+dist/assets/receipt-text-DdHaiCCD.js                     0.84 kB │ gzip:   0.39 kB
+dist/assets/SectionHeading-RWJsyi4L.js                   0.84 kB │ gzip:   0.49 kB
+dist/assets/useDeviceMotion-Bzek1i-6.js                  0.96 kB │ gzip:   0.58 kB
+dist/assets/index-Bq0DL5rN.js                            1.06 kB │ gzip:   0.52 kB
+dist/assets/index-CBO8Uofd.js                            1.06 kB │ gzip:   0.51 kB
+dist/assets/GyroButton-BElgym94.js                       1.07 kB │ gzip:   0.64 kB
+dist/assets/planVisuals-BRaDzxjb.js                      1.13 kB │ gzip:   0.57 kB
+dist/assets/ThreeStage-CYleI2dj.js                       1.14 kB │ gzip:   0.66 kB
+dist/assets/FormField-B_7daJqs.js                        1.15 kB │ gzip:   0.61 kB
+dist/assets/PageHeader-CTecEe9h.js                       1.20 kB │ gzip:   0.63 kB
+dist/assets/support-DBy1hXpB.js                          1.22 kB │ gzip:   0.65 kB
+dist/assets/iban-BwodvOFd.js                             1.24 kB │ gzip:   0.66 kB
+dist/assets/SplitReveal-RwqRVYOB.js                      1.65 kB │ gzip:   0.85 kB
+dist/assets/AuthShell-DXg47vCF.js                        1.68 kB │ gzip:   0.77 kB
+dist/assets/DateCountdown-Bw0Xbpw9.js                    1.71 kB │ gzip:   0.93 kB
+dist/assets/TierRightsGrid-BnLFavzM.js                   1.81 kB │ gzip:   0.85 kB
+dist/assets/payments-mnTl5uH7.js                         1.86 kB │ gzip:   0.75 kB
+dist/assets/InvitePage-Bzcfi8Yk.js                       2.15 kB │ gzip:   1.12 kB
+dist/assets/paymentMethods-pMoC1ILy.js                   2.17 kB │ gzip:   1.09 kB
+dist/assets/AccountOverviewSection-CxW2-_m6.js           2.46 kB │ gzip:   1.27 kB
+dist/assets/LoginPage-Br8LEVGx.js                        2.47 kB │ gzip:   1.20 kB
+dist/assets/accountLabels-CU2S8thU.js                    2.48 kB │ gzip:   1.11 kB
+dist/assets/TapBurst-2vHy7FMI.js                         2.54 kB │ gzip:   1.32 kB
+dist/assets/EmailChangeConfirmPage-CBadUMrh.js           2.68 kB │ gzip:   1.30 kB
+dist/assets/ForgotPasswordPage-T1LKfMbW.js               2.72 kB │ gzip:   1.35 kB
+dist/assets/AccountPage-C7kQDh8h.js                      2.75 kB │ gzip:   1.25 kB
+dist/assets/AccountOrdersSection-CYOIS5Ll.js             2.89 kB │ gzip:   1.36 kB
+dist/assets/Details-BBInBmbS.js                          3.09 kB │ gzip:   1.37 kB
+dist/assets/Timeline-CRevg_MN.js                         3.25 kB │ gzip:   1.37 kB
+dist/assets/FenerSahnesi-Dz-87C61.js                     3.31 kB │ gzip:   1.70 kB
+dist/assets/Gallery-CWPBHXtf.js                          3.41 kB │ gzip:   1.51 kB
+dist/assets/GiftRegistry-Cm3EKpEj.js                     3.43 kB │ gzip:   1.60 kB
+dist/assets/LiveShader-DEx49AxI.js                       3.54 kB │ gzip:   1.83 kB
+dist/assets/ResetPasswordPage-CH9vF9Qo.js                3.58 kB │ gzip:   1.59 kB
+dist/assets/RegisterPage-BEc6FUp3.js                     3.70 kB │ gzip:   1.61 kB
+dist/assets/index-4ppKDWY2.js                            3.76 kB │ gzip:   1.56 kB
+dist/assets/Testimonials-CiR9WFGc.js                     3.92 kB │ gzip:   1.77 kB
+dist/assets/CinemaBackdrop-Clg-ues8.js                   4.25 kB │ gzip:   1.82 kB
+dist/assets/AccountPrivacySection-jts8I-u6.js            4.97 kB │ gzip:   2.27 kB
+dist/assets/YorungeSahnesi-CSpUyGdQ.js                   4.97 kB │ gzip:   2.07 kB
+dist/assets/index-DRfE7SBp.js                            5.06 kB │ gzip:   2.32 kB
+dist/assets/index-CvfOWiub.js                            5.08 kB │ gzip:   2.54 kB
+dist/assets/CookiesPage-CF4vSYej.js                      5.10 kB │ gzip:   2.30 kB
+dist/assets/index-C_cpEkQZ.js                            5.21 kB │ gzip:   2.41 kB
+dist/assets/index-Dt5xxZvx.js                            5.32 kB │ gzip:   1.97 kB
+dist/assets/index--5GHEhiV.js                            5.34 kB │ gzip:   2.46 kB
+dist/assets/index-BcorQ6Cl.js                            5.34 kB │ gzip:   2.56 kB
+dist/assets/index-Cu-cTiTW.js                            5.40 kB │ gzip:   2.62 kB
+dist/assets/index-B5qPJvtv.js                            5.47 kB │ gzip:   2.56 kB
+dist/assets/index-sGgNH1o3.js                            5.47 kB │ gzip:   2.50 kB
+dist/assets/index-vKYGyM1B.js                            5.50 kB │ gzip:   2.59 kB
+dist/assets/HaritaKapak-BN1LHsT5.js                      5.54 kB │ gzip:   2.41 kB
+dist/assets/KelebekSahnesi-wtuIf_gY.js                   5.71 kB │ gzip:   2.73 kB
+dist/assets/index-D7maUs-t.js                            5.75 kB │ gzip:   2.79 kB
+dist/assets/index-BXaMs1b8.js                            5.97 kB │ gzip:   2.98 kB
+dist/assets/index-Bkyu4fF9.js                            6.05 kB │ gzip:   2.89 kB
+dist/assets/index-CzFC6xi6.js                            6.12 kB │ gzip:   2.74 kB
+dist/assets/index-sdtRey5O.js                            6.13 kB │ gzip:   2.87 kB
+dist/assets/index-DhrZMgun.js                            6.15 kB │ gzip:   2.78 kB
+dist/assets/index-Br3L3tjm.js                            6.23 kB │ gzip:   2.98 kB
+dist/assets/LegalPageLayout-BT3GC9J2.js                  6.68 kB │ gzip:   2.46 kB
+dist/assets/index-BhU5p6bp.js                            6.74 kB │ gzip:   2.99 kB
+dist/assets/GulSahnesi-BDA2vltH.js                       6.77 kB │ gzip:   3.07 kB
+dist/assets/bolumBasliklari-C03Is4lz.js                  6.79 kB │ gzip:   4.30 kB
+dist/assets/index-DLMp5QgD.js                            6.96 kB │ gzip:   2.54 kB
+dist/assets/AccountPlansSection-Bj-7HFQu.js              7.05 kB │ gzip:   2.89 kB
+dist/assets/index-BL1pE58a.js                            7.09 kB │ gzip:   3.07 kB
+dist/assets/index-DuC_dFvn.js                            7.12 kB │ gzip:   3.09 kB
+dist/assets/index-BbApTh36.js                            7.12 kB │ gzip:   2.38 kB
+dist/assets/index-CKG2DMXi.js                            7.12 kB │ gzip:   3.11 kB
+dist/assets/RSVPForm-BRJRqqzk.js                         7.49 kB │ gzip:   3.14 kB
+dist/assets/index-GABNBlV7.js                            7.65 kB │ gzip:   3.40 kB
+dist/assets/PricingPage-CwbgKyVg.js                      7.67 kB │ gzip:   3.10 kB
+dist/assets/index-BUhxO_4E.js                            7.85 kB │ gzip:   3.41 kB
+dist/assets/TermsPage-Tnb_1Lng.js                        7.90 kB │ gzip:   3.45 kB
+dist/assets/index-Cs9WGhe3.js                            7.91 kB │ gzip:   2.52 kB
+dist/assets/index-BNqZf9vc.js                            8.05 kB │ gzip:   3.40 kB
+dist/assets/PrivacyPage-CUVEYsNd.js                      8.06 kB │ gzip:   3.33 kB
+dist/assets/Features-CKNf_Yxs.js                         8.22 kB │ gzip:   2.92 kB
+dist/assets/AccountSecuritySection-C4Nc4aOX.js           8.38 kB │ gzip:   3.20 kB
+dist/assets/index-DEHlXxAY.js                            8.43 kB │ gzip:   4.01 kB
+dist/assets/AboutPage-BVFYBusZ.js                        8.79 kB │ gzip:   3.26 kB
+dist/assets/index-D4Xd7d9a.js                            8.85 kB │ gzip:   4.05 kB
+dist/assets/ContactPage-J2OzRvme.js                      9.16 kB │ gzip:   3.44 kB
+dist/assets/index-xW6dp1m8.js                            9.18 kB │ gzip:   4.32 kB
+dist/assets/index-rDGvpbdZ.js                            9.19 kB │ gzip:   4.16 kB
+dist/assets/index-CpYqBI_Q.js                            9.24 kB │ gzip:   2.91 kB
+dist/assets/index-BVTnmWaK.js                            9.29 kB │ gzip:   4.18 kB
+dist/assets/index-C5bOgRtV.js                            9.44 kB │ gzip:   4.36 kB
+dist/assets/index-CYBfapYu.js                            9.63 kB │ gzip:   4.31 kB
+dist/assets/index-BhjTpZb9.js                            9.96 kB │ gzip:   3.85 kB
+dist/assets/index-CJFUP5VS.js                           10.20 kB │ gzip:   4.24 kB
+dist/assets/index-lFyrILHJ.js                           10.43 kB │ gzip:   4.34 kB
+dist/assets/index-BLDJQpod.js                           10.50 kB │ gzip:   4.19 kB
+dist/assets/LiveRsvpPanel-Cr1e5fWq.js                   10.50 kB │ gzip:   3.36 kB
+dist/assets/PaymentReturnPage-ClX5zeG_.js               10.50 kB │ gzip:   3.59 kB
+dist/assets/index-DXHrN01q.js                           10.56 kB │ gzip:   4.68 kB
+dist/assets/index-D_Ew606Z.js                           10.59 kB │ gzip:   4.79 kB
+dist/assets/index-DCoVD6k9.js                           10.63 kB │ gzip:   4.39 kB
+dist/assets/useEkranBoyu-CoBYOfia.js                    10.78 kB │ gzip:   4.21 kB
+dist/assets/index-DXgoFKnw.js                           10.84 kB │ gzip:   4.43 kB
+dist/assets/index-afIfpuds.js                           11.20 kB │ gzip:   5.04 kB
+dist/assets/SustainabilityPage-NL_LR2nQ.js              11.31 kB │ gzip:   3.83 kB
+dist/assets/index-CyQgMqhJ.js                           11.38 kB │ gzip:   4.71 kB
+dist/assets/index-B-7-lItx.js                           11.69 kB │ gzip:   4.70 kB
+dist/assets/index-DolOLt8X.js                           12.22 kB │ gzip:   5.31 kB
+dist/assets/index-DFXYu1YY.js                           13.05 kB │ gzip:   5.68 kB
+dist/assets/index-BotyKllY.js                           13.18 kB │ gzip:   5.70 kB
+dist/assets/index-BLTz-MJ3.js                           13.36 kB │ gzip:   6.19 kB
+dist/assets/index-mp0RY7ok.js                           13.66 kB │ gzip:   5.46 kB
+dist/assets/index-YZyKuxgA.js                           13.70 kB │ gzip:   5.19 kB
+dist/assets/index-gVQi8qn5.js                           13.97 kB │ gzip:   5.84 kB
+dist/assets/index-DtZlIzmQ.js                           14.03 kB │ gzip:   5.05 kB
+dist/assets/AssistantWidget-Dw4tXZM9.js                 14.62 kB │ gzip:   4.74 kB
+dist/assets/index-C2qzd6NF.js                           14.82 kB │ gzip:   6.41 kB
+dist/assets/index-C4-uk-zz.js                           14.89 kB │ gzip:   6.17 kB
+dist/assets/metin-BUTuKIx6.js                           14.99 kB │ gzip:   5.20 kB
+dist/assets/index-B9V5HfgG.js                           15.52 kB │ gzip:   6.10 kB
+dist/assets/index-D3X8krPB.js                           15.54 kB │ gzip:   5.80 kB
+dist/assets/index-LTxG93g0.js                           16.34 kB │ gzip:   7.09 kB
+dist/assets/index-NnhJYHNY.js                           17.27 kB │ gzip:   6.75 kB
+dist/assets/index-Dvo3SYJG.js                           17.39 kB │ gzip:   6.85 kB
+dist/assets/DashboardPage-Dl0vmRkE.js                   17.95 kB │ gzip:   5.70 kB
+dist/assets/index-E2pJEatt.js                           24.94 kB │ gzip:   8.95 kB
+dist/assets/CheckoutPage-CYsC-bjc.js                    42.81 kB │ gzip:  11.71 kB
+dist/assets/CarsiPlani-Db1R3g2V.js                      50.58 kB │ gzip:  16.64 kB
+dist/assets/CreatePage-ZBdRr7pZ.js                      78.83 kB │ gzip:  23.19 kB
+dist/assets/SceneCanvas-CAW6qrqo.js                    886.61 kB │ gzip: 239.71 kB
+dist/assets/index-DfFic9Bg.js                        1,637.83 kB │ gzip: 442.06 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 11.77s
+
+> davetkart@0.0.0 verify
+> npm run verify:errors && npm run verify:endpoints && npm run verify:etag && npm run verify:time && npm run verify:state && npm run verify:content && npm run verify:image && npm run verify:payment && npm run verify:gift && npm run verify:pricing && npm run verify:render
+
+
+> davetkart@0.0.0 verify:errors
+> node scripts/run-check.mjs scripts/verify-error-contract.ts
+
+
+[tr] 28 kod denetleniyor…
+  örnek: Bu davetiyedeki özellikler Elit planı gerektiriyor. Planınızı yükseltin.
+  örnek: Günlük 30 mesaj hakkınızın tamamını kullandınız. 2 saat sonra tekrar deneyebilirsiniz.
+  örnek: Kişi sayısı en fazla 10 olabilir.
+  örnek: Program saati beklenen tarih biçiminde değil.
+
+[en] 28 kod denetleniyor…
+  örnek: The features in this invitation require the Elite plan. Upgrade to continue.
+  örnek: You've used all 30 of today's assistant messages. Try again in 2 hours.
+  örnek: Number of guests can be at most 10.
+  örnek: Schedule time isn't in the expected date format.
+
+✓ Hata sözleşmesi eksiksiz: 28 kod, iki dil, tüm çözümleme yolları.
+
+> davetkart@0.0.0 verify:endpoints
+> node scripts/run-check.mjs scripts/verify-endpoints.ts
+
+
+Medya uçları
+  ✓ sahip yüklemesi: POST /invitations/01J000000000000000000000/media
+  ✓ sahip yüklemesi: gövde multipart, dosya taşınıyor
+  ✓ misafir yüklemesi: POST /public/invitations/01J000000000000000000000/media
+  ✓ misafir yüklemesi: gövde multipart, dosya taşınıyor
+  ✓ galeri silme (sahip): DELETE /invitations/01J000000000000000000000/media/01J111111111111111111111
+
+LCV uçları
+  ✓ liste (sahip): GET /invitations/01J000000000000000000000/rsvps
+  ✓ gönderim (misafir): POST /public/invitations/01J000000000000000000000/rsvps
+  ✓ güncelleme (misafir): PUT /public/invitations/01J000000000000000000000/rsvps/01J2
+  ✓ silme (sahip): DELETE /rsvps/01J2
+
+Yayınlama ve ödeme uçları
+  ✓ yayınlama: POST /invitations/01J000000000000000000000/publish
+  ✓ davetiye kaydı: PUT /invitations/01J000000000000000000000
+  ✓ checkout (davetiye): POST /invitations/01J000000000000000000000/checkout
+  ✓ checkout (hesap paketi): POST /payments/checkout
+
+Hediye kodu (Faz 11)
+  ✓ checkout + hediye kodu: POST /invitations/01J000000000000000000000/checkout
+  ✓ checkout + boş kod: POST /payments/checkout
+  ✓ hediye kodu önizleme: POST /gift-codes/preview
+  ✓ önizleme: kesirli kuruş alanı reddediliyor
+  ✓ önizleme: tutarsız döküm reddediliyor
+
+Fiyat kataloğu uçları (Faz 13)
+  ✓ fiyat kataloğu (misafir): GET /public/plans
+  ✓ fiyat kataloğu (oturumlu): GET /pricing
+  ✓ katalog: bilinmeyen ödeme yöntemi süzülüyor
+  ✓ katalog: kesirli fiyat reddediliyor
+  ✓ katalog: tutarsız döküm reddediliyor
+  ✓ katalog: boş plan listesi reddediliyor
+
+Sipariş okuma uçları (Faz 10)
+  ✓ sipariş (tek): GET /orders/01j5
+  ✓ sipariş (kodlanmış kimlik): GET /orders/..%2Fauth%2Fme
+  ✓ siparişlerim: GET /orders
+
+Asistan ucu
+  ✓ asistan sohbeti: POST /assistant/chat
+
+İletişim ucu
+  ✓ iletişim: POST /public/contact
+
+Şifre sıfırlama uçları (Faz 10)
+  ✓ sıfırlama bağlantısı: POST /auth/forgot-password
+  ✓ yeni şifre: POST /auth/reset-password
+
+Hesap silme ucu (Faz 10)
+  ✓ hesap silme: DELETE /auth/me
+
+Hesap ayarları uçları (Faz 14)
+  ✓ planlarım: GET /account/entitlements
+  ✓ hakkı iptal et: POST /orders/01jabc/refund-request
+  ✓ iptal talebini geri çek: DELETE /orders/01jabc/refund-request
+  ✓ profil: PATCH /auth/me
+  ✓ parola değiştir: PUT /auth/password
+  ✓ e-posta değişikliği: POST /auth/email-change
+  ✓ e-posta onayı: POST /public/email-change/confirm?email=yeni%2Bdavet%40example.com&expires=1&old=ab&user=7&signature=cd
+  ✓ oturumlar: GET /auth/sessions
+  ✓ oturumu kapat: DELETE /auth/sessions/42
+  ✓ diğer oturumları kapat: DELETE /auth/sessions
+
+✓ Tüm uçlar backend sözleşmesiyle eşleşiyor.
+
+> davetkart@0.0.0 verify:etag
+> node scripts/run-check.mjs scripts/verify-conditional-get.ts
+
+
+Koşullu okuma
+  ✓ ilk okuma koşulsuz gidiyor
+  ✓ ikinci okuma If-None-Match gönderiyor
+  ✓ 304 gövdesiz yanıt önbellekten karşılanıyor
+  ✓ okunabilir ETag yoksa istek koşulsuz gidiyor
+  ✓ ETag yokken taze gövde alınıyor
+
+✓ Koşullu okuma doğru: If-None-Match gidiyor, 304 hata değil, ETag yoksa sürüm saklanmıyor.
+
+> davetkart@0.0.0 verify:time
+> node scripts/run-check.mjs scripts/verify-event-time.ts
+
+
+Duvar saati → an
+  ✓ İstanbul 19:00 → 16:00 UTC
+  ✓ Berlin (yaz) 12:00 → 10:00 UTC
+  ✓ Berlin (kış) 12:00 → 11:00 UTC
+
+🔴 Asıl hata: aynı duvar saati, farklı dilim
+  ✓ iki dilim arasında 2 saat fark var
+
+An → duvar saati (gidiş-dönüş)
+  ✓ Europe/Istanbul 2026-11-14T19:00 gidiş-dönüş
+  ✓ Europe/Berlin 2026-07-01T12:00 gidiş-dönüş
+  ✓ America/New_York 2026-01-01T00:00 gidiş-dönüş
+  ✓ Asia/Tokyo 2026-06-15T23:59 gidiş-dönüş
+
+Sınır durumlar
+  ✓ var olmayan saat bir ana çözülüyor
+  ✓ boş saat dilimi yerel saate düşüyor
+  ✓ geçersiz saat dilimi yerel saate düşüyor
+  ✓ geçersiz IANA kimliği reddediliyor
+  ✓ geçerli IANA kimliği kabul ediliyor
+  ✓ boş tarih null
+  ✓ bozuk tarih null
+
+✓ Duvar saati matematiği doğru: dilim farkı, yaz saati ve sınır durumlar.
+
+> davetkart@0.0.0 verify:state
+> node scripts/run-check.mjs scripts/verify-editor-state.ts
+
+
+Otomatik kaydetme
+  ✓ kullanıcı düzenlemesi editRevision'ı artırıyor
+  ✓ kaydetme yanıtı editRevision'ı artırmıyor (döngü yok)
+  ✓ kayıt yükleme ve sıfırlama kaydetme tetiklemiyor
+  ✓ eşzamanlı iki kaydetme tek POST üretiyor (kuyruk)
+
+Belge sürümü (bekleyen form yazımları)
+  ✓ düzenleme, kaydetme ve galeri güncellemesi belge sürümünü değiştirmiyor
+  ✓ sıfırlama ve kayıt yükleme belge sürümünü artırıyor
+
+Yeni davetiye
+  ✓ "Yeni Davetiye Oluştur" yeni kayıt açıyor, açık kaydın üzerine yazmıyor
+
+Kuşak yarışı
+  ✓ geç gelen kaydetme yanıtı yeni açılan kaydın kimliğini ezmiyor
+  ✓ sonraki kaydetme B'nin içeriğini B'ye yazıyor
+
+Yayınlama
+  ✓ kaydetme başarısızken yayınlanmıyor ve hata fırlatılıyor
+  ✓ kaydetme başarılıysa önce kaydediyor, sonra yayınlıyor
+
+İmza (Elit'te "DavetKart ile hazırlandı" yok)
+  ✓ kayıt yüklenince önizleme sunucunun imza kararını alıyor
+  ✓ imza kararı istek gövdesine girmiyor
+  ✓ kaydetme yanıtı kararı koruyor
+  ✓ ödemeden sonraki kayıt yanıtı imzayı kaldırıyor
+  ✓ yayın yanıtı imza kararını tazeliyor (paket yayında bağlanır)
+  ✓ yeni taslakta karar yok: imza çizilir
+
+Yayındaki davetiyede plan üstü modül (Faz 10 · K88)
+  ✓ reddedilen modül anahtarı geri alınıyor
+  ✓ aynı penceredeki metin korunuyor — yalnızca açılan modül geri alınır
+  ✓ plan duvarı bir kez, sunucunun planıyla ve "yükselt" nedeniyle açılıyor
+  ✓ geri alma yeniden kaydetmeyi tetikliyor (sunucu isteğin tamamını reddetmişti)
+  ✓ yeniden kaydetme metni gönderiyor, reddedilen modülü göndermiyor
+  ✓ yeniden kaydetme başarılı
+  ✓ sonraki kaydetmeler yeni bir plan duvarı açmıyor (402 fırtınası yok)
+
+Geri alınacak modül yoksa
+  ✓ geri alınacak modül yoksa otomatik yeniden kaydetme döngüsü kurulmuyor
+
+Form taslağı (bekleyen yazım)
+  ✓ bekleyen yazım yalnızca formun değiştirdiği alanı yazıyor; store'un geri aldığı anahtar geri yazılmıyor
+  ✓ store'dakiyle aynı olan alan yeniden yazılmıyor
+
+Oturum sınırları
+  ✓ açık çıkış editörü ve sihirbazı temizliyor
+  ✓ açık çıkış token'ı sunucuda iptal ediyor
+  ✓ sunucuda silinmiş oturum: bellek yine temizleniyor
+  ✓ sunucuda silinmiş oturum: iptal isteği gönderilmiyor
+  ✓ oturum düştükten sonra başka hesap girince önceki hesabın kaydına yazılmıyor
+  ✓ oturum düştükten sonra aynı hesap girince çalışma korunuyor
+  ✓ giriş yapmadan hazırlanan taslak girişten sonra korunuyor
+
+Oturum doğrulama (açılış)
+  ✓ açılış isteği GET /auth/me, güncel token'la
+  ✓ geçerli token: kullanıcı sunucudan tazeleniyor (zarf açılıyor)
+  ✓ süresi dolmuş token: oturum açılışta düşüyor
+  ✓ ağ hatası: oturum korunuyor (çevrimdışı açılış çıkış yaptırmaz)
+  ✓ eski token'ın geç gelen 401'i yeni oturumu düşürmüyor
+  ✓ eski oturumun geç gelen cevabı yeni kullanıcının üstüne yazılmıyor
+
+LCV: kendi yanıtını güncelleme
+  ✓ ilk gönderim POST; dönen kod bu davetiye için hatırlanıyor
+  ✓ ikinci gönderim yeni yanıt değil: aynı yanıta, kodla PUT
+  ✓ güncellemede tuzak alanı gönderilmiyor
+  ✓ listede aynı yanıt bir kez, güncel haliyle
+  ✓ sayfa yenilense de kod tarayıcıdan geri okunuyor
+  ✓ 404: kod unutulup yeni yanıt gönderiliyor, yeni kod hatırlanıyor
+  ✓ son tarih hatası: yeni yanıt açılmıyor, kod korunuyor
+
+LCV kapsamı
+  ✓ kapsam değişince önceki davetiyenin yanıtları yenisine yazılmıyor
+
+LCV son tarihi
+  ✓ Europe/Istanbul: 2026-11-10 → 10 Kasım 2026
+  ✓ America/New_York: 2026-11-10 → 10 Kasım 2026
+  ✓ Pacific/Pago_Pago: 2026-11-10 → 10 Kasım 2026
+  ✓ Pacific/Kiritimati: 2026-11-10 → 10 Kasım 2026
+  ✓ boş son tarih gösterilmiyor
+
+✓ Editör ve oturum durumu doğru: kaydetme döngüsü yok, belgeler ve hesaplar birbirine karışmıyor.
+
+> davetkart@0.0.0 verify:content
+> node scripts/run-check.mjs scripts/verify-invitation-content.ts
+
+
+Yeni davetiyenin başlangıç durumu
+  ✓ isimler boş başlıyor
+  ✓ tarih ve saat boş başlıyor
+  ✓ davet konumu boş başlıyor
+  ✓ ulaşım bilgisi boş başlıyor
+  ✓ program akışında tam olarak iki adım var
+  ✓ iki adımın saat, başlık ve açıklaması boş; kimliği null
+  ✓ başlangıç adımlarının yerel anahtarları benzersiz
+  ✓ düğün: "Gelin Adı" / "Damat Adı" etiketleri ve yönlendirici placeholder'lar
+  ✓ her kategorinin isim placeholder'ı dolu ve örnek isim değil, talimat
+
+İlk kaydetme
+  ✓ dokunulmamış taslak sunucuya örnek isim, tarih ya da konum göndermiyor
+  ✓ boş adımlar kimliksiz gidiyor, yerel anahtar gövdeye sızmıyor
+  ✓ tüm adımlar silinince boş liste güvenle kaydediliyor ("hepsini sil")
+  ✓ sıfırlama yine iki boş adımla açıyor
+
+Program adımları
+  ✓ eklenen adım boş doğuyor (örnek saat yok)
+  ✓ art arda üretilen 2000 anahtar benzersiz ve başlangıç anahtarlarıyla çakışmıyor
+  ✓ boş adım önizlemede gösterilmiyor
+  ✓ yalnızca boşluk içeren adım da boş sayılıyor
+  ✓ tek bir alanı dolu adım önizlemede gösteriliyor
+
+Önizlemede boş tarih ve konum
+  ✓ boş ya da geçersiz tarih hata vermeden boş metne dönüşüyor ("Invalid Date" yok)
+  ✓ girilmiş tarih biçimleniyor
+  ✓ boş tarihte geri sayım hesaplanmıyor
+  ✓ konum metni boşsa kap çizilmiyor, doluysa kırpılıyor
+
+Ulaşım bilgisi (harita konumu)
+  ✓ yaygın koordinat yazımları çözülüyor (nokta ve Türkçe virgül ondalık)
+  ✓ geçersiz ya da belirsiz koordinat reddediliyor
+  ✓ seçilen nokta resmî Google Haritalar yol tarifi bağlantısına yazılıyor
+  ✓ üretilen bağlantı backend'in url kuralından geçecek biçimde
+  ✓ öneriden seçilen yerin kimliği bağlantıya ekleniyor, koordinat yine okunuyor
+  ✓ kayıtlı bağlantıdan koordinat geri okunuyor
+  ✓ paylaşım bağlantısındaki @enlem,boylam tanınıyor
+  ✓ koordinat taşımayan ya da http(s) olmayan bağlantıdan nokta uydurulmuyor
+  ✓ koordinat alanda okunur biçimde gösteriliyor
+  ✓ harita nokta yokken işaretsiz, nokta seçilince iğneli açılıyor
+
+Ana sayfa tanıtımı
+  ✓ boş taslakta tanıtım örnek içerikle dolu çiziliyor
+  ✓ örnek içerik başlangıç durumuna yazılmıyor
+  ✓ kullanıcı bir alan doldurduysa taslak olduğu gibi gösteriliyor
+  ✓ yalnızca bir program adımı dolu taslak da olduğu gibi gösteriliyor
+  ✓ tanıtım tarihi geçmişte kalmıyor (en az bir ay sonrası)
+  ✓ tanıtım tarihi ay ve yıl geçişinde doğru biçimde kuruluyor
+
+İsim alanları
+  ✓ yalnızca ikinci isim girilince isim kendi alanında kalıyor
+  ✓ yalnızca birinci isim düz metin olarak saklanıyor
+  ✓ iki alan da boşken isim boş kalıyor
+  ✓ iki isim birleşip aynı biçimde ayrılıyor
+  ✓ önizleme ayracı göstermiyor (& Ali → Ali)
+  ✓ sondaki ayraç da gösterilmiyor
+  ✓ iki isimli metin olduğu gibi gösteriliyor
+  ✓ yalnızca ayraç kalan isim boş sayılıyor
+
+✓ Davetiye içeriği doğru: sahte varsayılan yok, boş alanlar önizlemede çizilmiyor, konum bağlantıları geçerli.
+
+> davetkart@0.0.0 verify:image
+> node scripts/run-check.mjs scripts/verify-image-compression.ts
+
+
+Hedef ölçü — sınır EN UZUN KENARA uygulanır
+  ✓ yatay 3000x2000 → 2000x1333
+  ✓ dikey 2000x3000 → 1333x2000
+  ✓ kare 4000x4000 → 2000x2000
+  ✓ sınırın altı olduğu gibi kalır
+  ✓ tam sınır olduğu gibi kalır
+  ✓ kısa kenar en az 1 px
+  ✓ sıfır ölçü çökmez
+
+Çıktı biçimi
+  ✓ JPEG kendi biçiminde kalır
+  ✓ PNG → WebP
+  ✓ WebP kendi biçiminde kalır
+
+Hangi dosyaya dokunuluyor?
+  ✓ büyük JPEG sıkıştırılır
+  ✓ küçük JPEG dokunulmaz
+  ✓ tam hedefte olan dosya dokunulmaz
+  ✓ küçük PNG bile dönüştürülür
+  ✓ video dokunulmaz
+  ✓ bilinmeyen biçim dokunulmaz
+
+Dosya adı içerikle tutarlı
+  ✓ uzantı değişir
+  ✓ JPEG uzantısı jpg olur
+  ✓ nokta içeren ad korunur
+  ✓ uzantısız ad
+  ✓ yalnızca uzantıdan oluşan ad
+
+Kalite basamakları
+  ✓ basamaklar azalan sırada
+  ✓ basamaklar 0-1 aralığında
+
+✓ Ön küçültme kararları doğru: ölçü, biçim, seçim ve ad.
+
+> davetkart@0.0.0 verify:payment
+> node scripts/run-check.mjs scripts/verify-payment.ts
+
+
+IBAN
+  ✓ geçerli TR IBAN kabul ediliyor
+  ✓ boşluklu ve küçük harfli yazım da kabul ediliyor
+  ✓ tek hane hatası reddediliyor (mod-97)
+  ✓ yan yana iki hanenin yer değiştirmesi reddediliyor
+  ✓ eksik hane reddediliyor
+  ✓ başka ülke IBAN’ı reddediliyor
+  ✓ normalize boşluk atar, büyütür
+  ✓ dörtlü gruplama
+
+IBAN (davetiye, backend ile aynı kural)
+  ✓ TR, bitişik
+  ✓ TR, dörtlü gruplar
+  ✓ TR, küçük harf
+  ✓ Almanya
+  ✓ Birleşik Krallık (harfli banka kodu)
+  ✓ kontrol hanesi yanlış
+  ✓ tek hane yanlış yazılmış
+  ✓ yan yana iki hane yer değiştirmiş
+  ✓ TR ama 25 karakter (sağlama toplamı doğru)
+  ✓ ülke kodu yok
+  ✓ çok kısa (sağlama toplamı doğru)
+  ✓ yarım yazılmış
+  ✓ boş
+  ✓ rastgele metin
+
+Kart markası ve biçim
+  ✓ 4 → Visa
+  ✓ 51–55 → Mastercard
+  ✓ 2221–2720 → Mastercard (2-serisi)
+  ✓ 2220 Mastercard değil
+  ✓ 34/37 → Amex
+  ✓ 9792 → Troy
+  ✓ Visa dörtlü gruplanır
+  ✓ Amex 4-6-5 gruplanır
+  ✓ harf ve fazla hane atılır
+  ✓ önizleme boş yerleri noktayla doldurur
+  ✓ Amex önizlemesi 15 hanedir
+
+Luhn ve otomatik ilerleme
+  ✓ Visa test numarası Luhn’dan geçer
+  ✓ Amex test numarası Luhn’dan geçer
+  ✓ tek hane hatası Luhn’dan geçmez
+  ✓ tamamlanan numara ilerletir
+  ✓ yarım numara ilerletmez
+  ✓ Luhn’suz tam numara ilerletmez
+
+Son kullanma alanı
+  ✓ iki hanede eğik çizgi eklenmez (geri silme kilitlenmez)
+  ✓ üçüncü hanede eğik çizgi gelir
+  ✓ tam tarih
+
+Doğrulama
+  ✓ geçerli kart hatasız
+  ✓ içinde bulunulan ay hâlâ geçerli (09/26)
+  ✓ geçen ay süresi dolmuş (08/26)
+  ✓ 13. ay reddedilir
+  ✓ yarım tarih reddedilir
+  ✓ Amex dört haneli güvenlik kodu ister
+  ✓ rakamlı isim reddedilir
+  ✓ Türkçe karakterli isim kabul edilir
+
+Ödeme adresi
+  ✓ adres gidip geliyor (davetiyeli)
+  ✓ hesap paketi: davetiye parametresi yok
+  ✓ davetiyesiz adres null kimlik verir
+  ✓ tanınmayan paket reddedilir
+  ✓ paketsiz adres reddedilir
+
+Havale
+  ✓ referans kodu biçimi
+  ✓ kısa kimlik sıfırla doldurulur
+
+Ödeme dönüşü: yoklama
+  ✓ başarı + pending: yoklamaya devam
+  ✓ başarı + expired: devam (K89, geç ödeme paid yapabilir)
+  ✓ başarı + paid: dur
+  ✓ başarı + failed: dur
+  ✓ hata adresi: tek okuma, yoklama yok
+  ✓ sınır: 20. okumadan sonra dur
+  ✓ sınırdan bir önce: devam
+
+Ödeme dönüşü: ekran
+  ✓ paid → onaylandı
+  ✓ pending, yoklama sürerken → doğrulanıyor
+  ✓ pending, yoklama bitti → gecikti (ödendi DEMEZ)
+  ✓ pending, hata adresi → tamamlanamadı
+  ✓ expired, yoklama sürerken → erken hüküm yok
+  ✓ expired, yoklama bitti → süresi doldu
+  ✓ failed → tamamlanamadı
+  ✓ refunded → iade edildi
+  ✓ ödenmemiş hiçbir durum "onaylandı" göstermez
+  ✓ ?order= okunur
+  ✓ boş ?order= → null
+  ✓ ?order= yok → null
+
+Silme uyarısı: plan hakkı
+  ✓ pencere açık → serbest kalır
+  ✓ tam sınır → yanar (backend isFuture() sorar)
+  ✓ pencere kapandı → yanar
+  ✓ alan yok (eski backend) → kesin konuşma
+  ✓ null → kesin konuşma
+  ✓ bozuk tarih → kesin konuşma
+
+Fiyat kartı vaatleri
+  ✓ premium tema → Gold
+  ✓ premium tema + galeri → Elit (modül daha yüksek)
+  ✓ sıradan tema → Standart
+  ✓ Faz 17 canlı etkileşimli premium → Gold
+  ✓ Faz 17 kazı kazan → Standart
+  ✓ premium temalar = backend'in preset_tiers listesi (13 + Faz 16 sinematik + Faz 17)
+  ✓ kart video galeri vaat etmiyor (galeri yalnızca fotoğraf)
+
+Hediye kodu (Faz 11)
+  ✓ tam lira kuruşsuz yazılır
+  ✓ kuruşlu tutar yuvarlanmaz (199,50 ≠ 200)
+  ✓ sıfır
+  ✓ gövde: kod kırpılır
+  ✓ gövde: boş kod hiç gitmez
+  ✓ gövde: null kod hiç gitmez
+
+Ödeme sayfasına gidiş (Faz 12)
+  ✓ form alanı okunur
+  ✓ redirect: checkout alanı önce
+  ✓ eski yanıt: redirectUrl geri dönüşü
+  ✓ ikisi de yok: null
+  ✓ biçim: geçerli form
+  ✓ biçim: sayısal alan değeri reddedilir
+  ✓ biçim: boş form reddedilir
+  ✓ biçim: dizi alanlar reddedilir
+  ✓ biçim: adressiz reddedilir
+  ✓ biçim: bilinmeyen tür reddedilir
+
+Sağlayıcı formu (Faz 12)
+  ✓ https hedef güvenli
+  ✓ http hedef reddedilir
+  ✓ javascript: reddedilir
+  ✓ göreli adres reddedilir
+  ✓ yerelde localhost http kabul
+  ✓ form gövdeye eklendi ve gönderildi
+  ✓ her alan gizli bir input
+  ✓ değer metin olarak atanır (HTML değil)
+  ✓ güvensiz hedefe hiçbir şey gönderilmez
+
+✓ Ödeme yardımcıları doğru: IBAN sağlama toplamı, kart biçimi, son kullanma, ödeme adresi ve dönüş sayfası kararları.
+
+> davetkart@0.0.0 verify:gift
+> node scripts/run-check.mjs scripts/verify-gift-code.ts
+
+
+Uygula / kaldır
+  ✓ geçerli kod uygulanır
+  ✓ kod kırpılmış saklanır
+  ✓ önizleme toplamı
+  ✓ önizleme isteği gövdesi
+  ✓ kaldırınca kod ve önizleme gider
+
+Hatalı kod
+  ✓ geçersiz kod uygulanmaz
+  ✓ önizleme yok
+  ✓ hata metni alanda durur
+  ✓ önizlemesiz kod gövdeye girmez
+
+Checkout
+  ✓ geçerli kod gövdeye girer
+  ✓ hediye siparişi paid döner
+  ✓ checkout hatası çağırana iletilir
+  ✓ tükenen kodun önizlemesi düşer
+  ✓ sebep alana yazılır
+  ✓ işlem bayrağı iner
+  ✓ sağlayıcı hatası önizlemeyi silmez
+
+Havale
+  ✓ kod uygulanınca karta geçilir
+  ✓ kod varken havale seçilemez
+  ✓ kod kaldırılınca havale açılır
+
+Plan değişimi ve yarış
+  ✓ plan değişince kod kalır
+  ✓ eski planın önizlemesi düşer
+  ✓ yeni plan için yeniden hesaplanır
+  ✓ geç gelen eski önizleme yenisini ezmez
+  ✓ kaldırılan kod geri gelmez
+  ✓ tam sıfırlama kodu da siler
+
+✓ Hediye kodu akışı doğru: önizlemesiz kod gitmez, tükenen kod düşer, havale kapanır, eski yanıt yenisini ezmez.
+
+> davetkart@0.0.0 verify:pricing
+> node scripts/run-check.mjs scripts/verify-pricing.ts
+
+
+Kaynak taraması: src/ altında fiyat yok
+  ✓ elle yazılmış fiyat bulunmadı
+  ✓ SUBSCRIPTION_PLANS fiyat taşımıyor
+
+Katalog deposu
+  ✓ misafir /public/plans okur
+  ✓ misafir kataloğu misafire ait
+  ✓ misafirde Gold liste fiyatında
+  ✓ aynı kimlikte ikinci istek atılmaz
+  ✓ force her zaman tazeler
+  ✓ giriş yapınca /pricing okunur
+  ✓ kullanıcı ilk yayın fiyatını görür
+  ✓ katalog kullanıcıya ait
+  ✓ geç gelen misafir yanıtı kullanıcı kataloğunu ezmez
+  ✓ hata: durum error
+  ✓ hata: başka kimliğin kataloğu kalmaz
+  ✓ tutarsız döküm reddedilir
+
+Yöntem hâli
+  ✓ kart + havale
+  ✓ yalnızca kart
+  ✓ yalnızca havale
+  ✓ yalnızca hediye kodu (bugün)
+  ✓ hiçbiri
+
+Kampanya bitişi
+  ✓ Türkçe, işletme saatinde
+  ✓ İngilizce
+
+✓ Fiyat kataloğu doğru: src/ fiyat taşımıyor, kimlik değişince katalog yenileniyor, eski yanıt yenisini ezmiyor.
+
+> davetkart@0.0.0 verify:render
+> node scripts/run-check.mjs scripts/verify-render.tsx
+
+
+İmza: misafir sayfası (bütün şablonlar)
+  ✓ Elit kararı (false) 373 şablonun hepsinde imzayı kaldırıyor
+  ✓ true iken 373 şablonun hepsinde imza var
+  ✓ karar yoksa (eski yanıt, taslak) 373 şablonun hepsinde imza var
+
+Tembel şablonlar: kayıt ve veri (74 şablon)
+  ✓ hepsi data.ts kataloğunda
+  ✓ dolu veride adlar çiziliyor
+  ✓ dolu veride mekân çiziliyor
+  ✓ boş veride (fotoğraf/program/ad yok) çizim kırılmıyor
+
+İmza: sahibin editör önizlemesi
+  ✓ Elit kaydı yüklenince önizlemede imza yok
+  ✓ alt bilgide adlar kalıyor
+  ✓ Gold kaydında önizlemede imza var
+  ✓ yeni taslakta önizlemede imza var
+
+LCV: kendi yanıtını güncelleme (K101)
+  ✓ ilk ziyarette form yeni yanıt gönderiyor
+  ✓ önizleme penceresi de yeni yanıt diyor
+  ✓ aynı cihazdan dönen misafir "Yanıtımı Güncelle" ve açıklamayı görüyor
+  ✓ önizleme penceresi de güncelle diyor
+  ✓ misafir sayfasının tamamında form güncelleme hâlinde
+  ✓ kod davetiyeye özgü: başka davetiyede yeni yanıt
+
+Gizlilik metni: saklama süreleri (K97 · K98)
+  ✓ bölüm bulundu
+  ✓ hesap silinince veriler hemen silinir (K97)
+  ✓ silinen davetiye 30 gün (K98)
+  ✓ misafir verisi etkinlikten 6 ay (K98)
+  ✓ iletişim mesajı 12 ay (K98)
+  ✓ eski, kodla çelişen ifadeler yok
+
+✓ Ekrana çizilen doğru: Elit imzasız, dönen misafir yanıtını güncelliyor, saklama süreleri kodla aynı.

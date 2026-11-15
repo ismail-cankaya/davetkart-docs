@@ -1,0 +1,148 @@
+{
+ "journey": "J6-refund-request",
+ "ranAt": "2026-11-15T11:24:41.640Z",
+ "base": "http://localhost:3000",
+ "steps": [
+  {
+   "a": "goto /hesap/planlarim",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "click:İptal Et",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "wait:1000",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "fillcss:textarea=Yanlışlıkla ikinci paketi aldım, kullanmayacağım.",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "click:Devam Et",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "wait:1000",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "shot:J6-iptal-onay-1440",
+   "url": "/hesap/planlarim",
+   "r": "screenshots/J6-iptal-onay-1440.png"
+  },
+  {
+   "a": "clickany:İptal Talebi Gönder",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "wait:2000",
+   "url": "/hesap/planlarim",
+   "writes": [
+    "201 POST /api/orders/01m7ff5dkn9a8z950v4nrrv7na/refund-request"
+   ]
+  },
+  {
+   "a": "shot:J6-iade-talebi-1440",
+   "url": "/hesap/planlarim",
+   "r": "screenshots/J6-iade-talebi-1440.png"
+  },
+  {
+   "a": "text:main",
+   "url": "/hesap/planlarim",
+   "r": "HESABIM Hesap Ayarları Elif Yıldırım · elif.yildirim.aud996311@example.com Genel Bakış Planlarım Siparişlerim Giriş ve Güvenlik Gizlilik ve Hesap Planlarım Şu an kullanılabilir hakkınız yok. Davetiyenizi yayınlarken ya da fiyatlar sayfasından plan alabilirsiniz. Planları gör STANDART 0 kullanılabilir hak İptal bekliyor 1 GOLD 0 kullanılabilir hak Kullanımda 1 ELİT 0 kullanılabilir hak Haklarım Kullanılmamış ve ödemesi yapılmış bir hakkı, ödemeden itibaren 14 gün içinde iptal edip iade isteyebilirsiniz. Standart İptal talebi bekliyor Ödeme: 15 Kas 2026 · ₺249 Talep tarihi: 15 Kas 2026 14:24 Tal"
+  },
+  {
+   "a": "dump",
+   "url": "/hesap/planlarim",
+   "r": {
+    "url": "/hesap/planlarim",
+    "h": [
+     "Hesap Ayarları",
+     "Planlarım",
+     "Haklarım"
+    ],
+    "inputs": [],
+    "buttons": [
+     "Talebi Geri Çek"
+    ],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "Planları gör→/pricing",
+     "HAYATIMIZIN EN ANLAMLI GÜNÜ→/dashboard"
+    ],
+    "alerts": []
+   }
+  },
+  {
+   "a": "mobile",
+   "url": "/hesap/planlarim",
+   "r": {
+    "overflowX": 0
+   }
+  },
+  {
+   "a": "shot:J6-iade-talebi-390",
+   "url": "/hesap/planlarim",
+   "r": "screenshots/J6-iade-talebi-390.png"
+  },
+  {
+   "a": "desktop",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "click:(Geri Çek|Talebi Geri|Vazgeç)",
+   "url": "/hesap/planlarim",
+   "writes": [
+    "204 DELETE /api/orders/01m7ff5dkn9a8z950v4nrrv7na/refund-request"
+   ]
+  },
+  {
+   "a": "wait:1200",
+   "url": "/hesap/planlarim"
+  },
+  {
+   "a": "dump:body",
+   "url": "/hesap/planlarim",
+   "r": {
+    "url": "/hesap/planlarim",
+    "h": [
+     "Hesap Ayarları",
+     "Planlarım",
+     "Haklarım"
+    ],
+    "inputs": [
+     "email||E-posta adresiniz|"
+    ],
+    "buttons": [
+     "TR",
+     "Çıkış Yap",
+     "İptal Et",
+     "Kayıt Ol",
+     "Asistanı aç"
+    ],
+    "links": [
+     "Genel Bakış→/hesap",
+     "Planlarım→/hesap/planlarim",
+     "Siparişlerim→/hesap/siparisler",
+     "Giriş ve Güvenlik→/hesap/guvenlik",
+     "Gizlilik ve Hesap→/hesap/gizlilik",
+     "HAYATIMIZIN EN ANLAMLI GÜNÜ→/dashboard"
+    ],
+    "alerts": []
+   }
+  }
+ ],
+ "console": [],
+ "net": [],
+ "writes": [
+  "201 POST /api/orders/01m7ff5dkn9a8z950v4nrrv7na/refund-request",
+  "204 DELETE /api/orders/01m7ff5dkn9a8z950v4nrrv7na/refund-request"
+ ],
+ "command": "--rec J6-refund-request hesap/planlarim click:İptal Et wait:1000 fillcss:textarea=Yanlışlıkla ikinci paketi aldım, kullanmayacağım. click:Devam Et wait:1000 shot:J6-iptal-onay-1440 clickany:İptal Talebi Gönder wait:2000 shot:J6-iade-talebi-1440 text:main dump mobile shot:J6-iade-talebi-390 desktop click:(Geri Çek|Talebi Geri|Vazgeç) wait:1200 dump:body"
+}

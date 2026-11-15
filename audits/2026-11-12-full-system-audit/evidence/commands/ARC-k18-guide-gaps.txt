@@ -1,0 +1,155 @@
+# komut: bash evidence/scripts/arc-k18-guide-gaps.sh
+# kopya: /d/Projects/davetkart/_audit-snap/backend (backend d810410) · tarih: 2026-11-13T09:42Z
+# kural: <yol>/<Ad>.php -> docs/rehber/<yol>/<Ad>.md
+
+## 1. Ozet
+taranan kod dosyasi: 362 · kilavuzu OLMAYAN: 79 · kilavuzu olan: 283
+
+## 2. Klasor bazinda eksik sayisi
+      6 tests/Unit
+      6 tests/Feature
+      6 app/Http/Controllers/Api/V1
+      6 app/Console/Commands
+      5 app/Services/Payment
+      5 app/Actions/Pricing
+      4 app/Notifications
+      4 app/Http/Requests/Account
+      4 app/Actions/Account
+      3 database/migrations
+      3 database/factories
+      3 app/Actions/Rsvp
+      2 app/Support
+      2 app/Services/Payment/Shopier
+      2 app/Http/Resources
+      2 app/Exceptions
+      2 app/Enums
+      2 app/Actions/GiftCode
+      2 app/Actions/Auth
+      1 routes
+      1 bootstrap
+      1 app/Services/Pricing
+      1 app/Jobs
+      1 app/Http/Requests/Rsvp
+      1 app/Http/Requests/Refund
+      1 app/Http/Controllers
+      1 app/Console/Commands/Concerns
+      1 app/Actions/Refund
+      1 app/Actions/Payment
+
+## 3. Kilavuzu olmayan dosyalar (tam liste)
+app/Actions/Account/ConfirmEmailChangeAction.php
+app/Actions/Account/EntitlementRight.php
+app/Actions/Account/EntitlementSummary.php
+app/Actions/Account/TierEntitlements.php
+app/Actions/Auth/RevokeOtherSessionsAction.php
+app/Actions/Auth/RevokeSessionAction.php
+app/Actions/GiftCode/GiftCodeQuote.php
+app/Actions/GiftCode/QuoteGiftCodeAction.php
+app/Actions/Payment/CheckoutResult.php
+app/Actions/Pricing/PriceCampaignSpec.php
+app/Actions/Pricing/PriceQuote.php
+app/Actions/Pricing/PricingOverview.php
+app/Actions/Pricing/Promotion.php
+app/Actions/Pricing/StopPriceCampaignAction.php
+app/Actions/Refund/WithdrawRefundRequestAction.php
+app/Actions/Rsvp/EnsureRsvpQuotaAction.php
+app/Actions/Rsvp/ResolveGuestMediaAction.php
+app/Actions/Rsvp/RsvpSubmission.php
+app/Console/Commands/ApproveRefundRequest.php
+app/Console/Commands/Concerns/ResolvesRefundRequests.php
+app/Console/Commands/ListPriceCampaigns.php
+app/Console/Commands/ListRefundRequests.php
+app/Console/Commands/RejectRefundRequest.php
+app/Console/Commands/StartPriceCampaign.php
+app/Console/Commands/StopPriceCampaign.php
+app/Enums/EntitlementState.php
+app/Enums/RefundBlocker.php
+app/Exceptions/EmailChangeFailedException.php
+app/Exceptions/RefundNotAllowedException.php
+app/Http/Controllers/Api/V1/EmailChangeController.php
+app/Http/Controllers/Api/V1/PasswordController.php
+app/Http/Controllers/Api/V1/ProfileController.php
+app/Http/Controllers/Api/V1/PublicEmailChangeController.php
+app/Http/Controllers/Api/V1/RefundRequestController.php
+app/Http/Controllers/Api/V1/SessionController.php
+app/Http/Controllers/Controller.php
+app/Http/Requests/Account/ChangePasswordRequest.php
+app/Http/Requests/Account/ConfirmEmailChangeRequest.php
+app/Http/Requests/Account/RequestEmailChangeRequest.php
+app/Http/Requests/Account/UpdateProfileRequest.php
+app/Http/Requests/Refund/StoreRefundRequestRequest.php
+app/Http/Requests/Rsvp/RsvpRequest.php
+app/Http/Resources/RefundRequestResource.php
+app/Http/Resources/SessionResource.php
+app/Jobs/OptimizedImage.php
+app/Notifications/EmailChangeConfirmationNotification.php
+app/Notifications/EmailChangedNotification.php
+app/Notifications/PasswordChangedNotification.php
+app/Notifications/RefundRequestResolvedNotification.php
+app/Services/Payment/BankTransferAccount.php
+app/Services/Payment/CheckoutSession.php
+app/Services/Payment/FormPostAction.php
+app/Services/Payment/PaymentNotification.php
+app/Services/Payment/RedirectAction.php
+app/Services/Payment/Shopier/ShopierCallback.php
+app/Services/Payment/Shopier/ShopierConfirmation.php
+app/Services/Pricing/OrderEntitlementResolver.php
+app/Support/DeviceLabel.php
+app/Support/EmailChangeLink.php
+bootstrap/providers.php
+database/factories/GiftCodeRedemptionFactory.php
+database/factories/PriceCampaignFactory.php
+database/factories/RefundRequestFactory.php
+database/migrations/0001_01_01_000001_create_cache_table.php
+database/migrations/0001_01_01_000002_create_jobs_table.php
+database/migrations/2026_07_28_210412_create_personal_access_tokens_table.php
+routes/web.php
+tests/Feature/GiftCodeAdminCommandsTest.php
+tests/Feature/GiftCodeCreateCommandsTest.php
+tests/Feature/GiftCodeModelTest.php
+tests/Feature/PasswordChangeTest.php
+tests/Feature/ProfileUpdateTest.php
+tests/Feature/SessionTest.php
+tests/Unit/CheckoutActionTest.php
+tests/Unit/DeviceLabelTest.php
+tests/Unit/EmailChangedNotificationTest.php
+tests/Unit/GiftCodeFormatTest.php
+tests/Unit/RefundRequestStatusTest.php
+tests/Unit/ShopierSignatureTest.php
+
+## 4. Yetim kilavuzlar: docs/rehber altinda olup karsiligi kod dosyasi OLMAYAN .md (app/routes/config/bootstrap/database/tests altlari)
+docs/rehber/app/Console/Commands/PriceCampaignCommands.md
+docs/rehber/app/Console/Commands/RefundCommands.md
+docs/rehber/config/README.md
+
+## 5. K18 kisa yorum kurali: 3 satirdan uzun yorum bloklari (uretim kodu)
+blok>3 | en uzun blok | yorum satiri | toplam satir | dosya
+23 | 29 | 264 | 664 | app/Jobs/OptimizeUploadedImage.php
+18 | 9 | 141 | 327 | config/davetkart.php
+16 | 20 | 215 | 450 | app/Providers/AppServiceProvider.php
+13 | 15 | 107 | 238 | app/Models/Order.php
+12 | 13 | 117 | 248 | app/Models/Invitation.php
+11 | 14 | 106 | 238 | app/Enums/ErrorCode.php
+10 | 23 | 117 | 333 | app/Actions/Payment/StartCheckoutAction.php
+9 | 15 | 94 | 377 | app/Services/Payment/ShopierGateway.php
+8 | 19 | 90 | 162 | app/Enums/OrderStatus.php
+8 | 14 | 74 | 248 | app/Exceptions/ApiExceptionRenderer.php
+7 | 9 | 65 | 185 | app/Http/Requests/Invitation/InvitationRequest.php
+7 | 25 | 66 | 179 | app/Actions/Payment/HandlePaymentCallbackAction.php
+7 | 20 | 87 | 212 | app/Http/Requests/Media/MediaRequest.php
+7 | 18 | 86 | 195 | app/Services/Ai/GeminiProvider.php
+7 | 18 | 81 | 165 | app/Services/Payment/FakeGateway.php
+7 | 16 | 75 | 143 | app/Actions/Assistant/AskAssistantAction.php
+7 | 14 | 72 | 148 | app/Http/Requests/Rsvp/RsvpRequest.php
+6 | 23 | 77 | 171 | app/Actions/Media/StoreUploadedMediaAction.php
+6 | 20 | 61 | 124 | app/Actions/Invitation/PublishInvitationAction.php
+6 | 15 | 57 | 132 | app/Enums/MediaKind.php
+5 | 21 | 62 | 102 | app/Actions/Invitation/DeleteInvitationAction.php
+5 | 20 | 56 | 169 | app/Console/Commands/NormalizeUserEmails.php
+5 | 19 | 53 | 131 | app/Services/Pricing/TierResolver.php
+5 | 18 | 66 | 114 | database/migrations/2026_09_10_100000_add_scope_to_orders_table.php
+5 | 17 | 49 | 125 | app/Services/Payment/PaymentMethods.php
+
+uretim kodunda 3 satirdan uzun yorum blogu iceren dosya sayisi: 265 / 287
+toplam uzun blok: 675
+en uzun tek yorum blogu (satir): 50

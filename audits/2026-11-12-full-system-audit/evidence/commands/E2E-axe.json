@@ -1,0 +1,728 @@
+{
+ "tool": "axe-core 4.10.3",
+ "ranAt": "2026-11-15T15:05:30.917Z",
+ "pages": [
+  {
+   "page": "Ana sayfa",
+   "path": "/",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 14,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > ul > li:nth-child(1) > .hover\\:text-white.hover\\: :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f",
+      ".md\\:col-span-2.space-y-3:nth-child(2) > ul > li:nth-child(2) > .hover\\:text-white.hover\\: :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Giriş Yap"
+    ]
+   }
+  },
+  {
+   "page": "Giriş",
+   "path": "/login",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".italic.text-gold.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Giriş Yap"
+    ]
+   }
+  },
+  {
+   "page": "Kayıt",
+   "path": "/register",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".italic.text-gold.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Giriş Yap"
+    ]
+   }
+  },
+  {
+   "page": "Fiyatlar",
+   "path": "/pricing",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 23,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".italic.font-medium.text-gold :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      ".items-start.gap-2\\.5:nth-child(5) > .text-stone-400.decoration-stone-300.line-through :: Fix any of the following: Element has insufficient color contrast of 2.58 (foreground color: #a6a09b, background color: #ffffff, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Giriş Yap"
+    ]
+   }
+  },
+  {
+   "page": "İletişim",
+   "path": "/contact",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".italic.text-gold.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Giriş Yap"
+    ]
+   }
+  },
+  {
+   "page": "Gizlilik",
+   "path": "/privacy",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 28,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".italic.font-medium.text-gold :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "a[href$=\"dashboard\"] :: Fix any of the following: Element has insufficient color contrast of 3.45 (foreground color: #5c6b64, background color: #b6d1c6, f"
+     ]
+    },
+    {
+     "id": "landmark-unique",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:flex :: Fix any of the following: The landmark must have a unique aria-label, aria-labelledby, or title to make landmarks distinguishable"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Giriş Yap"
+    ]
+   }
+  },
+  {
+   "page": "Sihirbaz (adım 1)",
+   "path": "/create",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".text-gold.italic.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Çıkış Yap"
+    ]
+   }
+  },
+  {
+   "page": "Panel",
+   "path": "/dashboard",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 16,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".text-gold.italic.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      ".text-muted\\/70 :: Fix any of the following: Element has insufficient color contrast of 3.01 (foreground color: #8d9792, background color: #ffffff, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".text-base :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Çıkış Yap"
+    ]
+   }
+  },
+  {
+   "page": "Ödeme",
+   "path": "/odeme?tier=gold&invitation=<id>",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".text-gold.italic.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    },
+    {
+     "id": "landmark-complementary-is-top-level",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Aside should not be contained in another landmark",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      "aside :: Fix any of the following: The null landmark is contained in another landmark."
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Çıkış Yap"
+    ]
+   }
+  },
+  {
+   "page": "Hesap · güvenlik",
+   "path": "/hesap/guvenlik",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".text-gold.italic.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    },
+    {
+     "id": "landmark-complementary-is-top-level",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Aside should not be contained in another landmark",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      "aside :: Fix any of the following: The null landmark is contained in another landmark."
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Çıkış Yap"
+    ]
+   }
+  },
+  {
+   "page": "Hesap · planlarım",
+   "path": "/hesap/planlarim",
+   "viewport": 1440,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 15,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".text-gold.italic.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      "li:nth-child(1) > .hover\\:text-white.hover\\:translate-x-1[href$=\"create\"] :: Fix any of the following: Element has insufficient color contrast of 4.45 (foreground color: #689282, background color: #002a20, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    },
+    {
+     "id": "landmark-complementary-is-top-level",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Aside should not be contained in another landmark",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      "aside :: Fix any of the following: The null landmark is contained in another landmark."
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Anasayfa",
+     "Davetiye Tasarla",
+     "Katılım Paneli",
+     "TR",
+     "Çıkış Yap"
+    ]
+   }
+  },
+  {
+   "page": "Misafir sayfası (390)",
+   "path": "/invite/<id>",
+   "viewport": 390,
+   "violations": [
+    {
+     "id": "landmark-one-main",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Document should have one main landmark",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      "html :: Fix all of the following: Document does not have a main landmark"
+     ]
+    },
+    {
+     "id": "region",
+     "impact": "moderate",
+     "nodes": 21,
+     "help": "All page content should be contained by landmarks",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".max-w-\\[19rem\\] :: Fix any of the following: Some page content is not contained by landmarks",
+      ".block.text-\\[\\#211b2d\\]:nth-child(1) :: Fix any of the following: Some page content is not contained by landmarks"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 22,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "Adınız ve soyadınız",
+     "−",
+     "+",
+     "Et Menü\nTavuk Menü\nVejet",
+     "Katılıyorum",
+     "Katılamıyorum"
+    ]
+   }
+  },
+  {
+   "page": "Ana sayfa (390)",
+   "path": "/",
+   "viewport": 390,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 4,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".sm\\:flex-row.justify-between.max-w-7xl > p :: Fix any of the following: Element has insufficient color contrast of 3.51 (foreground color: #547266, background color: #011712, f",
+      "a[href$=\"terms\"] :: Fix any of the following: Element has insufficient color contrast of 3.51 (foreground color: #547266, background color: #011712, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".md\\:col-span-2.space-y-3:nth-child(2) > h4 :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Kayıt Ol",
+     "Menü",
+     "Davetiyeni Oluştur",
+     "Şablonları İncele",
+     "KEŞFET"
+    ]
+   }
+  },
+  {
+   "page": "Panel (390)",
+   "path": "/dashboard",
+   "viewport": 390,
+   "violations": [
+    {
+     "id": "color-contrast",
+     "impact": "serious",
+     "nodes": 6,
+     "help": "Elements must meet minimum color contrast ratio thresholds",
+     "tags": [
+      "wcag143"
+     ],
+     "sample": [
+      ".text-gold.italic.font-medium :: Fix any of the following: Element has insufficient color contrast of 2.08 (foreground color: #c9a961, background color: #f8f6f1, f",
+      ".text-muted\\/70 :: Fix any of the following: Element has insufficient color contrast of 3.01 (foreground color: #8d9792, background color: #ffffff, f"
+     ]
+    },
+    {
+     "id": "heading-order",
+     "impact": "moderate",
+     "nodes": 1,
+     "help": "Heading levels should only increase by one",
+     "tags": [
+      "best-practice"
+     ],
+     "sample": [
+      ".text-base :: Fix any of the following: Heading order invalid"
+     ]
+    }
+   ],
+   "keyboard": {
+    "focused": 25,
+    "noRing": 0,
+    "hidden": 0,
+    "first": [
+     "DavetKart",
+     "Elif Yıldırım",
+     "Menü",
+     "1 kullanılabilir hak",
+     "Hesap Ayarları",
+     "Yeni Davetiye Oluştur"
+    ]
+   }
+  }
+ ],
+ "totals": {
+  "color-contrast": {
+   "impact": "serious",
+   "help": "Elements must meet minimum color contrast ratio thresholds",
+   "pages": 13,
+   "nodes": 196,
+   "tags": [
+    "wcag143"
+   ]
+  },
+  "heading-order": {
+   "impact": "moderate",
+   "help": "Heading levels should only increase by one",
+   "pages": 12,
+   "nodes": 12,
+   "tags": [
+    "best-practice"
+   ]
+  },
+  "landmark-unique": {
+   "impact": "moderate",
+   "help": "Landmarks should have a unique role or role/label/title (i.e. accessible name) combination",
+   "pages": 1,
+   "nodes": 1,
+   "tags": [
+    "best-practice"
+   ]
+  },
+  "landmark-complementary-is-top-level": {
+   "impact": "moderate",
+   "help": "Aside should not be contained in another landmark",
+   "pages": 3,
+   "nodes": 3,
+   "tags": [
+    "best-practice"
+   ]
+  },
+  "landmark-one-main": {
+   "impact": "moderate",
+   "help": "Document should have one main landmark",
+   "pages": 1,
+   "nodes": 1,
+   "tags": [
+    "best-practice"
+   ]
+  },
+  "region": {
+   "impact": "moderate",
+   "help": "All page content should be contained by landmarks",
+   "pages": 1,
+   "nodes": 21,
+   "tags": [
+    "best-practice"
+   ]
+  }
+ }
+}

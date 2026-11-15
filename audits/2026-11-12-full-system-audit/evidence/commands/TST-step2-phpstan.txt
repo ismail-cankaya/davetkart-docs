@@ -1,0 +1,8 @@
+﻿# Komut : php vendor/bin/phpstan analyse --memory-limit=1G --no-progress
+# Dizin : D:\Projects\davetkart\_audit-snap\backend-tst
+# Ortam : PHPSTAN_TURBO=0
+# Baslangic: 2026-11-13 12:29:40
+# Sure  : 79.8 sn (Measure-Command)
+# Cikis kodu: 0
+# ---------------------------------------------------------------
+{"tool":"phpstan","result":"passed","errors":0}

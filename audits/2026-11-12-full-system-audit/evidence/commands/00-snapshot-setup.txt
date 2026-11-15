@@ -1,0 +1,5 @@
+backend  origin/ccr-9a346997-bu6gve = d810410af48181753b72c0c89a3128b4f4a97bb7
+frontend origin/ccr-9a346997-bu6gve = 44caa4909557ae2db48b15b67ab12918d5212b02
+export-ignore tamamlandı: .github/workflows/ci.yml
+backend dosya: 774 (ağaçta 774)
+frontend dosya: 1653 (ağaçta 1653)
