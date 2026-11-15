@@ -18,6 +18,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | 12 | Shopier ile kartla ödeme | ⚠️ kod ✅ · §A boş, gerçek Shopier'e karşı sınanmadı | `faz-12-shopier` | [`faz-12/`](faz-12/FAZ-12-RAPOR.md) | `FAZ-12.md` |
 | 13 | Fiyat API'si, indirimler, ödeme yöntemi anahtarı | ⚠️ kod ✅ · elle doğrulama bekliyor | `faz-13-payment-settings` | [`faz-13/`](faz-13/) | `FAZ-13.md` |
 | 14 | Hesap ayarları: Planlarım, iptal/iade, profil, parola, oturumlar, e-posta | ⚠️ kod ✅ (bkz. backend README) | `faz-14-account-settings` | [`faz-14/`](faz-14/) | `FAZ-14.md` |
+| 18 | Denetim düzeltmeleri (`AUD-2026-11-12`, altı 🟠 bulgu) | Prompt'lar hazır | `faz-18-audit-fixes` + `fix/…` dalları | [`faz-18/`](faz-18/README.md) | `FAZ-18.md` (yazılacak) |
 
 ## Klasörler
 
@@ -27,6 +28,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | [`faz-12/`](faz-12/) | `FAZ-12-RAPOR.md` (24 Ekim 2026) | Tamamlandı (tarihsel) |
 | [`faz-13/`](faz-13/) | Commit komutları (backend, frontend) · `f13-ara/` ara kod çıktısı · `teshis.php` + `php-herdsiz.ini` (PHPStan teşhisi) | Tamamlandı (tarihsel) |
 | [`faz-14/`](faz-14/) | Commit komutları (backend, frontend) · `f14/` adım adım kod çıktısı (14.1–14.14) | Tamamlandı (tarihsel) |
+| [`faz-18/`](faz-18/) | Takip tablosu; bulgu başına commit komutları (ajanlar ekler) | Sürüyor |
 | [`frontend-catch-up/`](frontend-catch-up/) | `FRONTEND-YAKALAMA-PLANI.md` (11 Eylül 2026) | Tamamlandı (tarihsel) |
 
 Commit komutu dosyalarındaki `Claude outputs\f13-ara`, `Claude outputs\f14` yolları eski yerdir;
