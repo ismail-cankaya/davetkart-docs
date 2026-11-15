@@ -3,7 +3,11 @@
 Denetim ve gözden geçirme raporları. Her denetim kendi tarihli klasöründe:
 `YYYY-MM-DD-<konu>/` (ör. `2026-11-12-full-system-audit/`). Denetim kimliği `AUD-YYYY-MM-DD`.
 
-**Bu depoda henüz denetim yok.** Önceki raporlar backend deposunun `claude/` klasöründe:
+| Tarih | Denetim | Konu | Sonuç |
+|---|---|---|---|
+| 2026-11-12 | [`AUD-2026-11-12`](2026-11-12-full-system-audit/README.md) | Genel sistem denetimi (mimari, güvenlik, test, frontend/E2E, işletim) | 62 bulgu: 🟠 6 · 🟡 29 · 🟢 22 · 💡 5 · [rapor](2026-11-12-full-system-audit/REPORT.md) |
+
+Önceki raporlar backend deposunun `claude/` klasöründe:
 
 | Tarih | Rapor (backend `claude/`) | Konu |
 |---|---|---|
