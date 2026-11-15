@@ -1,0 +1,13 @@
+# M38 — K82: 3 günlük serbest bırakma penceresi
+# dosya: app/Actions/Invitation/DeleteInvitationAction.php:100
+# aranan : return $endsAt === null || $endsAt->isFuture();
+# yerine : return true;
+# süzgeç : OrderConsumptionTest|MaintenanceTest|InvitationTest|PaywallTest
+# sha256 önce: 7d124832a197e560dad733eb92b8c1400d60d95b0d3900667b9b2e36c8fec706
+# koşu (hedefli): 193 test, 3 kırmızı, 22.5 sn
+# öldüren: OrderConsumptionTest::deleting_after_the_window_stamps_the_order_as_consumed ; OrderConsumptionTest::a_consumed_order_is_not_reborn_when_the_trash_is_purged ; PaywallTest::deleting_after_the_window_burns_the_paid_order
+# sha256 sonra: 7d124832a197e560dad733eb92b8c1400d60d95b0d3900667b9b2e36c8fec706 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\OrderConsumptionTest.php","line":31,"message":"Failed asserting that null is not null."},{"test":"Tests\\Feature\\OrderConsumptionTest::a_consumed_order_is_not_reborn_when_the_trash_is_purged","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\OrderConsumptionTest.php","line":77,"message":"Failed asserting that null is not null."},{"test":"Tests\\Feature\\PaywallTest::deleting_after_the_window_burns_the_paid_order","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":1372,"message":"Failed asserting that null is identical to '01m7a6fqq8kat20b5r2re0ajy3'."}]}
+

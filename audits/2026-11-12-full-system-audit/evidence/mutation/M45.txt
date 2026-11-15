@@ -1,0 +1,13 @@
+# M45 — K137: yanmış hak yeniden kullanılamaz
+# dosya: app/Actions/Payment/ClaimReleasedOrderAction.php:67
+# aranan : ->unconsumed()
+# yerine : (silindi)
+# süzgeç : OrderConsumptionTest|PaywallTest
+# sha256 önce: fa098acb0ba6d94fb60f26f574e7861ca81796d239b2559aea0a55a701e38b37
+# koşu (hedefli): 89 test, 1 kırmızı, 11.7 sn
+# öldüren: OrderConsumptionTest::a_consumed_order_is_not_reborn_when_the_trash_is_purged
+# sha256 sonra: fa098acb0ba6d94fb60f26f574e7861ca81796d239b2559aea0a55a701e38b37 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":89,"passed":88,"assertions":239,"duration_ms":10613,"failed":1,"failures":[{"test":"Tests\\Feature\\OrderConsumptionTest::a_consumed_order_is_not_reborn_when_the_trash_is_purged","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\OrderConsumptionTest.php","line":77,"message":"Expected response status code [402] but received 200.\nFailed asserting that 200 is identical to 402."}]}
+

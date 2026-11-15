@@ -1,0 +1,13 @@
+# M20 — K91: NUL baytı 400
+# dosya: app/Http/Middleware/RejectMalformedInput.php:36
+# aranan :  || $this->containsNulByte($request->all())
+# yerine : (silindi)
+# süzgeç : MalformedInputTest|RsvpTest
+# sha256 önce: 1d7f1ad72faedac3daa8b7d6f827f8311ddec7de9e25f99e6fe126ece5ed5497
+# koşu (hedefli): 106 test, 12 kırmızı, 14.7 sn
+# öldüren: MalformedInputTest::a_nul_byte_is_malformed_on_every_route with data set "auth: giris" ; MalformedInputTest::a_nul_byte_is_malformed_on_every_route with data set "davetiye: olusturma" ; MalformedInputTest::a_nul_byte_is_malformed_on_every_route with data set "public: LCV (var olmayan davetiye)" ; MalformedInputTest::a_nul_byte_is_malformed_on_every_route with data set "public: iletisim"
+# sha256 sonra: 1d7f1ad72faedac3daa8b7d6f827f8311ddec7de9e25f99e6fe126ece5ed5497 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+is identical to 400."},{"test":"Tests\\Feature\\RsvpTest::a_nul_byte_is_rejected_as_malformed_instead_of_being_truncated with data set \"mesaj\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":433,"message":"Expected response status code [400] but received 201.\nFailed asserting that 201 is identical to 400."},{"test":"Tests\\Feature\\RsvpTest::a_nul_byte_is_rejected_as_malformed_instead_of_being_truncated with data set \"menu\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":433,"message":"Expected response status code [400] but received 201.\nFailed asserting that 201 is identical to 400."}]}
+

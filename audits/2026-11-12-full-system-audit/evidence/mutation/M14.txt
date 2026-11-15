@@ -1,0 +1,14 @@
+# M14 — K111: kod satırı kilidi (yarış)
+# dosya: app/Actions/GiftCode/ReserveGiftCodeAction.php:45
+# aranan : ->lockForUpdate()
+# yerine : (silindi)
+# süzgeç : GiftCode
+# sha256 önce: 9e4366cb68e9d77a11ba7b565e02a9782face509168e1501da30a223f58ad30a
+# hedefli koşu: 133 test, 0 kırmızı (16.1 sn) → tam paketle doğrulanıyor
+# koşu (tam paket): 1052 test, 0 kırmızı, 144.3 sn
+# öldüren: 
+# sha256 sonra: 9e4366cb68e9d77a11ba7b565e02a9782face509168e1501da30a223f58ad30a → GERİ ALINDI
+# SONUÇ: HAYATTA
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"passed","tests":1052,"passed":1052,"assertions":3915,"duration_ms":143351}
+

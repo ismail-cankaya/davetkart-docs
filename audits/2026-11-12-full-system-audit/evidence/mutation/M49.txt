@@ -1,0 +1,14 @@
+# M49 — Kilit: serbest hakkın sahiplenilmesi
+# dosya: app/Actions/Payment/ClaimReleasedOrderAction.php:71
+# aranan : ->lockForUpdate()
+# yerine : (silindi)
+# süzgeç : OrderConsumptionTest|PaywallTest|RefundRequestTest
+# sha256 önce: fa098acb0ba6d94fb60f26f574e7861ca81796d239b2559aea0a55a701e38b37
+# hedefli koşu: 103 test, 0 kırmızı (17.1 sn) → tam paketle doğrulanıyor
+# koşu (tam paket): 1052 test, 0 kırmızı, 156.7 sn
+# öldüren: 
+# sha256 sonra: fa098acb0ba6d94fb60f26f574e7861ca81796d239b2559aea0a55a701e38b37 → GERİ ALINDI
+# SONUÇ: HAYATTA
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"passed","tests":1052,"passed":1052,"assertions":3915,"duration_ms":155750}
+

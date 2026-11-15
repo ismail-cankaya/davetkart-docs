@@ -1,0 +1,13 @@
+# M05 — M8: paid yalnızca refunded olabilir
+# dosya: app/Enums/OrderStatus.php:119
+# aranan : self::Paid => $next === self::Refunded,
+# yerine : self::Paid => true,
+# süzgeç : PaywallTest|OrderStatusTest
+# sha256 önce: bc63b098ae91608a112da06cffb8c722d354391b54bb8c53ae11f249038ae9b6
+# koşu (hedefli): 89 test, 2 kırmızı, 11.9 sn
+# öldüren: OrderStatusTest::the_transition_table_is_exactly_the_documented_one ; PaywallTest::a_paid_order_cannot_be_moved_back_to_failed
+# sha256 sonra: bc63b098ae91608a112da06cffb8c722d354391b54bb8c53ae11f249038ae9b6 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+cation->run(Array)\n#76 {main}\n\n----------------------------------------------------------------------------------\n\nSQLSTATE[23514]: Check violation: 7 ERROR: new row for relation \"orders\" violates check constraint \"orders_paid_at_check\"\nDETAIL: Failing row contains (01m7a61ptep70xqnmzvbr7ysfd, 59, null, standart, failed, 24900, TRY, fake, ref-1, 2026-11-13 10:07:59, 2026-11-13 10:37:59, 2026-11-13 10:07:59, 2026-11-13 10:07:59, invitation, 0, null, null, 0, null, null). (Connection: pgsql, Host: 127.0.0.1, Port: 5432, Database: davetkart_aud_tst_test, SQL: update \"orders\" set \"status\" = failed, \"updated_at\" = 2026-11-13 10:07:59 where \"id\" = 01m7a61ptep70xqnmzvbr7ysfd)"}]}
+

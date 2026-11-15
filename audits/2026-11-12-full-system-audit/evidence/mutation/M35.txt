@@ -1,0 +1,13 @@
+# M35 — Faz 17: şablon Gold
+# dosya: config/davetkart.php:99
+# aranan : 'dugun-kelebek' => 'gold',
+# yerine : (silindi)
+# süzgeç : TemplateCatalogueTest|PaywallTest
+# sha256 önce: 8d67f17fbed87cad09720a488a69648030b1364a59deedce1dadc151027583be
+# koşu (hedefli): 182 test, 2 kırmızı, 23.9 sn
+# öldüren: PaywallTest::the_premium_themes_are_the_video_themes ; TemplateCatalogueTest::a_faz17_preset_requires_its_plan with data set "dugun-kelebek"
+# sha256 sonra: 8d67f17fbed87cad09720a488a69648030b1364a59deedce1dadc151027583be → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+e":176,"message":"Failed asserting that two arrays are equal.\n--- Expected\n+++ Actual\n@@ @@\n 'dugun-gokyuzu'\n 'dugun-gul-yapraklari'\n 'dugun-karanlik-oda'\n- 'dugun-kelebek'\n 'dugun-kristal-balo'\n 'dugun-mum-isigi'\n 'dugun-onyx'"},{"test":"Tests\\Feature\\TemplateCatalogueTest::a_faz17_preset_requires_its_plan with data set \"dugun-kelebek\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\TemplateCatalogueTest.php","line":171,"message":"Failed asserting that two variables reference the same object.\n--- Expected\n+++ Actual\n@@ @@\n-App\\Enums\\SubscriptionTier Enum #3097 (Gold, 'gold')\n+App\\Enums\\SubscriptionTier Enum #3101 (Standart, 'standart')"}]}
+

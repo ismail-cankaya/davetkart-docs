@@ -1,0 +1,13 @@
+# M39 — Misafir ucu yalnızca yayınlanmışı gösterir
+# dosya: app/Actions/Invitation/ResolvePublicInvitationAction.php:31
+# aranan : ->where('status', InvitationStatus::Published)
+# yerine : (silindi)
+# süzgeç : PublicInvitationTest|RsvpTest
+# sha256 önce: 3f08b6d079fd78f80d59b25559a9cd234be27cfbeb581aeb1937dab4520235d9
+# koşu (hedefli): 124 test, 3 kırmızı, 16.4 sn
+# öldüren: PublicInvitationTest::saved_invitation_is_not_readable ; PublicInvitationTest::unpublished_and_missing_invitations_are_indistinguishable ; RsvpTest::hidden_invitations_are_indistinguishable_from_missing_ones
+# sha256 sonra: 3f08b6d079fd78f80d59b25559a9cd234be27cfbeb581aeb1937dab4520235d9 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+ature\\PublicInvitationTest.php","line":54,"message":"Expected response status code [404] but received 200.\nFailed asserting that 200 is identical to 404."},{"test":"Tests\\Feature\\PublicInvitationTest::unpublished_and_missing_invitations_are_indistinguishable","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PublicInvitationTest.php","line":68,"message":"Failed asserting that 404 is identical to 200."},{"test":"Tests\\Feature\\RsvpTest::hidden_invitations_are_indistinguishable_from_missing_ones","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":255,"message":"taslak\nFailed asserting that 201 is identical to 404."}]}
+

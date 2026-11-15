@@ -1,0 +1,13 @@
+# M33 — K97: hesap silinince token'lar silinir
+# dosya: app/Actions/Auth/DeleteAccountAction.php:68
+# aranan : $user->tokens()->delete();
+# yerine : // mutant;
+# süzgeç : AccountDeletionTest
+# sha256 önce: 2becc789b12dc9518a2600b5e7ea26acf9b433d6f981599539f88e334e3415ec
+# koşu (hedefli): 7 test, 1 kırmızı, 2.6 sn
+# öldüren: AccountDeletionTest::personal_data_and_files_go_while_orders_stay_anonymous
+# sha256 sonra: 2becc789b12dc9518a2600b5e7ea26acf9b433d6f981599539f88e334e3415ec → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":7,"passed":6,"assertions":37,"duration_ms":1545,"failed":1,"failures":[{"test":"Tests\\Feature\\AccountDeletionTest::personal_data_and_files_go_while_orders_stay_anonymous","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\AccountDeletionTest.php","line":89,"message":"Failed asserting that 2 is identical to 0."}]}
+

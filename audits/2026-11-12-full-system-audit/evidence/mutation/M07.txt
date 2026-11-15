@@ -1,0 +1,13 @@
+# M07 — K126: bildirim tutarı siparişle eşleşmeli
+# dosya: app/Actions/Payment/HandlePaymentCallbackAction.php:176
+# aranan : return $notification->amountMinor === $order->amount_minor
+# yerine : return true
+# süzgeç : PaymentNotificationAmountTest|ShopierOsbTest
+# sha256 önce: ebcdfe23518b7c9b86faf9715dcabcb71a8e60b2df62a87726005077837381bc
+# koşu (hedefli): 15 test, 2 kırmızı, 3.7 sn
+# öldüren: PaymentNotificationAmountTest::a_different_amount_is_rejected_loudly ; ShopierOsbTest::an_osb_with_a_different_amount_does_not_pay
+# sha256 sonra: ebcdfe23518b7c9b86faf9715dcabcb71a8e60b2df62a87726005077837381bc → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+nd-tst\\tests\\Feature\\PaymentNotificationAmountTest.php","line":49,"message":"Failed asserting that two variables reference the same object.\n--- Expected\n+++ Actual\n@@ @@\n-App\\Enums\\OrderStatus Enum #1088 (Pending, 'pending')\n+App\\Enums\\OrderStatus Enum #1083 (Paid, 'paid')"},{"test":"Tests\\Feature\\ShopierOsbTest::an_osb_with_a_different_amount_does_not_pay","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\ShopierOsbTest.php","line":95,"message":"Failed asserting that two variables reference the same object.\n--- Expected\n+++ Actual\n@@ @@\n-App\\Enums\\OrderStatus Enum #1088 (Pending, 'pending')\n+App\\Enums\\OrderStatus Enum #1083 (Paid, 'paid')"}]}
+

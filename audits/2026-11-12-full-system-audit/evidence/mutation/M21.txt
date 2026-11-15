@@ -1,0 +1,13 @@
+# M21 — K91: yarım JSON 400
+# dosya: app/Http/Middleware/RejectMalformedInput.php:52
+# aranan : return $body !== '' && ! json_validate($body);
+# yerine : return false;
+# süzgeç : MalformedInputTest|RsvpTest
+# sha256 önce: 1d7f1ad72faedac3daa8b7d6f827f8311ddec7de9e25f99e6fe126ece5ed5497
+# koşu (hedefli): 106 test, 7 kırmızı, 13 sn
+# öldüren: MalformedInputTest::a_truncated_json_body_is_malformed_on_every_route with data set "auth: giris" ; MalformedInputTest::a_truncated_json_body_is_malformed_on_every_route with data set "davetiye: olusturma" ; MalformedInputTest::a_truncated_json_body_is_malformed_on_every_route with data set "public: LCV (var olmayan davetiye)" ; MalformedInputTest::a_truncated_json_body_is_malformed_on_every_route with data set "public: iletisim"
+# sha256 sonra: 1d7f1ad72faedac3daa8b7d6f827f8311ddec7de9e25f99e6fe126ece5ed5497 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+ing that 422 is identical to 400."},{"test":"Tests\\Feature\\MalformedInputTest::a_truncated_json_body_is_malformed_on_every_route with data set \"odeme bildirimi (webhook)\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MalformedInputTest.php","line":64,"message":"Expected response status code [400] but received 404.\nFailed asserting that 404 is identical to 400."},{"test":"Tests\\Feature\\RsvpTest::a_truncated_json_body_is_malformed_not_invalid","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":450,"message":"Expected response status code [400] but received 422.\nFailed asserting that 422 is identical to 400."}]}
+

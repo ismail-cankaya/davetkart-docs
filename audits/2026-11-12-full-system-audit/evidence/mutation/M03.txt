@@ -1,0 +1,13 @@
+# M03 — Yayın: plan yetmezse 402
+# dosya: app/Actions/Invitation/PublishInvitationAction.php:106
+# aranan : if (! $owned->covers($required)) {
+# yerine : if (false) {
+# süzgeç : PaywallTest
+# sha256 önce: ed183659bb51c99c9d7fccbe3013cbe37eaa2366434f229d5529d8d0fbd983ee
+# koşu (hedefli): 84 test, 2 kırmızı, 12.7 sn
+# öldüren: PaywallTest::a_standart_order_cannot_publish_a_premium_theme ; PaywallTest::a_gold_order_cannot_publish_a_gallery_invitation
+# sha256 sonra: ed183659bb51c99c9d7fccbe3013cbe37eaa2366434f229d5529d8d0fbd983ee → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+ed","tests":84,"passed":82,"assertions":224,"duration_ms":11686,"failed":2,"failures":[{"test":"Tests\\Feature\\PaywallTest::a_standart_order_cannot_publish_a_premium_theme","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":195,"message":"Expected response status code [402] but received 200.\nFailed asserting that 200 is identical to 402."},{"test":"Tests\\Feature\\PaywallTest::a_gold_order_cannot_publish_a_gallery_invitation","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":464,"message":"Expected response status code [402] but received 200.\nFailed asserting that 200 is identical to 402."}]}
+

@@ -1,0 +1,13 @@
+# M43 — R7: 4xx Sentry'ye gitmez
+# dosya: bootstrap/app.php:57
+# aranan : && $e->errorCode()->status() < 500,
+# yerine : && false,
+# süzgeç : ExceptionReportingTest
+# sha256 önce: 4327d8b0402149003a54aa53784eefff8aa881829f36129d7bbb8cdaf2c21163
+# koşu (hedefli): 5 test, 2 kırmızı, 2.3 sn
+# öldüren: ExceptionReportingTest::a_client_side_business_exception_is_not_reported ; ExceptionReportingTest::a_wrong_password_answers_401_and_reports_nothing
+# sha256 sonra: 4327d8b0402149003a54aa53784eefff8aa881829f36129d7bbb8cdaf2c21163 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+"Tests\\Feature\\ExceptionReportingTest::a_client_side_business_exception_is_not_reported","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\ExceptionReportingTest.php","line":54,"message":"The following exceptions were reported: App\\Exceptions\\InvalidCredentialsException, App\\Exceptions\\PaywallViolationException.\nFailed asserting that an array is empty."},{"test":"Tests\\Feature\\ExceptionReportingTest::a_wrong_password_answers_401_and_reports_nothing","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\ExceptionReportingTest.php","line":90,"message":"The expected [App\\Exceptions\\InvalidCredentialsException] exception was reported."}]}
+

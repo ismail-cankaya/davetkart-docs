@@ -1,0 +1,13 @@
+# M25 — K93: Retry-After başlığı
+# dosya: app/Exceptions/ApiExceptionRenderer.php:96
+# aranan : return is_int($retryAfter) ? ['Retry-After' => (string) $retryAfter] : [];
+# yerine : return [];
+# süzgeç : MalformedInputTest|RateLimitTest|AssistantTest
+# sha256 önce: c262c539b80835a9d07193014fc5c59428b4d2b59f1097a61e76ddf0efe7729b
+# koşu (hedefli): 48 test, 6 kırmızı, 8.6 sn
+# öldüren: AssistantTest::the_quota_rejection_carries_the_limit_and_a_retry_hint ; AssistantTest::a_failing_provider_returns_service_unavailable ; MalformedInputTest::the_auth_limiter_sends_a_retry_after_header ; MalformedInputTest::the_contact_limiter_sends_a_retry_after_header
+# sha256 sonra: c262c539b80835a9d07193014fc5c59428b4d2b59f1097a61e76ddf0efe7729b → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+e":"Header [Retry-After] not present on response.\nFailed asserting that false is true."},{"test":"Tests\\Feature\\MalformedInputTest::the_assistant_limiter_sends_a_retry_after_header","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MalformedInputTest.php","line":186,"message":"Header [Retry-After] not present on response.\nFailed asserting that false is true."},{"test":"Tests\\Feature\\MalformedInputTest::the_assistant_daily_quota_sends_a_retry_after_header","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MalformedInputTest.php","line":211,"message":"Header [Retry-After] not present on response.\nFailed asserting that false is true."}]}
+

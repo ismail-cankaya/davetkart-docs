@@ -1,0 +1,13 @@
+# M28 — K36: giriş hız sınırı 5/dk
+# dosya: app/Providers/AppServiceProvider.php:386
+# aranan : Limit::perMinute(5)->by($identity.'|'.IpBucket::of($request->ip())),
+# yerine : Limit::perMinute(500)->by($identity.'|'.IpBucket::of($request->ip())),
+# süzgeç : AuthTest|RateLimitTest|MalformedInputTest
+# sha256 önce: 245b6798cdd7576ddd0e002cda5d5d797b60fbf41f2882dd37f5ef09db028435
+# koşu (hedefli): 47 test, 3 kırmızı, 7.3 sn
+# öldüren: AuthTest::the_auth_limiter_counts_both_forms_of_i_in_one_bucket ; AuthTest::credential_endpoints_are_rate_limited ; MalformedInputTest::the_auth_limiter_sends_a_retry_after_header
+# sha256 sonra: 245b6798cdd7576ddd0e002cda5d5d797b60fbf41f2882dd37f5ef09db028435 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+esponse status code [429] but received 401.\nFailed asserting that 401 is identical to 429."},{"test":"Tests\\Feature\\AuthTest::credential_endpoints_are_rate_limited","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\AuthTest.php","line":393,"message":"Expected response status code [429] but received 401.\nFailed asserting that 401 is identical to 429."},{"test":"Tests\\Feature\\MalformedInputTest::the_auth_limiter_sends_a_retry_after_header","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MalformedInputTest.php","line":163,"message":"Expected response status code [429] but received 422.\nFailed asserting that 422 is identical to 429."}]}
+

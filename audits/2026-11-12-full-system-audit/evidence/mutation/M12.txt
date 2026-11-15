@@ -1,0 +1,13 @@
+# M12 — K111: kişi başı tek kullanım
+# dosya: app/Actions/GiftCode/QuoteGiftCodeAction.php:45
+# aranan : if ($usedByUser) {
+# yerine : if (false) {
+# süzgeç : GiftCode
+# sha256 önce: 5085035bc0331dabdab70ded22f2b8e9cd475d3cf0ee220eb655772ecaeea259
+# koşu (hedefli): 133 test, 3 kırmızı, 14.6 sn
+# öldüren: GiftCodeCheckoutTest::the_same_user_cannot_use_a_code_twice ; GiftCodeCheckoutTest::a_refund_does_not_give_the_redemption_back ; GiftCodePreviewTest::the_preview_applies_the_same_rules_as_checkout
+# sha256 sonra: 5085035bc0331dabdab70ded22f2b8e9cd475d3cf0ee220eb655772ecaeea259 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+hat 201 is identical to 422."},{"test":"Tests\\Feature\\GiftCodeCheckoutTest::a_refund_does_not_give_the_redemption_back","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\GiftCodeCheckoutTest.php","line":351,"message":"Failed asserting that two strings are identical.\n--- Expected\n+++ Actual\n@@ @@\n-'GIFT_CODE_ALREADY_USED'\n+'GIFT_CODE_INVALID'"},{"test":"Tests\\Feature\\GiftCodePreviewTest::the_preview_applies_the_same_rules_as_checkout","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\GiftCodePreviewTest.php","line":109,"message":"Expected response status code [422] but received 200.\nFailed asserting that 200 is identical to 422."}]}
+

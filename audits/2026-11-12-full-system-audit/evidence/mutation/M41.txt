@@ -1,0 +1,13 @@
+# M41 — Checkout: seçilen plan davetiyeyi kapsamalı
+# dosya: app/Actions/Payment/StartCheckoutAction.php:96
+# aranan : if (! $tier->covers($required)) {
+# yerine : if (false) {
+# süzgeç : PaywallTest|CheckoutActionTest
+# sha256 önce: 9563b9687a9cd0fc493e7eec82e00f82a4fe33f942e3feeb61e642b7c02e369c
+# koşu (hedefli): 94 test, 1 kırmızı, 13.3 sn
+# öldüren: PaywallTest::a_tier_that_does_not_cover_the_invitation_is_rejected
+# sha256 sonra: 9563b9687a9cd0fc493e7eec82e00f82a4fe33f942e3feeb61e642b7c02e369c → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":94,"passed":93,"assertions":238,"duration_ms":12096,"failed":1,"failures":[{"test":"Tests\\Feature\\PaywallTest::a_tier_that_does_not_cover_the_invitation_is_rejected","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":819,"message":"Expected response status code [402] but received 201.\nFailed asserting that 201 is identical to 402."}]}
+

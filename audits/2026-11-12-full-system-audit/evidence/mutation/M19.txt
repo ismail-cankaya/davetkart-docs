@@ -1,0 +1,13 @@
+# M19 — K90: token ömrü 30 gün
+# dosya: config/sanctum.php:66
+# aranan : 'expiration' => 60 * 24 * 30,
+# yerine : 'expiration' => null,
+# süzgeç : AuthTest|SessionTest
+# sha256 önce: 145628c3102467ff25034b323b7b78bf0a9c510103f6f67d9ef644a83808d8fa
+# koşu (hedefli): 31 test, 3 kırmızı, 5.8 sn
+# öldüren: AuthTest::a_token_expires_thirty_days_after_it_was_issued ; SessionTest::the_list_names_devices_and_marks_the_current_one ; SessionTest::an_expired_token_is_not_listed
+# sha256 sonra: 145628c3102467ff25034b323b7b78bf0a9c510103f6f67d9ef644a83808d8fa → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+Application->run(Array)\n#64 {main}\n\n----------------------------------------------------------------------------------\n\nConfiguration value for key [sanctum.expiration] must be an integer, NULL given."}],"errors":1,"error_details":[{"test":"Tests\\Feature\\SessionTest::an_expired_token_is_not_listed","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\SessionTest.php","line":101,"message":"PHPUnit\\Framework\\Assert::assertCount(): Argument #2 ($haystack) must be of type Countable|Traversable|array, null given, called in D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\vendor\\laravel\\framework\\src\\Illuminate\\Testing\\AssertableJsonString.php on line 74"}]}
+

@@ -1,0 +1,13 @@
+# M44 — K102: imza yalnızca Elit'te kalkar
+# dosya: app/Actions/Invitation/ResolveBrandingAction.php:43
+# aranan : $owned === null || ! $owned->covers($whiteLabel)
+# yerine : true
+# süzgeç : PaywallTest|PublicInvitationTest|InvitationTest
+# sha256 önce: 0559d24bd7f9f58268d8387b0d1469b2b47d8bd962b1774c54c4bc98dbdb4fcb
+# koşu (hedefli): 159 test, 6 kırmızı, 18.4 sn
+# öldüren: InvitationTest::the_owner_sees_the_same_branding_as_the_guests with data set "Elit" ; InvitationTest::an_update_returns_the_branding_decision ; InvitationTest::the_list_carries_each_invitations_branding_without_a_query_per_invitation ; PaywallTest::publishing_with_an_elit_package_returns_the_record_without_branding
+# sha256 sonra: 0559d24bd7f9f58268d8387b0d1469b2b47d8bd962b1774c54c4bc98dbdb4fcb → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+it-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":281,"message":"Failed asserting that true is identical to false."},{"test":"Tests\\Feature\\PublicInvitationTest::the_branding_follows_the_paid_plan with data set \"Elit\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PublicInvitationTest.php","line":215,"message":"Failed asserting that true is identical to false."},{"test":"Tests\\Feature\\PublicInvitationTest::the_branding_follows_the_paid_plan with data set \"Gold + Elit\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PublicInvitationTest.php","line":215,"message":"Failed asserting that true is identical to false."}]}
+

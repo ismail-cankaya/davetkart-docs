@@ -1,0 +1,13 @@
+# M32 — K144: e-posta bağlantısı tek kullanımlık
+# dosya: app/Actions/Account/ConfirmEmailChangeAction.php:50
+# aranan : if (! hash_equals(EmailChangeLink::fingerprint($user->email), $change['old_fingerprint'])) {
+# yerine : if (false) {
+# süzgeç : EmailChangeTest
+# sha256 önce: dfec70927301d5ab1c26f52f1dd03b25070329c6d98869532a07d99c4ee273bb
+# koşu (hedefli): 10 test, 1 kırmızı, 2.8 sn
+# öldüren: EmailChangeTest::a_link_cannot_be_used_twice
+# sha256 sonra: dfec70927301d5ab1c26f52f1dd03b25070329c6d98869532a07d99c4ee273bb → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":10,"passed":9,"assertions":51,"duration_ms":1760,"failed":1,"failures":[{"test":"Tests\\Feature\\EmailChangeTest::a_link_cannot_be_used_twice","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\EmailChangeTest.php","line":113,"message":"Expected response status code [422] but received 204.\nFailed asserting that 204 is identical to 422."}]}
+

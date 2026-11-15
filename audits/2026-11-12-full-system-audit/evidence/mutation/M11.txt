@@ -1,0 +1,13 @@
+# M11 — Shopier callback imzası
+# dosya: app/Services/Payment/Shopier/ShopierSignature.php:61
+# aranan : return hash_equals($expected, $decoded);
+# yerine : return true;
+# süzgeç : ShopierSignatureTest|ShopierCallbackTest
+# sha256 önce: 56f55de11415dfc17a00b49b1ef6a21173d4eab45ad6978b984a48b526c601c8
+# koşu (hedefli): 42 test, 5 kırmızı, 3.5 sn
+# öldüren: ShopierSignatureTest::a_forged_callback_is_refused with data set "başka sipariş" ; ShopierSignatureTest::a_forged_callback_is_refused with data set "başka random_nr" ; ShopierSignatureTest::a_forged_callback_is_refused with data set "başka sır" ; ShopierSignatureTest::a_forged_callback_is_refused with data set "hex imza"
+# sha256 sonra: 56f55de11415dfc17a00b49b1ef6a21173d4eab45ad6978b984a48b526c601c8 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+end-tst\\tests\\Unit\\ShopierSignatureTest.php","line":67,"message":"Failed asserting that true is false."},{"test":"Tests\\Feature\\ShopierCallbackTest::a_wrong_signature_changes_nothing_and_goes_to_the_failure_page","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\ShopierCallbackTest.php","line":186,"message":"Header [Location] was found, but value [https://davetkart.test/odeme/basarili?order=01m7a633rkct0fp6egvggvz601] does not match [https://davetkart.test/odeme/hata].\nFailed asserting that two strings are equal.\n--- Expected\n+++ Actual\n@@ @@\n-'https://davetkart.test/odeme/hata'\n+'https://davetkart.test/odeme/basarili?order=01m7a633rkct0fp6egvggvz601'"}]}
+

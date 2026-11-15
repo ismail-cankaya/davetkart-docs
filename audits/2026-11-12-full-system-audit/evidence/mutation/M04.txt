@@ -1,0 +1,13 @@
+# M04 — K-4/K89: expired → paid geçişi
+# dosya: app/Enums/OrderStatus.php:118
+# aranan : self::Expired => $next === self::Paid,
+# yerine : self::Expired => false,
+# süzgeç : PaywallTest|OrderStatusTest|MaintenanceTest
+# sha256 önce: bc63b098ae91608a112da06cffb8c722d354391b54bb8c53ae11f249038ae9b6
+# koşu (hedefli): 118 test, 4 kırmızı, 15.1 sn
+# öldüren: OrderStatusTest::the_transition_table_is_exactly_the_documented_one ; OrderStatusTest::an_expired_order_can_still_become_paid_but_a_failed_one_cannot ; OrderStatusTest::only_states_without_an_exit_are_final ; PaywallTest::a_paid_webhook_after_expiry_still_grants_the_order
+# sha256 sonra: bc63b098ae91608a112da06cffb8c722d354391b54bb8c53ae11f249038ae9b6 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+@ @@\n Array &0 [\n 0 => App\\Enums\\OrderStatus Enum #1082 (Failed, 'failed'),\n- 1 => App\\Enums\\OrderStatus Enum #1080 (Refunded, 'refunded'),\n+ 1 => App\\Enums\\OrderStatus Enum #1081 (Expired, 'expired'),\n+ 2 => App\\Enums\\OrderStatus Enum #1080 (Refunded, 'refunded'),\n ]"},{"test":"Tests\\Feature\\PaywallTest::a_paid_webhook_after_expiry_still_grants_the_order","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":1175,"message":"Failed asserting that two variables reference the same object.\n--- Expected\n+++ Actual\n@@ @@\n-App\\Enums\\OrderStatus Enum #1083 (Paid, 'paid')\n+App\\Enums\\OrderStatus Enum #1081 (Expired, 'expired')"}]}
+

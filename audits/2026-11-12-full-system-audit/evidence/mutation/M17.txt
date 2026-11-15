@@ -1,0 +1,13 @@
+# M17 — LCV kotası SUM(guest_count)
+# dosya: app/Actions/Rsvp/EnsureRsvpQuotaAction.php:59
+# aranan : ->sum('guest_count');
+# yerine : ->count();
+# süzgeç : RsvpTest|RsvpEditTest
+# sha256 önce: daddcbb9c69dddf966c6876938238b5a349a91d4b010c5bfd2150539ee43ce1d
+# koşu (hedefli): 98 test, 7 kırmızı, 12.5 sn
+# öldüren: RsvpEditTest::the_update_counts_the_guest_once_against_the_quota ; RsvpTest::a_standart_plan_accepts_guests_up_to_the_exact_limit_and_not_one_more ; RsvpTest::the_quota_counts_guests_not_rows ; RsvpTest::undecided_guests_take_seats
+# sha256 sonra: daddcbb9c69dddf966c6876938238b5a349a91d4b010c5bfd2150539ee43ce1d → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+:687,"message":"Expected response status code [403] but received 201.\nFailed asserting that 201 is identical to 403."},{"test":"Tests\\Feature\\RsvpTest::a_quota_rejection_reveals_no_counters","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":702,"message":"Expected response status code [403] but received 201.\nFailed asserting that 201 is identical to 403."},{"test":"Tests\\Feature\\RsvpTest::removing_a_spam_reply_frees_its_seats","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":714,"message":"Expected response status code [403] but received 201.\nFailed asserting that 201 is identical to 403."}]}
+

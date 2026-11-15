@@ -1,0 +1,13 @@
+# M50 — R12: para birimi TRY
+# dosya: config/davetkart.php:21
+# aranan : 'currency' => 'TRY',
+# yerine : 'currency' => 'USD',
+# süzgeç : PaywallTest|PricingTest|OrderTest
+# sha256 önce: 8d67f17fbed87cad09720a488a69648030b1364a59deedce1dadc151027583be
+# koşu (hedefli): 107 test, 7 kırmızı, 16.8 sn
+# öldüren: OrderTest::the_owner_reads_a_paid_order ; OrderTest::the_frozen_price_breakdown_is_returned ; PaywallTest::the_order_amount_comes_from_the_server_side_price ; PaywallTest::each_tier_is_charged_its_published_price with data set "standart 249 TL"
+# sha256 sonra: 8d67f17fbed87cad09720a488a69648030b1364a59deedce1dadc151027583be → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+st":"Tests\\Feature\\PaywallTest::each_tier_is_charged_its_published_price with data set \"elit 549 TL\"","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":794,"message":"Failed asserting that two strings are identical.\n--- Expected\n+++ Actual\n@@ @@\n-'TRY'\n+'USD'"},{"test":"Tests\\Feature\\PricingTest::the_public_catalog_lists_the_three_plans_at_list_price","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PricingTest.php","line":37,"message":"Failed asserting that two strings are equal.\n--- Expected\n+++ Actual\n@@ @@\n '..ll,\\n\n- \"currency\": \"TRY\",\\n\n+ \"currency\": \"USD\",\\n\n \"firstPublishP..'"}]}
+

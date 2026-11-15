@@ -1,0 +1,13 @@
+# M31 — K139: iade penceresi 14 gün
+# dosya: app/Services/Refund/RefundEligibility.php:40
+# aranan : ! $this->windowIsOpen($order) => RefundBlocker::WindowClosed,
+# yerine : false => RefundBlocker::WindowClosed,
+# süzgeç : RefundRequestTest|SummarizeEntitlementsActionTest|AccountEntitlementsTest
+# sha256 önce: e8a6da9571d0908e0fe9c55d22ec80be53fa9c028243ef5afc4c1800abc65086
+# koşu (hedefli): 31 test, 2 kırmızı, 5.8 sn
+# öldüren: RefundRequestTest::a_right_past_the_window_cannot_be_cancelled ; SummarizeEntitlementsActionTest::the_refund_blockers_name_the_first_reason
+# sha256 sonra: e8a6da9571d0908e0fe9c55d22ec80be53fa9c028243ef5afc4c1800abc65086 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+sertions":91,"duration_ms":4794,"failed":2,"failures":[{"test":"Tests\\Feature\\RefundRequestTest::a_right_past_the_window_cannot_be_cancelled","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RefundRequestTest.php","line":121,"message":"Expected response status code [409] but received 201.\nFailed asserting that 201 is identical to 409."},{"test":"Tests\\Feature\\SummarizeEntitlementsActionTest::the_refund_blockers_name_the_first_reason","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\SummarizeEntitlementsActionTest.php","line":171,"message":"Failed asserting that null is identical to an object of class \"App\\Enums\\RefundBlocker\"."}]}
+

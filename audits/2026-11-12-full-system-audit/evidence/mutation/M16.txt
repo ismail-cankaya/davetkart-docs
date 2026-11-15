@@ -1,0 +1,13 @@
+# M16 — Sahiplik: sipariş
+# dosya: app/Policies/OrderPolicy.php:40
+# aranan : return $user->id === $order->user_id;
+# yerine : return true;
+# süzgeç : OrderTest|RefundRequestTest
+# sha256 önce: 6eda043c7542ebf1de277e268c0b9b2be4dc369169980fae66af76740f5633ee
+# koşu (hedefli): 28 test, 3 kırmızı, 5.4 sn
+# öldüren: OrderTest::another_users_order_is_indistinguishable_from_a_missing_one ; RefundRequestTest::another_users_order_is_not_found ; RefundRequestTest::another_user_cannot_withdraw
+# sha256 sonra: 6eda043c7542ebf1de277e268c0b9b2be4dc369169980fae66af76740f5633ee → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+ted response status code [404] but received 200.\nFailed asserting that 200 is identical to 404."},{"test":"Tests\\Feature\\RefundRequestTest::another_users_order_is_not_found","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RefundRequestTest.php","line":85,"message":"Expected response status code [404] but received 201.\nFailed asserting that 201 is identical to 404."},{"test":"Tests\\Feature\\RefundRequestTest::another_user_cannot_withdraw","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RefundRequestTest.php","line":202,"message":"Expected response status code [404] but received 204.\nFailed asserting that 204 is identical to 404."}]}
+

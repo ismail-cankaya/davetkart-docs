@@ -1,0 +1,13 @@
+# M27 — K-3: Türkçe İ normalizasyonu
+# dosya: app/Support/EmailNormalizer.php:46
+# aranan : return str_replace(self::DOTTED_SMALL_I, 'i', mb_strtolower(trim($email)));
+# yerine : return mb_strtolower(trim($email));
+# süzgeç : AuthTest|EmailNormalizerTest|MaintenanceTest
+# sha256 önce: 69ce68b2ab2f611bcc67484a202ebc681146a6e4e9c79210cd6caf1110c40a24
+# koşu (hedefli): 58 test, 12 kırmızı, 6.9 sn
+# öldüren: EmailNormalizerTest::it_folds_every_form_of_the_turkish_capital_i_into_a_plain_i with data set "İ, tek kod noktasi (U+0130, Turkce klavye)" ; EmailNormalizerTest::it_folds_every_form_of_the_turkish_capital_i_into_a_plain_i with data set "I + birlesen nokta (U+0049 U+0307, NFD)" ; EmailNormalizerTest::it_folds_every_form_of_the_turkish_capital_i_into_a_plain_i with data set "i + birlesen nokta (Faz 9 oncesi DB satiri)" ; EmailNormalizerTest::it_folds_every_form_of_the_turkish_capital_i_into_a_plain_i with data set "yerel kisimda ve alan adinda birden cok İ"
+# sha256 sonra: 69ce68b2ab2f611bcc67484a202ebc681146a6e4e9c79210cd6caf1110c40a24 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+6e6b61796140676d61696c2e636f6d'"},{"test":"Tests\\Feature\\MaintenanceTest::it_skips_and_reports_an_address_another_account_already_holds","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MaintenanceTest.php","line":372,"message":"Failed asserting that 0 is identical to 1."},{"test":"Tests\\Feature\\MaintenanceTest::the_normalize_dry_run_writes_nothing_and_shows_the_hidden_dot","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MaintenanceTest.php","line":405,"message":"Failed asserting that '\\n\n INFO 0 e-posta duzeltilecek (yazilmadi). \\n\\r\n\\n\n' [ASCII](length: 50) contains \"i\\u0307smail.cankaya@gmail.com\" [ASCII](length: 30)."}]}
+

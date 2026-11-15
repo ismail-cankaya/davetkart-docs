@@ -1,0 +1,14 @@
+# M47 — Kilit: ödeme bildirimi sipariş satırı
+# dosya: app/Actions/Payment/HandlePaymentCallbackAction.php:59
+# aranan : ->lockForUpdate()
+# yerine : (silindi)
+# süzgeç : PaywallTest|PaymentNotificationAmountTest|ShopierOsbTest
+# sha256 önce: ebcdfe23518b7c9b86faf9715dcabcb71a8e60b2df62a87726005077837381bc
+# hedefli koşu: 99 test, 0 kırmızı (19 sn) → tam paketle doğrulanıyor
+# koşu (tam paket): 1052 test, 0 kırmızı, 172.5 sn
+# öldüren: 
+# sha256 sonra: ebcdfe23518b7c9b86faf9715dcabcb71a8e60b2df62a87726005077837381bc → GERİ ALINDI
+# SONUÇ: HAYATTA
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"passed","tests":1052,"passed":1052,"assertions":3915,"duration_ms":171272}
+

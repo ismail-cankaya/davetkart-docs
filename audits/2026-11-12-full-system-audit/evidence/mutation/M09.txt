@@ -1,0 +1,13 @@
+# M09 — W2: sahte ağ geçidi imzası
+# dosya: app/Services/Payment/FakeGateway.php:139
+# aranan : if (! hash_equals($expected, $signature)) {
+# yerine : if (false) {
+# süzgeç : PaywallTest
+# sha256 önce: 65e10baf9e6e9d6ffc261dd1c30f2a8109c84e1a383c8447195e7d1d26bc7013
+# koşu (hedefli): 84 test, 1 kırmızı, 11.3 sn
+# öldüren: PaywallTest::the_webhook_rejects_an_invalid_signature
+# sha256 sonra: 65e10baf9e6e9d6ffc261dd1c30f2a8109c84e1a383c8447195e7d1d26bc7013 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":84,"passed":83,"assertions":227,"duration_ms":10299,"failed":1,"failures":[{"test":"Tests\\Feature\\PaywallTest::the_webhook_rejects_an_invalid_signature","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaywallTest.php","line":890,"message":"Expected response status code [404] but received 204.\nFailed asserting that 204 is identical to 404."}]}
+

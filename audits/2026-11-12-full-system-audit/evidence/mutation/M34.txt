@@ -1,0 +1,13 @@
+# M34 — K98: çöp kutusu 30 gün
+# dosya: app/Console/Commands/PurgeExpiredData.php:67
+# aranan : Invitation::onlyTrashed()->where('deleted_at', '<', $cutoff);
+# yerine : Invitation::onlyTrashed();
+# süzgeç : MaintenanceTest
+# sha256 önce: 8c0720c14f8f025412676b09461f4a68b2c3ae2d607e3fe12ef70588c6028b47
+# koşu (hedefli): 29 test, 1 kırmızı, 4.5 sn
+# öldüren: MaintenanceTest::a_trashed_invitation_is_purged_with_its_files_after_thirty_days
+# sha256 sonra: 8c0720c14f8f025412676b09461f4a68b2c3ae2d607e3fe12ef70588c6028b47 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":29,"passed":28,"assertions":94,"duration_ms":3477,"failed":1,"failures":[{"test":"Tests\\Feature\\MaintenanceTest::a_trashed_invitation_is_purged_with_its_files_after_thirty_days","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\MaintenanceTest.php","line":446,"message":"Failed asserting that false is true."}]}
+

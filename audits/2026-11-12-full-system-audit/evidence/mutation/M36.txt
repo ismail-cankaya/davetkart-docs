@@ -1,0 +1,13 @@
+# M36 — K131: ilk yayın yalnızca hiç ödeme yokken
+# dosya: app/Actions/Pricing/QuotePriceAction.php:103
+# aranan : return $hasPaid ? null : Promotion::firstPublish($percent);
+# yerine : return Promotion::firstPublish($percent);
+# süzgeç : QuotePriceActionTest|FirstPublishCheckoutTest|PricingTest
+# sha256 önce: f6f6e3ce264092eb6dd0ccaaf1718c9995d94d233369c3361a7c12423d035ad0
+# koşu (hedefli): 36 test, 7 kırmızı, 7.6 sn
+# öldüren: FirstPublishCheckoutTest::once_an_order_is_paid_the_next_one_is_at_list_price ; FirstPublishCheckoutTest::a_campaign_order_points_at_its_campaign ; PricingTest::the_personal_catalog_is_at_list_price_after_a_paid_order ; QuotePriceActionTest::any_order_that_was_ever_paid_ends_the_first_publish_discount with data set "paid"
+# sha256 sonra: f6f6e3ce264092eb6dd0ccaaf1718c9995d94d233369c3361a7c12423d035ad0 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+,"line":75,"message":"Failed asserting that App\\Actions\\Pricing\\Promotion Object #13684 (\n 'kind' => App\\Enums\\PromotionKind Enum #11164 (FirstPublish, 'first_publish'),\n 'percent' => 60,\n 'campaign' => null,\n) is null."},{"test":"Tests\\Feature\\QuotePriceActionTest::an_active_campaign_applies_to_a_returning_customer_and_a_guest","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\QuotePriceActionTest.php","line":138,"message":"Failed asserting that two variables reference the same object.\n--- Expected\n+++ Actual\n@@ @@\n-App\\Enums\\PromotionKind Enum #11165 (Campaign, 'campaign')\n+App\\Enums\\PromotionKind Enum #11164 (FirstPublish, 'first_publish')"}]}
+

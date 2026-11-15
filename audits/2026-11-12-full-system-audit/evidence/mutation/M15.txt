@@ -1,0 +1,13 @@
+# M15 — Sahiplik: davetiye
+# dosya: app/Policies/InvitationPolicy.php:74
+# aranan : return $user->id === $invitation->user_id;
+# yerine : return true;
+# süzgeç : InvitationTest|PaywallTest|RsvpTest|MediaTest
+# sha256 önce: 84fc983c5f07d15c0fa6e7c62321fae8044400cd24aa4902cb78ffe086373967
+# koşu (hedefli): 294 test, 10 kırmızı, 35 sn
+# öldüren: InvitationTest::owner_cannot_read_another_users_invitation ; InvitationTest::owner_cannot_update_another_users_invitation ; InvitationTest::owner_cannot_delete_another_users_invitation ; InvitationTest::missing_and_forbidden_invitations_are_indistinguishable
+# sha256 sonra: 84fc983c5f07d15c0fa6e7c62321fae8044400cd24aa4902cb78ffe086373967 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+cted response status code [404] but received 201.\nFailed asserting that 201 is identical to 404."},{"test":"Tests\\Feature\\RsvpTest::another_account_gets_the_same_404_as_a_missing_invitation","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":838,"message":"Expected response status code [404] but received 200.\nFailed asserting that 200 is identical to 404."},{"test":"Tests\\Feature\\RsvpTest::another_account_cannot_delete_a_reply","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\RsvpTest.php","line":933,"message":"Expected response status code [404] but received 204.\nFailed asserting that 204 is identical to 404."}]}
+

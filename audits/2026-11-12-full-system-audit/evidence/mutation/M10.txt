@@ -1,0 +1,13 @@
+# M10 — Shopier OSB imzası
+# dosya: app/Services/Payment/Shopier/ShopierSignature.php:79
+# aranan : return hash_equals($expected, strtolower($hash));
+# yerine : return true;
+# süzgeç : ShopierSignatureTest|ShopierOsbTest
+# sha256 önce: 56f55de11415dfc17a00b49b1ef6a21173d4eab45ad6978b984a48b526c601c8
+# koşu (hedefli): 39 test, 2 kırmızı, 3.1 sn
+# öldüren: ShopierSignatureTest::a_tampered_osb_body_is_refused ; ShopierOsbTest::a_wrong_hash_is_a_silent_404
+# sha256 sonra: 56f55de11415dfc17a00b49b1ef6a21173d4eab45ad6978b984a48b526c601c8 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"failed","tests":39,"passed":37,"assertions":56,"duration_ms":2022,"failed":2,"failures":[{"test":"Tests\\Unit\\ShopierSignatureTest::a_tampered_osb_body_is_refused","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Unit\\ShopierSignatureTest.php","line":98,"message":"Failed asserting that true is false."},{"test":"Tests\\Feature\\ShopierOsbTest::a_wrong_hash_is_a_silent_404","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\ShopierOsbTest.php","line":80,"message":"Expected response status code [404] but received 200.\nFailed asserting that 200 is identical to 404."}]}
+

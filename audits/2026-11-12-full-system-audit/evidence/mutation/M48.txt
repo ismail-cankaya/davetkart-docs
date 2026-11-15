@@ -1,0 +1,14 @@
+# M48 — Kilit: LCV kotası davetiye satırı
+# dosya: app/Actions/Rsvp/EnsureRsvpQuotaAction.php:54
+# aranan : ->lockForUpdate()
+# yerine : (silindi)
+# süzgeç : RsvpTest|RsvpEditTest
+# sha256 önce: daddcbb9c69dddf966c6876938238b5a349a91d4b010c5bfd2150539ee43ce1d
+# hedefli koşu: 98 test, 0 kırmızı (15.7 sn) → tam paketle doğrulanıyor
+# koşu (tam paket): 1052 test, 0 kırmızı, 152.3 sn
+# öldüren: 
+# sha256 sonra: daddcbb9c69dddf966c6876938238b5a349a91d4b010c5bfd2150539ee43ce1d → GERİ ALINDI
+# SONUÇ: HAYATTA
+# --- test çıktısının sonu ---
+{"tool":"phpunit","result":"passed","tests":1052,"passed":1052,"assertions":3915,"duration_ms":151014}
+

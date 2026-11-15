@@ -1,0 +1,13 @@
+# M37 — K134: kapalı ödeme yöntemi reddedilir
+# dosya: app/Services/Payment/PaymentMethods.php:66
+# aranan : if (! $this->isEnabled($method)) {
+# yerine : if (false) {
+# süzgeç : PaymentMethodGateTest|PaymentMethodsTest
+# sha256 önce: a62377fb6c58c5d4320af215f045e6008a4b351281e181a0066330a2a78ec8e3
+# koşu (hedefli): 19 test, 6 kırmızı, 3.1 sn
+# öldüren: PaymentMethodGateTest::with_the_card_off_a_plain_checkout_is_refused_and_writes_nothing ; PaymentMethodGateTest::with_the_card_off_a_partial_code_is_refused_and_the_code_stays_free ; PaymentMethodGateTest::with_gift_codes_off_a_coded_checkout_is_refused_before_the_code_is_looked_up ; PaymentMethodGateTest::with_gift_codes_off_the_preview_is_refused
+# sha256 sonra: a62377fb6c58c5d4320af215f045e6008a4b351281e181a0066330a2a78ec8e3 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+125,"message":"Expected response status code [403] but received 422.\nFailed asserting that 422 is identical to 403."},{"test":"Tests\\Feature\\PaymentMethodGateTest::a_misspelled_setting_is_a_503_without_leaking_the_word","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaymentMethodGateTest.php","line":146,"message":"Expected response status code [503] but received 201.\nFailed asserting that 201 is identical to 503."},{"test":"Tests\\Feature\\PaymentMethodsTest::ensure_enabled_throws_the_disabled_code_with_the_method","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\PaymentMethodsTest.php","line":69,"message":"Card must be rejected."}]}
+

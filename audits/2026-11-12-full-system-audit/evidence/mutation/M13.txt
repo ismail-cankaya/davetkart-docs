@@ -1,0 +1,13 @@
+# M13 — K110: kullanım tavanı
+# dosya: app/Actions/GiftCode/QuoteGiftCodeAction.php:55
+# aranan : if ($active >= $giftCode->max_redemptions) {
+# yerine : if (false) {
+# süzgeç : GiftCode
+# sha256 önce: 5085035bc0331dabdab70ded22f2b8e9cd475d3cf0ee220eb655772ecaeea259
+# koşu (hedefli): 133 test, 3 kırmızı, 14 sn
+# öldüren: GiftCodeCheckoutTest::every_invalid_reason_gets_the_same_bytes ; GiftCodeCheckoutTest::a_single_use_code_is_invalid_for_the_second_user ; GiftCodeCheckoutTest::a_refund_does_not_give_the_redemption_back
+# sha256 sonra: 5085035bc0331dabdab70ded22f2b8e9cd475d3cf0ee220eb655772ecaeea259 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+ 201.\nFailed asserting that 201 is identical to 422."},{"test":"Tests\\Feature\\GiftCodeCheckoutTest::a_single_use_code_is_invalid_for_the_second_user","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\GiftCodeCheckoutTest.php","line":337,"message":"Expected response status code [422] but received 201.\nFailed asserting that 201 is identical to 422."},{"test":"Tests\\Feature\\GiftCodeCheckoutTest::a_refund_does_not_give_the_redemption_back","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\GiftCodeCheckoutTest.php","line":351,"message":"Expected response status code [422] but received 201.\nFailed asserting that 201 is identical to 422."}]}
+

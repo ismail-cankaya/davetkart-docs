@@ -1,0 +1,13 @@
+# M06 — M6: fiyat config'ten
+# dosya: app/Enums/SubscriptionTier.php:29
+# aranan : return (int) $this->config('price');
+# yerine : return 1;
+# süzgeç : PaywallTest|PricingTest|QuotePriceActionTest|FirstPublishCheckoutTest
+# sha256 önce: cdd9c4aa3b29445f010653c4844e5cac6228fea133694bcdd34a3ff9d6791ba1
+# koşu (hedefli): 120 test, 24 kırmızı, 17 sn
+# öldüren: FirstPublishCheckoutTest::a_new_users_first_order_is_opened_at_sixty_percent_off ; FirstPublishCheckoutTest::once_an_order_is_paid_the_next_one_is_at_list_price ; FirstPublishCheckoutTest::an_abandoned_checkout_keeps_the_discount_for_the_next_try ; FirstPublishCheckoutTest::a_campaign_order_points_at_its_campaign
+# sha256 sonra: cdd9c4aa3b29445f010653c4844e5cac6228fea133694bcdd34a3ff9d6791ba1 → GERİ ALINDI
+# SONUÇ: ÖLDÜ
+# --- test çıktısının sonu ---
+t-snap\\backend-tst\\tests\\Feature\\QuotePriceActionTest.php","line":192,"message":"Failed asserting that 40 is identical to 15960."},{"test":"Tests\\Feature\\QuotePriceActionTest::a_gift_code_applies_to_what_is_left_after_the_promotion","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\QuotePriceActionTest.php","line":228,"message":"Failed asserting that 20 is identical to 7980."},{"test":"Tests\\Feature\\QuotePriceActionTest::a_free_code_covers_the_rest_and_a_fixed_code_cannot_go_below_zero","file":"D:\\Projects\\davetkart\\_audit-snap\\backend-tst\\tests\\Feature\\QuotePriceActionTest.php","line":246,"message":"Failed asserting that 40 is identical to 15960."}]}
+
