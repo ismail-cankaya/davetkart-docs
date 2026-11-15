@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-15 — Genel sistem denetimi (`audit/2026-11-12-full-system-audit`)
+
+- `AUD-2026-11-12`: [`audits/2026-11-12-full-system-audit/`](audits/2026-11-12-full-system-audit/README.md) eklendi (rapor, beş bulgu dosyası, kanıt klasörü); `audits/README.md` listesine işlendi. Başka doküman değişmedi.
+
 ## 2026-11-12 — Depo düzenlemesi (`docs/2026-11-12-restructure`)
 
 - Başlangıç commit'i: depo o anki hâliyle git'e alındı. Eski `davetkart-claude` deposunun `.git`'i
