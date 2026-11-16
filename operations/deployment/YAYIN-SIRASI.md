@@ -36,7 +36,7 @@ Hepsi yeşil olmadan etiket atılmaz.
 | 3 | Frontend kalite kapısı | `npm ci` → `npm run check` | Çıkış 0; zincirde `verify:plans` var |
 | 4 | Sözleşme kopyası güncel | aşağıdaki blok | `AYNI` |
 | 5 | İki depoda aynı etiket | `git describe --tags --exact-match main` (iki depoda) | İkisi de aynı `vX.Y.Z` |
-| 6 | Yedek alınıyor (`OPS-02`) | Faz 18.2 kapanınca buraya yazılacak | Son gece dökümü S3'te |
+| 6 | Yedek alınıyor (`OPS-02`) | Konsolda yedek bucket'ı → `daily/<dünün tarihi>/`; sunucuda `journalctl -t davetkart-backup --since yesterday` ([`YEDEK-VE-GERI-YUKLEME.md`](YEDEK-VE-GERI-YUKLEME.md) §5) | Dünün klasöründe `.dump` + `.manifest.json`; günlükte son satır `TAMAM`. İlk üretim provası yapılmış ve süresi yazılmış (aynı dosya §6) |
 
 ```powershell
 # 4 — frontend'in kopyası backend'in sözleşmesiyle aynı mı? (satır sonu farkını yok sayar)

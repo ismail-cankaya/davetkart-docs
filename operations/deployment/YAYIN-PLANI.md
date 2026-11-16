@@ -202,8 +202,8 @@ sonucu görünce sıradakine geçeriz. 🖥️ = senin makinen · ☁️ = AWS k
 | **Y11.2** | S3: galeriye foto yükle → URL S3'ten geliyor, küçültme işi koştu | — |
 | **Y11.3** | Sentry DSN + `LOG_STACK=daily,sentry` (10.55b) + Crons izleyicileri | Zamanlanmış iş sessizce durursa haberimiz olsun |
 | **Y11.4** | Gemini üretim anahtarı + ilk gün gerçek soru (10.56) | Google 2.5 erişimini kısıtlayabiliyor |
-| **Y11.5** | Gece `pg_dump` → `s3://…/backups/` (cron) | Snapshot tüm diski geri alır; `pg_dump` **tek bir tabloyu** ya da dünkü veriyi geri getirebilir. İki katman, iki farklı felaket |
-| **Y11.6** | **Geri yükleme provası**: dünkü dump'ı yerelde aç | Denenmemiş yedek, yedek değildir |
+| **Y11.5** | Gece `pg_dump` → `s3://…/backups/` (cron) | Snapshot tüm diski geri alır; `pg_dump` **tek bir tabloyu** ya da dünkü veriyi geri getirebilir. İki katman, iki farklı felaket · ▶️ Nasıl: [`YEDEK-VE-GERI-YUKLEME.md`](YEDEK-VE-GERI-YUKLEME.md) §2–§5 (Faz 18.2, K151–K156; ayrı bucket) |
+| **Y11.6** | **Geri yükleme provası**: dünkü dump'ı yerelde aç | Denenmemiş yedek, yedek değildir · ▶️ Nasıl: [`YEDEK-VE-GERI-YUKLEME.md`](YEDEK-VE-GERI-YUKLEME.md) §6 (K157) |
 | **Y11.7** | Dışarıdan çalışma izleme (UptimeRobot, ücretsiz) + Lightsail CPU/durum alarmı | Site düştüğünde bunu müşteriden önce öğrenmek |
 
 ### Y12 — Canlı doğrulama
@@ -378,3 +378,4 @@ Site Y12'den sonra çalışır; **müşteriye açılması** için:
 | Y10.3 | 26 Ekim | ✅ | Tek komutla tam site deploy'u (`deploy.sh` → backend, ardından `deploy-frontend.sh`): `[frontend] Bitti: ae5937b -> 47aedc8`, derleme `dist.new/` içine 11,3 sn, yer değiştirme + sağlık kontrolü ✅, site çalışıyor. 📝 `cp -an` coreutils 9.x'te "non-portable" uyarısı → `cp -a --update=none` (aynı anlam: var olanı ezme) |
 | Y10.3b | 26 Ekim | ✅ | `cp --update=none` düzeltmesi deploy edildi ve **yeniden başlatma ilk kez canlı denendi**: `Kod cekiliyor (3bc56a8)` → `deploy/ betikleri degisti: yeni surumle yeniden baslatiliyor` → ikinci tur (tekrar başlatma YOK, "önceki sürüm" yine 3bc56a8) → `Backend bitti: 3bc56a8 -> 03d3940` → frontend `47aedc8 -> 47aedc8`, `cp` uyarısı yok. `dist` + `dist.old`, `git status` temiz, `dist/assets` 182 dosya (önceki derlemenin parçaları korunuyor). **Y10 tamam** |
 | Y10.4 | 26 Ekim | ✅ | **Uçtan uca kullanıcı testi** (İsmail, tarayıcıdan): kayıt + giriş, davetiye oluşturma, fotoğraf yükleme (S3 + kuyruk + `media.davetkart.com`) çalışıyor; parola sıfırlama maili SES sandbox'tan doğrulanmış Gmail'e **gelen kutusuna** düştü (spam değil → DKIM/DMARC çalışıyor) |
+| Y11.5–Y11.6 (hazırlık) | 16 Kasım | 🟡 | Faz 18.2 (`OPS-02`, K151–K157): yedek betiği, cron dosyası ve prova betiği backend deposunda yazıldı (`deploy/backup/`, `deploy/cron/davetkart-backup`) ve yerelde denendi. **AWS'de ve sunucuda henüz hiçbir şey kurulmadı:** bucket, kimlik, kurulum ve ilk üretim provası [`YEDEK-VE-GERI-YUKLEME.md`](YEDEK-VE-GERI-YUKLEME.md)'de. Yedekler ayrı bucket'a gider (Y3.1 kararı); §1 şemasındaki "ayrı önek" ve Y3.3'teki `backups/` kuralı kullanılmıyor. Açık karar: sunucuya AWS CLI nasıl kurulacak (kitap §4.1) |

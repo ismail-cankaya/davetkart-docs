@@ -9,7 +9,7 @@
 > ve `FAZ-14.md`'de kullanılmışlar, satırları buraya işlenmedi. Bu numaralar **dolu**; yeni
 > karar almaz. Faz 18 kararları bu yüzden K146'dan başlar (2026-11-16).
 
-**Sıradaki boş numara: K151**
+**Sıradaki boş numara: K158**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -146,6 +146,13 @@
 | **K148** | Dağıtım sırası: önce backend, `plans:export --check` yeşilken frontend; tersine sıra yasak | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K149** | Sürüm etiketle izlenir (`vMAJOR.MINOR.PATCH`, iki depoda aynı); deploy betikleri etiketi yazar, etiketsiz commit uyarı verir, durdurmaz | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K150** | Kalite kapısı kırmızı olan dal yayın adayı değildir; `TST-01` `OPS-01` dalında kapandı | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K151** | Gece yedeği: 02:00 UTC'de `pg_dump -Fc`; ayrı cron dosyası, `root`, Laravel zamanlayıcısından bağımsız; kilit (`flock`) betiğin içinde | Faz 18.2 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K152** | Yedekler medyadan ayrı S3 bucket'ında: Block Public Access, sürümleme, SSE-S3; geçerli sürüm 30 gün + eski sürüm 7 gün (etkili saklama ~37 gün) | Faz 18.2 (16 Kas) | geçerli · ⚠️ bucket henüz açılmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K153** | Sunucudaki yedek kimliği yalnızca yazabilir (`s3:PutObject`, `daily/*`); anahtar root:600 dosyada; betik root'a ait kurulu kopyadan çalışır | Faz 18.2 (16 Kas) | geçerli · ⚠️ kimlik henüz açılmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K154** | Yedek veritabanına `postgres` sistem kullanıcısı + peer ile bağlanır; `.pgpass` yok, parola hiçbir yerde yok | Faz 18.2 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K155** | Döküm yüklenmeden doğrulanır (`pg_restore --list`, boyut, zorunlu tablolar) ve `manifest.json` ile gider; satır sayıları dökümle aynı anlık görüntüden | Faz 18.2 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K156** | Yedek izlemesi asgari: isteğe bağlı iki kalp atışı adresi (başarı / başarısızlık); adres günlüğe yazılmaz; alarm `OPS-03` | Faz 18.2 (16 Kas) | geçerli · adresler boş | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K157** | Kayıt açılmadan önce üretim dökümüyle geri yükleme provası ve ölçülen süre plana; sonra ayda bir; RPO 24 saat kabul, WAL/PITR ayrı karar | Faz 18.2 (16 Kas) | geçerli · ⚠️ üretim provası yapılmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 
