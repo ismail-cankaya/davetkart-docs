@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-16 — Faz 18.1 `OPS-01` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
+
+- Yayın sırası ve sürüm etiketi çalıştırma kitabı [`operations/deployment/YAYIN-SIRASI.md`](operations/deployment/YAYIN-SIRASI.md); K146–K150 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md), `DECISION-INDEX.md`: sıradaki boş numara K151, K128–K145 için ⚠️ notu); [`phases/faz-18/FAZ-18-OPS-01-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-OPS-01-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md`, `operations/README.md`, `decisions/README.md` satırları.
+
 ## 2026-11-16 — Faz 18 prompt'ları (`docs/2026-11-16-faz-18-audit-fixes`)
 
 - `AUD-2026-11-12`'nin altı yüksek (🟠) bulgusu için altı prompt: `prompts/PROMPT-FAZ-18-{1..6}-*.md`; takip tablosu [`phases/faz-18/README.md`](phases/faz-18/README.md); `prompts/README.md` ve `phases/README.md` satırları.

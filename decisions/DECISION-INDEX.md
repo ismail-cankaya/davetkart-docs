@@ -5,7 +5,11 @@
 > bu dosyaya da elle satır eklenir (bkz. `../CLAUDE.md` §5).
 > ⚠️ işaretli satırlar açık soru ya da çelişki taşır; **numaralar değiştirilmedi.**
 
-**Sıradaki boş numara: K128**
+> ⚠️ **K128–K145 bu tabloda yok** (`ARC-01`, ayrı bir iş): backend `docs/rehber/fazlar/FAZ-13.md`
+> ve `FAZ-14.md`'de kullanılmışlar, satırları buraya işlenmedi. Bu numaralar **dolu**; yeni
+> karar almaz. Faz 18 kararları bu yüzden K146'dan başlar (2026-11-16).
+
+**Sıradaki boş numara: K151**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -137,6 +141,11 @@
 | **K125** | Ad/soyad/e-posta kullanıcıdan; TCKN, telefon, adres `config('payment.providers.shopier.buyer_placeholders')` | Faz 12 (24 Eki) | ⚠️ elle doğrulama bekliyor | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K126** | Bildirim tutar taşıyorsa (OSB) siparişin `amount_minor` + `currency`'siyle eşleşmeli; uymazsa geçiş yok + `Lo`… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K127** | Tarayıcı callback'i ayrı metot (`parseCallback`) ve ayrı tip (`ShopierCallback`); `osb` modunda bildirim nesn… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K146** | Plan kuralları sözleşmesi: `plans:export` → `contracts/plan-rules.json` (fiyat ve damga yok), `--check` `composer check` zincirinde | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K147** | Frontend `verify:plans`: `minimumTier`, fiyat kartı ve `getRequiredTier` ↔ sözleşme kopyası (kopya, kardeş depodan okuma yok) | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K148** | Dağıtım sırası: önce backend, `plans:export --check` yeşilken frontend; tersine sıra yasak | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K149** | Sürüm etiketle izlenir (`vMAJOR.MINOR.PATCH`, iki depoda aynı); deploy betikleri etiketi yazar, etiketsiz commit uyarı verir, durdurmaz | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K150** | Kalite kapısı kırmızı olan dal yayın adayı değildir; `TST-01` `OPS-01` dalında kapandı | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 
