@@ -11,7 +11,7 @@ Altı yüksek (🟠) bulgu, yayından önce. Her bulgu ayrı bir düzeltme dalı
 
 | Sıra | Bulgu | Konu | Efor | Prompt | Depolar | Dal | K | Durum |
 |---|---|---|---|---|---|---|---|---|
-| 18.1 | `OPS-01` | Yayına çıkacak commit ve dağıtım sırası; plan kuralları sözleşmesi (+ `TST-01`) | S | [`PROMPT-FAZ-18-1-OPS-01.md`](../../prompts/PROMPT-FAZ-18-1-OPS-01.md) | backend · frontend · docs | `fix/2026-11-16-ops-01-release-alignment` (backend · frontend) | K146–K150 | backend ve docs: kod ✅ · commit bekliyor — frontend: dosyalar hazır, `package.json` adımı 18.1.0 birleştirme commit'ini bekliyor |
+| 18.1 | `OPS-01` | Yayına çıkacak commit ve dağıtım sırası; plan kuralları sözleşmesi (+ `TST-01`) | S | [`PROMPT-FAZ-18-1-OPS-01.md`](../../prompts/PROMPT-FAZ-18-1-OPS-01.md) | backend · frontend · docs | `fix/2026-11-16-ops-01-release-alignment` (backend · frontend) | K146–K150 | kod ✅ · commit bekliyor (backend 18.1.1–18.1.4 birleşti `162c985`; kalan: frontend 18.1.5 + birleştirme, backend 18.1.7 + birleştirme, docs) |
 | 18.2 | `OPS-02` | Veritabanı yedeği ve geri yükleme provası | M | [`PROMPT-FAZ-18-2-OPS-02.md`](../../prompts/PROMPT-FAZ-18-2-OPS-02.md) | backend · docs | — | — | bekliyor |
 | 18.3 | `SEC-01` | İlk yayın indirimi tek açık siparişe | M | [`PROMPT-FAZ-18-3-SEC-01.md`](../../prompts/PROMPT-FAZ-18-3-SEC-01.md) | backend · (frontend) · docs | — | — | bekliyor |
 | 18.4 | `SEC-02` | Yayınlanmış hakkın iadesi | M | [`PROMPT-FAZ-18-4-SEC-02.md`](../../prompts/PROMPT-FAZ-18-4-SEC-02.md) | backend · (frontend) · docs | — | — | bekliyor |
@@ -26,7 +26,7 @@ Durum değerleri: `bekliyor` → `kod ✅ · commit bekliyor` → `birleşti` (�
 
 | Dosya | Ne |
 |---|---|
-| [`FAZ-18-OPS-01-COMMIT-KOMUTLARI.md`](FAZ-18-OPS-01-COMMIT-KOMUTLARI.md) | 18.1 (`OPS-01`) commit ve birleştirme komutları: frontend birleştirmesi (18.1.0), backend 18.1.1–18.1.4, frontend 18.1.5, docs 18.1.6 |
+| [`FAZ-18-OPS-01-COMMIT-KOMUTLARI.md`](FAZ-18-OPS-01-COMMIT-KOMUTLARI.md) | 18.1 (`OPS-01`) commit ve birleştirme komutları: üstte kalan bloklar (frontend 18.1.5, backend 18.1.7, docs), altta çalıştırılmışların kaydı |
 
 Kararlar: [`../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) ·
 çalıştırma kitabı: [`../../operations/deployment/YAYIN-SIRASI.md`](../../operations/deployment/YAYIN-SIRASI.md).
