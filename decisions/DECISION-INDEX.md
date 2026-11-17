@@ -8,8 +8,10 @@
 > ⚠️ **K128–K145 bu tabloda yok** (`ARC-01`, ayrı bir iş): backend `docs/rehber/fazlar/FAZ-13.md`
 > ve `FAZ-14.md`'de kullanılmışlar, satırları buraya işlenmedi. Bu numaralar **dolu**; yeni
 > karar almaz. Faz 18 kararları bu yüzden K146'dan başlar (2026-11-16).
+> Bu aralıktaki **K131** (ilk yayın = hiç ödenmiş sipariş yok; bekleyen sayılmaz) Faz 18.3'te
+> **daraltıldı → K159**; durum notu backend `FAZ-13.md` §4'teki satırına işlendi.
 
-**Sıradaki boş numara: K158**
+**Sıradaki boş numara: K164**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -153,6 +155,12 @@
 | **K155** | Döküm yüklenmeden doğrulanır (`pg_restore --list`, boyut, zorunlu tablolar) ve `manifest.json` ile gider; satır sayıları dökümle aynı anlık görüntüden | Faz 18.2 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K156** | Yedek izlemesi asgari: isteğe bağlı iki kalp atışı adresi (başarı / başarısızlık); adres günlüğe yazılmaz; alarm `OPS-03` | Faz 18.2 (16 Kas) | geçerli · adresler boş | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K157** | Kayıt açılmadan önce üretim dökümüyle geri yükleme provası ve ölçülen süre plana; sonra ayda bir; RPO 24 saat kabul, WAL/PITR ayrı karar | Faz 18.2 (16 Kas) | geçerli · ⚠️ üretim provası yapılmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K158** | Kullanıcı başına en fazla bir `pending` + `first_publish` sipariş; üç katman: kullanıcı satırı kilidi, kısmi UNIQUE index, ödeme anında son kapı (`Log::critical`, geçiş reddedilmez) | Faz 18.3 (16 Kas) | geçerli · ⚠️ yönetici bildirim kanalı yok, yalnızca log | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K159** | İlk yayın uygunluğu tek yerde (`FirstPublishEligibility`): `paid_at` damgalı sipariş yok **ve** başka hedefin ödeme bekleyen indirimli siparişi yok; önizleme ve checkout aynı cevabı kullanır. K131'i daraltır | Faz 18.3 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K160** | Aynı niyet (hedef, plan, otomatik fiyat tutarı, hediye kodu, sağlayıcı) için ödeme bekleyen sipariş varsa checkout onu döndürür; kimliği ve penceresi değişmez | Faz 18.3 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K161** | Aynı hedefte farklı niyet eski siparişi `expired` kapatır, indirim yenisine geçer; penceresi dolmuş `pending` satırlar checkout başında kapatılır (K89'a dayanır) | Faz 18.3 (16 Kas) | geçerli · ⚠️ kapatılan siparişe geç ödemeyi yalnızca son kapı yakalar | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K162** | İndirim index'inin göçü veri değiştirmez: çakışan satır varsa anlaşılır mesajla durur, çözüm sorgusu kılavuzda | Faz 18.3 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K163** | Fiyat uçlarının yanıt biçimi değişmez; istek isteğe bağlı hedef alır (`GET /pricing?invitation=`, önizlemede `invitationId`), yoksa davetiyesiz paket; sahiplik sınanmaz | Faz 18.3 (16 Kas) | geçerli · ⚠️ plandan sapma (frontend ödeme sayfası değişti) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 

@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-16 — Faz 18.3 `SEC-01` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
+
+- "İlk yayın" indirimi tek açık siparişe: K158–K163 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.3; `DECISION-INDEX.md`: sıradaki boş numara K164, K131 için "daraltıldı → K159" notu); [`phases/faz-18/FAZ-18-SEC-01-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-01-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` satırları.
+
 ## 2026-11-16 — Faz 18.2 `OPS-02` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
 
 - Yedek ve geri yükleme çalıştırma kitabı [`operations/deployment/YEDEK-VE-GERI-YUKLEME.md`](operations/deployment/YEDEK-VE-GERI-YUKLEME.md) (bucket, IAM politikası, sunucu kurulumu, prova kaydı); K151–K157 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md), `DECISION-INDEX.md`: sıradaki boş numara K158); `YAYIN-PLANI.md` Y11.5–Y11.6 bağlantıları ve ilerleme satırı; `YAYIN-SIRASI.md` kontrol listesi 6. madde; [`phases/faz-18/FAZ-18-OPS-02-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-OPS-02-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` ve `operations/README.md` satırları.
