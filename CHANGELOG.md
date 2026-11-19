@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-20 — Faz 18.4 `SEC-02` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
+
+- Yayın yapmış hak iade edilmez: K164–K169 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.4; `DECISION-INDEX.md`: sıradaki boş numara K170, K82 için "daraltıldı → K164", K139 için "daraltıldı → K166" notu); [`phases/faz-18/FAZ-18-SEC-02-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-02-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` satırları.
+
 ## 2026-11-16 — Faz 18.3 `SEC-01` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
 
 - "İlk yayın" indirimi tek açık siparişe: K158–K163 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.3; `DECISION-INDEX.md`: sıradaki boş numara K164, K131 için "daraltıldı → K159" notu); [`phases/faz-18/FAZ-18-SEC-01-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-01-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` satırları.

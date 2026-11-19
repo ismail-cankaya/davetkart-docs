@@ -78,3 +78,34 @@ Açık kalanlar (karar İsmail'in): kapatılmış siparişe geç gelen indirimli
 kullanımının yeniden aktif sayılması (Faz 11'den beri var; K161 kapatmayı anında yaptığı için
 beklemeye gerek kalmıyor) · başka hedefin sayfasında "indiriminiz açık bir siparişte ayrılmış"
 metni (UX; yanıt sebep taşımıyor) · plan duvarının hedefli kataloğu okuması.
+
+### 18.4 — `SEC-02` (yayın yapmış hakkın iadesi)
+
+Kod kılavuzları (backend `docs/rehber/`): `database/migrations/2026_11_17_100000_add_first_published_at_to_orders_table.md` ·
+`app/Actions/Payment/StampFirstPublishAction.md` · `app/Services/Refund/RefundEligibility.md` §6–§9 ·
+`app/Actions/Refund/ResolveRefundRequestAction.md` §5–§8 · `app/Console/Commands/RefundCommands.md` §2.1, §4–§5.
+Frontend: `docs/rehber/src/pages/account/README.md` §7.
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K164** | **Yayın damgası:** `orders.first_published_at` (tz'siz `timestamp`, nullable; `CHECK (first_published_at IS NULL OR paid_at IS NOT NULL)`). Hak yayındaki bir davetiyeye ilk kez hizmet ettiğinde **yalnızca boşsa** basılır; serbest bırakma (K82), davetiye silme ya da başka hiçbir yol onu silmez. `#[Fillable]` boş kalır; tek yazar `StampFirstPublishAction` | "Kullanıldı" bir **olaydır**, `invitation_id` bir **konum**. Konumdan türetilen olay, konum değişince (K82'nin serbest bırakması) kaybolur: `SEC-02` buydu. K137'nin dersi ("bilgi kopabilecek bir bağda saklanmaz") bir adım erkene, yayın anına taşındı. `timestampTz` değil `timestamp`: şemadaki bütün zaman kolonları tz'siz ve pgsql bağlantısında saat dilimi ayarı yok; tek tz'li kolon UTC olmayan oturumda `GREATEST(published_at, paid_at)` gibi karşılaştırmaları kaydırırdı | ✅ Faz 18.4 · ⚠️ yerel göç koşmadı |
+| **K165** | **İki basma yeri:** `PublishInvitationAction` (yayın yazıldıktan sonra, aynı transaction) ve `DeleteInvitationAction` (hak davetiyeden ayrılmadan ya da yanmadan önce). Davetiyeye bağlı **ödenmiş her** sipariş damgalanır; zaman = yayın anı ile ödeme anının sonraki | Yayındaki davetiyeye sonradan ödenen yükseltme siparişi yayın Action'ından hiç geçmez; davetiye üç gün içinde silinince damgasız serbest kalır ve iade edilirdi (aynı açık, yan kapıdan). Ödeme bildiriminde basmak davetiye satırını silme akışıyla ters sırada kilitlemeyi gerektirirdi: para yolunda kilitlenme riski. Silme akışı davetiyeyi zaten kilitli tutuyor | ✅ Faz 18.4 · ⚠️ plandan sapma (plan yalnızca yayını sayıyordu) |
+| **K166** | **Yeni iade engeli `used`:** `RefundEligibility::usageBlockerFor()`: bağlı ya da yanmış → `in_use`; değilse damgalı → `used`. `in_use` önce sorulur. Hata kodu (`REFUND_NOT_ALLOWED`, 409) ve `contracts/error-codes.json` değişmez; frontend `RefundBlocker` tipi, `refundReasons.used` çevirisi ve Planlarım'da açıklama satırı. **K139'u daraltır** | Serbest kalan hak Planlarım'da "Kullanılabilir" görünür ve yeni bir davetiyede kullanılabilir (K82, D6). `in_use`'un cümlesi ("hak bir davetiyede kullanılıyor") aynı satırda çelişir ve "silersem iade alırım" eylemini önerirdi | ✅ Faz 18.4 |
+| **K167** | **Onay anında yeniden sınama:** `ResolveRefundRequestAction` onayda, sipariş satırı kilitliyken `usageBlockerFor()`'u sorar; hak kullanılmışsa onaylamaz (talep açık kalır, `refunds:reject` ile kapanır). `refunds:approve` aynı soruyu "Parayı Shopier panelinden geri gönderdiniz mi?" sorusundan **önce** sorar. Sipariş zaten `refunded` ise istisna. Durum makinesi değişmez | TOCTOU: talep anındaki "kullanılmamış" cevabı onaya kadar bayatlar. İki yol: düzeltmeden önce açılmış talep (denetim sondası P47) ve donmuş hakkı aşan eşzamanlı yayın (iki bağlantılı SQL denemesiyle görüldü). Tam uygunluk sorulmaz: açık talep her zaman doludur, 14 gün yöneticinin gecikmesiyle kullanıcıyı cezalandırırdı. Ön denetim K141'in sırası yüzünden (önce para, sonra komut): yalnızca Action reddetseydi para çoktan gitmiş olurdu | ✅ Faz 18.4 · ⚠️ para gönderilip onay reddedilirse yol yok (açık karar) |
+| **K168** | **`refunds:list` "Yayın" sütunu:** damga tarihi (`davetkart.default_timezone`) · `davetiyeye bağlı` (damgasız ama bağlı) · `hiç yayınlanmadı` | Son savunma insan onayıydı ama onaylayan kararı verecek bilgiye sahip değildi (P49). Bağlı ama damgasız hak (yükseltme) "hiç yayınlanmadı" görünmemeli | ✅ Faz 18.4 |
+| **K169** | **Geriye dönük doldurma (göç):** (1) yayınlanmış davetiyeye bağlı (çöptekiler dahil), `paid_at` damgalı sipariş → `GREATEST(published_at, paid_at)`; (2) yanmış hak → `consumed_at`; (3) serbest kalmış hak → aynı kullanıcının çöpteki **yayınlanmış** davetiyesi + sipariş `updated_at` ≈ davetiye `deleted_at` (±2 sn) + `paid_at <= deleted_at`. İz yoksa damga yok | Canlıda müşteri verisi yok; doldurma, düzeltmeden önce açılmış bir talebin onaylanmasını önlemek için. 3. kural sezgisel: `DeleteInvitationAction` iki zamanı aynı transaction'da yazar. Çöp kutusu (30 gün) boşaldıysa ya da sipariş sonradan güncellendiyse iz kaybolur; yanlış damga elle (SQL) düzeltilir, uygulamada silen yol bilerek yok. Yerel deneme verisinde 24 siparişten 6'sı | ✅ Faz 18.4 · ⚠️ 3. kural sezgisel |
+
+**Daraltılan kararlar:** K139 ("iptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün") →
+**K166**: hak bir davetiyeyi yayınlamamış da olmalı. K139'un satırı backend `docs/rehber/fazlar/FAZ-14.md`
+§4'te (bu depodaki indekste yok, `ARC-01`); durum notu oraya işlendi. K82 ("ödenen hak 3 gün içinde
+serbest kalır") → **K164**: pencere ve serbest bırakma aynen; serbest kalan hak yeniden **kullanılır**,
+artık **iade edilmez** (D6).
+
+Geçersiz kılınan karar: yok. K137 (yanma damgası) ve K141 (önce para, sonra komut) değişmedi; K167,
+K141'in sorusundan önce bir denetim ekler.
+
+Açık kalanlar (karar İsmail'in): para gönderilip onay reddedilirse ne yapılacağı (bugün: Shopier iade
+bildirimi beklenir ya da elle SQL; "yine de onayla" bayrağı bilerek yok) · göçten sonra yerelde
+damgalanan 6 siparişin doğruluğu · donmuş hakkın eşzamanlı yayında bağlanabilmesinin kök düzeltmesi
+(`ClaimReleasedOrderAction`, `TST-02`; parasal sonucu K167 yakalıyor) · frontend Kullanım Şartları'ndaki
+"İade talepleri İletişim sayfası üzerinden iletilir" ifadesi (Faz 14'ten beri Planlarım).

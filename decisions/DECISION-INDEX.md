@@ -10,8 +10,10 @@
 > karar almaz. Faz 18 kararları bu yüzden K146'dan başlar (2026-11-16).
 > Bu aralıktaki **K131** (ilk yayın = hiç ödenmiş sipariş yok; bekleyen sayılmaz) Faz 18.3'te
 > **daraltıldı → K159**; durum notu backend `FAZ-13.md` §4'teki satırına işlendi.
+> **K139** (iptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün) Faz 18.4'te
+> **daraltıldı → K166**; durum notu backend `FAZ-14.md` §4'teki satırına işlendi.
 
-**Sıradaki boş numara: K164**
+**Sıradaki boş numara: K170**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -97,7 +99,7 @@
 | **K79** | `Jobs/SendRsvpNotification` yazılmadı | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
 | **K80** | Altyapı en düşük ortak paydaya yazılır; Redis, S3 ve süpervizör birer yükseltmedir | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K81** | `orders.scope` — kapsam satırda saklanır, okumada türetilmez | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K82** | Yayınlanmış davetiye silinebilir; ödenen hak 3 gün içinde serbest kalır | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
+| **K82** | Yayınlanmış davetiye silinebilir; ödenen hak 3 gün içinde serbest kalır | Faz 9 | geçerli · daraltıldı → K164 (Faz 18.4, `SEC-02`): serbest kalan hak yeniden kullanılır, iade edilmez | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K83** | Serbest hak, yayın anında yeten en düşük siparişten harcanır | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K84** | Bakım komutları `--dry-run` taşır ve zamanlayıcıdan önce elle koşulur | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K85** | Güvenlik başlıkları middleware'de, nginx'te değil | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
@@ -161,6 +163,12 @@
 | **K161** | Aynı hedefte farklı niyet eski siparişi `expired` kapatır, indirim yenisine geçer; penceresi dolmuş `pending` satırlar checkout başında kapatılır (K89'a dayanır) | Faz 18.3 (16 Kas) | geçerli · ⚠️ kapatılan siparişe geç ödemeyi yalnızca son kapı yakalar | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K162** | İndirim index'inin göçü veri değiştirmez: çakışan satır varsa anlaşılır mesajla durur, çözüm sorgusu kılavuzda | Faz 18.3 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K163** | Fiyat uçlarının yanıt biçimi değişmez; istek isteğe bağlı hedef alır (`GET /pricing?invitation=`, önizlemede `invitationId`), yoksa davetiyesiz paket; sahiplik sınanmaz | Faz 18.3 (16 Kas) | geçerli · ⚠️ plandan sapma (frontend ödeme sayfası değişti) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K164** | Yayın damgası `orders.first_published_at`: hak ilk kez yayına hizmet ettiğinde yalnızca boşsa basılır, hiçbir yol silmez; tek yazar `StampFirstPublishAction`; tz'siz `timestamp` + CHECK | Faz 18.4 (17 Kas) | geçerli · ⚠️ yerel göç koşmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K165** | Damga yayında ve silmede (hak davetiyeden ayrılmadan önce) basılır; davetiyeye bağlı ödenmiş her sipariş; zaman = yayın ve ödeme anının sonraki | Faz 18.4 (17 Kas) | geçerli · ⚠️ plandan sapma (yükseltme siparişinin yan kapısı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K166** | Yeni iade engeli `used` (serbest ama yayın yapmış hak); `in_use` önce sorulur; hata kodu ve sözleşme aynı. K139'u daraltır | Faz 18.4 (17 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K167** | İade onayı "hak kullanıldı mı"yı kilit altında yeniden sınar; `refunds:approve` para sorusundan önce durur; durum makinesi aynı | Faz 18.4 (17 Kas) | geçerli · ⚠️ para gönderilip onay reddedilirse yol yok | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K168** | `refunds:list` "Yayın" sütunu: damga tarihi · `davetiyeye bağlı` · `hiç yayınlanmadı` | Faz 18.4 (17 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K169** | Göç damgayı geriye dönük doldurur: bağlı + yayınlanmış, yanmış ve çöpteki davetiyeden izlenen serbest hak; iz yoksa damga yok | Faz 18.4 (17 Kas) | geçerli · ⚠️ 3. kural sezgisel | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 
