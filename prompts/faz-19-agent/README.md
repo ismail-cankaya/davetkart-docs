@@ -47,12 +47,7 @@ Hatlar içindeki dosya sahipliği çakışmayı azaltacak biçimde seçildi: `Ap
    }
    ```
    Sonra PostgreSQL'de üç veritabanını oluştur: `davetkart_test_hat_a`, `davetkart_test_hat_b`, `davetkart_test_hat_c` (Hat B ayrıca `davetkart_e2e`; `TST-04` kurar). Ana klasör `faz-19-audit-fixes`'te kalır; birleştirmeleri orada yaparsın.
-3. **Üç hattı başlat:** her hat için ayrı bir Claude Code oturumu, **çalışma klasörü hat klasörü** (`D:\Projects\davetkart-hat-a` …). Her bulgu için: §A'yı doldur → `/clear` → dosyadaki `/model` → şu satırı yapıştır:
-
-   ```
-   davetkart-docs\prompts\faz-19-agent\BAGLAM.md ve davetkart-docs\prompts\faz-19-agent\19-NN-ID.md dosyalarını oku ve 19-NN-ID.md'yi uygula.
-   ```
-   Bitince: commit komutları (hat klasöründe) → birleştirme (ana klasörde) → hattın sıradaki bulgusu.
+3. **Üç hattı başlat:** her hat için ayrı bir Claude Code oturumu; **çalışma klasörü hat klasörü** (`D:\Projects\davetkart-hat-a` …). Yapıştıracağın satırlar **hazır**: [`BASLA.md`](BASLA.md) (şablon yok, her bulgunun gerçek dosya adı ve klasörü yazılı; aynı satır her prompt dosyasının başında da var). Her bulguda: §A'yı **hat klasöründeki** kopyada doldur → `/clear` → `/model` → satırı yapıştır. Bitince: commit komutları (hat klasöründe) → birleştirme (ana klasörde) → hattın sıradaki satırı.
 4. **Hat B'nin `SEC-11`'i** Hat A'nın `SEC-10`, `SEC-09` ve Hat C'nin `SEC-13`'ünü bekler (dosyada yazıyor).
 5. **Üç hat bitince (Hat C'de):** `19-90-KAYIT.md` → `19-28-ARC-03.md` (Faz 19 kapanışı, `v1.2.0`).
 6. Kapanıştan sonra hat klasörlerini kaldır: `git -C <depo> worktree remove D:\Projects\davetkart-hat-x\<depo>` (her depo, her hat).
@@ -90,4 +85,4 @@ Hatlar içindeki dosya sahipliği çakışmayı azaltacak biçimde seçildi: `Ap
 | C8 | 19.90 kayıt birleştirme | Sonnet | 40 | — | A, B, C bitmiş | [`19-90-KAYIT.md`](19-90-KAYIT.md) |
 | C9 | 19.28 `ARC-03` + Faz 19 kapanışı | Sonnet | 80 | §A | 19.90 | [`19-28-ARC-03.md`](19-28-ARC-03.md) |
 
-Yardımcılar: [`BAGLAM.md`](BAGLAM.md) (ortak kurallar) · [`19-00-HAZIRLIK.md`](19-00-HAZIRLIK.md) · [`19-CAKISMA.md`](19-CAKISMA.md)
+Yardımcılar: [`BASLA.md`](BASLA.md) (yapıştırılacak satırlar) · [`BAGLAM.md`](BAGLAM.md) (ortak kurallar) · [`19-00-HAZIRLIK.md`](19-00-HAZIRLIK.md) · [`19-CAKISMA.md`](19-CAKISMA.md)

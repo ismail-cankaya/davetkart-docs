@@ -1,5 +1,6 @@
 # 19.0 — Paralel çalışma hazırlığı (hat başına test veritabanı)
 
+> **Başlatma:** `D:\Projects\davetkart` (ana klasör) → `/clear` → `/model sonnet` → [`BASLA.md`](BASLA.md) §0 satırı.
 > **Tek ajan, hatlar başlamadan önce.** **Model:** `/model sonnet` · **Çağrı bütçesi:** 30 · Kurallar: `BAGLAM.md` (yalnızca §1 ve §3; bu prompt ana klasörde çalışır, §2'nin "ana klasörde değişiklik yok" kuralı bu prompt için geçerli değil).
 
 ## Sorun
