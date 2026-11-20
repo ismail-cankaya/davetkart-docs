@@ -13,6 +13,34 @@ Yapay zekâ ajanlarına verilen başlangıç prompt'ları (`PROMPT-*.md`). Geçe
 | [`PROMPT-FAZ-18-4-SEC-02.md`](PROMPT-FAZ-18-4-SEC-02.md) | Faz 18.4 — `SEC-02` denetim düzeltmesi (16 Kasım 2026) | — | [`phases/faz-18/`](../phases/faz-18/README.md) | Hazır |
 | [`PROMPT-FAZ-18-5-SEC-03.md`](PROMPT-FAZ-18-5-SEC-03.md) | Faz 18.5 — `SEC-03` denetim düzeltmesi (16 Kasım 2026) | — | [`phases/faz-18/`](../phases/faz-18/README.md) | Hazır |
 | [`PROMPT-FAZ-18-6-SEC-04.md`](PROMPT-FAZ-18-6-SEC-04.md) | Faz 18.6 — `SEC-04` denetim düzeltmesi (16 Kasım 2026) | — | [`phases/faz-18/`](../phases/faz-18/README.md) | Hazır |
+| [`PROMPT-FAZ-19-01-SEC-07.md`](PROMPT-FAZ-19-01-SEC-07.md) | Faz 19.1 — `SEC-07` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-02-ARC-01.md`](PROMPT-FAZ-19-02-ARC-01.md) | Faz 19.2 — `ARC-01` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-03-ARC-02.md`](PROMPT-FAZ-19-03-ARC-02.md) | Faz 19.3 — `ARC-02` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-04-ARC-05.md`](PROMPT-FAZ-19-04-ARC-05.md) | Faz 19.4 — `ARC-05` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-05-ARC-04.md`](PROMPT-FAZ-19-05-ARC-04.md) | Faz 19.5 — `ARC-04` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-06-OPS-04.md`](PROMPT-FAZ-19-06-OPS-04.md) | Faz 19.6 — `OPS-04` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-07-OPS-03.md`](PROMPT-FAZ-19-07-OPS-03.md) | Faz 19.7 — `OPS-03` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-08-OPS-05.md`](PROMPT-FAZ-19-08-OPS-05.md) | Faz 19.8 — `OPS-05` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-09-SEC-05.md`](PROMPT-FAZ-19-09-SEC-05.md) | Faz 19.9 — `SEC-05` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-10-SEC-06.md`](PROMPT-FAZ-19-10-SEC-06.md) | Faz 19.10 — `SEC-06` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-11-TST-02.md`](PROMPT-FAZ-19-11-TST-02.md) | Faz 19.11 — `TST-02` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-12-FE-51.md`](PROMPT-FAZ-19-12-FE-51.md) | Faz 19.12 — `FE-51` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-13-SEC-08.md`](PROMPT-FAZ-19-13-SEC-08.md) | Faz 19.13 — `SEC-08` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-14-SEC-09.md`](PROMPT-FAZ-19-14-SEC-09.md) | Faz 19.14 — `SEC-09` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-15-SEC-10.md`](PROMPT-FAZ-19-15-SEC-10.md) | Faz 19.15 — `SEC-10` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-16-SEC-13.md`](PROMPT-FAZ-19-16-SEC-13.md) | Faz 19.16 — `SEC-13` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-17-SEC-12.md`](PROMPT-FAZ-19-17-SEC-12.md) | Faz 19.17 — `SEC-12` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-18-SEC-11.md`](PROMPT-FAZ-19-18-SEC-11.md) | Faz 19.18 — `SEC-11` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-19-FE-52.md`](PROMPT-FAZ-19-19-FE-52.md) | Faz 19.19 — `FE-52` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-20-FE-01.md`](PROMPT-FAZ-19-20-FE-01.md) | Faz 19.20 — `FE-01` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-21-FE-02.md`](PROMPT-FAZ-19-21-FE-02.md) | Faz 19.21 — `FE-02` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-22-TST-04.md`](PROMPT-FAZ-19-22-TST-04.md) | Faz 19.22 — `TST-04` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-23-FE-04.md`](PROMPT-FAZ-19-23-FE-04.md) | Faz 19.23 — `FE-04` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-24-FE-10.md`](PROMPT-FAZ-19-24-FE-10.md) | Faz 19.24 — `FE-10` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-25-FE-53.md`](PROMPT-FAZ-19-25-FE-53.md) | Faz 19.25 — `FE-53` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-26-FE-50.md`](PROMPT-FAZ-19-26-FE-50.md) | Faz 19.26 — `FE-50` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-27-FE-54.md`](PROMPT-FAZ-19-27-FE-54.md) | Faz 19.27 — `FE-54` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`PROMPT-FAZ-19-28-ARC-03.md`](PROMPT-FAZ-19-28-ARC-03.md) | Faz 19.28 — `ARC-03` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
 | [`PROMPT-YAYIN.md`](PROMPT-YAYIN.md) | Yayın (AWS) oturumuna devam | Kayıtlı değil | [`operations/deployment/`](../operations/deployment/) | Güncel |
 
 **Bu depoda olmayanlar:** Faz 6–9 prompt'ları backend deposunun `claude/` klasöründe

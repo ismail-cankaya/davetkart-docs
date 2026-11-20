@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-20 — Faz 19 prompt'ları (`docs/2026-11-20-faz-19-audit-fixes`)
+
+- `AUD-2026-11-12`'nin 28 orta (🟡) bulgusu için 28 prompt (`TST-01` Faz 18.1'de kapandı): `prompts/PROMPT-FAZ-19-01-SEC-07.md` … `PROMPT-FAZ-19-28-ARC-03.md`; takip tablosu ve sıra gerekçesi [`phases/faz-19/README.md`](phases/faz-19/README.md); `prompts/README.md` ve `phases/README.md` satırları.
+
 ## 2026-11-20 — Faz 18.6 `SEC-04` kayıtları ve Faz 18 kapanışı (`docs/2026-11-16-faz-18-audit-fixes`)
 
 - SPA güvenlik başlıkları Nginx'te: K173–K178 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.6; `DECISION-INDEX.md`: sıradaki boş numara K179, K85 için "daraltıldı → K173"); [`operations/deployment/YAYIN-SIRASI.md`](operations/deployment/YAYIN-SIRASI.md) §4.4 (Nginx kurulumu) ve §6 (duman testi); [`phases/faz-18/FAZ-18-SEC-04-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-04-COMMIT-KOMUTLARI.md) (SEC-04 + Faz 18 kapanış komutları; etiket komutları `SEC-07` yüzünden yok); `phases/faz-18/README.md` ve `phases/README.md` Faz 18 satırları.
