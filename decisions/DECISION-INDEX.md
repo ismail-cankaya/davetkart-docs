@@ -13,7 +13,7 @@
 > **K139** (iptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün) Faz 18.4'te
 > **daraltıldı → K166**; durum notu backend `FAZ-14.md` §4'teki satırına işlendi.
 
-**Sıradaki boş numara: K170**
+**Sıradaki boş numara: K173**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -111,7 +111,7 @@
 | **K91** | Bozuk girdi (yarım JSON, NUL) → 400, alan başına değil `api` grubunda tek middleware | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
 | **K92** | Sayı alanları `integer:strict` (`true` ve `"3"` reddedilir) | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
 | **K93** | 429 ve 503 yanıtları `Retry-After` başlığını da taşır | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K94** | §A girdisi: BOŞ. Varsayılanlar: klasik `api_pay4.php`; ödeme imzası `base64(HMAC(random_nr·order_id·tutar·par`… | Faz 12 (24 Eki) | ⚠️ geçici: elle doğrulamadan sonra güncellenecek | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K94** | §A girdisi: BOŞ. Varsayılanlar: klasik `api_pay4.php`; ödeme imzası `base64(HMAC(random_nr·order_id·tutar·par`… | Faz 12 (24 Eki) | ⚠️ geçici: elle doğrulamadan sonra güncellenecek · Faz 18.5 (`SEC-03`): adım 7 OSB'yi doğrularsa `callback` kipinin kaldırılması ayrıca karara bağlanır (K170) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K95** | Mail kanalı kodda sağlayıcıdan bağımsız; geliştirmede `MAIL_MAILER=log`. SES mi alan adının SMTP'si mi, deplo… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
 | **K96** | Kullanıcıya giden mailler Türkçe (K21'in istisnası). Dil `config/davetkart.php` → `mail.locale` | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
 | **K97** | Hesap silinince anonimleştir: kullanıcı, davetiyeleri, LCV'leri, medyası (dosyalarıyla) silinir; `orders` sat… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
@@ -134,16 +134,16 @@
 | **K114** | İade edilen sipariş kullanımı geri vermez | Faz 11 (23 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7) |
 | **K115** | Tek kullanımlık kodlar bir kez gösterilir: `storage/app/private/gift-codes/<batch>.csv`; konsola basılmaz | Faz 11 (23 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7) |
 | **K116** | Süresi dolup kullanımı iade olmuş siparişe geç ödeme gelirse kod `max_redemptions`'ı 1 aşabilir: bilinen ve k… | Faz 11 (23 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7) |
-| **K117** | Onay kanalı `SHOPIER_CONFIRMATION`, varsayılan `osb`: tarayıcı callback'i yalnızca yönlendirir, `paid`'i yaln… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K117** | Onay kanalı `SHOPIER_CONFIRMATION`, varsayılan `osb`: tarayıcı callback'i yalnızca yönlendirir, `paid`'i yaln… | Faz 12 (24 Eki) | geçerli · daraltıldı → K170 (Faz 18.5, `SEC-03`): üretimde `callback` kipi reddedilir (503) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K118** | `CheckoutSession` bir `CheckoutAction` taşır: `RedirectAction(url)` \| `FormPostAction(url, fields)`. `Paymen`… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K119** | `OrderResource.checkout = {type:'redirect',url} \| {type:'form',url,fields}`; `redirectUrl` `type=redirect` i… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K120** | Shopier paketi eklenmez, kendi sürücümüz | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K121** | `platform_order_id = orders.id = provider_ref` (M8 korunur); Shopier'in kimliği `orders.provider_payment_id`… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
-| **K122** | Callback yanıtı 303, hedef `config('payment.return_urls')`'ten, `order` yalnızca ULID ise; geçersiz imza → `/`… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K122** | Callback yanıtı 303, hedef `config('payment.return_urls')`'ten, `order` yalnızca ULID ise; geçersiz imza → `/`… | Faz 12 (24 Eki) | geçerli · genişletildi → K172 (Faz 18.5): sürücü kurulamazsa da 303 → `/odeme/hata` | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K123** | Sır, mod ya da (`osb` modunda) OSB kimliği eksikse `ShopierGateway` kurulmaz → 503 | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K124** | Tutar metni `sprintf('%d.%02d', intdiv, %)`; imzaya giren ve forma yazılan aynı değişken | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K125** | Ad/soyad/e-posta kullanıcıdan; TCKN, telefon, adres `config('payment.providers.shopier.buyer_placeholders')` | Faz 12 (24 Eki) | ⚠️ elle doğrulama bekliyor | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
-| **K126** | Bildirim tutar taşıyorsa (OSB) siparişin `amount_minor` + `currency`'siyle eşleşmeli; uymazsa geçiş yok + `Lo`… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K126** | Bildirim tutar taşıyorsa (OSB) siparişin `amount_minor` + `currency`'siyle eşleşmeli; uymazsa geçiş yok + `Lo`… | Faz 12 (24 Eki) | geçerli · genişletildi → K171 (Faz 18.5): üretimde tutar taşımayan `paid` de reddedilir | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K127** | Tarayıcı callback'i ayrı metot (`parseCallback`) ve ayrı tip (`ShopierCallback`); `osb` modunda bildirim nesn… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K146** | Plan kuralları sözleşmesi: `plans:export` → `contracts/plan-rules.json` (fiyat ve damga yok), `--check` `composer check` zincirinde | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K147** | Frontend `verify:plans`: `minimumTier`, fiyat kartı ve `getRequiredTier` ↔ sözleşme kopyası (kopya, kardeş depodan okuma yok) | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
@@ -169,6 +169,9 @@
 | **K167** | İade onayı "hak kullanıldı mı"yı kilit altında yeniden sınar; `refunds:approve` para sorusundan önce durur; durum makinesi aynı | Faz 18.4 (17 Kas) | geçerli · ⚠️ para gönderilip onay reddedilirse yol yok | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K168** | `refunds:list` "Yayın" sütunu: damga tarihi · `davetiyeye bağlı` · `hiç yayınlanmadı` | Faz 18.4 (17 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K169** | Göç damgayı geriye dönük doldurur: bağlı + yayınlanmış, yanmış ve çöpteki davetiyeden izlenen serbest hak; iz yoksa damga yok | Faz 18.4 (17 Kas) | geçerli · ⚠️ 3. kural sezgisel | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K170** | Üretimde Shopier `callback` kipi yapılandırma hatasıdır: sürücü kurulmaz (K123 gibi 503) + `critical` log; kip yalnızca yerel/test. K117'yi daraltır | Faz 18.5 (20 Kas) | geçerli · ⚠️ sunucudaki değer gözle doğrulanmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K171** | Üretimde tutar taşımayan `paid` bildirimi `amountMatches()`'ten geçmez; `failed`/`refunded` ve üretim dışı etkilenmez. K126'yı genişletir | Faz 18.5 (20 Kas) | geçerli · ⚠️ plandan sapma (yalnızca `paid`) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K172** | Callback ucu sürücüyü `try` içinde kurar; kurulamazsa 303 → `/odeme/hata` (`?order=` yok), sipariş değişmez; OSB 503 kalır. K122'yi genişletir | Faz 18.5 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 

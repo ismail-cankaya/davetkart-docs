@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-20 — Faz 18.5 `SEC-03` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
+
+- Shopier `callback` kipi üretimde reddedilir: K170–K172 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.5; `DECISION-INDEX.md`: sıradaki boş numara K173, K117 için "daraltıldı → K170", K122/K126 için "genişletildi" ve K94 için kaldırma notu); [`phases/faz-18/FAZ-18-SEC-03-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-03-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` satırları.
+
 ## 2026-11-20 — Faz 18.4 `SEC-02` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
 
 - Yayın yapmış hak iade edilmez: K164–K169 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.4; `DECISION-INDEX.md`: sıradaki boş numara K170, K82 için "daraltıldı → K164", K139 için "daraltıldı → K166" notu); [`phases/faz-18/FAZ-18-SEC-02-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-02-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` satırları.

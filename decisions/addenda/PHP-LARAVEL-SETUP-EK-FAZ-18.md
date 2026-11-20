@@ -109,3 +109,28 @@ bildirimi beklenir ya da elle SQL; "yine de onayla" bayrağı bilerek yok) · g�
 damgalanan 6 siparişin doğruluğu · donmuş hakkın eşzamanlı yayında bağlanabilmesinin kök düzeltmesi
 (`ClaimReleasedOrderAction`, `TST-02`; parasal sonucu K167 yakalıyor) · frontend Kullanım Şartları'ndaki
 "İade talepleri İletişim sayfası üzerinden iletilir" ifadesi (Faz 14'ten beri Planlarım).
+
+### 18.5 — `SEC-03` (Shopier `callback` kipi üretimde reddedilir)
+
+Kod kılavuzları (backend `docs/rehber/`): `app/Services/Payment/ShopierGateway.md` §11 ·
+`app/Http/Controllers/Api/V1/ShopierCallbackController.md` §8 ·
+`app/Actions/Payment/HandlePaymentCallbackAction.md` "Faz 18.5" · `config/payment.md` §3.
+Frontend değişmedi.
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K170** | **Üretimde `callback` kipi yok:** `App::isProduction()` ve `SHOPIER_CONFIRMATION=callback` ise `ShopierGateway` kurulmaz; sır eksikliğiyle aynı sonuç (K123: `PaymentProviderException::unavailable` → 503 `PROVIDER_UNAVAILABLE`, checkout sipariş yazmaz) ve her kurulma denemesinde `CRITICAL Shopier callback confirmation mode refused in production`. Kip yalnızca yerel/test için kalır. **K117'yi daraltır** | Callback imzası `random_nr + platform_order_id`'yi kapsıyor; `paid` kararını veren `status` ve tutar imzanın dışında. Bir imza yalnızca kapsadığı alanları korur. Güvensiz olduğu bilinen seçeneği tek bir `.env` satırına bırakmak yerine üretimde imkânsız kılmak fail-safe tasarım. Kontrol kurucuda: checkout, callback ve OSB üçü de oradan geçiyor. Tamamen silinmedi (D2): OSB'nin API ile başlatılan ödemelerde gelip gelmediği doğrulanmadı (K94 ⚠️ geçici, elle doğrulama adım 7); kaldırma o adımdan sonra ayrıca karara bağlanır | ✅ Faz 18.5 · ⚠️ sunucudaki değer gözle doğrulanmadı (yayın kaydına göre `osb`) |
+| **K171** | **Üretimde tutarsız `paid` kabul edilmez:** `HandlePaymentCallbackAction::amountMatches()` tutar taşımayan bildirimi üretimde `paid` için uyumsuz sayar (geçiş yok, mevcut `critical` satırı, `notified_minor: null`). `failed`/`refunded` ve üretim dışı etkilenmez. **K126'yı genişletir** | Derinlemesine savunma: K170 sonrası üretimde tutarsız `paid` üreten yol yok; yarın eklenen bir sürücü ya da yeniden açılan bir kip tutar taşımayı unutursa para kararı yine kanıtsız verilmez. Yalnızca `paid`: tutar hak açan kararın kanıtı; tutarsız iade bildirimini reddetmek ters yönde hata olurdu (para geri gitmiş, hak açık). Yalnızca üretim: yerelde Fake sürücü tutar taşımaz | ✅ Faz 18.5 · ⚠️ plandan sapma (plan bütün durumlar için yazılmıştı) |
+| **K172** | **Callback ucu sürücü kurulamazsa da yönlendirir:** `ShopierCallbackController` sürücüyü `try`'ın içinde kurar (`new ShopierGateway`); hangi nedenle kurulamazsa kurulmasın (K123 sır yok, K170 üretimde `callback`) 303 → `/odeme/hata` (`?order=` yok), sipariş değişmez, `warning Shopier callback rejected`. OSB ucu 503 kalır. **K122'yi genişletir** | Sürücü metot parametresiyken kurucu istisnası `try`'a hiç girmiyor, ödeme dönüşündeki insan 503 JSON görüyordu (K122'nin kaçındığı şey). OSB'nin karşısında makine var: 503 "sonra tekrar dene" demek. `new`: kapsayıcıyla kurulum PHPStan'de istisnayı gizledi ("dead catch"); kurucunun bağımlılığı yok | ✅ Faz 18.5 · sır eksikliğinde davranış değişti (503 JSON → 303) |
+
+**Daraltılan/genişletilen kararlar:** K117 ("`callback` ancak `status`'ün imzalı olduğu ya da başarısız
+ödemede callback gelmediği gösterilirse") → **K170**: üretimde hiçbir koşulda; `status` imzalı gösterilirse
+doğru düzeltme imza doğrulamasına `status`'ü eklemek ve yeni bir karardır. K126 → **K171**. K122 → **K172**.
+Satırların durum notları backend `docs/rehber/fazlar/FAZ-12.md` §5'e ve [`DECISION-INDEX.md`](../DECISION-INDEX.md)'ye işlendi.
+
+Geçersiz kılınan karar: yok. K94 değişmedi (⚠️ geçici); satırına "kaldırma adım 7'den sonra" notu eklendi.
+
+Açık kalanlar (karar İsmail'in): `callback` kipinin tamamen kaldırılması (K94 adım 7 OSB'yi doğrularsa) ·
+adım 7'de OSB gelmezse üretimde ödemenin nasıl onaylanacağı (çözüm `callback` değil: sunucudan sunucuya
+sorgu ya da `status`'ü imzalayan bir formül, yeni K) · sunucudaki `SHOPIER_CONFIRMATION` değerinin yayından
+önce gözle doğrulanması.
