@@ -2,6 +2,8 @@
 
 > **Tarih:** 16 Kasım 2026 · **Kaynak:** `AUD-2026-11-12` → `OPS-01` (Faz 18.1) · **Kararlar:** K146–K150
 > ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md))
+> · 20 Kasım: §4.4 (Nginx kurulumu) ve §6 (duman testi) eklendi, `SEC-04` (Faz 18.6, K173, K178).
+> §4.4 ve §6'daki sunucu komutları da **koşmadı**; duman testi yerelde Herd Nginx ve `vite preview`'a karşı koştu.
 > **Ne bu:** Bir sürümü yayına alırken izlenen sıra. Sunucu kurulumu [`YAYIN-PLANI.md`](YAYIN-PLANI.md)'de,
 > betiklerin ayrıntısı backend deposunda `docs/rehber/deploy/deploy.md` ve `deploy-frontend.md`'de.
 > ⚠️ **B7:** §3–§5'teki sunucu ve etiket komutları **yazıldı, çalıştırılmadı.** Betiklerdeki etiket bloğu
@@ -32,7 +34,7 @@ Hepsi yeşil olmadan etiket atılmaz.
 | # | Kontrol | Komut | Beklenen |
 |---|---|---|---|
 | 1 | Backend kalite kapısı | `composer check` | Son satır `"result":"passed"`; zincirde `plans:export --check` var |
-| 2 | Backend bağımlılık taraması (`SEC-07`) | `composer audit` | Açık yok. 🔴 16 Kasım'da **kırmızı**; etiketten önce kapanmalı |
+| 2 | Backend bağımlılık taraması (`SEC-07`) | `composer audit` | Açık yok. 🔴 16 Kasım'da **kırmızı**; 20 Kasım'da (18.6) hâlâ kırmızı: 6 pakette 9 açık. Etiketten önce kapanmalı |
 | 3 | Frontend kalite kapısı | `npm ci` → `npm run check` | Çıkış 0; zincirde `verify:plans` var |
 | 4 | Sözleşme kopyası güncel | aşağıdaki blok | `AYNI` |
 | 5 | İki depoda aynı etiket | `git describe --tags --exact-match main` (iki depoda) | İkisi de aynı `vX.Y.Z` |
@@ -160,6 +162,23 @@ kopya bayattır. Günlükte aranacak satır:
 > Tek `bash deploy/deploy.sh` de sırayı korur (önce backend, sonra frontend), ama ara kontrolü atlar.
 > Plan kuralı değiştiren sürümlerde iki adımlı yolu kullan.
 
+### 4.4 Nginx (yalnızca `deploy/nginx/` değiştiyse; `v1.1.0`'da değişti)
+
+Nginx yapılandırması dağıtım betiklerinin parçası değil (`deploy` kullanıcısının Nginx yetkisi yok).
+Backend çekildikten sonra depodaki dosyalar yenidir; onları `sudo` ile kur:
+
+```bash
+# sunucuda, sudo yetkili kullanıcıyla ('deploy' değil)
+cd /var/www/davetkart/backend
+git -C /var/www/davetkart/backend diff --stat <önceki-etiket> HEAD -- deploy/nginx/   # boşsa bu adımı atla
+sudo bash deploy/nginx/install.sh
+```
+
+Betik iki dosyayı (site + güvenlik başlıkları snippet'i) birlikte kurar, `nginx -t` yeşilse reload
+yapar, kırmızıysa eskileri geri koyar (`nginx -t kirmizi: eski dosyalar geri kondu`; site etkilenmez).
+Ayrıntı: backend `docs/rehber/deploy/nginx/install.md`. **`v1.1.0` notu:** bu, sunucuya ilk kez
+snippet kurulan yayın (`SEC-04`, K173); hemen ardından §6.
+
 ## 5. Geri alma: önceki etikete dönüş
 
 🔴 **Sıra tersine döner: önce frontend, sonra backend.** Geri alırken de arayüz sunucunun uyguladığından
@@ -202,7 +221,29 @@ Geri almadan önce bil:
 
 ## 6. Dağıtım sonrası duman testi
 
-Faz 18.6'da (`SEC-04`) eklenecek.
+Her dağıtımdan ve her Nginx değişikliğinden sonra (Faz 18.6, `SEC-04`, K178). Sitenin her yanıt
+türünün güvenlik başlıklarını taşıdığını, API yanıtlarının onları iki kez taşımadığını sınar.
+
+```powershell
+# kendi bilgisayarından (Git Bash ya da WSL; bash + curl yeter)
+bash D:/Projects/davetkart/davetkart-backend-php-laravel/deploy/smoke/check-security-headers.sh https://davetkart.com
+```
+
+```bash
+# ya da sunucunun içinden (DNS'e gitmeden)
+cd /var/www/davetkart/backend
+bash deploy/smoke/check-security-headers.sh --resolve davetkart.com:443:127.0.0.1 https://davetkart.com
+```
+
+Beklenen: altı satırın hepsi `OK` (`/`, SPA yolu, `/assets/*.js`, `/favicon.svg`, `/.env` 404,
+`/api/ping`) ve `SONUC: tamam`. `EKSIK` satırı hangi yolda hangi başlığın eksik ya da kaç kez geldiğini
+yazar. Neden ve çözüm: backend `docs/rehber/deploy/smoke/check-security-headers.md` §8. Kırmızıysa
+yayın geri alınmaz (site çalışıyor); Nginx yapılandırması düzeltilip §4.4 tekrarlanır.
+
+**Gözlem haftası (K175):** tam CSP rapor kipinde. Yayından sonraki hafta ödeme dahil akışları
+tarayıcıda gez, DevTools → Console'da `report-only Content Security Policy` satırlarını not et.
+Temizse zorlamaya geçiş ayrı bir değişiklik ve ayrı bir karar (backend
+`docs/rehber/deploy/nginx/snippets/davetkart-security-headers.md` §5).
 
 ## 7. Bu sıra neyi önlemez?
 

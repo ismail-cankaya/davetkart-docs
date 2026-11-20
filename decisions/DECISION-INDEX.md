@@ -13,7 +13,7 @@
 > **K139** (iptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün) Faz 18.4'te
 > **daraltıldı → K166**; durum notu backend `FAZ-14.md` §4'teki satırına işlendi.
 
-**Sıradaki boş numara: K173**
+**Sıradaki boş numara: K179**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -102,7 +102,7 @@
 | **K82** | Yayınlanmış davetiye silinebilir; ödenen hak 3 gün içinde serbest kalır | Faz 9 | geçerli · daraltıldı → K164 (Faz 18.4, `SEC-02`): serbest kalan hak yeniden kullanılır, iade edilmez | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K83** | Serbest hak, yayın anında yeten en düşük siparişten harcanır | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K84** | Bakım komutları `--dry-run` taşır ve zamanlayıcıdan önce elle koşulur | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K85** | Güvenlik başlıkları middleware'de, nginx'te değil | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
+| **K85** | Güvenlik başlıkları middleware'de, nginx'te değil | Faz 9 | geçerli · daraltıldı → K173 (Faz 18.6, `SEC-04`): yalnızca `/api/*`; SPA başlıkları Nginx'te | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K86** | `config/cors.php` yayınlandı ve daraltıldı; `exposed_headers: ['ETag']` | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
 | **K87** | PHP ^8.5 kalır | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
 | **K88** | Yayındaki davetiyede modül açma kayıt anında plan kontrolünden geçer → 402 `PAYWALL_TIER_INSUFFICIENT` | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
@@ -172,6 +172,12 @@
 | **K170** | Üretimde Shopier `callback` kipi yapılandırma hatasıdır: sürücü kurulmaz (K123 gibi 503) + `critical` log; kip yalnızca yerel/test. K117'yi daraltır | Faz 18.5 (20 Kas) | geçerli · ⚠️ sunucudaki değer gözle doğrulanmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K171** | Üretimde tutar taşımayan `paid` bildirimi `amountMatches()`'ten geçmez; `failed`/`refunded` ve üretim dışı etkilenmez. K126'yı genişletir | Faz 18.5 (20 Kas) | geçerli · ⚠️ plandan sapma (yalnızca `paid`) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K172** | Callback ucu sürücüyü `try` içinde kurar; kurulamazsa 303 → `/odeme/hata` (`?order=` yok), sipariş değişmez; OSB 503 kalır. K122'yi genişletir | Faz 18.5 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K173** | SPA güvenlik başlıkları Nginx snippet'inde (`deploy/nginx/snippets/davetkart-security-headers.conf`), API dışındaki her `location`'da `include`, `server` seviyesinde değil; `/api/*` yalnızca Laravel; kurulum `install.sh`. K85'i daraltır | Faz 18.6 (20 Kas) | geçerli · ⚠️ plandan sapma (D1 `server` bloğu diyordu) · sunucuya kurulmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K174** | Hemen zorlanan: HSTS 1 yıl + `includeSubDomains` (preload yok), `nosniff`, `strict-origin-when-cross-origin`, `X-Frame-Options: DENY`, CSP `frame-ancestors 'none'; base-uri 'self'; object-src 'none'` | Faz 18.6 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K175** | Tam CSP önce rapor kipinde (envantere dayalı; toplayıcı uç yok); zorlamaya geçiş bir hafta gözlemden sonra, ayrı değişiklik ve ayrı K | Faz 18.6 (20 Kas) | geçerli · ⚠️ gözlem ve zorlama kararı bekliyor | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K176** | `Permissions-Policy`: ivmeölçer ve jiroskop `(self)`, tam ekran `(self)`; kamera, mikrofon, konum, ödeme, USB, manyetometre kapalı | Faz 18.6 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K177** | Oturum token'ı `localStorage`'da kalır (açık karar); httpOnly çerez (Sanctum SPA + CSRF) `SEC-18` olarak yayından sonra; bu sürede CSP ikinci kilit | Faz 18.6 (20 Kas) | geçerli · `SEC-18` açık | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K178** | Duman testi `deploy/smoke/check-security-headers.sh`: her `location` türünden bir yol + API'de tek kaynak; `install.sh` ve dağıtım sonrası çalıştırma kitabında, `deploy.sh` çağırmaz | Faz 18.6 (20 Kas) | geçerli · sunucuda koşmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 

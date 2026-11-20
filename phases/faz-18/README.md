@@ -16,11 +16,17 @@ Altı yüksek (🟠) bulgu, yayından önce. Her bulgu ayrı bir düzeltme dalı
 | 18.3 | `SEC-01` | İlk yayın indirimi tek açık siparişe | M | [`PROMPT-FAZ-18-3-SEC-01.md`](../../prompts/PROMPT-FAZ-18-3-SEC-01.md) | backend · frontend · docs | `fix/2026-11-16-sec-01-first-publish-once` (backend · frontend) | K158–K163 | kod ✅ · commit bekliyor (backend 18.3.1–18.3.5, frontend 18.3.6, docs 18.3.7 · doğrulama sonuçları: backend `FAZ-18.md` §18.3 · ⚠️ plandan sapma: fiyat uçları isteğe bağlı hedef alıyor ve frontend ödeme sayfası değişti, K163 · göç yerelde henüz koşmadı: `php artisan migrate`) |
 | 18.4 | `SEC-02` | Yayınlanmış hakkın iadesi | M | [`PROMPT-FAZ-18-4-SEC-02.md`](../../prompts/PROMPT-FAZ-18-4-SEC-02.md) | backend · frontend · docs | `fix/2026-11-17-sec-02-refund-after-publish` (backend · frontend) | K164–K169 | kod ✅ · commit bekliyor (backend 18.4.1–18.4.6, frontend 18.4.7, docs 18.4.8 · doğrulama sonuçları: backend `FAZ-18.md` §18.4 · ⚠️ plandan sapma: silme akışı da damga basıyor (K165), frontend SSS cevabı değişti · göç yerelde henüz koşmadı: `php artisan migrate`) |
 | 18.5 | `SEC-03` | Shopier `callback` kipi üretimde reddedilir | S | [`PROMPT-FAZ-18-5-SEC-03.md`](../../prompts/PROMPT-FAZ-18-5-SEC-03.md) | backend · docs | `fix/2026-11-20-sec-03-shopier-callback-mode` (backend) | K170–K172 | kod ✅ · commit bekliyor (backend 18.5.1–18.5.4, docs 18.5.5 · doğrulama sonuçları: backend `FAZ-18.md` §18.5 · `composer check` ✅ 1166 test · 6/6 mutant · ⚠️ plandan sapma: K171 yalnızca `paid` için; K172 sır eksikliğinde de 303 · sunucudaki `SHOPIER_CONFIRMATION` değeri gözle doğrulanmadı) |
-| 18.6 | `SEC-04` | Frontend güvenlik başlıkları + Faz 18 kapanışı | S | [`PROMPT-FAZ-18-6-SEC-04.md`](../../prompts/PROMPT-FAZ-18-6-SEC-04.md) | backend · (frontend) · docs | — | — | bekliyor |
+| 18.6 | `SEC-04` | Frontend güvenlik başlıkları + Faz 18 kapanışı | S | [`PROMPT-FAZ-18-6-SEC-04.md`](../../prompts/PROMPT-FAZ-18-6-SEC-04.md) | backend · docs (frontend değişmedi) | `fix/2026-11-20-sec-04-security-headers` (backend) | K173–K178 | kod ✅ · commit bekliyor (backend 18.6.1–18.6.4, docs 18.6.6 · doğrulama sonuçları: backend `FAZ-18.md` §18.6 · `composer check` ✅ 1166 test · frontend `npm ci` + `npm run check` ✅ · yerel Nginx (Herd) + tarayıcı denemesi ✅ · 9/9 mutant · ⚠️ plandan sapma: snippet `server` seviyesinde değil, API dışındaki her `location`'da (K173) · sunucuda `install.sh` ve duman testi koşmadı) |
 
 Durum değerleri: `bekliyor` → `kod ✅ · commit bekliyor` → `birleşti` (İsmail işaretler).
 
 **Etiketten önce kapanmalı (🟡, Faz 18 dışında):** `SEC-07` (`composer audit` kırmızı).
+
+**Faz 18 kapanışı (20 Kasım 2026, 18.6 §11):** altı bulgunun kodu tamam; son ağaçta backend `composer check` ✅
+(1166 test), frontend `npm ci` + `npm run check` ✅, backend `composer audit` ❌ (6 pakette 9 açık, `SEC-07`).
+Bu yüzden **`v1.1.0` etiketi bekliyor**; etiket komutları verilmedi. `main`'e birleştirme ve dağıtım komutları
+[`FAZ-18-SEC-04-COMMIT-KOMUTLARI.md`](FAZ-18-SEC-04-COMMIT-KOMUTLARI.md) §4–§6'da. Bulgu başına kalan elle işler:
+backend `docs/rehber/fazlar/FAZ-18.md` "Faz 18 kapanış özeti".
 
 ## Bu klasördeki dosyalar
 
@@ -36,6 +42,8 @@ Durum değerleri: `bekliyor` → `kod ✅ · commit bekliyor` → `birleşti` (�
 
 | [`FAZ-18-SEC-03-COMMIT-KOMUTLARI.md`](FAZ-18-SEC-03-COMMIT-KOMUTLARI.md) | 18.5 (`SEC-03`) commit ve birleştirme komutları: backend 18.5.1–18.5.4, docs 18.5.5 |
 
+| [`FAZ-18-SEC-04-COMMIT-KOMUTLARI.md`](FAZ-18-SEC-04-COMMIT-KOMUTLARI.md) | 18.6 (`SEC-04`) commit ve birleştirme komutları: backend 18.6.1–18.6.4, docs 18.6.6; Faz 18 kapanışı (`main`'e birleştirme, etiket bekliyor, dağıtım sırası, duman testi) |
+
 Kararlar: [`../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) ·
-çalıştırma kitapları: [`../../operations/deployment/YAYIN-SIRASI.md`](../../operations/deployment/YAYIN-SIRASI.md) (18.1) ·
+çalıştırma kitapları: [`../../operations/deployment/YAYIN-SIRASI.md`](../../operations/deployment/YAYIN-SIRASI.md) (18.1; §4.4 ve §6: 18.6) ·
 [`../../operations/deployment/YEDEK-VE-GERI-YUKLEME.md`](../../operations/deployment/YEDEK-VE-GERI-YUKLEME.md) (18.2).

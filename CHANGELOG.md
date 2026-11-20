@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-20 — Faz 18.6 `SEC-04` kayıtları ve Faz 18 kapanışı (`docs/2026-11-16-faz-18-audit-fixes`)
+
+- SPA güvenlik başlıkları Nginx'te: K173–K178 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.6; `DECISION-INDEX.md`: sıradaki boş numara K179, K85 için "daraltıldı → K173"); [`operations/deployment/YAYIN-SIRASI.md`](operations/deployment/YAYIN-SIRASI.md) §4.4 (Nginx kurulumu) ve §6 (duman testi); [`phases/faz-18/FAZ-18-SEC-04-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-04-COMMIT-KOMUTLARI.md) (SEC-04 + Faz 18 kapanış komutları; etiket komutları `SEC-07` yüzünden yok); `phases/faz-18/README.md` ve `phases/README.md` Faz 18 satırları.
+
 ## 2026-11-20 — Faz 18.5 `SEC-03` kayıtları (`docs/2026-11-16-faz-18-audit-fixes`)
 
 - Shopier `callback` kipi üretimde reddedilir: K170–K172 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md) §18.5; `DECISION-INDEX.md`: sıradaki boş numara K173, K117 için "daraltıldı → K170", K122/K126 için "genişletildi" ve K94 için kaldırma notu); [`phases/faz-18/FAZ-18-SEC-03-COMMIT-KOMUTLARI.md`](phases/faz-18/FAZ-18-SEC-03-COMMIT-KOMUTLARI.md); `phases/faz-18/README.md` satırları.
