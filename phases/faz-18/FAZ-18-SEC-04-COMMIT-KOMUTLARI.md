@@ -170,6 +170,11 @@ git status --short
 
 ## 5. Etiket: **BEKLİYOR** (`v1.1.0` komutu verilmedi)
 
+> **Durum notu (20 Kasım 2026):** `SEC-07` Faz 19.1'de ele alındı (K179–K181): yeni `composer.lock` temiz
+> (`composer audit --locked`). `vendor` kurulumu ve kapılar (§0), ardından `v1.1.0` (Faz 18 + `SEC-07`):
+> [`../faz-19/FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](../faz-19/FAZ-19-SEC-07-COMMIT-KOMUTLARI.md) §0, §5.
+> Bu dosyanın §4'ü (Faz 18 → `main`) yerine oradaki §5.1 kullanılabilir: aynı birleştirme, `SEC-07` dahil.
+
 Prompt 18.6 §11.5: `composer audit` kırmızıyken etiket komutu verilmez. 20 Kasım'da son ağaçta:
 
 | Kapı | Sonuç |

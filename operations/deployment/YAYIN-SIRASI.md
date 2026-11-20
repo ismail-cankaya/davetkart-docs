@@ -3,6 +3,7 @@
 > **Tarih:** 16 Kasım 2026 · **Kaynak:** `AUD-2026-11-12` → `OPS-01` (Faz 18.1) · **Kararlar:** K146–K150
 > ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md`](../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md))
 > · 20 Kasım: §4.4 (Nginx kurulumu) ve §6 (duman testi) eklendi, `SEC-04` (Faz 18.6, K173, K178).
+> · 20 Kasım (Faz 19.1, `SEC-07`, K181): §2 madde 2 Faz 19.1'e bağlandı; §3'teki etiket mesajı `SEC-07`'yi anıyor.
 > §4.4 ve §6'daki sunucu komutları da **koşmadı**; duman testi yerelde Herd Nginx ve `vite preview`'a karşı koştu.
 > **Ne bu:** Bir sürümü yayına alırken izlenen sıra. Sunucu kurulumu [`YAYIN-PLANI.md`](YAYIN-PLANI.md)'de,
 > betiklerin ayrıntısı backend deposunda `docs/rehber/deploy/deploy.md` ve `deploy-frontend.md`'de.
@@ -25,7 +26,7 @@ backend config ─[plans:export]→ contracts/plan-rules.json ─(kopya)→ fron
 
 **Sürüm numarası:** `MAJOR` API sözleşmesini kıran değişiklik · `MINOR` yeni özellik, şablon ya da plan
 kuralı · `PATCH` düzeltme. Yalnızca bir depo değişse bile **iki depo da** yeni etiketi alır.
-Faz 18 sonu: `v1.1.0`.
+Faz 18 + `SEC-07` (Faz 19.1): `v1.1.0`. Faz 19 sonu: `v1.2.0`.
 
 ## 2. Yayın öncesi kontrol listesi (yerelde, İsmail)
 
@@ -34,7 +35,7 @@ Hepsi yeşil olmadan etiket atılmaz.
 | # | Kontrol | Komut | Beklenen |
 |---|---|---|---|
 | 1 | Backend kalite kapısı | `composer check` | Son satır `"result":"passed"`; zincirde `plans:export --check` var |
-| 2 | Backend bağımlılık taraması (`SEC-07`) | `composer audit` | Açık yok. 🔴 16 Kasım'da **kırmızı**; 20 Kasım'da (18.6) hâlâ kırmızı: 6 pakette 9 açık. Etiketten önce kapanmalı |
+| 2 | Backend bağımlılık taraması (`SEC-07`, K181) | `composer audit` | Çıkış 0: `No security vulnerability advisories found.` `composer check`'in parçası **değil**, ayrı koşulur (ağ ister, zamana bağlı; K181). 16–20 Kasım kırmızıydı (6 pakette 9 açık). Faz 19.1'de `composer.lock` güncellendi (K179; backend `docs/rehber/composer.md`, `fazlar/FAZ-19.md` §19.1): yeni lock `composer audit --locked` → çıkış 0 (20 Kasım); kurulu paketlerle koşu `vendor` kurulunca |
 | 3 | Frontend kalite kapısı | `npm ci` → `npm run check` | Çıkış 0; zincirde `verify:plans` var |
 | 4 | Sözleşme kopyası güncel | aşağıdaki blok | `AYNI` |
 | 5 | İki depoda aynı etiket | `git describe --tags --exact-match main` (iki depoda) | İkisi de aynı `vX.Y.Z` |
@@ -62,7 +63,7 @@ kapanış prompt'u verir (Faz 18 için 18.6 §11).
 cd D:\Projects\davetkart\davetkart-backend-php-laravel
 git switch main
 git log --oneline -1                                  # yayınlanacak commit bu mu?
-git tag -a v1.1.0 -m "v1.1.0 - Faz 18 audit fixes (AUD-2026-11-12)"
+git tag -a v1.1.0 -m "Release v1.1.0: Phase 18 audit fixes + SEC-07"
 git describe --tags --exact-match main                # v1.1.0
 ```
 
@@ -71,7 +72,7 @@ git describe --tags --exact-match main                # v1.1.0
 cd D:\Projects\davetkart\davetkart-frontent
 git switch main
 git log --oneline -1
-git tag -a v1.1.0 -m "v1.1.0 - Faz 18 audit fixes (AUD-2026-11-12)"
+git tag -a v1.1.0 -m "Release v1.1.0: Phase 18 audit fixes + SEC-07"
 git describe --tags --exact-match main                # v1.1.0
 ```
 

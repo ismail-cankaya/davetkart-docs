@@ -13,7 +13,7 @@
 > **K139** (iptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün) Faz 18.4'te
 > **daraltıldı → K166**; durum notu backend `FAZ-14.md` §4'teki satırına işlendi.
 
-**Sıradaki boş numara: K179**
+**Sıradaki boş numara: K182**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -149,7 +149,7 @@
 | **K147** | Frontend `verify:plans`: `minimumTier`, fiyat kartı ve `getRequiredTier` ↔ sözleşme kopyası (kopya, kardeş depodan okuma yok) | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K148** | Dağıtım sırası: önce backend, `plans:export --check` yeşilken frontend; tersine sıra yasak | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K149** | Sürüm etiketle izlenir (`vMAJOR.MINOR.PATCH`, iki depoda aynı); deploy betikleri etiketi yazar, etiketsiz commit uyarı verir, durdurmaz | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
-| **K150** | Kalite kapısı kırmızı olan dal yayın adayı değildir; `TST-01` `OPS-01` dalında kapandı | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K150** | Kalite kapısı kırmızı olan dal yayın adayı değildir; `TST-01` `OPS-01` dalında kapandı | Faz 18.1 (16 Kas) | geçerli · tamamlandı → K181 (Faz 19.1, `SEC-07`): yayın adayı = `check` + `audit` | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K151** | Gece yedeği: 02:00 UTC'de `pg_dump -Fc`; ayrı cron dosyası, `root`, Laravel zamanlayıcısından bağımsız; kilit (`flock`) betiğin içinde | Faz 18.2 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K152** | Yedekler medyadan ayrı S3 bucket'ında: Block Public Access, sürümleme, SSE-S3; geçerli sürüm 30 gün + eski sürüm 7 gün (etkili saklama ~37 gün) | Faz 18.2 (16 Kas) | geçerli · ⚠️ bucket henüz açılmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K153** | Sunucudaki yedek kimliği yalnızca yazabilir (`s3:PutObject`, `daily/*`); anahtar root:600 dosyada; betik root'a ait kurulu kopyadan çalışır | Faz 18.2 (16 Kas) | geçerli · ⚠️ kimlik henüz açılmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
@@ -178,6 +178,9 @@
 | **K176** | `Permissions-Policy`: ivmeölçer ve jiroskop `(self)`, tam ekran `(self)`; kamera, mikrofon, konum, ödeme, USB, manyetometre kapalı | Faz 18.6 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K177** | Oturum token'ı `localStorage`'da kalır (açık karar); httpOnly çerez (Sanctum SPA + CSRF) `SEC-18` olarak yayından sonra; bu sürede CSP ikinci kilit | Faz 18.6 (20 Kas) | geçerli · `SEC-18` açık | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K178** | Duman testi `deploy/smoke/check-security-headers.sh`: her `location` türünden bir yol + API'de tek kaynak; `install.sh` ve dağıtım sonrası çalıştırma kitabında, `deploy.sh` çağırmaz | Faz 18.6 (20 Kas) | geçerli · sunucuda koşmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
+| **K179** | Güvenlik güncellemesi yalnızca `composer.lock`'u değiştirir, majör getirmez: `composer update "symfony/*" laravel/framework -W` + geçici `--with` kısıtları (`psr7 ^2.13`, `uri-template ^1.0.10`, `brick/math ^0.18`); Guzzle 8 geçişi ayrı karar | Faz 19.1 (20 Kas) | geçerli · §A-1 varsayılanı → majör (§8) → İsmail "majörsüz" · ⚠️ yeni `vendor` ile `composer check` koşmadı · ⚠️ düz `composer update` majörleri getirir | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K180** | Dışarıya verilen mutlak adresler istekten değil yapılandırmadan üretilir; Shopier callback = `app.url` + `CALLBACK_PATH` (açık üretim, küresel `forceRootUrl` yok) | Faz 19.1 (20 Kas) | geçerli · §A-2 varsayılanı · ⚠️ `APP_URL` ödeme dönüşü için kritik, sunucuda gözle doğrulanmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K181** | Yayın adayı = `composer check` ✅ ve `composer audit` ✅; `audit` `check` zincirine girmez (CI'da ayrı adım, yayın listesinde 2. madde). K150'yi tamamlar | Faz 19.1 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 

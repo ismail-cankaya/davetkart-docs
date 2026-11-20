@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-20 — Faz 19.1 `SEC-07` kayıtları (`docs/2026-11-20-faz-19-audit-fixes`)
+
+- Yeni `composer.lock` temiz (`composer audit --locked`; `vendor` kurulumu ve yeni `vendor` ile kapılar İsmail'de, GitHub erişilemedi), Shopier callback adresi `APP_URL`'den: K179–K181 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md) yeni; `DECISION-INDEX.md`: sıradaki boş numara K182, K150 için "tamamlandı → K181"; `decisions/README.md`); [`operations/deployment/YAYIN-SIRASI.md`](operations/deployment/YAYIN-SIRASI.md) §2 madde 2 ve §3 etiket mesajı; [`phases/faz-19/FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-SEC-07-COMMIT-KOMUTLARI.md) (19.1 + `v1.1.0` blokları); `phases/faz-19/README.md`, `phases/README.md` satırları; `phases/faz-18/FAZ-18-SEC-04-COMMIT-KOMUTLARI.md` §5 durum notu.
+
 ## 2026-11-20 — Faz 19 prompt'ları (`docs/2026-11-20-faz-19-audit-fixes`)
 
 - `AUD-2026-11-12`'nin 28 orta (🟡) bulgusu için 28 prompt (`TST-01` Faz 18.1'de kapandı): `prompts/PROMPT-FAZ-19-01-SEC-07.md` … `PROMPT-FAZ-19-28-ARC-03.md`; takip tablosu ve sıra gerekçesi [`phases/faz-19/README.md`](phases/faz-19/README.md); `prompts/README.md` ve `phases/README.md` satırları.

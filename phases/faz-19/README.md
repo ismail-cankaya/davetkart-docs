@@ -9,6 +9,7 @@
 - **Resmî faz kaydı:** backend `docs/rehber/fazlar/FAZ-19.md`. Backend'e dokunmayan bulgular bölümlerini önce `phases/faz-19/FAZ-19-<ID>-KAYIT.md`'ye yazar; sonraki backend bulgusu taşır.
 - **Sürümler:** 19.1 (`SEC-07`) sonunda **`v1.1.0`** (= Faz 18 + `SEC-07`; Faz 18'in bekleyen etiketi). 19.28 sonunda **`v1.2.0`** (Faz 19 kapanışı).
 - **§A:** "Karar" sütununda **§A** yazan prompt'larda önce senin cevapların gerekir; boş bırakılan satır için ajan prompt'taki varsayılanı uygular ve K kaydında işaretler.
+- **Bu klasördeki dosyalar:** bu tablo · bulgu başına `FAZ-19-<ID>-COMMIT-KOMUTLARI.md` (ilki [`FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](FAZ-19-SEC-07-COMMIT-KOMUTLARI.md): 19.1 + `v1.1.0` etiket blokları) · gerekirse `FAZ-19-<ID>-KAYIT.md`.
 
 ## Sıra ve gerekçe
 
@@ -20,7 +21,7 @@
 
 | Sıra | Bulgu | Konu | Efor | Karar | Prompt | Depolar | Dal | K | Durum |
 |---|---|---|---|---|---|---|---|---|---|
-| 19.1 | `SEC-07` | Composer bağımlılıklarında bilinen açıklar; `composer audit` kırmızı | S | **§A** | [`PROMPT-FAZ-19-01-SEC-07.md`](../../prompts/PROMPT-FAZ-19-01-SEC-07.md) | backend · docs | `fix/<tarih>-sec-07-composer-audit` | — | bekliyor |
+| 19.1 | `SEC-07` | Composer bağımlılıklarında bilinen açıklar; `composer audit` kırmızı | S | **§A** | [`PROMPT-FAZ-19-01-SEC-07.md`](../../prompts/PROMPT-FAZ-19-01-SEC-07.md) | backend · docs | `fix/2026-11-20-sec-07-composer-audit` | K179–K181 | kod ✅ · `vendor` kurulumu + kapılar (GitHub erişilemedi) ve commit bekliyor · komutlar [`FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](FAZ-19-SEC-07-COMMIT-KOMUTLARI.md) |
 | 19.2 | `ARC-01` | Karar indeksi K128–K145'i bilmiyor | S | — | [`PROMPT-FAZ-19-02-ARC-01.md`](../../prompts/PROMPT-FAZ-19-02-ARC-01.md) | docs | `docs/<tarih>-arc-01-decision-index` | — | bekliyor |
 | 19.3 | `ARC-02` | Faz 16 ve 17'nin faz kaydı yok | S | **§A** | [`PROMPT-FAZ-19-03-ARC-02.md`](../../prompts/PROMPT-FAZ-19-03-ARC-02.md) | backend (yalnızca `docs/`) · docs | `fix/<tarih>-arc-02-phase-16-17-records` | — | bekliyor |
 | 19.4 | `ARC-05` | Eski `claude/…` yolları; backend'in `claude/` klasörü ikinci ev | M | **§A** | [`PROMPT-FAZ-19-04-ARC-05.md`](../../prompts/PROMPT-FAZ-19-04-ARC-05.md) | backend (`claude/`, `docs/`) · docs | `fix/<tarih>-arc-05-claude-folder` | — | bekliyor |
