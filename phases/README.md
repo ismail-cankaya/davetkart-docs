@@ -13,7 +13,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 |---|---|---|---|---|---|
 | 0–9 | Temel, kimlik, davetiye, yayın, LCV, medya, ödeme, asistan, bakım | Kod ✅; ayrıntı `context/PHP-LARAVEL-SETUP.md` §10 | — | — | `docs/rehber/fazlar/FAZ-0.md` … `FAZ-9.md` |
 | F1–F7 | Frontend yakalama (Faz 9 ile 10 arası) | ✅ 13–16 Eylül 2026 (`PHP-LARAVEL-SETUP.md` başlığı) | — | [`frontend-catch-up/`](frontend-catch-up/FRONTEND-YAKALAMA-PLANI.md) | — |
-| 10 | Sertleştirme ve lansman eksikleri | Plan: backend `claude/FAZ-10-PLANI.md`; `FAZ-10.md` yazılmadı | `faz-10` | — | — |
+| 10 | Sertleştirme ve lansman eksikleri | Plan: [`faz-10/FAZ-10-PLANI.md`](faz-10/FAZ-10-PLANI.md); `FAZ-10.md` yazılmadı | `faz-10` | [`faz-10/`](faz-10/) | — |
 | 11 | Hediye kodu | ⚠️ kod ✅ · elle doğrulama bekliyor | `faz-11-hediye-kodu` | [`faz-11/`](faz-11/) | `FAZ-11.md` |
 | 12 | Shopier ile kartla ödeme | ⚠️ kod ✅ · §A boş, gerçek Shopier'e karşı sınanmadı | `faz-12-shopier` | [`faz-12/`](faz-12/FAZ-12-RAPOR.md) | `FAZ-12.md` |
 | 13 | Fiyat API'si, indirimler, ödeme yöntemi anahtarı | ⚠️ kod ✅ · elle doğrulama bekliyor | `faz-13-payment-settings` | [`faz-13/`](faz-13/) | `FAZ-13.md` |
@@ -25,6 +25,9 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 
 | Klasör | İçerik | Durum |
 |---|---|---|
+| [`faz-05/`](faz-05/) | `FAZ-5-DEVIR.md`, `OKUBENI-FAZ-5.md` (backend `claude/`'dan, 2026-11-22) | Tarihsel |
+| [`faz-06/`](faz-06/) · [`faz-07/`](faz-07/) · [`faz-09/`](faz-09/) | `FAZ-6/7/9-DEVIR.md` (backend `claude/`'dan, 2026-11-22; Faz 8'in devri yok) | Tarihsel |
+| [`faz-10/`](faz-10/) | `FAZ-10-PLANI.md`: 85 adım, K87–K106 (backend `claude/`'dan, 2026-11-22) | Tarihsel |
 | [`faz-11/`](faz-11/) | `FAZ-11-COMMIT-KOMUTLARI.md` (backend + claude), `FAZ-11-FRONTEND-COMMIT-KOMUTLARI.md` | Tamamlandı (tarihsel) |
 | [`faz-12/`](faz-12/) | `FAZ-12-RAPOR.md` (24 Ekim 2026) | Tamamlandı (tarihsel) |
 | [`faz-13/`](faz-13/) | Commit komutları (backend, frontend) · `f13-ara/` ara kod çıktısı · `teshis.php` + `php-herdsiz.ini` (PHPStan teşhisi) | Tamamlandı (tarihsel) |
