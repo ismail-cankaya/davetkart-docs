@@ -5,13 +5,10 @@
 > bu dosyaya da elle satır eklenir (bkz. `../CLAUDE.md` §5).
 > ⚠️ işaretli satırlar açık soru ya da çelişki taşır; **numaralar değiştirilmedi.**
 
-> ⚠️ **K128–K145 bu tabloda yok** (`ARC-01`, ayrı bir iş): backend `docs/rehber/fazlar/FAZ-13.md`
-> ve `FAZ-14.md`'de kullanılmışlar, satırları buraya işlenmedi. Bu numaralar **dolu**; yeni
-> karar almaz. Faz 18 kararları bu yüzden K146'dan başlar (2026-11-16).
-> Bu aralıktaki **K131** (ilk yayın = hiç ödenmiş sipariş yok; bekleyen sayılmaz) Faz 18.3'te
-> **daraltıldı → K159**; durum notu backend `FAZ-13.md` §4'teki satırına işlendi.
-> **K139** (iptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün) Faz 18.4'te
-> **daraltıldı → K166**; durum notu backend `FAZ-14.md` §4'teki satırına işlendi.
+> Bu indeks `python -I _restructure/build_decision_index.py --check` ile denetlenir: docs ve kardeş
+> backend deposundaki bütün K tanımları burada, burada olan her numaranın bir tanımı var (2026-11-20, `ARC-01`).
+> **Ayrılmış (Faz 19, paralel hatlar):** K183–K219 Hat A · K220–K249 Hat B · K250–K279 Hat C. K182 ve
+> hatların bekleyen kararları `phases/faz-19/kayit/`'ta; 19.90'da buraya işlenir (`--check` o klasörü taramaz).
 
 **Sıradaki boş numara: K182**
 
@@ -145,6 +142,24 @@
 | **K125** | Ad/soyad/e-posta kullanıcıdan; TCKN, telefon, adres `config('payment.providers.shopier.buyer_placeholders')` | Faz 12 (24 Eki) | ⚠️ elle doğrulama bekliyor | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K126** | Bildirim tutar taşıyorsa (OSB) siparişin `amount_minor` + `currency`'siyle eşleşmeli; uymazsa geçiş yok + `Lo`… | Faz 12 (24 Eki) | geçerli · genişletildi → K171 (Faz 18.5): üretimde tutar taşımayan `paid` de reddedilir | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K127** | Tarayıcı callback'i ayrı metot (`parseCallback`) ve ayrı tip (`ShopierCallback`); `osb` modunda bildirim nesn… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K128** | Fiyatın tek kaynağı backend; frontend gösterir, hesaplamaz (`OrderResource` "tutar gönderilmez" kararı geri alındı) | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K129** | Bütün hesap `QuotePriceAction` → `PriceQuote`; checkout, önizleme ve fiyat uçları aynı sınıfı çağırır | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K130** | İlk yayın %60, `davetkart.pricing.first_publish_percent`, `env()` yok (ticari söz), 0–90 | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K131** | "İlk yayın" = `paid_at` damgalı hiç sipariş yok; hediye ve iade edilmiş de sayılır, bekleyen sayılmaz | Faz 13 | geçerli · daraltıldı → K159 (Faz 18.3, `SEC-01`): bekleyen sipariş yalnızca aynı hedef için sayılmaz | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K132** | Kampanya: `price_campaigns` tablosu + artisan; deploy yok, bitiş kendiliğinden | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K133** | Otomatik indirimler toplanmaz: büyük olan (eşitlikte ilk yayın); hediye kodu kalan fiyata | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K134** | `PAYMENT_METHODS`; backend reddeder (403 `PAYMENT_METHOD_DISABLED`), fiyat ucu bildirir; tanımsız kelime 503 | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K135** | Havale hesabı backend `.env`'inde (`BANK_TRANSFER_*`), IBAN backend'de doğrulanır | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K136** | Sağlayıcı yalnızca ödenecek tutar varken kurulur (`PaymentGatewayResolver`); boş Shopier sırları bedava siparişi bozmaz | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
+| **K137** | Yanmış hak bir damgadır (`orders.consumed_at`), bağ değil; bağ (`invitation_id`) purge'te kopar | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K138** | İptal = iade talebi, ayrı tablo (`refund_requests`); açık talep hakkı dondurur, siparişte en fazla bir açık talep | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K139** | İptal edilebilir hak: `paid` + bağsız + yanmamış + ücretli + 14 gün; kural tek sınıfta (`RefundEligibility`) | Faz 14 | geçerli · daraltıldı → K166 (Faz 18.4, `SEC-02`): yeni iade engeli `used` | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K140** | Planlarım bir okuma modeli: yeni tablo/kolon yok, sabit sayıda sorgu, kova kuralı enum'larda; üç plan her zaman döner | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K141** | Para kodda gönderilmez: yönetici Shopier panelinden iade eder, sonra `refunds:approve` (önce sorar); mail commit'ten sonra | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K142** | Parola değişince bu cihaz hariç bütün oturumlar kapanır; bekleyen sıfırlama silinir; "siz değilseniz" maili | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K143** | Oturum = Sanctum token'ı; cihaz için yalnızca User-Agent, IP saklanmaz; token tek üreticiden (`IssueApiTokenAction`) | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K144** | E-posta değişikliği sızdırmaz: istek her zaman 202; çakışma onayda UNIQUE ile, genel `EMAIL_CHANGE_INVALID` | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
+| **K145** | Frontend hak saymaz: yazma sonrası listeyi sunucudan yeniden okur (K128'in haklar için hali) | Faz 14 | geçerli | backend `docs/rehber/fazlar/FAZ-14.md` §4 |
 | **K146** | Plan kuralları sözleşmesi: `plans:export` → `contracts/plan-rules.json` (fiyat ve damga yok), `--check` `composer check` zincirinde | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K147** | Frontend `verify:plans`: `minimumTier`, fiyat kartı ve `getRequiredTier` ↔ sözleşme kopyası (kopya, kardeş depodan okuma yok) | Faz 18.1 (16 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
 | **K148** | Dağıtım sırası: önce backend, `plans:export --check` yeşilken frontend; tersine sıra yasak | Faz 18.1 (16 Kas) | geçerli · ⚠️ sunucuda denenmedi | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-18.md#a-karar-kaydına-eklenecek-7) |
@@ -184,7 +199,7 @@
 
 ## Notlar
 
-- Eksik numara: yok (K1–K127).
+- Eksik numara: yok (K1–K181; `--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.

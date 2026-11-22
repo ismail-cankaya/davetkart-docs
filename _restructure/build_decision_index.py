@@ -1,8 +1,21 @@
-"""decisions/DECISION-INDEX.md üretir (2026-11-12).
+"""decisions/DECISION-INDEX.md denetler (--check) ya da ilk sürümünü üretir (--generate).
 
-Kaynak tabloları okur (backend deposu salt okunur), her K için tek satır yazar.
-Kullanım: python -I _restructure/build_decision_index.py
+Kullanım (docs deposunun kökünden):
+  python -I _restructure/build_decision_index.py --check
+      0 = indeks ve tanımlar aynı · 1 = fark var (numaralar yazılır) · 2 = kardeş backend deposu yok.
+  python -I _restructure/build_decision_index.py --generate
+      2026-11-12 üretimi: yalnızca K1–K127 kaynaklarını bilir ve DOSYAYI EZER. K128+ satırları elle
+      eklendiği için bugün kullanılmaz; tarihçe için duruyor.
+
+TANIM / ATIF KURALI (--check):
+  Tanım = markdown tablo satırının İLK hücresi yalnızca K numarasıdır: `| K128 |`, `| **K128** |`,
+  `| **K9'** |` ya da §8'deki üstü çizili biçim `| ~~K9: …~~ |`. Başka her geçiş (cümle içinde,
+  başlıkta, ikinci ve sonraki hücrelerde, `K2xx` gibi yer tutucular) atıftır ve sayılmaz.
+  Taranan: docs deposu + ../davetkart-backend-php-laravel içindeki bütün *.md dosyaları.
+  Hariç: indeksin kendisi, SKIP_DIRS ve docs'ta SKIP_DOCS (bekleyen hat kayıtları 19.90'da işlenir;
+  denetim raporları ve prompt'lar karar tanımlamaz, alıntılar).
 """
+import os
 import re
 import sys
 from pathlib import Path
@@ -117,5 +130,57 @@ def main():
     print(f"{len(nums)} satır; eksik: {missing}")
 
 
+INDEX = ROOT / "decisions" / "DECISION-INDEX.md"
+SKIP_DIRS = {".git", "vendor", "node_modules", "storage", "dist", "bootstrap", "public"}
+SKIP_DOCS = ("phases/faz-19/kayit/", "audits/", "prompts/", "_restructure/")
+DEF = re.compile(r"^\|\s*(?:(?:\*\*|~~)*(K\d+'?)(?:\*\*|~~)*|~~(K\d+'?):[^|]*~~)\s*\|")
+
+
+def definitions(base, skip=()):
+    """{K: [göreli yol:satır, ...]} — yalnızca tanım satırları (bkz. kural)."""
+    found = {}
+    for d, dirs, files in os.walk(base):
+        dirs[:] = [x for x in dirs if x not in SKIP_DIRS]
+        for f in files:
+            path = Path(d) / f
+            rel = path.relative_to(base).as_posix()
+            if not f.endswith(".md") or path == INDEX or rel.startswith(skip):
+                continue
+            for i, line in enumerate(path.read_text("utf-8", errors="replace").splitlines(), 1):
+                m = DEF.match(line)
+                if m:
+                    found.setdefault(m.group(1) or m.group(2), []).append(f"{rel}:{i}")
+    return found
+
+
+def check():
+    if not BE.is_dir():
+        print(f"UYARI: kardeş backend deposu yok: {BE} — denetim yapılmadı.")
+        return 2
+    defined = definitions(ROOT, SKIP_DOCS)
+    for k, where in definitions(BE).items():
+        defined.setdefault(k, []).extend(f"backend {w}" for w in where)
+    indexed = set()
+    for line in INDEX.read_text("utf-8").splitlines():
+        m = DEF.match(line)
+        if m:
+            indexed.add(m.group(1) or m.group(2))
+    num = lambda k: (int(re.sub(r"\D", "", k)), k.endswith("'"))  # noqa: E731
+    missing = sorted(set(defined) - indexed, key=num)
+    orphan = sorted(indexed - set(defined), key=num)
+    for k in missing:
+        print(f"indekste yok: {k} ({', '.join(defined[k][:3])})")
+    for k in orphan:
+        print(f"tanımı yok: {k} (indekste var, docs ve backend'de tanım satırı yok)")
+    print(f"indeks {len(indexed)} · tanım {len(defined)} · eksik {len(missing)} · tanımsız {len(orphan)}")
+    return 1 if missing or orphan else 0
+
+
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:] == ["--check"]:
+        sys.exit(check())
+    if sys.argv[1:] == ["--generate"]:
+        main()
+        sys.exit(0)
+    print(__doc__)
+    sys.exit(2)
