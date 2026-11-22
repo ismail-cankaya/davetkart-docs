@@ -1,0 +1,14 @@
+# Hat C — açık hatalar ve düzeltme notları (ayrıca çalışılacak)
+
+> İsmail'in isteği (22 Kasım 2026): Hat C'de görülen, bulgunun kapsamı dışında kalan hatalar burada
+> toplanır; ayrı bir oturumda ele alınır. Her madde: ne · kanıt · önerilen düzeltme · durum.
+
+| # | Ne | Kanıt | Önerilen düzeltme | Durum |
+|---|---|---|---|---|
+| 1 | 🔴 Backend `composer check` kırmızı: phpstan `cast.string` ×2 | `app/Console/Commands/Concerns/ResolvesRefundRequests.php:29` `(string) $id` (`ApproveRefundRequest`, `RejectRefundRequest`). Dosya 14.6'dan beri aynı; Laravel 13.43 + phpstan 2.2.7 + larastan 3.10.0 ile çıkıyor. 19.1 (`SEC-07`) kapıyı yalnızca eski `vendor` (13.35) ile yeşil gördü. Testler yeşil (1168/1168, 19.3) | `$this->argument('id')` dönüşünü daralt: `is_string($id) ? $id : throw …` (cast değil; phpstan talimatı), ya da argümanı `string` olarak tip denetimli oku. `composer check` + `--filter=RefundRequest` | Açık · 19.3 ve 19.4'te "bağımsız" diye kayıtlı (İsmail kararı "a") |
+| 2 | `SEC-07` kaydı "yeni `vendor` ile `composer check` koşmadı" diyor; `v1.1.0` adayı K181'e göre bu kapıya bağlı | backend `docs/rehber/fazlar/FAZ-19.md` 19.1 B7 satırı | 1 düzelince `composer check` + `composer audit` yeni `vendor` ile; K181 satırına sonuç | Açık |
+| 3 | Ana klasörde boş ARC-01 worktree'si | `D:\Projects\davetkart\davetkart-docs.worktrees\arc-01-decision-index`, dal `docs/2026-11-20-arc-01-decision-index` @ 625a733, commit'siz | `FAZ-19-ARC-01-COMMIT-KOMUTLARI.md` §4 (`worktree remove` + `branch -d`) | Açık (isteğe bağlı) |
+| 4 | `DECISION-INDEX.md` "Sıradaki boş numara: K182" eskidi | K182–K254 kullanıldı (hat kayıtları) | 19.90 | 19.90'a bırakıldı |
+| 5 | `claude/FAZ-13-PLANI.md`, `FAZ-14-PLANI.md` hiçbir deponun geçmişinde yok | `git log --all` iki depoda boş; backend `FAZ-13.md`/`FAZ-14.md` başlığı onları "Plan" diye anıyordu | Varsa İsmail'in makinesinde/claude.ai projesinde ara; bulunursa `phases/faz-13|14/` | Açık · atıf "(plan dosyası hiçbir depoda yok)" yapıldı (19.4) |
+| 6 | Docs'ta backend `FAZ-14.md`'nin kopyası | `phases/faz-14/f14/backend/14.11/docs/rehber/fazlar/FAZ-14.md` (K137–K145 iki yerde) | Tarihsel ara çıktı; `--check` için zararsız. İstenirse `archive/` | Bilgi |
+| 7 | ARC-01'in `--check`'i hat aralığındaki tanımlarda kırmızı oluyordu | K252 (19.3) | K253: K182–K279 "bekleyen" | ✅ 19.4'te düzeltildi |
