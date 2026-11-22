@@ -290,6 +290,9 @@ Site Y12'den sonra çalışır; **müşteriye açılması** için:
 | **Natro mail hosting** (Standart, 250 MB, 1 hesap) | **11 Ocak 2027** | Alan adından AYRI bir hizmet, 4 aylık dönemle başlamış. Yenileme 5,88 $/yıl. Karar: yenile ya da Zoho'ya taşı — 11 Aralık'a kadar |
 | AWS kredisi | ~10 ay (tarih Y4.5'te yazılacak) | Bitince aylık ~15 $ karta |
 
+> **22 Kasım 2026 (`OPS-05`):** Bu tablonun güncel hâli ve hatırlatıcıları → [`SURE-TAKVIMI.md`](SURE-TAKVIMI.md)
+> (kredi bitişi 25 Temmuz 2027, Y1.3). Bu tablo tarihsel kayıt olarak kalır.
+
 | Y2.3 | 4 Ekim | ↪️ **Y7.5'e taşındı** | Plan sapması (İsmail onayladı) |
 | Y2.x | 4 Ekim | ✅ | SES test maili `bilgi@davetkart.com` → Gmail gelen kutusu (spam değil). Natro'da `bilgi@` kutusu |
 | Y3.1 | 4 Ekim | ✅ | `davetkart-media-438641` (Frankfurt, ACL kapalı, Block Public Access 4/4 açık, sürümleme açık, SSE-S3 + Bucket Key). **İki bucket kararı**: yedekler Y11'de ayrı `davetkart-backup-…` bucket'ında (kusur yalıtımı) |

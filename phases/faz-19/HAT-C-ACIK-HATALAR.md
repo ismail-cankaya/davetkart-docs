@@ -12,3 +12,6 @@
 | 5 | `claude/FAZ-13-PLANI.md`, `FAZ-14-PLANI.md` hiçbir deponun geçmişinde yok | `git log --all` iki depoda boş; backend `FAZ-13.md`/`FAZ-14.md` başlığı onları "Plan" diye anıyordu | Varsa İsmail'in makinesinde/claude.ai projesinde ara; bulunursa `phases/faz-13|14/` | Açık · atıf "(plan dosyası hiçbir depoda yok)" yapıldı (19.4) |
 | 6 | Docs'ta backend `FAZ-14.md`'nin kopyası | `phases/faz-14/f14/backend/14.11/docs/rehber/fazlar/FAZ-14.md` (K137–K145 iki yerde) | Tarihsel ara çıktı; `--check` için zararsız. İstenirse `archive/` | Bilgi |
 | 7 | ARC-01'in `--check`'i hat aralığındaki tanımlarda kırmızı oluyordu | K252 (19.3) | K253: K182–K279 "bekleyen" | ✅ 19.4'te düzeltildi |
+| 8 | 🔴 Alan adı `davetkart.com` otomatik yenilemesi KAPALI (4 Ekim kaydı), bugünkü durum bilinmiyor | `operations/deployment/SURE-TAKVIMI.md` §1 #0 | Natro panelinde aç + kartı doğrula; sonra takvimde durumu ✅ yap | Açık · İsmail (hatırlatıcı 25 Kasım) |
+| 9 | Natro posta barındırma 11 Ocak 2027'de bitiyor; karar yok | `SURE-TAKVIMI.md` §3 | 11 Aralık'a kadar karar → K + §3 | Açık · İsmail |
+| 10 | Let's Encrypt SSL için dış bitiş izlemesi yok (Let's Encrypt uyarı e-postası atmıyor) | Y7.2b; `IZLEME.md` (19.7 `OPS-03`) henüz yok | `OPS-03`'te UptimeRobot SSL bitiş izlemesi | Açık · Hat C `OPS-03` |
