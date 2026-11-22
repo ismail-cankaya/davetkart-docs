@@ -1,4 +1,6 @@
 * text=auto eol=lf
+# Takvim dosyası: RFC 5545 satır sonu CRLF ister (OPS-05).
+*.ics text eol=crlf
 *.mp4 binary
 *.webm binary
 *.jpg binary
