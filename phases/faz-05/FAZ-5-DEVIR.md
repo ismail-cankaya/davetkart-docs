@@ -205,7 +205,7 @@ Sıra **en ucuzdan pahalıya** (L1). Honeypot en başta ve **sorgudan önce**.
 - [ ] `composer check` yeşil
 - [ ] `FAZ-5-ELLE-DOGRULAMA.md` 16 adım
 - [ ] **Frontend uyarlaması — 7 dosya** →
-      [`Notlar/04-FAZ-5-FRONTEND-YAPILACAKLAR.md`](Notlar/04-FAZ-5-FRONTEND-YAPILACAKLAR.md)
+      [`Notlar/04-FAZ-5-FRONTEND-YAPILACAKLAR.md`](../../notes/04-FAZ-5-FRONTEND-YAPILACAKLAR.md)
       🔴 Honeypot alanı eklenmezse savunma **hiç çalışmaz** ve **hiçbir test
       bunu söylemez**
 - [ ] `PHP-LARAVEL-SETUP-EK-FAZ-5.md` master dosyaya işlensin
@@ -289,4 +289,4 @@ siler).
 ## 11. Sıradaki iş
 
 Faz 5 doğrulandıktan sonra **Faz 6 — Media**.
-Hazır başlangıç mesajı: [`PROMPT-FAZ-6.md`](PROMPT-FAZ-6.md)
+Hazır başlangıç mesajı: [`PROMPT-FAZ-6.md`](../../prompts/PROMPT-FAZ-6.md)

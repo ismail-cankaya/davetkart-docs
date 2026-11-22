@@ -15,7 +15,7 @@ Sonuçları:
 1. **`claude/PHP-LARAVEL-SETUP.md` bu oturumda OKUNAMADI.** İçindeki 48 karar
    ve 41 ders görülmedi. Bu yüzden o dosya **yeniden yazılmadı** — yazılsaydı,
    görülmemiş içerik silinirdi.
-   Yerine [`PHP-LARAVEL-SETUP-EK-FAZ-5.md`](PHP-LARAVEL-SETUP-EK-FAZ-5.md)
+   Yerine [`PHP-LARAVEL-SETUP-EK-FAZ-5.md`](../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md)
    yazıldı: master dosyaya **elle eklenecek** bölümler.
 
 2. Buradaki dosyalar **çakışmayacak adlarla** seçildi (`PROMPT.md` değil
@@ -36,9 +36,9 @@ Sonuçları:
 | Dosya | Kimin için | Ne işe yarar |
 |---|---|---|
 | [`FAZ-5-DEVIR.md`](FAZ-5-DEVIR.md) | 🤖 **Yeni AI asistanı** | Projenin bugünkü tam durumu. Yeni bir sohbete başlayan asistanın okuyacağı ilk dosya |
-| [`PROMPT-FAZ-6.md`](PROMPT-FAZ-6.md) | 🤖 Yeni AI asistanı | **Kopyala-yapıştır** başlangıç mesajı — Faz 6 (Media) için |
-| [`PHP-LARAVEL-SETUP-EK-FAZ-5.md`](PHP-LARAVEL-SETUP-EK-FAZ-5.md) | 👤 İsmail | Master devir dosyasına elle eklenecek Faz 5 bölümleri |
-| [`Notlar/04-FAZ-5-FRONTEND-YAPILACAKLAR.md`](Notlar/04-FAZ-5-FRONTEND-YAPILACAKLAR.md) | 👤 + 🤖 | LCV modülünün frontend borcu — 7 dosya |
+| [`PROMPT-FAZ-6.md`](../../prompts/PROMPT-FAZ-6.md) | 🤖 Yeni AI asistanı | **Kopyala-yapıştır** başlangıç mesajı — Faz 6 (Media) için |
+| [`PHP-LARAVEL-SETUP-EK-FAZ-5.md`](../../decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md) | 👤 İsmail | Master devir dosyasına elle eklenecek Faz 5 bölümleri |
+| [`Notlar/04-FAZ-5-FRONTEND-YAPILACAKLAR.md`](../../notes/04-FAZ-5-FRONTEND-YAPILACAKLAR.md) | 👤 + 🤖 | LCV modülünün frontend borcu — 7 dosya |
 
 ---
 

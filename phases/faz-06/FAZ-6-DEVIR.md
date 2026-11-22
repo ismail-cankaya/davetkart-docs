@@ -283,4 +283,4 @@ D:\Projects\davetkart\
 ## 10. Sıradaki iş
 
 Faz 6 doğrulandıktan sonra **Faz 7 — Ödeme ve paywall**.
-Hazır başlangıç mesajı: [`PROMPT-FAZ-7.md`](PROMPT-FAZ-7.md)
+Hazır başlangıç mesajı: [`PROMPT-FAZ-7.md`](../../prompts/PROMPT-FAZ-7.md)

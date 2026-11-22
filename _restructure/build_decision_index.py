@@ -28,11 +28,11 @@ BE = ROOT.parent / "davetkart-backend-php-laravel"
 MAIN = "context/PHP-LARAVEL-SETUP.md"
 SOURCES = [  # (dosya, gösterilen kaynak, bağlantı mı)
     (ROOT / MAIN, f"[`{MAIN}` §7](../{MAIN}#7-karar-kaydı)"),
-    (BE / "claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md", "backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A"),
-    (BE / "claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md", "backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A"),
-    (BE / "claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md", "backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A"),
-    (BE / "claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md", "backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A"),
-    (BE / "claude/FAZ-10-PLANI.md", "backend `claude/FAZ-10-PLANI.md` §2"),
+    (ROOT / "decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md", "[`addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md)"),
+    (ROOT / "decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md", "[`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md)"),
+    (ROOT / "decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md", "[`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md)"),
+    (ROOT / "decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md", "[`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md)"),
+    (ROOT / "phases/faz-10/FAZ-10-PLANI.md", "[`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md)"),
     (ROOT / "decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md",
      "[`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7)"),
     (ROOT / "decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md",
@@ -125,7 +125,7 @@ def main():
             "- K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.",
             "- Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71."
             " Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.",
-            "- Backend kaynakları (`davetkart-backend-php-laravel/claude/…`) bu depoda değil; yol düz metindir."]
+            "- Backend `claude/` kaynakları 2026-11-22'de bu depoya taşındı (`ARC-05`)."]
     (ROOT / "decisions" / "DECISION-INDEX.md").write_text("\n".join(out) + "\n", "utf-8")
     print(f"{len(nums)} satır; eksik: {missing}")
 
@@ -133,6 +133,9 @@ def main():
 INDEX = ROOT / "decisions" / "DECISION-INDEX.md"
 SKIP_DIRS = {".git", "vendor", "node_modules", "storage", "dist", "bootstrap", "public"}
 SKIP_DOCS = ("phases/faz-19/kayit/", "audits/", "prompts/", "_restructure/")
+# Faz 19 hatlarına ayrılmış numaralar (K182–K279): indekste yoksa "bekleyen" yazılır, hata sayılmaz.
+# 19.90 bunları indekse işleyince bu aralık kaldırılır (K253).
+PENDING = range(182, 280)
 DEF = re.compile(r"^\|\s*(?:(?:\*\*|~~)*(K\d+'?)(?:\*\*|~~)*|~~(K\d+'?):[^|]*~~)\s*\|")
 
 
@@ -167,12 +170,16 @@ def check():
             indexed.add(m.group(1) or m.group(2))
     num = lambda k: (int(re.sub(r"\D", "", k)), k.endswith("'"))  # noqa: E731
     missing = sorted(set(defined) - indexed, key=num)
+    pending = [k for k in missing if num(k)[0] in PENDING]
+    missing = [k for k in missing if k not in pending]
     orphan = sorted(indexed - set(defined), key=num)
+    for k in pending:
+        print(f"bekleyen (19.90): {k} ({', '.join(defined[k][:3])})")
     for k in missing:
         print(f"indekste yok: {k} ({', '.join(defined[k][:3])})")
     for k in orphan:
         print(f"tanımı yok: {k} (indekste var, docs ve backend'de tanım satırı yok)")
-    print(f"indeks {len(indexed)} · tanım {len(defined)} · eksik {len(missing)} · tanımsız {len(orphan)}")
+    print(f"indeks {len(indexed)} · tanım {len(defined)} · eksik {len(missing)} · tanımsız {len(orphan)} · bekleyen {len(pending)}")
     return 1 if missing or orphan else 0
 
 

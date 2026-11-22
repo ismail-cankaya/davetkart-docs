@@ -3,7 +3,7 @@
 > **Bu bir yama dosyasıdır.** Aşağıdaki bloklar master `claude/PHP-LARAVEL-SETUP.md`
 > dosyasının ilgili bölümlerine **elle** eklenecek.
 >
-> 🔴 Master dosya bu oturumda okunamadı (bkz. [`OKUBENI-FAZ-5.md`](OKUBENI-FAZ-5.md)),
+> 🔴 Master dosya bu oturumda okunamadı (bkz. [`OKUBENI-FAZ-5.md`](../../phases/faz-05/OKUBENI-FAZ-5.md)),
 > bu yüzden yeniden yazılmadı — görülmemiş 48 karar ve 41 ders silinirdi.
 
 ---

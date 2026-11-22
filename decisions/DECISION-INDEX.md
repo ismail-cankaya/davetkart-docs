@@ -63,21 +63,21 @@
 | **K46** | ETag ayrı middleware, controller içi değil | Faz 4 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K47** | Faz 4 salt okuma kalır; yayın ucu Faz 7'de | Faz 4 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K48** | Olay `InvitationChanged`, modelden yapısal fırlar | Faz 4 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
-| **K49** | `RsvpStatus` = `attending \| pending \| declined`; `label()` metodu yok | Faz 5 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A |
-| **K50** | LCV kotası `attending + pending` toplamını sayar; `declined` saymaz | Faz 5 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A |
-| **K51** | Kota limiti `RsvpQuotaResolver` arayüzü arkasından okunur | Faz 5 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A |
-| **K52** | `rsvps.id` = ULID | Faz 5 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A |
-| **K53** | `Jobs/SendRsvpNotification` Faz 5'te yazılmadı | Faz 5 | geçersiz kılındı → K62 | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A |
-| **K54** | `media.disk` kolonda saklanır, `config()`'ten okunmaz | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K55** | Depolama yerel `public` diski kalır; S3/R2 ertelendi | Faz 6 | geçerli · ⚠️ yayın planı S3 diski kuruyor (`operations/deployment/YAYIN-DEVIR.md` Y0); yerine geçen K yok | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K56** | `media.id` = ULID | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K57** | Medya polimorfik değil; `invitation_id` + `kind` ile modellendi | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K58** | LCV medyası kimlikle iliştirilir, URL ile değil | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K59** | Geçersiz medya kimliği sessizce düşürülür, reddedilmez | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K60** | `rsvps` medya FK'leri `nullOnDelete` | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K61** | Misafirin medya ucu ayrı bir throttle kovası alır (`throttle:media`) | Faz 6 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K62** | `Jobs/SendRsvpNotification` Faz 8'e kaldı | Faz 6 | geçersiz kılındı → K79 | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
-| **K63** | `invitations.timezone` Faz 7'ye ertelendi | Faz 6 | geçersiz kılındı → K71 | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A |
+| **K49** | `RsvpStatus` = `attending \| pending \| declined`; `label()` metodu yok | Faz 5 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md) |
+| **K50** | LCV kotası `attending + pending` toplamını sayar; `declined` saymaz | Faz 5 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md) |
+| **K51** | Kota limiti `RsvpQuotaResolver` arayüzü arkasından okunur | Faz 5 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md) |
+| **K52** | `rsvps.id` = ULID | Faz 5 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md) |
+| **K53** | `Jobs/SendRsvpNotification` Faz 5'te yazılmadı | Faz 5 | geçersiz kılındı → K62 | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-5.md) |
+| **K54** | `media.disk` kolonda saklanır, `config()`'ten okunmaz | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K55** | Depolama yerel `public` diski kalır; S3/R2 ertelendi | Faz 6 | geçerli · ⚠️ yayın planı S3 diski kuruyor (`operations/deployment/YAYIN-DEVIR.md` Y0); yerine geçen K yok | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K56** | `media.id` = ULID | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K57** | Medya polimorfik değil; `invitation_id` + `kind` ile modellendi | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K58** | LCV medyası kimlikle iliştirilir, URL ile değil | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K59** | Geçersiz medya kimliği sessizce düşürülür, reddedilmez | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K60** | `rsvps` medya FK'leri `nullOnDelete` | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K61** | Misafirin medya ucu ayrı bir throttle kovası alır (`throttle:media`) | Faz 6 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K62** | `Jobs/SendRsvpNotification` Faz 8'e kaldı | Faz 6 | geçersiz kılındı → K79 | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
+| **K63** | `invitations.timezone` Faz 7'ye ertelendi | Faz 6 | geçersiz kılındı → K71 | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-6.md) |
 | **K64** | Checkout iki uç: `/invitations/{id}/checkout` (tekil) · `/payments/checkout` (paket) | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K65** | Webhook ucu `/api/public/` altında | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K66** | `public_slug` üretilmiyor | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
@@ -86,41 +86,41 @@
 | **K69** | İmza hatası → 404 (401/403/400 değil) | Faz 7 | geçerli · K122 tarayıcı callback'i için bilinçli sapma | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K70** | Sürücü seçimi çözüm anında, sessiz varsayılan yok | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K71** | `invitations.timezone` = duvar saati + IANA kimliği, `timestamptz` değil | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
-| **K72** | Asistan ucu auth'lu | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K73** | Kota veritabanında sayılır (`assistant_usages`); `throttle:assistant` ayrıca durur | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K74** | Kota aşımı 429 + yeni kod `ASSISTANT_QUOTA_EXCEEDED` | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K75** | AI sağlayıcı hatalarının tamamı → `PROVIDER_UNAVAILABLE` (503) | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K76** | İletişim ucu `/api/public/contact` (`/api/contact` değil) | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K77** | `ip_hash` `hash_hmac`'e birleşti; ortak yer `app/Support/IpHasher` | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K78** | `ai.request.timeout_seconds` 10 → 6; retry yalnızca bağlantı hatasında | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K79** | `Jobs/SendRsvpNotification` yazılmadı | Faz 8 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A |
-| **K80** | Altyapı en düşük ortak paydaya yazılır; Redis, S3 ve süpervizör birer yükseltmedir | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K81** | `orders.scope` — kapsam satırda saklanır, okumada türetilmez | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K82** | Yayınlanmış davetiye silinebilir; ödenen hak 3 gün içinde serbest kalır | Faz 9 | geçerli · daraltıldı → K164 (Faz 18.4, `SEC-02`): serbest kalan hak yeniden kullanılır, iade edilmez | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K83** | Serbest hak, yayın anında yeten en düşük siparişten harcanır | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K84** | Bakım komutları `--dry-run` taşır ve zamanlayıcıdan önce elle koşulur | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K85** | Güvenlik başlıkları middleware'de, nginx'te değil | Faz 9 | geçerli · daraltıldı → K173 (Faz 18.6, `SEC-04`): yalnızca `/api/*`; SPA başlıkları Nginx'te | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K86** | `config/cors.php` yayınlandı ve daraltıldı; `exposed_headers: ['ETag']` | Faz 9 | geçerli | backend `claude/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A |
-| **K87** | PHP ^8.5 kalır | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K88** | Yayındaki davetiyede modül açma kayıt anında plan kontrolünden geçer → 402 `PAYWALL_TIER_INSUFFICIENT` | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K89** | `OrderStatus::Expired` eklenir. `orders:expire` onu yazar, `Expired → Paid` geçişine izin verilir. `Failed` f… | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K90** | Sanctum token ömrü 30 gün, mutlak (oluşturmadan itibaren) | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K91** | Bozuk girdi (yarım JSON, NUL) → 400, alan başına değil `api` grubunda tek middleware | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K92** | Sayı alanları `integer:strict` (`true` ve `"3"` reddedilir) | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K93** | 429 ve 503 yanıtları `Retry-After` başlığını da taşır | Faz 10 (25 Eyl) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
+| **K72** | Asistan ucu auth'lu | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K73** | Kota veritabanında sayılır (`assistant_usages`); `throttle:assistant` ayrıca durur | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K74** | Kota aşımı 429 + yeni kod `ASSISTANT_QUOTA_EXCEEDED` | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K75** | AI sağlayıcı hatalarının tamamı → `PROVIDER_UNAVAILABLE` (503) | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K76** | İletişim ucu `/api/public/contact` (`/api/contact` değil) | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K77** | `ip_hash` `hash_hmac`'e birleşti; ortak yer `app/Support/IpHasher` | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K78** | `ai.request.timeout_seconds` 10 → 6; retry yalnızca bağlantı hatasında | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K79** | `Jobs/SendRsvpNotification` yazılmadı | Faz 8 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-8.md) |
+| **K80** | Altyapı en düşük ortak paydaya yazılır; Redis, S3 ve süpervizör birer yükseltmedir | Faz 9 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K81** | `orders.scope` — kapsam satırda saklanır, okumada türetilmez | Faz 9 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K82** | Yayınlanmış davetiye silinebilir; ödenen hak 3 gün içinde serbest kalır | Faz 9 | geçerli · daraltıldı → K164 (Faz 18.4, `SEC-02`): serbest kalan hak yeniden kullanılır, iade edilmez | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K83** | Serbest hak, yayın anında yeten en düşük siparişten harcanır | Faz 9 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K84** | Bakım komutları `--dry-run` taşır ve zamanlayıcıdan önce elle koşulur | Faz 9 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K85** | Güvenlik başlıkları middleware'de, nginx'te değil | Faz 9 | geçerli · daraltıldı → K173 (Faz 18.6, `SEC-04`): yalnızca `/api/*`; SPA başlıkları Nginx'te | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K86** | `config/cors.php` yayınlandı ve daraltıldı; `exposed_headers: ['ETag']` | Faz 9 | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-9.md) |
+| **K87** | PHP ^8.5 kalır | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K88** | Yayındaki davetiyede modül açma kayıt anında plan kontrolünden geçer → 402 `PAYWALL_TIER_INSUFFICIENT` | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K89** | `OrderStatus::Expired` eklenir. `orders:expire` onu yazar, `Expired → Paid` geçişine izin verilir. `Failed` f… | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K90** | Sanctum token ömrü 30 gün, mutlak (oluşturmadan itibaren) | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K91** | Bozuk girdi (yarım JSON, NUL) → 400, alan başına değil `api` grubunda tek middleware | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K92** | Sayı alanları `integer:strict` (`true` ve `"3"` reddedilir) | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K93** | 429 ve 503 yanıtları `Retry-After` başlığını da taşır | Faz 10 (25 Eyl) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
 | **K94** | §A girdisi: BOŞ. Varsayılanlar: klasik `api_pay4.php`; ödeme imzası `base64(HMAC(random_nr·order_id·tutar·par`… | Faz 12 (24 Eki) | ⚠️ geçici: elle doğrulamadan sonra güncellenecek · Faz 18.5 (`SEC-03`): adım 7 OSB'yi doğrularsa `callback` kipinin kaldırılması ayrıca karara bağlanır (K170) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
-| **K95** | Mail kanalı kodda sağlayıcıdan bağımsız; geliştirmede `MAIL_MAILER=log`. SES mi alan adının SMTP'si mi, deplo… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K96** | Kullanıcıya giden mailler Türkçe (K21'in istisnası). Dil `config/davetkart.php` → `mail.locale` | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K97** | Hesap silinince anonimleştir: kullanıcı, davetiyeleri, LCV'leri, medyası (dosyalarıyla) silinir; `orders` sat… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K98** | Saklama süreleri: çöp kutusundaki davetiye 30 gün · misafir verisi etkinlikten 6 ay · iletişim mesajı 12 ay.… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K99** | Paket (davetiyesiz alınan sipariş) tek davetiye yayınlar: bağsız tekil sipariş olarak açılır, ilk yayında bağ… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K100** | İade, davetiyeyi kapsayan başka ödenmiş sipariş bırakmıyorsa davetiye yayından kalkar ve taslağa döner | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K101** | Misafire düzenleme kodu: aynı tarayıcıdan ikinci gönderim yeni satır açmaz, eskisini günceller (`PUT /public/`… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K102** | P-1 karışık: Elit'te *"DavetKart ile hazırlandı"* yok · premium = videolu 13 tema, en az Gold · *"video galer… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K103** | Zamanlanmış işler Sentry Cron Monitors'a bağlı (sabit izleyici adları) | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K104** | Hız sınırları düğüne göre: LCV IP 20/dk, davetiye 300/saat · medya IP 15/dk, davetiye 150/saat · IPv6 kovası… | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K105** | IBAN her kayıtta biçim + mod-97 ile doğrulanır (TR 26 karakter); değer yazıldığı gibi saklanır | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
-| **K106** | Asistanın günlük kotası İstanbul gece yarısında yenilenir (`default_timezone`) | Faz 10 (25 Eyl–1 Eki) | geçerli | backend `claude/FAZ-10-PLANI.md` §2 |
+| **K95** | Mail kanalı kodda sağlayıcıdan bağımsız; geliştirmede `MAIL_MAILER=log`. SES mi alan adının SMTP'si mi, deplo… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K96** | Kullanıcıya giden mailler Türkçe (K21'in istisnası). Dil `config/davetkart.php` → `mail.locale` | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K97** | Hesap silinince anonimleştir: kullanıcı, davetiyeleri, LCV'leri, medyası (dosyalarıyla) silinir; `orders` sat… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K98** | Saklama süreleri: çöp kutusundaki davetiye 30 gün · misafir verisi etkinlikten 6 ay · iletişim mesajı 12 ay.… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K99** | Paket (davetiyesiz alınan sipariş) tek davetiye yayınlar: bağsız tekil sipariş olarak açılır, ilk yayında bağ… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K100** | İade, davetiyeyi kapsayan başka ödenmiş sipariş bırakmıyorsa davetiye yayından kalkar ve taslağa döner | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K101** | Misafire düzenleme kodu: aynı tarayıcıdan ikinci gönderim yeni satır açmaz, eskisini günceller (`PUT /public/`… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K102** | P-1 karışık: Elit'te *"DavetKart ile hazırlandı"* yok · premium = videolu 13 tema, en az Gold · *"video galer… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K103** | Zamanlanmış işler Sentry Cron Monitors'a bağlı (sabit izleyici adları) | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K104** | Hız sınırları düğüne göre: LCV IP 20/dk, davetiye 300/saat · medya IP 15/dk, davetiye 150/saat · IPv6 kovası… | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K105** | IBAN her kayıtta biçim + mod-97 ile doğrulanır (TR 26 karakter); değer yazıldığı gibi saklanır | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
+| **K106** | Asistanın günlük kotası İstanbul gece yarısında yenilenir (`default_timezone`) | Faz 10 (25 Eyl–1 Eki) | geçerli | [`phases/faz-10/FAZ-10-PLANI.md` §2](../phases/faz-10/FAZ-10-PLANI.md) |
 | **K107** | Hediye = sipariş. Kod planı tamamen karşılıyorsa `provider='gift'`, `status='paid'`, `amount_minor=0` sipariş… | Faz 11 (23 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7) |
 | **K108** | Kısmi indirimde normal akış: `amount_minor = fiyat − indirim`, `discount_minor` ayrı kolon | Faz 11 (23 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7) |
 | **K109** | Kod değil `sha256(normalize(kod))` saklanır + son 4 karakter ipucu | Faz 11 (23 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-11.md#a-karar-kaydına-eklenecek-7) |
@@ -203,4 +203,4 @@
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.
-- Backend kaynakları (`davetkart-backend-php-laravel/claude/…`) bu depoda değil; yol düz metindir.
+- Backend `claude/` klasörünün kaynakları (EK-FAZ-5…9, `FAZ-10-PLANI.md`) 2026-11-22'de bu depoya taşındı (`ARC-05`, [`_restructure/2026-11-backend-claude-map.md`](../_restructure/2026-11-backend-claude-map.md)). K128–K145'in kaynağı backend `docs/rehber/fazlar/` dosyaları; yol düz metindir.
