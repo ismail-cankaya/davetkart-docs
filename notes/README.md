@@ -7,5 +7,6 @@ Serbest notlar, analizler, araştırmalar. Eski adı `claude/Notlar/`.
 | [`01-FRONTEND-ANALIZI.md`](01-FRONTEND-ANALIZI.md) | Frontend'den türetilen API sözleşmesi (27 Temmuz 2026) | Tarihsel |
 | [`02-FRONTEND-BACKEND-TEMAS-NOKTALARI.md`](02-FRONTEND-BACKEND-TEMAS-NOKTALARI.md) | Frontend'in backend'e dokunduğu her yer, rehberli gezinti | Tarihsel |
 | [`03-FRONTEND-YAPILACAKLAR.md`](03-FRONTEND-YAPILACAKLAR.md) | K20 (hata sözleşmesi) sonrası frontend'e düşen iş (31 Temmuz 2026'dan beri güncellendi) | Belirsiz: kod depolarında 14 yerden atıf alıyor, kapanıp kapanmadığı dosyadan anlaşılmıyor |
+| [`04-SHOPIER-ALICI-ALANLARI-SORUSU.md`](04-SHOPIER-ALICI-ALANLARI-SORUSU.md) | Shopier'e gönderilecek soru: dijital üründe TCKN/telefon/adres zorunlu mu (SEC-10, K125) | Gönderilmeyi bekliyor (2026-11-22) |
 
 `04-FAZ-5-FRONTEND-YAPILACAKLAR.md` backend deposunun `claude/Notlar/` klasöründe.
