@@ -41,6 +41,7 @@ Yapay zekâ ajanlarına verilen başlangıç prompt'ları (`PROMPT-*.md`). Geçe
 | [`PROMPT-FAZ-19-26-FE-50.md`](PROMPT-FAZ-19-26-FE-50.md) | Faz 19.26 — `FE-50` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
 | [`PROMPT-FAZ-19-27-FE-54.md`](PROMPT-FAZ-19-27-FE-54.md) | Faz 19.27 — `FE-54` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
 | [`PROMPT-FAZ-19-28-ARC-03.md`](PROMPT-FAZ-19-28-ARC-03.md) | Faz 19.28 — `ARC-03` denetim düzeltmesi (20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | Hazır |
+| [`faz-19-agent/`](faz-19-agent/README.md) | Faz 19 — üç paralel hat (A, B, C) için ajan prompt'ları (`BAGLAM.md`, bulgu başına `19-NN-<ID>.md`, `19-90-KAYIT.md`, `19-CAKISMA.md`; 20 Kasım 2026) | — | [`phases/faz-19/`](../phases/faz-19/README.md) | 19.0–19.27 + 19.90 tamamlandı · 19.28 bekliyor |
 | [`PROMPT-YAYIN.md`](PROMPT-YAYIN.md) | Yayın (AWS) oturumuna devam | Kayıtlı değil | [`operations/deployment/`](../operations/deployment/) | Güncel |
 
 **Bu depoda olmayanlar:** Faz 6–9 prompt'ları backend deposunun `claude/` klasöründe

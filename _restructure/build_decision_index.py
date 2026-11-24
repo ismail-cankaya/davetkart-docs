@@ -12,7 +12,7 @@ TANIM / ATIF KURALI (--check):
   `| **K9'** |` ya da §8'deki üstü çizili biçim `| ~~K9: …~~ |`. Başka her geçiş (cümle içinde,
   başlıkta, ikinci ve sonraki hücrelerde, `K2xx` gibi yer tutucular) atıftır ve sayılmaz.
   Taranan: docs deposu + ../davetkart-backend-php-laravel içindeki bütün *.md dosyaları.
-  Hariç: indeksin kendisi, SKIP_DIRS ve docs'ta SKIP_DOCS (bekleyen hat kayıtları 19.90'da işlenir;
+  Hariç: indeksin kendisi, SKIP_DIRS ve docs'ta SKIP_DOCS (hat kayıtları 19.90'da indekse işlendi, kopyadır;
   denetim raporları ve prompt'lar karar tanımlamaz, alıntılar).
 """
 import os
@@ -133,9 +133,8 @@ def main():
 INDEX = ROOT / "decisions" / "DECISION-INDEX.md"
 SKIP_DIRS = {".git", "vendor", "node_modules", "storage", "dist", "bootstrap", "public"}
 SKIP_DOCS = ("phases/faz-19/kayit/", "audits/", "prompts/", "_restructure/")
-# Faz 19 hatlarına ayrılmış numaralar (K182–K279): indekste yoksa "bekleyen" yazılır, hata sayılmaz.
-# 19.90 bunları indekse işleyince bu aralık kaldırılır (K253).
-PENDING = range(182, 280)
+# Paralel hatların bekleyen aralığı (K253). 19.90 (24 Kas) hat kararlarını indekse işledi; aralık boş.
+PENDING = range(0)
 DEF = re.compile(r"^\|\s*(?:(?:\*\*|~~)*(K\d+'?)(?:\*\*|~~)*|~~(K\d+'?):[^|]*~~)\s*\|")
 
 
