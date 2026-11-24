@@ -1,7 +1,7 @@
 # `PHP-LARAVEL-SETUP.md` — Faz 19 Yaması
 
 > **Tarih:** 20 Kasım 2026'da açıldı; 19.0 ve 19.2–19.27 hat kayıtlarından 24 Kasım'da (19.90) işlendi.
-> Kullanılan: K182 (hazırlık) · K183–K192 (Hat A) · K220–K232 (Hat B) · K250–K258 (Hat C). 19.28 `ARC-03` bekliyor.
+> Kullanılan: K182 (hazırlık) · K183–K192 (Hat A) · K220–K232 (Hat B) · K250–K258 (Hat C). 19.28 `ARC-03`: K259 (25 Kasım).
 > **Ne bu:** Ana devir dosyasına (`context/PHP-LARAVEL-SETUP.md`) **işlenmeyi bekleyen** Faz 19 kayıtları.
 > `-EK-FAZ-18` ile aynı biçim.
 > **Tam kayıt:** `davetkart-backend-php-laravel/docs/rehber/fazlar/FAZ-19.md`
@@ -315,3 +315,15 @@ Kayıt: [`phases/faz-19/kayit/19-27-FE-54.md`](../../phases/faz-19/kayit/19-27-F
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K229** | Toast iki kalıcı canlı bölge (status/alert), kontrast WCAG AA (`gold-ink` tonu, alt bilgi /70), misafir sayfası `<main>`, `npm run e2e`'de 14 sayfalık axe taraması | Mesajlar ekran okuyucuya ulaşsın; kontrast geri kayarsa e2e kırmızı. | geçerli · Faz 19.27 (2026-11-23) |
+
+### 19.28 — `ARC-03`: K18 dosyaların %92'sinde çiğneniyor; 79 dosyanın kılavuzu yok
+
+Dallar: backend `fix/2026-11-24-arc-03-k18-ratchet` · docs `docs/2026-11-24-arc-03-k18-ratchet`. Kod kılavuzları: `app/Console/Commands/CheckK18.md`, `app/Support/K18Inspector.md`.
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K259** | K18 cırcırla denetlenir: `php artisan k18:check` tabandan (`0743874`) sonra değişen `app/`, `routes/`, `config/`, `database/` PHP dosyalarında 3 içerik satırından uzun yorum bloğu (tip etiketleri hariç) ya da eksik `docs/rehber/<aynı-yol>.md` varsa çıkış 1; `composer check` zincirinde; CI tam geçmişle (`fetch-depth: 0`), taban bulunamazsa kapalı başarısızlık. K18'i değiştirmez, ölçer | Kural doğru, sorun ölçülmemesiydi; bütün kod tabanını bir günde temizlemek yerine dokunulan dosya temiz olmak zorunda (ihlal yalnızca azalır). Sabit taban, dal ilerledikçe kaymasın diye | geçerli · §A varsayılanı (İsmail cevaplamadı) · Faz 19.28 (25 Kas) |
+
+**Eski kararların durum notları:**
+
+- K18 → geçerli; denetimle → K259.

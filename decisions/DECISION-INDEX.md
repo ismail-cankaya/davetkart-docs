@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K233–K249 (Hat B) ayrılmıştı, kullanılmadı.
 
-**Sıradaki boş numara: K259**
+**Sıradaki boş numara: K260**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -32,7 +32,7 @@
 | **K15** | Tam Clean Architecture / DDD YAPILMAYACAK | Faz 0 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K16** | Klasörler `php artisan make:*` ile üretilir | Faz 0 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K17** | Özellik-özellik inşa (9 faz) | Faz 0 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
-| **K18** | Kodda kısa yorum, detay `docs/rehber/` altında | Faz 0 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
+| **K18** | Kodda kısa yorum, detay `docs/rehber/` altında | Faz 0 | geçerli · denetimle → K259 (Faz 19.28, `k18:check` cırcırı) | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K19** | Geliştirme ve testte de PostgreSQL 18 | Faz 0 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K20** | 🔴 Hata sözleşmesi — API metin değil kod döner | Faz 0 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K21** | Backend tek dil konuşur (`APP_LOCALE=en`) | Faz 0 | geçerli · K96 istisnası (mailler Türkçe) | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
@@ -229,11 +229,12 @@
 | **K256** | Başarısız kuyruk işi `Log::critical` ile bildirilir; bağlam yalnızca iş sınıfı, kuyruk, bağlantı, deneme sayısı, istisna sınıfı (yük ve istisna metni yok) | Faz 19.7 (22 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K257** | Etkinlik tarihi olmayan davetiyede misafir verisi (LCV + misafir dosyaları) `published_at` + 12 ay, yayınlanmamışsa `created_at` + 12 ay sonra silinir; tarihli davetiyede K98 (`event_at` + 6 ay) aynen; sahibe bildirim yok | Faz 19.16 (23 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K258** | Parola kuralı tek kaynaktan (`App\Rules\PasswordPolicy`): en az 8, en çok 255 karakter, yaygın 10.000 parola listesinde olmayan (büyük/küçük harf duyarsız) ve tek karakter tekrarı olmayan; kayıt, sıfırlama, değiştirmede aynı; karmaşıklık kuralı yok; mevcut hesaplar zorlanmaz; hata `VALIDATION_FAILED` + `uncommon_password` | Faz 19.9 (23 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K259** | K18 cırcırla denetlenir: `php artisan k18:check` tabandan (`0743874`) sonra değişen `app/`, `routes/`, `config/`, `database/` PHP dosyalarında 3 içerik satırından uzun yorum bloğu (tip etiketleri hariç) ya da eksik `docs/rehber/<aynı-yol>.md` varsa çıkış 1; `composer check` zincirinde; CI tam geçmişle (`fetch-depth: 0`), taban bulunamazsa kapalı başarısızlık. K18'i değiştirmez, ölçer | Faz 19.28 (25 Kas) | geçerli · §A varsayılanı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 
 ## Notlar
 
-- Eksik numara: K193–K219 ve K233–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K259–K279 (Hat C) serbest,
-  numaralama K259'dan sürer. Başka eksik yok (K1–K258; `--check` denetler).
+- Eksik numara: K193–K219 ve K233–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K260–K279 (Hat C) serbest,
+  numaralama K260'tan sürer. Başka eksik yok (K1–K259; `--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.
