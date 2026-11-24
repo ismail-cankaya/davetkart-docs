@@ -2,6 +2,11 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-25 — Faz 19.28 `ARC-03` ve Faz 19 kapanışı (`docs/2026-11-24-arc-03-k18-ratchet`)
+
+- 19.28 `ARC-03`: K18 cırcırı `php artisan k18:check` `composer check`'te; `routes/api.php` ve `AppServiceProvider.php` uzun yorumları kılavuzlarına taşındı; 29 eksik kılavuz (K259; `DECISION-INDEX.md` sıradaki K260, K18 durum notu).
+- Faz 19 kapanışı: 28/28 birleşti; tam takım, `composer audit`, frontend check/e2e/perf ✅; `composer check` PHPStan iç hatasıyla kırmızı → `v1.2.0` bekliyor ([`phases/faz-19/FAZ-19-ARC-03-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-ARC-03-COMMIT-KOMUTLARI.md)); `phases/README.md` Faz 19 satırı.
+
 ## 2026-11-24 — Faz 19.90: hat kayıtları birleştirildi (`docs/2026-11-24-faz19-records`)
 
 - 19.0 ve 19.2–19.27'nin kararları K182, K183–K192, K220–K232, K250–K258 ([`decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md); `DECISION-INDEX.md`: sıradaki boş numara K259, eski karar durum notları, bekleyen aralık kaldırıldı); takip tablosu [`phases/faz-19/README.md`](phases/faz-19/README.md) `birleşti`; `prompts/README.md`: `faz-19-agent/`.
