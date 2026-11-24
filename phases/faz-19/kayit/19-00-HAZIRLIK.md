@@ -1,5 +1,8 @@
 # Faz 19.0 — Paralel çalışma hazırlığı (hat başına test veritabanı)
 
+> **Birleştirildi → 19.90** (24 Kasım 2026): kararlar `decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` ve
+> `DECISION-INDEX.md`'de, faz bölümü backend `docs/rehber/fazlar/FAZ-19.md`'de. Bu dosya tarihçe için duruyor.
+
 > **Tarih:** 20 Kasım 2026 · **Karar:** K182 · **Dallar:** backend `fix/2026-11-20-faz19-parallel-test-db`
 > (← `faz-19-audit-fixes`) · docs `docs/2026-11-20-faz19-parallel-test-db` (← `docs/2026-11-20-faz-19-audit-fixes`)
 > **Commit komutları:** [`../FAZ-19-HAZIRLIK-COMMIT-KOMUTLARI.md`](../FAZ-19-HAZIRLIK-COMMIT-KOMUTLARI.md)
