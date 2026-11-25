@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-25 — Hat C açık hataları kapandı (`docs/2026-11-25-hat-c-fixes`)
+
+- [`phases/faz-19/HAT-C-ACIK-HATALAR.md`](phases/faz-19/HAT-C-ACIK-HATALAR.md): kod ve doküman maddeleri (#1, #2, #11–#20, #27, #30) kapandı; PHPStan'in iç hatası ortak sonuç önbelleğiydi (`tmpDir`), `composer check` uçtan uca yeşil (§E). Komutlar: [`phases/faz-19/FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md); `phases/faz-19/README.md` üç hat raporunu listeliyor.
+
 ## 2026-11-25 — Hat C açık hatalar listesi (`docs/2026-11-25-hat-c-open-items`)
 
 - [`phases/faz-19/HAT-C-ACIK-HATALAR.md`](phases/faz-19/HAT-C-ACIK-HATALAR.md) güncellendi: Faz 19 ortak düzeltme dalı için öncelik sırası; PHPStan (#11, #12, #1, #18, #19), `OPS-03` kılavuzları (#13), 19.28 artıkları (#14–#17, #20), sürüm etiketleri (#21), dal düzeni; #3, #4, #7 kapandı.
