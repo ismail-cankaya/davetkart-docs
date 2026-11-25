@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-25 — Hat C açık hatalar listesi (`docs/2026-11-25-hat-c-open-items`)
+
+- [`phases/faz-19/HAT-C-ACIK-HATALAR.md`](phases/faz-19/HAT-C-ACIK-HATALAR.md) güncellendi: Faz 19 ortak düzeltme dalı için öncelik sırası; PHPStan (#11, #12, #1, #18, #19), `OPS-03` kılavuzları (#13), 19.28 artıkları (#14–#17, #20), sürüm etiketleri (#21), dal düzeni; #3, #4, #7 kapandı.
+
 ## 2026-11-25 — Faz 19.28 `ARC-03` ve Faz 19 kapanışı (`docs/2026-11-24-arc-03-k18-ratchet`)
 
 - 19.28 `ARC-03`: K18 cırcırı `php artisan k18:check` `composer check`'te; `routes/api.php` ve `AppServiceProvider.php` uzun yorumları kılavuzlarına taşındı; 29 eksik kılavuz (K259; `DECISION-INDEX.md` sıradaki K260, K18 durum notu).
