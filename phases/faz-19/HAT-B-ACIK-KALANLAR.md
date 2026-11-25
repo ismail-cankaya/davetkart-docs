@@ -154,7 +154,7 @@ K numaraları Hat B'nin ayrılmış, kullanılmamış aralığından (K233–K23
 
 | # | Durum | Ne yapıldı |
 |---|---|---|
-| B-E1 | ✅ K233 | Silme günlüğü **veritabanı dışında** (`config/deletion_log.php`, üretimde `DAVETKART_DELETION_LOG_DISK=s3`): `RecordDeletion` observer'ı commit sonrası hesap/davetiye/LCV/medya silmesini yazar; `data:reapply-deletions --since=<yedek anı>` geri yüklemeden sonra aynı Action'larla yeniden siler, sonra `data:purge`; `data:purge` 40 günden eski günlüğü siler. 7 test. ⚠️ `operations/deployment/YEDEK-VE-GERI-YUKLEME.md` §7.2/§9'a adım eklenmedi (aşağıda) |
+| B-E1 | ✅ K233 | Silme günlüğü **veritabanı dışında** (`config/deletion_log.php`, üretimde `DAVETKART_DELETION_LOG_DISK=s3`): `RecordDeletion` observer'ı commit sonrası hesap/davetiye/LCV/medya silmesini yazar; `data:reapply-deletions --since=<yedek anı>` geri yüklemeden sonra aynı Action'larla yeniden siler, sonra `data:purge`; `data:purge` 40 günden eski günlüğü siler. 7 test. Kitap: `operations/deployment/YEDEK-VE-GERI-YUKLEME.md` §7.2 ve §9'a adım eklendi (26 Kas) |
 | B-E2 | ✅ K234 | `data:purge` siparişi yılının sonundan 10 yıl sonra siler (iade talebi + hediye kodu kullanımıyla) |
 | B-E3 | ⏳ | Shopier cevabı bekleniyor (değişmedi) |
 | B-E4 | ✅ K235 | Frontend derlemesi kapakları `dist/covers/<preset>.<uzantı>` + `index.json` yayımlar (65 kapak; SVG/kapaksız/büyük atlanır); backend `TemplateCovers` galerisiz davetiyede kapağı `og:image` yapar |
@@ -173,4 +173,4 @@ K numaraları Hat B'nin ayrılmış, kullanılmamış aralığından (K233–K23
 
 Kapılar: backend `composer check` ✅ (B-E1 dalında 1300/1300); frontend e2e ✅ 5/5 (B-E7 dalında), `verify:bundle`/`verify:render` ✅.
 **Koşulmadı:** son birleşmelerden (B-E4 frontend, B-E5/6, B-E10) sonra birleşik uçta tam `npm run check` + e2e, ve backend birleşik uçta `composer check`.
-**Kalan:** kitaba §7.3 "geri yüklemeden sonra `data:reapply-deletions`" adımı; K233–K237'yi `DECISION-INDEX.md`/`EK-FAZ-19.md`'ye işlemek; B-D10, B-D14; §4 elle işler.
+**26 Kasım:** kitap adımı ve K233–K237 (`DECISION-INDEX.md`, `EK-FAZ-19.md` "Hat B" bölümü) işlendi. Kalan: B-D10, B-D14; §4 elle işler.

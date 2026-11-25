@@ -349,3 +349,21 @@ Girdi: [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](../../phases/faz-19/HAT-A-ACIK-K
 | **K262** | SEC-10 D2: kartla ödenecek siparişte alıcının cep telefonu sorulur (`05XXXXXXXXX`, `+90`/boşluk/tire normalleştirilir), **yalnızca siparişte** (`orders.buyer_phone`) saklanır ve Shopier'e o gider; zorunluluğu sürücü belirler (`RequiresBuyerPhone`; Fake ve hediye siparişi telefon tutmaz); hesap silinince anonim siparişten de silinir. TCKN ve adres Shopier'in cevabına kadar yer tutucu | Herkese aynı telefon "çalışıyor" ama izinli olduğu bilinmiyor; gerçek telefon cevap ne olursa olsun zararsız ve KVKK için en az veri yalnızca siparişte | geçerli · İsmail'in kararı · ortak düzeltme (25 Kas) |
 
 - K125 → kısmen geçersiz: telefon yer tutucusu kalktı (K262); TCKN ve adres maddesi ⚠️ Shopier cevabını bekliyor.
+
+### Faz 19 ortak düzeltme — Hat B
+
+Girdi: [`phases/faz-19/HAT-B-ACIK-KALANLAR.md`](../../phases/faz-19/HAT-B-ACIK-KALANLAR.md) §2, §5 (§9 sonuçlar) · dallar: `fix/2026-11-25-b-*` → `faz-19-fix`; docs `docs/2026-11-25-hat-b-fixes-2`. Kararlar İsmail'in oturumdaki cevabı (25 Kasım 2026).
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K233** | Silme günlüğü veritabanı dışında (`config/deletion_log.php`, üretimde `DAVETKART_DELETION_LOG_DISK=s3`): `RecordDeletion` observer'ı commit sonrası hesap/davetiye/LCV/medya silmesini tür + kimlik + zamanla yazar; geri yüklemeden sonra `data:reapply-deletions --since=<yedek anı>` aynı Action'larla yeniden siler, sonra `data:purge`; 40 günden eski günlük `data:purge`'te silinir | Gizlilik metni (K231) yedeklerden 40 günde silmeyi söylüyor; döküm geri yüklenirse yedekten sonraki silmeler geri gelirdi. Günlük veritabanında olsaydı o da yedek anına dönerdi | geçerli · İsmail'in kararı (K-7) |
+| **K234** | `data:purge` siparişi yılının sonundan 10 yıl sonra siler (`ORDER_RETENTION_YEARS`); iade talebi ve hediye kodu kullanımı önce silinir (FK restrict) | Gizlilik metni "işlem ve fatura kayıtları: 10 yıl" diyor; mevzuattaki süre takvim yılı sonundan başlar | geçerli |
+| **K235** | Paylaşım önizlemesi galeri yoksa şablon kapağını kullanır: frontend derlemesi kapakları `dist/covers/<preset>.<uzantı>` + `index.json` olarak yayımlar, backend `TemplateCovers` dizini okur; SVG, kapaksız ve 600 kB üstü → genel poster | Kapaklar Vite'ta hash'li adla çıkıyordu; galerisiz davetiye WhatsApp'ta genel poster gösteriyordu | geçerli · İsmail'in kararı (K-1) |
+| **K236** | e2e CI `main`'e açılan PR'larda ve elle koşar (`.github/workflows/e2e.yml`, Windows koşucusu); her push'ta değil | ~10 dk'lık iş; `ci.yml` her push'ta yeter. TST-04 §A-1'in "taslak" varsayılanının yerine | geçerli · İsmail'in kararı (K-6) · GitHub'da henüz koşmadı |
+| **K237** | Paket bütçesi cırcır kalır; misafir sayfası 900 → 800 kB, ilk yükleme 720 kB | B-E5 (katalog misafire inmiyor) 94 kB kazandırdı; sınır yalnızca gerçek kazançtan sonra iner | geçerli · İsmail'in kararı (K-4) |
+
+**Eski kararların durum notları:**
+
+- K152 / K231 → geçerli; yedekten dönüşte silmelerin yeniden uygulanması K233 ile eklendi.
+- K230 → geçerli; "şablon kapağı kullanılmadı" maddesi geçersiz kılındı → K235.
+- K224 (TST-04) → geçerli; "e2e CI yalnızca taslak" → K236.
