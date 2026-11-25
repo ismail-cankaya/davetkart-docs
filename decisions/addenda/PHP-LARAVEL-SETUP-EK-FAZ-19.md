@@ -327,3 +327,17 @@ Dallar: backend `fix/2026-11-24-arc-03-k18-ratchet` · docs `docs/2026-11-24-arc
 **Eski kararların durum notları:**
 
 - K18 → geçerli; denetimle → K259.
+
+### Faz 19 ortak düzeltme — Hat A
+
+Girdi: [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](../../phases/faz-19/HAT-A-ACIK-KALANLAR.md) §2 (E1, E2) · dallar: backend `fix/2026-11-25-a-e1-verify-existing-accounts`, `fix/2026-11-25-a-e2-prune-empty-drafts` → `faz-19-fix` · docs `docs/2026-11-25-hat-a-fixes`. İkisi de İsmail'in oturumdaki cevabı (25 Kasım 2026).
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K260** | 19.14 öncesi açılmış doğrulanmamış hesaplar doğrulanmış sayılır: tek seferlik göç `2026_11_25_100000_mark_existing_accounts_as_verified` → `email_verified_at = created_at` (göç anında var olan satırlar); `down()` yok | Doğrulama postası yalnızca kayıtta gider; göçsüz eski hesaplar canlıya çıkıldığı gün ödeme ve yayın yapamazdı. Damga `created_at`: "doğrulandı" değil "kuraldan önce vardı" | geçerli · İsmail'in kararı · ortak düzeltme (25 Kas) |
+| **K261** | Boş taslak temizliği tek seferlik komutla: `invitations:prune-empty-drafts` (`--dry-run`, `--older-than` varsayılan 7 gün); isim/tarih/mekân boş, hiç yayınlanmamış, siparişsiz, medyasız taslak soft delete (kalıcı silme `data:purge`, K98); zamanlayıcıda yok (K84) | 19.26 öncesi boş taslaklar 50'lik tavana sayılıyordu. Yaş koşulu, içerik boşken "Davetiyeni Oluştur"la açılıp düzenlenen taslağı korur | geçerli · İsmail'in kararı · ortak düzeltme (25 Kas) |
+
+**Eski kararların durum notları:**
+
+- K191 → geçerli; "mevcut hesaplara göç yok" maddesi geçersiz kılındı → K260.
+- K192 → geçerli; "boş taslak temizliği yok" → tek seferlik komut K261.

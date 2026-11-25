@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K233–K249 (Hat B) ayrılmıştı, kullanılmadı.
 
-**Sıradaki boş numara: K260**
+**Sıradaki boş numara: K262**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -205,8 +205,8 @@
 | **K188** | `ClaimReleasedOrderAction` kilitli adayları aldıktan sonra koşulları yeni sorguyla yeniden sınar (başka tabloya bakan koşul kilitten sonra yeniden sorulur) | Faz 19.11 (2026-11-22) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K189** | Misafir medya yüklemesi bayrakla kapalı (varsayılan), kapalıyken 404; bayrak public davetiye yanıtında `guestUploads` | Faz 19.12 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K190** | Misafir yükleme bütçesi: iliştirilmiş 1 GB + tür başına adet; iliştirilmemişler ayrı kota (50 dosya / 200 MB); yetim 1 saat, temizlik saatlik | Faz 19.13 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
-| **K191** | Kayıt sonrası e-posta doğrulaması: imzalı 24 saatlik bağlantı (EmailChangeLink deseni, sır saklanmaz), checkout ve yayın `403 EMAIL_NOT_VERIFIED`, ilk yayın indirimi yalnızca doğrulanmışa, yeniden gönderme saatte 3 | Faz 19.14 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
-| **K192** | Taslak yaşam döngüsü: ilk kayıt gerçek içerikte ya da "Davetiyeni Oluştur"da; adres `/create/<id>`; kullanıcı başına 50 yayınlanmamış davetiye, kilitli sayım, `403 DRAFT_LIMIT_REACHED` | Faz 19.26 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K191** | Kayıt sonrası e-posta doğrulaması: imzalı 24 saatlik bağlantı (EmailChangeLink deseni, sır saklanmaz), checkout ve yayın `403 EMAIL_NOT_VERIFIED`, ilk yayın indirimi yalnızca doğrulanmışa, yeniden gönderme saatte 3 | Faz 19.14 (2026-11-23) | geçerli · "mevcut hesaplara göç yok" maddesi geçersiz kılındı → K260 (ortak düzeltme, A-E1) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K192** | Taslak yaşam döngüsü: ilk kayıt gerçek içerikte ya da "Davetiyeni Oluştur"da; adres `/create/<id>`; kullanıcı başına 50 yayınlanmamış davetiye, kilitli sayım, `403 DRAFT_LIMIT_REACHED` | Faz 19.26 (2026-11-23) | geçerli · boş taslak temizliği → K261 (ortak düzeltme, A-E2) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K220** | Dil seçici yalnızca tr/en; eski kayıt ve desteklenmeyen dil tr'ye düşer | Faz 19.20 (2026-11-20) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K221** | `verify:i18n`: çekirdek .tsx gömülü Türkçe metin mandalı (dosya başına tam eşit taban) | Faz 19.20 (2026-11-20) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K222** | Rota hata sınırları: katmanlı `errorElement` + markalı `RouteError` (editör kaydetme notu, misafir kapsamı) | Faz 19.21 (2026-11-20) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
@@ -230,11 +230,13 @@
 | **K257** | Etkinlik tarihi olmayan davetiyede misafir verisi (LCV + misafir dosyaları) `published_at` + 12 ay, yayınlanmamışsa `created_at` + 12 ay sonra silinir; tarihli davetiyede K98 (`event_at` + 6 ay) aynen; sahibe bildirim yok | Faz 19.16 (23 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K258** | Parola kuralı tek kaynaktan (`App\Rules\PasswordPolicy`): en az 8, en çok 255 karakter, yaygın 10.000 parola listesinde olmayan (büyük/küçük harf duyarsız) ve tek karakter tekrarı olmayan; kayıt, sıfırlama, değiştirmede aynı; karmaşıklık kuralı yok; mevcut hesaplar zorlanmaz; hata `VALIDATION_FAILED` + `uncommon_password` | Faz 19.9 (23 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K259** | K18 cırcırla denetlenir: `php artisan k18:check` tabandan (`0743874`) sonra değişen `app/`, `routes/`, `config/`, `database/` PHP dosyalarında 3 içerik satırından uzun yorum bloğu (tip etiketleri hariç) ya da eksik `docs/rehber/<aynı-yol>.md` varsa çıkış 1; `composer check` zincirinde; CI tam geçmişle (`fetch-depth: 0`), taban bulunamazsa kapalı başarısızlık. K18'i değiştirmez, ölçer | Faz 19.28 (25 Kas) | geçerli · §A varsayılanı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K260** | 19.14 öncesi açılmış doğrulanmamış hesaplar doğrulanmış sayılır: tek seferlik göç `email_verified_at = created_at` (göç anında var olan satırlar); `down()` yok. K191'in "mevcut hesaplara göç yok" maddesini geçersiz kılar | Faz 19 ortak düzeltme, Hat A E1 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
+| **K261** | Boş taslak temizliği tek seferlik komutla: `invitations:prune-empty-drafts` (`--dry-run`, `--older-than` varsayılan 7 gün); isim/tarih/mekân boş, hiç yayınlanmamış, siparişsiz, medyasız taslak soft delete; zamanlayıcıda yok (K84) | Faz 19 ortak düzeltme, Hat A E2 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
 
 ## Notlar
 
-- Eksik numara: K193–K219 ve K233–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K260–K279 (Hat C) serbest,
-  numaralama K260'tan sürer. Başka eksik yok (K1–K259; `--check` denetler).
+- Eksik numara: K193–K219 ve K233–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K260–K279 Hat C'ye ayrılmıştı,
+  K260–K261 ortak düzeltmede (Hat A) kullanıldı, numaralama K262'den sürer. Başka eksik yok (K1–K261; `--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.
