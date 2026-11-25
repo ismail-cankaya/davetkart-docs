@@ -9,7 +9,7 @@
 - **Resmî faz kaydı:** backend `docs/rehber/fazlar/FAZ-19.md`. Backend'e dokunmayan bulgular bölümlerini önce `phases/faz-19/FAZ-19-<ID>-KAYIT.md`'ye yazar; sonraki backend bulgusu taşır.
 - **Sürümler:** 19.1 (`SEC-07`) sonunda **`v1.1.0`** (= Faz 18 + `SEC-07`; Faz 18'in bekleyen etiketi). 19.28 sonunda **`v1.2.0`** (Faz 19 kapanışı).
 - **§A:** "Karar" sütununda **§A** yazan prompt'larda önce senin cevapların gerekir; boş bırakılan satır için ajan prompt'taki varsayılanı uygular ve K kaydında işaretler.
-- **Bu klasördeki dosyalar:** bu tablo · bulgu başına `FAZ-19-<ID>-COMMIT-KOMUTLARI.md` (ilki [`FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](FAZ-19-SEC-07-COMMIT-KOMUTLARI.md): 19.1 + `v1.1.0` etiket blokları) · gerekirse `FAZ-19-<ID>-KAYIT.md`. Ortak düzeltme adımının girdileri: [`HAT-A-ACIK-KALANLAR.md`](HAT-A-ACIK-KALANLAR.md), [`HAT-B-ACIK-KALANLAR.md`](HAT-B-ACIK-KALANLAR.md), [`HAT-C-ACIK-HATALAR.md`](HAT-C-ACIK-HATALAR.md); Hat C'nin düzeltme komutları [`FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md`](FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md).
+- **Bu klasördeki dosyalar:** bu tablo · bulgu başına `FAZ-19-<ID>-COMMIT-KOMUTLARI.md` (ilki [`FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](FAZ-19-SEC-07-COMMIT-KOMUTLARI.md): 19.1 + `v1.1.0` etiket blokları) · gerekirse `FAZ-19-<ID>-KAYIT.md`. Ortak düzeltme adımının girdileri: [`HAT-A-ACIK-KALANLAR.md`](HAT-A-ACIK-KALANLAR.md), [`HAT-B-ACIK-KALANLAR.md`](HAT-B-ACIK-KALANLAR.md), [`HAT-C-ACIK-HATALAR.md`](HAT-C-ACIK-HATALAR.md); Hat C'nin düzeltme komutları [`FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md`](FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md); Hat B'ninkiler [`FAZ-19-HAT-B-FIX-COMMIT-KOMUTLARI.md`](FAZ-19-HAT-B-FIX-COMMIT-KOMUTLARI.md).
 
 ## Sıra ve gerekçe
 
