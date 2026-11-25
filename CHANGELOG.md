@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-25 — Hat A açık kalanları kapandı (`docs/2026-11-25-hat-a-fixes`)
+
+- [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](phases/faz-19/HAT-A-ACIK-KALANLAR.md): §1'in 4 hatası kapandı (H2 taslak tavanı mesajı `faz-19-fix`'te), §2'den E1 (K260 hesap doğrulama göçü), E2 (K261 boş taslak temizlik komutu), E3, E8, E9; `composer check` 1279/1279 ve `npm run check` yeşil, e2e koşulmadı (§8). K260–K261 `DECISION-INDEX.md` ve EK-FAZ-19'a işlendi (sıradaki K262). Komutlar: [`phases/faz-19/FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md).
+
 ## 2026-11-25 — Hat B bilinen hataları kapandı (`docs/2026-11-25-hat-b-fixes`)
 
 - [`phases/faz-19/HAT-B-ACIK-KALANLAR.md`](phases/faz-19/HAT-B-ACIK-KALANLAR.md) §1'in 7 hatası (B-H1–B-H7) `faz-19-fix`'te kapandı; B-H2'nin kökü form yeniden bağlanması değil zarf animasyonundaki `inert`'ti; `composer check`, `npm run check` ve e2e (4/4) yeşil (§8). Komutlar: [`phases/faz-19/FAZ-19-HAT-B-FIX-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-HAT-B-FIX-COMMIT-KOMUTLARI.md).
