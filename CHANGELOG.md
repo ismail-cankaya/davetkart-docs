@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-25 — Hat B bilinen hataları kapandı (`docs/2026-11-25-hat-b-fixes`)
+
+- [`phases/faz-19/HAT-B-ACIK-KALANLAR.md`](phases/faz-19/HAT-B-ACIK-KALANLAR.md) §1'in 7 hatası (B-H1–B-H7) `faz-19-fix`'te kapandı; B-H2'nin kökü form yeniden bağlanması değil zarf animasyonundaki `inert`'ti; `composer check`, `npm run check` ve e2e (4/4) yeşil (§8). Komutlar: [`phases/faz-19/FAZ-19-HAT-B-FIX-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-HAT-B-FIX-COMMIT-KOMUTLARI.md).
+
 ## 2026-11-25 — Hat C açık hataları kapandı (`docs/2026-11-25-hat-c-fixes`)
 
 - [`phases/faz-19/HAT-C-ACIK-HATALAR.md`](phases/faz-19/HAT-C-ACIK-HATALAR.md): kod ve doküman maddeleri (#1, #2, #11–#20, #27, #30) kapandı; PHPStan'in iç hatası ortak sonuç önbelleğiydi (`tmpDir`), `composer check` uçtan uca yeşil (§E). Komutlar: [`phases/faz-19/FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-HAT-C-FIX-COMMIT-KOMUTLARI.md); `phases/faz-19/README.md` üç hat raporunu listeliyor.
