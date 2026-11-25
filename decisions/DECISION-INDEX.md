@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K233–K249 (Hat B) ayrılmıştı, kullanılmadı.
 
-**Sıradaki boş numara: K262**
+**Sıradaki boş numara: K263**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -139,7 +139,7 @@
 | **K122** | Callback yanıtı 303, hedef `config('payment.return_urls')`'ten, `order` yalnızca ULID ise; geçersiz imza → `/`… | Faz 12 (24 Eki) | geçerli · genişletildi → K172 (Faz 18.5): sürücü kurulamazsa da 303 → `/odeme/hata` | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K123** | Sır, mod ya da (`osb` modunda) OSB kimliği eksikse `ShopierGateway` kurulmaz → 503 | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K124** | Tutar metni `sprintf('%d.%02d', intdiv, %)`; imzaya giren ve forma yazılan aynı değişken | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
-| **K125** | Ad/soyad/e-posta kullanıcıdan; TCKN, telefon, adres `config('payment.providers.shopier.buyer_placeholders')` | Faz 12 (24 Eki) | ⚠️ elle doğrulama bekliyor · Shopier sorusu hazır, gönderilmeyi bekliyor (Faz 19.15, `SEC-10`, `notes/04`) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
+| **K125** | Ad/soyad/e-posta kullanıcıdan; TCKN, telefon, adres `config('payment.providers.shopier.buyer_placeholders')` | Faz 12 (24 Eki) | kısmen geçersiz → K262 (telefon gerçek) · ⚠️ TCKN/adres elle doğrulama bekliyor · Shopier sorusu hazır, gönderilmeyi bekliyor (Faz 19.15, `SEC-10`, `notes/04`) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K126** | Bildirim tutar taşıyorsa (OSB) siparişin `amount_minor` + `currency`'siyle eşleşmeli; uymazsa geçiş yok + `Lo`… | Faz 12 (24 Eki) | geçerli · genişletildi → K171 (Faz 18.5): üretimde tutar taşımayan `paid` de reddedilir | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K127** | Tarayıcı callback'i ayrı metot (`parseCallback`) ve ayrı tip (`ShopierCallback`); `osb` modunda bildirim nesn… | Faz 12 (24 Eki) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-12.md#a-karar-kaydına-eklenecek-7) |
 | **K128** | Fiyatın tek kaynağı backend; frontend gösterir, hesaplamaz (`OrderResource` "tutar gönderilmez" kararı geri alındı) | Faz 13 | geçerli | backend `docs/rehber/fazlar/FAZ-13.md` §4 |
@@ -232,11 +232,12 @@
 | **K259** | K18 cırcırla denetlenir: `php artisan k18:check` tabandan (`0743874`) sonra değişen `app/`, `routes/`, `config/`, `database/` PHP dosyalarında 3 içerik satırından uzun yorum bloğu (tip etiketleri hariç) ya da eksik `docs/rehber/<aynı-yol>.md` varsa çıkış 1; `composer check` zincirinde; CI tam geçmişle (`fetch-depth: 0`), taban bulunamazsa kapalı başarısızlık. K18'i değiştirmez, ölçer | Faz 19.28 (25 Kas) | geçerli · §A varsayılanı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K260** | 19.14 öncesi açılmış doğrulanmamış hesaplar doğrulanmış sayılır: tek seferlik göç `email_verified_at = created_at` (göç anında var olan satırlar); `down()` yok. K191'in "mevcut hesaplara göç yok" maddesini geçersiz kılar | Faz 19 ortak düzeltme, Hat A E1 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
 | **K261** | Boş taslak temizliği tek seferlik komutla: `invitations:prune-empty-drafts` (`--dry-run`, `--older-than` varsayılan 7 gün); isim/tarih/mekân boş, hiç yayınlanmamış, siparişsiz, medyasız taslak soft delete; zamanlayıcıda yok (K84) | Faz 19 ortak düzeltme, Hat A E2 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
+| **K262** | SEC-10 D2: kartla ödemede alıcının cep telefonu sorulur, yalnızca siparişte (`orders.buyer_phone`) saklanır ve Shopier'e o gider; zorunluluğu sürücü belirler (`RequiresBuyerPhone`); hediye/Fake siparişi telefon tutmaz; hesap silinince anonim siparişten silinir. TCKN/adres yer tutucu kalır | Faz 19 ortak düzeltme, Hat A E5 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
 
 ## Notlar
 
 - Eksik numara: K193–K219 ve K233–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K260–K279 Hat C'ye ayrılmıştı,
-  K260–K261 ortak düzeltmede (Hat A) kullanıldı, numaralama K262'den sürer. Başka eksik yok (K1–K261; `--check` denetler).
+  K260–K262 ortak düzeltmede (Hat A) kullanıldı, numaralama K263'ten sürer. Başka eksik yok (K1–K262; `--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.

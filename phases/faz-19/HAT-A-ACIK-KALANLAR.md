@@ -12,7 +12,7 @@
 | Bölüm | Adet | En önemlisi |
 |---|---|---|
 | 1. Bilinen hatalar | 4 (✅ 4 kapandı) | Taslak tavanı dolunca editör "bağlantınızı kontrol edin" diyor (FE-50); PHPStan önbelleği hatlar arasında ortak |
-| 2. Eksikler | 9 (✅ 5 kapandı) | Mevcut hesaplar doğrulanmamış sayılıyor: canlıya çıkınca hiçbiri ödeme/yayın yapamaz (SEC-09) |
+| 2. Eksikler | 9 (✅ 8 kapandı, 🟡 1 kısmen) | Mevcut hesaplar doğrulanmamış sayılıyor: canlıya çıkınca hiçbiri ödeme/yayın yapamaz (SEC-09) |
 | 3. Koşulmayan doğrulamalar | 9 (✅ 1 koşuldu) | Sunucuda `about` / `schedule:list` / SES; tarayıcıda doğrulama bandı ve sayfası |
 | 4. Elle yapman gerekenler | 8 (✅ 3 gerekmiyor) | Shopier sorusu, sunucu `.env` anahtar karşılaştırması |
 | 5. Bekleyen kararlar | 9 (✅ 3 kapandı) | §A'sı boş geçilen 8 işin varsayılanları + PHPStan |
@@ -34,10 +34,10 @@
 | ✅ E1 | **Mevcut hesaplar için göç yok.** → K260: göç `email_verified_at = created_at` (§8). `email_verified_at` boş olan her hesap (19.14'ten önce açılanların hepsi) canlıya çıkınca ödeme başlatamaz, yayınlayamaz ve ilk yayın indirimini alamaz. Doğrulama postası hiç gitmemiş; kullanıcı yalnızca banttaki "yeniden gönder" ile kurtulur | Canlıda kullanıcı varsa yayın akışı bir gecede kırılır | SEC-09 §A varsayılanı ("göç yok") |
 | ✅ E2 | → K261: `invitations:prune-empty-drafts` (§8). 19.26'dan önce açılmış boş taslaklar silinmedi; 50'lik tavana sayılıyorlar. Otomatik temizlik işi yok | Çok gezinen eski kullanıcı tavana boş "Düğün"lerle yaklaşabilir; H2 ile birlikte kafa karıştırır | FE-50 §A-2 |
 | ✅ E3 | → bayrak artık önbellekten sonra her istekte okunuyor (§8). `guestUploads` alanı davetiye önbelleğinde en çok 6 saat eski kalabilir; bayrak değişince otomatik geçersiz kılma yok, `php artisan cache:clear` gerekir | Bayrak açılırsa arayüz 6 saate kadar yüklemeyi göstermez (uç hemen açılır) | FE-51 "Bilinen gecikme" |
-| E4 | Bekleyen dosya sonradan iliştirilirse 1 GB bütçe en çok 200 MB aşılabilir | Kasıtlı (yetimleri bütçeye katmak DoS'u geri getirir); belgelenmiş sınır | SEC-08 |
-| E5 | Shopier'e her alıcı için aynı yer tutucu TCKN/telefon/adres gidiyor; kod değişmedi (D4) | K125 ⚠️; Hat B E3 ile aynı madde | SEC-10 |
-| E6 | Yerelde `public` diskte biriken medya S3'e taşınmadı | Canlıda `public`'te dosya varsa K183 sonrası okunur ama yeni yükleme S3'e gider; iki yerde medya | ARC-04 (kapsam dışı) |
-| E7 | Sunucudaki gerçek `.env` anahtar listesi görülmedi; şablon yalnızca Y8.3b düzeltmeleriyle eşitlendi | Sunucuda şablonda olmayan bir anahtar varsa yeniden kurulumda kaybolur | OPS-04 §A-1 |
+| ✅ E4 | → iliştirmede bütçe davetiye kilidi altında yeniden sınanıyor (§9). Bekleyen dosya sonradan iliştirilirse 1 GB bütçe en çok 200 MB aşılabilir | Kasıtlı (yetimleri bütçeye katmak DoS'u geri getirir); belgelenmiş sınır | SEC-08 |
+| 🟡 E5 | → telefon gerçek (K262, §9); TCKN ve adres Shopier'in cevabına kadar yer tutucu. Shopier'e her alıcı için aynı yer tutucu TCKN/telefon/adres gidiyor; kod değişmedi (D4) | K125 ⚠️; Hat B E3 ile aynı madde | SEC-10 |
+| ✅ E6 | → `php artisan media:move-disk` (§9); sunucuda koşmak İ8. Yerelde `public` diskte biriken medya S3'e taşınmadı | Canlıda `public`'te dosya varsa K183 sonrası okunur ama yeni yükleme S3'e gider; iki yerde medya | ARC-04 (kapsam dışı) |
+| ✅ E7 | → `php artisan env:template --env=.env` (§9); sunucuda koşmak İ2. Sunucudaki gerçek `.env` anahtar listesi görülmedi; şablon yalnızca Y8.3b düzeltmeleriyle eşitlendi | Sunucuda şablonda olmayan bir anahtar varsa yeniden kurulumda kaybolur | OPS-04 §A-1 |
 | ✅ E8 | → gerçek araya girme testleri eklendi, iki mutant ölüyor (§8). M47 (`HandlePaymentCallbackAction`) ve M49 (`ClaimReleasedOrderAction`) kilit silinince iki bağlantılı bekleme testleri **yeşil kaldı**; yalnızca SQL envanter testi öldürdü (sonraki `UPDATE` de beklediği için) | Bu iki kilidin eşzamanlılık davranışını kanıtlayan test yok; yalnızca "sorguda `for update` var" kanıtı var | TST-02 mutant tablosu |
 | ✅ E9 | → kopya silindi (§8). `a_user_cannot_open_someone_elses_draft_by_url`, mevcut `owner_cannot_read_another_users_invitation`'ın taslak kopyası | Tekrar eden test (zararsız) | FE-50 plandan sapma |
 
@@ -60,13 +60,13 @@
 | # | İş | Komut / yer | Kaynak |
 |---|---|---|---|
 | İ1 | Shopier sorusunu göndermek; cevabı `prompts/faz-19-agent/19-15-SEC-10.md` §A-1'e yazıp 19.15'i yeniden koşmak | `notes/04-SHOPIER-ALICI-ALANLARI-SORUSU.md` | SEC-10 |
-| İ2 | Sunucuda anahtar listesini şablonla karşılaştırmak | `cut -d= -f1 .env \| sort` ↔ `docs/10-URETIM-ENV-SABLONU.md` | OPS-04 |
+| İ2 | Sunucuda anahtar listesini şablonla karşılaştırmak | `php artisan env:template --env=.env --check` (E7; yalnızca anahtarlar) | OPS-04 |
 | İ3 | Sunucuda D1 ve D2 komutları | `php artisan about --only=davetkart` · `php artisan schedule:list` | ARC-04 · OPS-04 · SEC-08 |
 | ✅ İ4 | (K260, göç hazır) Canlıya çıkmadan E1 kararı; göç seçilirse tek seferlik komut/göç | — | SEC-09 |
 | ✅ İ5 | (göç mevcut yerel hesapları da işaretler; yalnızca göçten sonra açılanlar için gerekli) Yerel deneme hesaplarını doğrulamak | `docs/rehber/app/Support/VerifiedEmailGuard.md` (`tinker`) | SEC-09 |
 | ✅ İ6 | (E3 ile gerekmiyor) `DAVETKART_GUEST_UPLOADS` değişirse `php artisan cache:clear` | sunucu | FE-51 |
 | İ7 | Son birleşmelerden sonra tam `npm run e2e` (D7) | frontend, Hat B ortamı | FE-50 · SEC-09 |
-| İ8 | Canlıda `public` diskte medya varsa S3'e taşıma kararı | — | ARC-04 |
+| İ8 | Canlıda `public` diskte medya varsa S3'e taşımak | `php artisan media:move-disk --dry-run` → `media:move-disk` → doğrulayınca `--delete-source` (E6) | ARC-04 |
 
 ## 5. Bekleyen kararlar (§A boş → varsayılan, "İsmail cevaplamadı")
 
@@ -79,7 +79,7 @@
 | K-5 | Misafir bütçesi | 1 GB tek bütçe · yetim 1 saat · video 20 MB · bekleyen 50 dosya / 200 MB; plan bazlı değil (K190) | SEC-08 §A |
 | ✅ K-6 | E-posta doğrulaması (göç maddesi → K260) | Giriş/taslak serbest, ödeme/yayın 403; bağlantı 24 saat; saatte 3; **mevcut hesaplara göç yok** (E1) (K191) | SEC-09 §A |
 | ✅ K-7 | Taslak yaşam döngüsü (temizlik → K261) | Tavan 50, yayındakiler sayılmaz; boş taslak temizliği yok (E2) (K192) | FE-50 §A |
-| K-8 | Shopier alıcı alanları | D4: kod değişmez, soru hazır | SEC-10 §A-1 |
+| 🟡 K-8 | Shopier alıcı alanları | Telefon gerçek (K262, İsmail'in kararı); TCKN/adres D4: soru hazır | SEC-10 §A-1 |
 | ✅ K-9 | PHPStan kırmızısı (kapandı: B-H1, B-H7, Hat C 19.91) | Hat A'da "bağımsız" diye kayıtlı; ortak dalda düzeltilecek (H1) | ARC-04 İ(1) |
 
 ## 6. Temizlik ve devir
@@ -140,3 +140,28 @@ her zaman tam koşu. Kök neden araştırılmadı.
 
 **Açık kalan (bu adımın kapsamı dışında):** E4 (kasıtlı sınır), E5 (Shopier cevabı, İ1), E6–E7 (sunucu), D1–D8 (sunucu, tarayıcı,
 e2e), İ1–İ3, İ7, İ8, K-1–K-5 ve K-8 varsayılanları, §6'daki dal silme (İsmail).
+
+## 9. İkinci tur: kalan eksikler (25 Kasım 2026)
+
+İstek: "tüm eksikleri düzenle". Her madde `faz-19-fix`'ten kendi dalında; komutlar [`FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md`](FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md) §5.
+Yeni karar: **K262** (E5, İsmail'in cevabı: "telefonu gerçek al").
+
+| # | Ne yapıldı | Kanıt (görülen çıktı) |
+|---|---|---|
+| E4 | `ResolveGuestMediaAction::fitsAttachedBudget`: bekleyen dosya bir yanıta iliştirilirken aynı türden iliştirilmiş adet ve iliştirilmiş bayt bütçesi yeniden sınanır; aşarsa kimlik null olur (yanıt kaydedilir, sınır misafire söylenmez, H9). `SubmitRsvpAction`/`UpdateRsvpAction` medyayı transaction içinde davetiye satırı kilitliyken çözer (yükleme ucuyla aynı sıra). Güncellemede yanıtın eski dosyası sayımdan çıkar. Dokunulan dosyaların uzun yorumları kılavuza taşındı (K18) | `MediaTest` 2 yeni test ✓; 2/2 mutant öldü (bütçe kontrolü kaldırıldı · eski dosya hariç tutulmadı) |
+| E7 | `php artisan env:template --env=<yol> [--check]`: gerçek `.env`'in **yalnızca anahtarları** şablonla karşılaştırılır ("in .env, not in template" / "in template, missing in .env"); değer hiçbir çıktıya girmez | `ProductionConfigTest::a_real_env_file_is_compared_by_keys_only` ✓ (değer metni çıktıda aranır) |
+| E6 | `php artisan media:move-disk [--from=public] [--to=] [--dry-run] [--delete-source]`: akışla kopya, boyutla doğrulama, koşullu `UPDATE … WHERE disk = <kaynak>`, kaynak yalnızca istenirse silinir, etkilenen davetiyelerin misafir önbelleği `InvitationChanged` ile düşer; kaynağı olmayan satır raporlanır, değişmez (çıkış 1) | `MoveMediaDiskTest` 4/4 ✓; 2/3 mutant öldü (önbellek olayı · `--delete-source` koşulu); üçüncüsü (`exists` kontrolü) yedek koruma, davranış `readStream` null dönünce aynı |
+| E5 | **K262 (D2):** `orders.buyer_phone` (yalnızca siparişte). `RequiresBuyerPhone` işaretli sürücüde (Shopier) kartla ödenecek siparişte telefon zorunlu (422 `fields.phone` `required` / `regex`), telefon istemeyen sürücüde (Fake) ve hediye siparişinde saklanmaz. İstek `+90`, boşluk, tire, parantezi normalleştirir. Shopier formuna `buyer_phone` siparişten gider; `buyer_placeholders.phone` kalktı, telefonsuz form üretilmez. Hesap silinince anonim siparişin telefonu da silinir. Frontend: kart formunda etiketli telefon alanı (`utils/trMobile.ts`, aynı kural), `checkoutBody` geçersizi göndermez; gizlilik metninin Shopier satırı telefonu sayar. **TCKN ve adres hâlâ yer tutucu** (Shopier cevabı, İ1) | Backend `CheckoutBuyerPhoneTest` 5/5, `ShopierGatewayTest` 24/24, `PaymentDriverResolutionTest` 12/12; 3/3 mutant öldü (hesap silmede telefon · zorunluluk · sürücü ayrımı). Frontend `verify:payment` "Alıcı telefonu" 5 ✓ |
+
+**Birleşik uçta kapılar** (backend `faz-19-fix` @ `e31543b`, frontend @ `d6b8cc5`; ağaçlar kapıların koşulduğu dal uçlarıyla birebir aynı):
+
+| Kapı | Sonuç |
+|---|---|
+| backend `composer check` | ✅ exit 0 · PHPStan 0, `k18:check` 0 ihlal (21 dosya), 1292/1292 (4726 doğrulama) |
+| frontend `npm run check` | ✅ exit 0 · `verify:i18n` 781 (değişmedi) · ilk yükleme 711,8 / 720 kB · misafir 885,0 / 900 kB |
+| `npm run e2e` | ⏳ koşmadı (Hat B ile ortak veritabanı ve port). e2e ödeme yolculuğu hediye koduyla ilerliyor; kart formu değişikliği oraya dokunmuyor, ama a11y taramasındaki ödeme sayfası yeni alanı içeriyor |
+
+**K18 yan etkisi:** E4 ve E5'in dokunduğu 9 kod dosyasındaki 26 uzun yorum bloğu kılavuzlarına taşındı (`## K18 ile koddan taşınan
+açıklamalar` bölümleri); kodda ilk tam cümle ve kılavuz işaretçisi (E5'te `§A-E5-<satır>`) kaldı. Anlamsız kalan 4 özet elle tam cümleye çevrildi.
+
+**Hâlâ açık:** E5'in TCKN/adres kısmı (Shopier'e soru, İ1), sunucu komutları (İ2, İ3, İ8), e2e (İ7), D1–D8.

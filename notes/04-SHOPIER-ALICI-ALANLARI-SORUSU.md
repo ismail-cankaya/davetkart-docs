@@ -1,6 +1,7 @@
 # Shopier'e soru: dijital üründe alıcı kimlik/iletişim alanları
 
 > **Bulgu:** `SEC-10` (denetim 2026-11-12) · **Karar:** K125 (⚠️ elle doğrulama bekliyor) · **Hazırlayan:** Faz 19.15 (D4, 2026-11-22)
+> **25 Kasım 2026 (K262):** telefon artık gerçek (kartla ödemede sorulur, yalnızca siparişte saklanır); soru TCKN ve adres için hâlâ geçerli, 2. ve 3. maddede `buyer_phone` artık sorulmuyor.
 > **Durum:** gönderilmeyi bekliyor. Cevap gelince tarihi, kanalı ve metni `prompts/faz-19-agent/19-15-SEC-10.md` §A-1'e yaz ve 19.15'i yeniden çalıştır.
 
 ## Gönderilecek metin (destek formu ya da e-posta)

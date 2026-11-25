@@ -1,6 +1,6 @@
 # Faz 19 ortak düzeltme — Hat A açık kalanları (`HAT-A-ACIK-KALANLAR.md`) commit komutları
 
-> **Tarih:** 25 Kasım 2026 · **Hat:** A · **Girdi:** [`HAT-A-ACIK-KALANLAR.md`](HAT-A-ACIK-KALANLAR.md) §1 (H2), §2 (E1, E2, E3, E8, E9) · **Yeni karar:** K260, K261
+> **Tarih:** 25 Kasım 2026 · **Hat:** A · **Girdi:** [`HAT-A-ACIK-KALANLAR.md`](HAT-A-ACIK-KALANLAR.md) §1 (H2), §2 (E1–E9) · **Yeni karar:** K260, K261, K262
 > **Dallar:** her madde için ayrı dal, `faz-19-fix`'ten (`fix/2026-11-25-a-<id>-<kısa-ad>`); docs `docs/2026-11-25-hat-a-fixes`.
 > Birleştirme: kod → `faz-19-fix` (`--no-ff`), docs → `docs/2026-11-20-faz-19-audit-fixes`.
 > Bütün blokları İsmail'in izniyle (25 Kasım) ajan çalıştırdı; dosya kayıt içindir. Sıra: H2 → E3 → E8/E9 → E1 → E2.
@@ -106,4 +106,114 @@ git status --short
 php artisan migrate                                   # K260 göçü dahil
 php artisan invitations:prune-empty-drafts --dry-run  # K261: önce say
 php artisan invitations:prune-empty-drafts            # sonra sil
+```
+
+## 5. İkinci tur: E4, E7, E6, E5 (çalıştırıldı)
+
+```powershell
+cd D:\Projects\davetkart-hat-a\davetkart-backend-php-laravel
+# A-E4 — dal fix/2026-11-25-a-e4-attach-budget
+git add app/Actions/Rsvp/ResolveGuestMediaAction.php
+git add app/Actions/Rsvp/SubmitRsvpAction.php
+git add app/Actions/Rsvp/UpdateRsvpAction.php
+git add docs/rehber/app/Actions/Rsvp/ResolveGuestMediaAction.md
+git add docs/rehber/app/Actions/Rsvp/SubmitRsvpAction.md
+git add docs/rehber/app/Actions/Rsvp/UpdateRsvpAction.md
+git add docs/rehber/fazlar/FAZ-19.md
+git commit -m "A-E4 - fix(rsvp): Recheck the guest byte budget under the invitation lock when a pending upload is attached"
+git add tests/Feature/MediaTest.php
+git commit -m "A-E4 - test(media): Lock the attach-time guest budget and the replaced photo exclusion"
+
+# A-E7 — dal fix/2026-11-25-a-e7-env-key-compare
+git add app/Console/Commands/CheckEnvTemplate.php
+git add docs/rehber/app/Console/Commands/CheckEnvTemplate.md
+git commit -m "A-E7 - feat(ops): Compare a real .env file with the production template by keys only"
+git add tests/Feature/ProductionConfigTest.php
+git commit -m "A-E7 - test(ops): Lock the key-only .env comparison and keep values out of the output"
+
+# A-E6 — dal fix/2026-11-25-a-e6-move-media-disk
+git add app/Console/Commands/MoveMediaDisk.php
+git add docs/rehber/app/Console/Commands/MoveMediaDisk.md
+git add docs/rehber/fazlar/FAZ-19.md
+git commit -m "A-E6 - feat(media): Add a command that moves media files between disks and repoints their rows"
+git add tests/Feature/MoveMediaDiskTest.php
+git commit -m "A-E6 - test(media): Lock the disk move, the missing file report and the cache refresh"
+
+# A-E5 — dal fix/2026-11-25-a-e5-buyer-phone
+git add database/migrations/2026_11_25_110000_add_buyer_phone_to_orders_table.php
+git add docs/rehber/database/migrations/2026_11_25_110000_add_buyer_phone_to_orders_table.md
+git add app/Services/Payment/RequiresBuyerPhone.php
+git add docs/rehber/app/Services/Payment/RequiresBuyerPhone.md
+git add app/Http/Requests/Payment/StoreCheckoutRequest.php
+git add docs/rehber/app/Http/Requests/Payment/StoreCheckoutRequest.md
+git add app/Actions/Payment/StartCheckoutAction.php
+git add docs/rehber/app/Actions/Payment/StartCheckoutAction.md
+git add app/Http/Controllers/Api/V1/PaymentController.php
+git add docs/rehber/app/Http/Controllers/Api/V1/PaymentController.md
+git add app/Services/Payment/ShopierGateway.php
+git add docs/rehber/app/Services/Payment/ShopierGateway.md
+git add config/payment.php
+git add docs/rehber/config/payment.md
+git add docs/rehber/fazlar/FAZ-19.md
+git commit -m "A-E5 - feat(payment): Ask the buyer's mobile phone at checkout and send it to Shopier instead of a placeholder (K262)"
+git add app/Actions/Auth/DeleteAccountAction.php
+git add docs/rehber/app/Actions/Auth/DeleteAccountAction.md
+git add tests/Feature/AccountDeletionTest.php
+git commit -m "A-E5 - fix(accounts): Drop the buyer phone from anonymous orders when an account is deleted"
+git add tests/Feature/CheckoutBuyerPhoneTest.php
+git add tests/Feature/ShopierGatewayTest.php
+git add tests/Feature/PaymentDriverResolutionTest.php
+git commit -m "A-E5 - test(payment): Lock the buyer phone rules at checkout and in the Shopier form"
+git status --short
+
+cd D:\Projects\davetkart-hat-a\davetkart-frontent
+# A-E5 — dal fix/2026-11-25-a-e5-buyer-phone
+git add src/utils/trMobile.ts
+git add docs/rehber/src/utils/trMobile.md
+git add src/types.ts
+git add src/services/payments.ts
+git add docs/rehber/src/services/payments.md
+git add src/stores/useCheckoutStore.ts
+git add docs/rehber/src/stores/useCheckoutStore.md
+git add src/components/payment/checkout/CardPaymentForm.tsx
+git add docs/rehber/src/components/payment/checkout/CardPaymentForm.md
+git add src/locales/tr/translation.json
+git add src/locales/en/translation.json
+git commit -m "A-E5 - feat(checkout): Ask the buyer's mobile phone on the card payment form (K262)"
+git add src/pages/legal/PrivacyPage.tsx
+git add docs/rehber/src/pages/legal/PrivacyPage.md
+git commit -m "A-E5 - docs(privacy): List the buyer phone in the Shopier row of the privacy policy"
+git add scripts/verify-payment.ts
+git commit -m "A-E5 - test(verify): Lock the phone normalisation and the checkout body"
+git status --short
+
+cd D:\Projects\davetkart\davetkart-backend-php-laravel
+git merge --no-ff fix/2026-11-25-a-e4-attach-budget -m "Merge A-E4 into faz-19-fix"
+git merge --no-ff fix/2026-11-25-a-e7-env-key-compare -m "Merge A-E7 into faz-19-fix"
+git merge --no-ff fix/2026-11-25-a-e6-move-media-disk -m "Merge A-E6 into faz-19-fix"
+git merge --no-ff fix/2026-11-25-a-e5-buyer-phone -m "Merge A-E5 into faz-19-fix"
+cd D:\Projects\davetkart\davetkart-frontent
+git merge --no-ff fix/2026-11-25-a-e5-buyer-phone -m "Merge A-E5 into faz-19-fix"
+
+cd D:\Projects\davetkart-hat-a\davetkart-docs
+# dal docs/2026-11-25-hat-a-fixes-2
+git add decisions/DECISION-INDEX.md
+git add decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md
+git add notes/04-SHOPIER-ALICI-ALANLARI-SORUSU.md
+git add phases/faz-19/HAT-A-ACIK-KALANLAR.md
+git add phases/faz-19/FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md
+git add CHANGELOG.md
+git commit -m "docs(faz-19): Record the second round of Hat A fixes and K262"
+cd D:\Projects\davetkart\davetkart-docs
+git merge --no-ff docs/2026-11-25-hat-a-fixes-2 -m "Merge Hat A second round into docs/2026-11-20-faz-19-audit-fixes"
+```
+
+## 6. Canlıya çıkarken, ikinci tur (İsmail)
+
+```bash
+php artisan migrate                                   # K262: orders.buyer_phone
+php artisan env:template --env=.env --check          # E7: sunucu .env anahtarları ↔ şablon
+php artisan media:move-disk --dry-run                # E6: public'te kalan medya
+php artisan media:move-disk                          # kopyala + satırları çevir
+php artisan media:move-disk --delete-source          # doğruladıktan sonra kaynağı sil
 ```
