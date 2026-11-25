@@ -146,3 +146,31 @@ Her hata `faz-19-fix`'ten kendi dalında düzeltildi ve `--no-ff` ile birleşti.
 | backend `composer check` (B-D15) | ✅ exit 0 · pint, phpstan 0, errors/plans/env, `k18:check` 0 ihlal, 1273/1273 |
 
 **Açık kalan:** §2–§6 (eksikler, elle işler, kararlar) bu adımın kapsamı dışında; değişmedi.
+
+## 9. İkinci tur: eksikler, doğrulamalar, temizlik (25 Kasım 2026)
+
+İsmail'in kararları (25 Kas): K-7 → silme günlüğü · B-E9 → ayrı faz · K-1/B-E4 → şablon kapağı · K-6 → e2e CI · §6 dal temizliği · K-4 → bütçeyi düşür.
+K numaraları Hat B'nin ayrılmış, kullanılmamış aralığından (K233–K237); `DECISION-INDEX.md`'ye ortak adımda işlenmeli (Hat A K260+'ı eşzamanlı kullanıyor).
+
+| # | Durum | Ne yapıldı |
+|---|---|---|
+| B-E1 | ✅ K233 | Silme günlüğü **veritabanı dışında** (`config/deletion_log.php`, üretimde `DAVETKART_DELETION_LOG_DISK=s3`): `RecordDeletion` observer'ı commit sonrası hesap/davetiye/LCV/medya silmesini yazar; `data:reapply-deletions --since=<yedek anı>` geri yüklemeden sonra aynı Action'larla yeniden siler, sonra `data:purge`; `data:purge` 40 günden eski günlüğü siler. 7 test. ⚠️ `operations/deployment/YEDEK-VE-GERI-YUKLEME.md` §7.2/§9'a adım eklenmedi (aşağıda) |
+| B-E2 | ✅ K234 | `data:purge` siparişi yılının sonundan 10 yıl sonra siler (iade talebi + hediye kodu kullanımıyla) |
+| B-E3 | ⏳ | Shopier cevabı bekleniyor (değişmedi) |
+| B-E4 | ✅ K235 | Frontend derlemesi kapakları `dist/covers/<preset>.<uzantı>` + `index.json` yayımlar (65 kapak; SVG/kapaksız/büyük atlanır); backend `TemplateCovers` galerisiz davetiyede kapağı `og:image` yapar |
+| B-E5 | ✅ (yarısı) | Misafir sayfası kataloğu indirmiyor (üretilmiş `templatePresetColors.ts`): 884,3 → 790,2 kB. `motion` ilk yüklemeden çıkarılmadı (uygulama kabuğunun ve 300+ şablonun bağımlılığı; ayrı iş) |
+| B-E6 | ✅ K237 | Misafir bütçesi 900 → 800 kB; ilk yükleme 720'de (712,0) |
+| B-E7 | ✅ | `text-gold` → `text-gold-ink` (ana sayfa adımları, Hakkımızda); a11y'ye `/about` (15 sayfa) + hatalı parola formu (alan hatası `aria-describedby`'a bağlı, axe temiz) |
+| B-E8 | ✅ | `UNDATED_GUEST_DATA_MONTHS = 12`; SSS ve gizlilik metni sabitten, `verify-render` kilitli |
+| B-E9 | ⏳ | Karar: ayrı faz |
+| B-E10 | ✅ K236 | `.github/workflows/e2e.yml`: `main`'e PR'da ve elle; GitHub'da **koşmadı** (push yok). Backend özelse `BACKEND_REPO_TOKEN` sırrı gerekli |
+| B-D8 | ✅ | Fiyat sayfası 1280 ve 390 px: SSS cevabı (tarihsiz kural dahil) düzgün, yatay taşma ve sayfa hatası yok |
+| B-D11 | ✅ | `npm run perf`: ana sayfa CLS 0; misafir LCP 2808 ms (< 3000) |
+| B-D1, B-D4 | ⏳ | `davetkart.test` (Herd) ayakta değil; B-İ1/B-İ2 elle |
+| B-D10 | ⏳ | İncelendi (çökme = rota söküm temizliği → `debouncedSave.flush()`), e2e vakası yazılmadı |
+| B-D14 | ⏳ | `onizleme.html` ile 373 şablonda ölçüm betiği hazırlandı; sonuç bu kayda girmeden oturum bitti |
+| §6 dallar | ✅ | Birleşmiş Hat B dalları silindi (backend 8, frontend 20, docs 12; `-d`, fe-04 `--is-ancestor` ile doğrulanıp `-D`) |
+
+Kapılar: backend `composer check` ✅ (B-E1 dalında 1300/1300); frontend e2e ✅ 5/5 (B-E7 dalında), `verify:bundle`/`verify:render` ✅.
+**Koşulmadı:** son birleşmelerden (B-E4 frontend, B-E5/6, B-E10) sonra birleşik uçta tam `npm run check` + e2e, ve backend birleşik uçta `composer check`.
+**Kalan:** kitaba §7.3 "geri yüklemeden sonra `data:reapply-deletions`" adımı; K233–K237'yi `DECISION-INDEX.md`/`EK-FAZ-19.md`'ye işlemek; B-D10, B-D14; §4 elle işler.
