@@ -13,8 +13,8 @@
 |---|---|---|
 | 1. Bilinen hatalar | 4 (✅ 4 kapandı) | Taslak tavanı dolunca editör "bağlantınızı kontrol edin" diyor (FE-50); PHPStan önbelleği hatlar arasında ortak |
 | 2. Eksikler | 9 (✅ 8 kapandı, 🟡 1 kısmen) | Mevcut hesaplar doğrulanmamış sayılıyor: canlıya çıkınca hiçbiri ödeme/yayın yapamaz (SEC-09) |
-| 3. Koşulmayan doğrulamalar | 9 (✅ 1 koşuldu) | Sunucuda `about` / `schedule:list` / SES; tarayıcıda doğrulama bandı ve sayfası |
-| 4. Elle yapman gerekenler | 8 (✅ 3 gerekmiyor) | Shopier sorusu, sunucu `.env` anahtar karşılaştırması |
+| 3. Koşulmayan doğrulamalar | 9 (✅ 2 koşuldu) | Sunucuda `about` / `schedule:list` / SES; tarayıcıda doğrulama bandı ve sayfası |
+| 4. Elle yapman gerekenler | 8 (✅ 3 gerekmiyor, ✅ 1 ajan yaptı) | Shopier sorusu, sunucu `.env` anahtar karşılaştırması |
 | 5. Bekleyen kararlar | 9 (✅ 3 kapandı) | §A'sı boş geçilen 8 işin varsayılanları + PHPStan |
 | 6. Temizlik ve devir | 5 | 20 birleşmiş Hat A dalı silinebilir |
 
@@ -51,7 +51,7 @@
 | D4 | Tarayıcıda: doğrulama bandı, `/eposta-dogrula` sayfası, yayında `EMAIL_NOT_VERIFIED` mesajı | SEC-09 | Yalnızca `verify:*` ve e2e (log'dan bağlantı) |
 | D5 | Tarayıcıda: tavan dolu hesapta sihirbaz (H2'yi gösterir), `/create/<başkasının-id>` → mesaj + panel | FE-50 | Denenmedi |
 | D6 | Misafir sayfasında hiçbir şablonda dosya alanı yok | FE-51 | `verify:render` metin taraması; tarayıcıda bakılmadı |
-| D7 | `npm run e2e` FE-50'nin `draftSurvivesReload` adımıyla | FE-50 | Hat A koşmadı. FE-54'ün dalı FE-50 birleşmesini içeriyor ve e2e'si 4/4 yeşil; kayıt adımı adıyla yazmıyor. SEC-11 · FE-52'den sonra yeniden koşulmadı (Hat B D9) |
+| ✅ D7 | `npm run e2e` FE-50'nin `draftSurvivesReload` adımıyla (26 Kas: birleşik uçta 5/5, §10) | FE-50 | Hat A koşmadı. FE-54'ün dalı FE-50 birleşmesini içeriyor ve e2e'si 4/4 yeşil; kayıt adımı adıyla yazmıyor. SEC-11 · FE-52'den sonra yeniden koşulmadı (Hat B D9) |
 | D8 | `concurrency` grubunun (`lock_timeout = 200ms`, alt süreç 800 ms) yavaş makinede / CI'da kararlılığı | TST-02 | Yalnızca bu makinede ölçüldü |
 | ✅ D9 | Tam backend paketi `composer check` içinden (25 Kas: exit 0, §8) | hepsi | H1 yüzünden PHPStan'da duruyor; adımlar elle koşuldu (bkz. §7) |
 
@@ -65,7 +65,7 @@
 | ✅ İ4 | (K260, göç hazır) Canlıya çıkmadan E1 kararı; göç seçilirse tek seferlik komut/göç | — | SEC-09 |
 | ✅ İ5 | (göç mevcut yerel hesapları da işaretler; yalnızca göçten sonra açılanlar için gerekli) Yerel deneme hesaplarını doğrulamak | `docs/rehber/app/Support/VerifiedEmailGuard.md` (`tinker`) | SEC-09 |
 | ✅ İ6 | (E3 ile gerekmiyor) `DAVETKART_GUEST_UPLOADS` değişirse `php artisan cache:clear` | sunucu | FE-51 |
-| İ7 | Son birleşmelerden sonra tam `npm run e2e` (D7) | frontend, Hat B ortamı | FE-50 · SEC-09 |
+| ✅ İ7 | (ajan koştu, §10) Son birleşmelerden sonra tam `npm run e2e` (D7) | frontend, Hat B ortamı | FE-50 · SEC-09 |
 | İ8 | Canlıda `public` diskte medya varsa S3'e taşımak | `php artisan media:move-disk --dry-run` → `media:move-disk` → doğrulayınca `--delete-source` (E6) | ARC-04 |
 
 ## 5. Bekleyen kararlar (§A boş → varsayılan, "İsmail cevaplamadı")
@@ -165,3 +165,25 @@ Yeni karar: **K262** (E5, İsmail'in cevabı: "telefonu gerçek al").
 açıklamalar` bölümleri); kodda ilk tam cümle ve kılavuz işaretçisi (E5'te `§A-E5-<satır>`) kaldı. Anlamsız kalan 4 özet elle tam cümleye çevrildi.
 
 **Hâlâ açık:** E5'in TCKN/adres kısmı (Shopier'e soru, İ1), sunucu komutları (İ2, İ3, İ8), e2e (İ7), D1–D8.
+
+## 10. Birleşik uçta e2e (26 Kasım 2026)
+
+Kod değişmedi; yalnızca doğrulama. Uç: frontend `faz-19-fix` @ `c188c2b`, backend @ `3ac136e` (Hat A'nın iki turu + Hat B'nin
+B-E1, B-E2, B-E4, B-E5, B-E6, B-E7, B-E8, B-E10 birleşmeleri).
+
+**Hat B'ye dokunmadan:** `davetkart_e2e` yerine ayrı veritabanı `davetkart_e2e_hat_a` (`backend.ps1 -Database`, betiğin izin verdiği
+`davetkart_e2e_<ek>` biçimi) ve ayrı portlar (backend 8030, önizleme 4190). Bunun için takip edilmeyen geçici bir Playwright yapılandırması
+kullanıldı; koşudan sonra yapılandırma, sonuç klasörü ve veritabanı silindi.
+
+| Koşu | Sonuç |
+|---|---|
+| 1. koşu | ❌ `publish` adımında kayıt: sunucu ilk `POST /api/auth/register`'ı 19 sn'de bitirdi, istemci 15 sn'de kesti (`api.ts` `timeout: 15_000`, trace'te `net::ERR_ABORTED`); bağımlı 4 test koşmadı |
+| Neden | Soğuk başlangıç: aynı koşuda `/up` 4 sn, `/api/public/plans` 3 sn sürdü; Hat B'nin bir önizleme sunucusu da açıktı. Aynı backend'e elle 3 geçerli kayıt: 201, 1,1 · 0,6 · 0,7 sn. Dış servis çağrısı yok (`PasswordPolicy` yerel liste) |
+| 2. koşu | ✅ 5/5 (2,5 dk): yayın + `draftSurvivesReload` (D7) · a11y 15 sayfa · a11y hatalı form · misafir LCV · Elit plan duvarı |
+
+a11y taramasındaki `/odeme` sayfası varsayılan olarak kart sekmesiyle açılır; K262'nin telefon alanı taramaya girdi ve temiz çıktı.
+
+**Not (kod değişikliği yapılmadı):** ilk istek soğukken 15 sn'lik istemci sınırı e2e'yi kırabiliyor. Tekrarlarsa e2e başında bir ısıtma
+isteği ya da kayıt için daha uzun `waitForResponse` düşünülebilir; bir kez görüldüğü için şimdilik yalnızca kayda geçti.
+
+**Hâlâ açık:** E5'in TCKN/adres kısmı (İ1), sunucu komutları (İ2, İ3, İ8), D1–D6 ve D8.

@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Hat A birleşik uçta e2e (`docs/2026-11-26-hat-a-e2e`)
+
+- [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](phases/faz-19/HAT-A-ACIK-KALANLAR.md) §10: `npm run e2e` `faz-19-fix` ucunda (Hat A + Hat B birleşmeleri) ayrı veritabanı ve portlarla 5/5; ilk koşu soğuk başlangıçta kayıt zaman aşımıyla kırıldı, nedeni kayda geçti. D7 ve İ7 kapandı; kod değişmedi.
+
 ## 2026-11-26 — Hat B ikinci tur kayıtları (`docs/2026-11-26-hat-b-records`)
 
 - K233–K237 (silme günlüğü, sipariş 10 yıl, paylaşım kapağı, e2e CI, paket bütçesi) [`decisions/DECISION-INDEX.md`](decisions/DECISION-INDEX.md) ve [`EK-FAZ-19.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md) "Hat B" bölümünde; [`YEDEK-VE-GERI-YUKLEME.md`](operations/deployment/YEDEK-VE-GERI-YUKLEME.md) §7.2/§9'a `data:reapply-deletions` adımı; [`HAT-B-ACIK-KALANLAR.md`](phases/faz-19/HAT-B-ACIK-KALANLAR.md) §9 güncellendi.
