@@ -341,3 +341,11 @@ Girdi: [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](../../phases/faz-19/HAT-A-ACIK-K
 
 - K191 → geçerli; "mevcut hesaplara göç yok" maddesi geçersiz kılındı → K260.
 - K192 → geçerli; "boş taslak temizliği yok" → tek seferlik komut K261.
+
+İkinci tur (E5, İsmail'in cevabı: Shopier'i beklemeden "telefonu gerçek al"; dal `fix/2026-11-25-a-e5-buyer-phone`, backend ve frontend):
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K262** | SEC-10 D2: kartla ödenecek siparişte alıcının cep telefonu sorulur (`05XXXXXXXXX`, `+90`/boşluk/tire normalleştirilir), **yalnızca siparişte** (`orders.buyer_phone`) saklanır ve Shopier'e o gider; zorunluluğu sürücü belirler (`RequiresBuyerPhone`; Fake ve hediye siparişi telefon tutmaz); hesap silinince anonim siparişten de silinir. TCKN ve adres Shopier'in cevabına kadar yer tutucu | Herkese aynı telefon "çalışıyor" ama izinli olduğu bilinmiyor; gerçek telefon cevap ne olursa olsun zararsız ve KVKK için en az veri yalnızca siparişte | geçerli · İsmail'in kararı · ortak düzeltme (25 Kas) |
+
+- K125 → kısmen geçersiz: telefon yer tutucusu kalktı (K262); TCKN ve adres maddesi ⚠️ Shopier cevabını bekliyor.
