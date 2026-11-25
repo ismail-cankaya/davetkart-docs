@@ -167,10 +167,12 @@ K numaraları Hat B'nin ayrılmış, kullanılmamış aralığından (K233–K23
 | B-D8 | ✅ | Fiyat sayfası 1280 ve 390 px: SSS cevabı (tarihsiz kural dahil) düzgün, yatay taşma ve sayfa hatası yok |
 | B-D11 | ✅ | `npm run perf`: ana sayfa CLS 0; misafir LCP 2808 ms (< 3000) |
 | B-D1, B-D4 | ⏳ | `davetkart.test` (Herd) ayakta değil; B-İ1/B-İ2 elle |
-| B-D10 | ⏳ | İncelendi (çökme = rota söküm temizliği → `debouncedSave.flush()`), e2e vakası yazılmadı |
-| B-D14 | ⏳ | `onizleme.html` ile 373 şablonda ölçüm betiği hazırlandı; sonuç bu kayda girmeden oturum bitti |
+| B-D10 | ✅ **gerçek hata bulundu ve düzeltildi** (26 Kas) | e2e `editor-flush.spec.ts`: yazıp hemen editörden çıkınca (geçiş ya da çökme, aynı söküm yolu) son düzenleme backend'e **gitmiyordu**. Neden: React üstten aşağı söker; `useInvitationAutoSave` temizliği (abonelikten çık + flush) formun taslak yazımından önce koşuyordu. Çözüm: temizlik `queueMicrotask` ile ertelendi. Test önce kırmızı, sonra yeşil |
+| B-D14 | ✅ **16 şablonda ihlal bulundu ve düzeltildi** (26 Kas) | `npm run a11y:envelopes` (373 şablon, 390 px, axe): ipucu nabzın 0,75 opaklık tabanında 16 şablonda < 4,5 (çoğu pastel Baby Shower; en kötü 2,95). Tam opaklıkta hepsi geçiyor, 0,95'te bile ikisi kalıyordu → nabız opaklıktan ölçeğe taşındı. Yeniden tarama: 342 geçti, 0 ihlal; 11 axe "belirsiz" (krom degrade, kâğıt dokusu — gözle bakılmalı), 20 şablon kendi kapısı |
 | §6 dallar | ✅ | Birleşmiş Hat B dalları silindi (backend 8, frontend 20, docs 12; `-d`, fe-04 `--is-ancestor` ile doğrulanıp `-D`) |
 
 Kapılar: backend `composer check` ✅ (B-E1 dalında 1300/1300); frontend e2e ✅ 5/5 (B-E7 dalında), `verify:bundle`/`verify:render` ✅.
-**Koşulmadı:** son birleşmelerden (B-E4 frontend, B-E5/6, B-E10) sonra birleşik uçta tam `npm run check` + e2e, ve backend birleşik uçta `composer check`.
-**26 Kasım:** kitap adımı ve K233–K237 (`DECISION-INDEX.md`, `EK-FAZ-19.md` "Hat B" bölümü) işlendi. Kalan: B-D10, B-D14; §4 elle işler.
+**Birleşik uçta kapılar (26 Kas):** backend `composer check` ✅ 1301/1301 (Hat A/C dahil); frontend `npm run check` ✅ (ilk 712,0/720, misafir 790,2/800 kB), e2e ✅ 6/6, `npm run a11y:envelopes` ✅ 0 ihlal.
+**26 Kasım:** kitap adımı ve K233–K237 (`DECISION-INDEX.md`, `EK-FAZ-19.md` "Hat B" bölümü) işlendi; B-D10 ve B-D14 kapandı; birleşmiş dallar silindi.
+**Ajanın yapabileceği iş kalmadı.** Açık kalanlar: B-E3 (Shopier cevabı), B-E9 (ayrı faz), B-D1/B-D4 (yerel `davetkart.test` kapalı → B-İ1, B-İ2),
+B-D2, B-D3, B-D5, B-D6, B-D7, B-D12, B-D13 ve §4'teki elle işler; 11 "belirsiz" zarf ipucuna gözle bakılması; e2e CI'nın ilk GitHub koşusu.

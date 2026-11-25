@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Hat B: B-D10 ve B-D14 kapandı (`docs/2026-11-26-hat-b-final`)
+
+- [`phases/faz-19/HAT-B-ACIK-KALANLAR.md`](phases/faz-19/HAT-B-ACIK-KALANLAR.md) §9: editörden hemen çıkınca son düzenlemenin kaybolması (B-D10) ve 16 şablonda zarf ipucu kontrastı (B-D14) bulunup düzeltildi; birleşik uçta bütün kapılar yeşil; ajana kalan iş yok.
+
 ## 2026-11-26 — Hat A birleşik uçta e2e (`docs/2026-11-26-hat-a-e2e`)
 
 - [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](phases/faz-19/HAT-A-ACIK-KALANLAR.md) §10: `npm run e2e` `faz-19-fix` ucunda (Hat A + Hat B birleşmeleri) ayrı veritabanı ve portlarla 5/5; ilk koşu soğuk başlangıçta kayıt zaman aşımıyla kırıldı, nedeni kayda geçti. D7 ve İ7 kapandı; kod değişmedi.
