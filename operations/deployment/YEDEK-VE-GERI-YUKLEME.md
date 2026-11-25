@@ -317,6 +317,9 @@ sudo -u postgres pg_restore --no-owner --no-acl --role=davetkart -d davetkart_ge
 sudo -u postgres psql -c 'ALTER DATABASE davetkart RENAME TO davetkart_bozuk'
 sudo -u postgres psql -c 'ALTER DATABASE davetkart_geri RENAME TO davetkart'
 sudo -n -u www-data /usr/bin/php /var/www/davetkart/backend/artisan migrate --force   # döküm eski şemadaysa
+# K233: dökümün alındığı andan beri yapılan silmeleri yeniden uygula (önce say, sonra uygula; sonunda data:purge koşar)
+sudo -n -u www-data /usr/bin/php /var/www/davetkart/backend/artisan data:reapply-deletions --since=<dökümün-anı> --dry-run
+sudo -n -u www-data /usr/bin/php /var/www/davetkart/backend/artisan data:reapply-deletions --since=<dökümün-anı>
 sudo -n -u www-data /usr/bin/php /var/www/davetkart/backend/artisan up
 sudo rm /var/lib/postgresql/geri.dump /tmp/davetkart-<damga>.dump
 ```
@@ -359,8 +362,12 @@ Dökümde kullanıcılar, davetiyeler ve misafir yanıtları var. "Silme" bir an
 
 - Gizlilik metni bu süreyi söylemeli (`SEC-11`, Faz 18'in dışında). "30 gün" yazılacaksa kural 23 + 7
   yapılmalı; karar senin.
-- **Yedekten dönüldüğünde silinmiş veri geri gelir.** Geri yüklemeden sonra, dökümün alındığı andan beri
-  yapılan hesap silme taleplerini yeniden uygula ve `data:purge`'ü çalıştır.
+- **Yedekten dönüldüğünde silinmiş veri geri gelir.** Geri yüklemeden sonra, `artisan up`'tan önce
+  `data:reapply-deletions --since=<dökümün anı>` (K233, §7.2): silme günlüğü veritabanının dışında
+  (`DAVETKART_DELETION_LOG_DISK=s3`) durur, yedekten sonraki hesap/davetiye/LCV/medya silmelerini aynı
+  Action'larla yeniden uygular ve sonunda `data:purge`'ü çalıştırır. `--since` dökümün manifestindeki an.
+  Ayrıca uygulama günlüğünde `Deletion log write failed` satırı varsa o kimlikler elle silinir.
+  Ayrıntı: backend `docs/rehber/app/Console/Commands/ReapplyDeletions.md`.
 - Provada indirdiğin dosyalar ve prova veritabanı da birer kopyadır: iş bitince sil.
 
 ## 10. Bu düzen neyi korumaz

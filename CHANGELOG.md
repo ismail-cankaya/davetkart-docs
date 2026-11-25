@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Hat B ikinci tur kayıtları (`docs/2026-11-26-hat-b-records`)
+
+- K233–K237 (silme günlüğü, sipariş 10 yıl, paylaşım kapağı, e2e CI, paket bütçesi) [`decisions/DECISION-INDEX.md`](decisions/DECISION-INDEX.md) ve [`EK-FAZ-19.md`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md) "Hat B" bölümünde; [`YEDEK-VE-GERI-YUKLEME.md`](operations/deployment/YEDEK-VE-GERI-YUKLEME.md) §7.2/§9'a `data:reapply-deletions` adımı; [`HAT-B-ACIK-KALANLAR.md`](phases/faz-19/HAT-B-ACIK-KALANLAR.md) §9 güncellendi.
+
 ## 2026-11-25 — Hat A kalan eksikleri, ikinci tur (`docs/2026-11-25-hat-a-fixes-2`)
 
 - [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](phases/faz-19/HAT-A-ACIK-KALANLAR.md) §9: E4 (iliştirmede bütçe), E6 (`media:move-disk`), E7 (`env:template --env`) kapandı; E5 kısmen: **K262** kartla ödemede gerçek telefon (yalnızca siparişte), TCKN/adres Shopier cevabını bekliyor (`notes/04` durumu, K125 kısmen geçersiz). `composer check` 1292/1292, `npm run check` yeşil; e2e koşmadı. Sıradaki K263. Komutlar: [`phases/faz-19/FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md`](phases/faz-19/FAZ-19-HAT-A-FIX-COMMIT-KOMUTLARI.md) §5–§6.

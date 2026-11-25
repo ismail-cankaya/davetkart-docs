@@ -8,7 +8,7 @@
 > Bu indeks `python -I _restructure/build_decision_index.py --check` ile denetlenir: docs ve kardeş
 > backend deposundaki bütün K tanımları burada, burada olan her numaranın bir tanımı var (2026-11-20, `ARC-01`).
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
-> bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K233–K249 (Hat B) ayrılmıştı, kullanılmadı.
+> bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
 **Sıradaki boş numara: K263**
 
@@ -220,6 +220,11 @@
 | **K230** | Paylaşım önizlemesi: Nginx bot eşlemesi → Laravel `GET /invite/{id}` (grupsuz web rotası) OG Blade; yalnızca yayındaki davetiye, misafir önbelleğiyle aynı anahtar; site geneli OG `index.html`'de | Faz 19.23 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K231** | Gizlilik metni silmeyi iki adımda söyler: canlıdan hemen, yedeklerden en geç `BACKUP_PURGE_DAYS` (40) gün içinde; veri işleyenler ad · amaç · yer · veriyle listelenir; `verify-render` sabiti ve adları kilitler | Faz 19.18 (2026-11-24) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K232** | Davetiyenin yayın süresi yok: siz silene kadar yayında kalır; fiyat sayfası SSS'si süre ya da ücretli uzatma vaat etmez, misafir verisi süresini `GUEST_DATA_MONTHS_AFTER_EVENT` sabitinden söyler; `verify-render` kilitler | Faz 19.19 (2026-11-24) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K233** | Silme günlüğü veritabanı dışında (`deletion_log.disk`, üretimde s3): kullanıcı silmeleri (hesap, davetiye, LCV, medya) commit sonrası kimlik + zamanla yazılır; geri yüklemeden sonra `data:reapply-deletions --since=<yedek anı>` aynı Action'larla yeniden siler, sonra `data:purge`; günlük 40 gün | Faz 19 ortak düzeltme, Hat B (25 Kas) | geçerli · İsmail'in kararı (K-7) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-b) |
+| **K234** | `data:purge` siparişi yılının sonundan 10 yıl sonra siler; iade talebi ve hediye kodu kullanımı siparişle gider | Faz 19 ortak düzeltme, Hat B (25 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-b) |
+| **K235** | Paylaşım önizlemesi: galeri yoksa şablon kapağı (`dist/covers/<preset>.<uzantı>` + `index.json`, derlemede yayımlanır); SVG/kapaksız/600 kB üstü → genel poster | Faz 19 ortak düzeltme, Hat B (25 Kas) | geçerli · İsmail'in kararı (K-1) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-b) |
+| **K236** | e2e CI: `.github/workflows/e2e.yml` `main`'e açılan PR'larda ve elle (Windows koşucusu); her push'ta değil | Faz 19 ortak düzeltme, Hat B (25 Kas) | geçerli · İsmail'in kararı (K-6) · GitHub'da henüz koşmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-b) |
+| **K237** | Paket bütçesi cırcır kalır; misafir sayfası 900 → 800 kB (B-E5 sonrası 790,2), ilk yükleme 720 kB | Faz 19 ortak düzeltme, Hat B (25 Kas) | geçerli · İsmail'in kararı (K-4) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-b) |
 | **K250** | Karar indeksi `build_decision_index.py --check` ile denetlenir: tanım = tablo satırının ilk hücresi yalnızca K numarası; docs + kardeş backend; eksik/tanımsız → 1, backend yok → 2 | Faz 19.2 (20 Kas) | geçerli · genişletildi → K253 (bekleyen aralık; 19.90'da kaldırıldı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K251** | `build_decision_index.py` argümansız koşunca yazmaz (kullanım, çıkış 2); 2026-11-12 üretimi yalnızca `--generate` ile | Faz 19.2 (20 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K252** | Gold = videolu **ya da** premium etkileşimli (canlı WebGL / sensörlü) şablon; Faz 16'nın 10 ve Faz 17'nin 9 kimliği `preset_tiers`'te (kaynak `contracts/plan-rules.json` `presetTiers`). ⚠️ onay yalnızca kod yorumunda, kayıt onaylatılmadı | Faz 19.3 (20 Kas) | geçerli · ⚠️ İsmail onaylamadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
@@ -236,8 +241,9 @@
 
 ## Notlar
 
-- Eksik numara: K193–K219 ve K233–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K260–K279 Hat C'ye ayrılmıştı,
-  K260–K262 ortak düzeltmede (Hat A) kullanıldı, numaralama K263'ten sürer. Başka eksik yok (K1–K262; `--check` denetler).
+- Eksik numara: K193–K219 ve K238–K249 ayrılmıştı, kullanılmadı (Faz 19 Hat A ve B); K260–K279 Hat C'ye ayrılmıştı,
+  K260–K262 ortak düzeltmede (Hat A) kullanıldı, numaralama K263'ten sürer. K233–K237 ortak düzeltmede Hat B'nin
+  ayrılmış aralığından alındı (Hat A K260+'ı eşzamanlı kullanırken çakışmasın diye). Başka eksik yok (`--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.
