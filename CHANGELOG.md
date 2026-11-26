@@ -8,6 +8,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.1 `SEC-16`: girişte hesap başına, IP'den bağımsız kova (saatte 30 başarısız deneme, dolunca 429, sıfırlama boşaltır, sahibe IP'siz uyarı postası) — **K265** (varsayılan), [`EK-FAZ-21`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md) açıldı, [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) (sıradaki K266), `decisions/README.md` satırı. `composer check` 1318/1318, e2e 6/6, 11 mutant öldü.
 - 21.2 `SEC-15`: kayıt ucunun 422/201 farkı kabul edilen risk (sözleşme aynı); frenler (`throttle:auth` kovaları, iki yolda hash, `fields` yok) testle kilitlendi, kod eklenmedi — **K266** (varsayılan, B). `composer check` 1321/1321, e2e 6/6, 4 mutant öldü.
 - 21.3 `FE-58`: ödeme dönüşünde otomatik yayın kaldı, K67 daraltıldı → **K267** (varsayılan); karar `src/utils/autoPublish.ts`'e taşındı, sekme başına tek istek, yenilemede istek yok. `EK-FAZ-12` §F-7 kapandı. `npm run check` 0, e2e 6/6, 7 mutant öldü.
+- 21.4 `OPS-08`: her yanıtta `X-Request-Id` (ULID; gelen kimlik yalnızca ULID/UUID ise), Laravel `Context` ile günlük satırlarına ve kuyruk işlerine; zarf aynı — **K268** (varsayılan). `composer check` 1335/1335, e2e 6/6, 6/7 mutant öldü (biri eşdeğer, kod kaldırıldı).
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 

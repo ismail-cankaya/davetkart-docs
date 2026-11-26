@@ -43,7 +43,7 @@ Sıra:
 | 21.1 | `SEC-16` | 🟢 | Hesap bazlı (IP'den bağımsız) giriş freni | S | ✅ | backend · docs | K265 | be 245a71f | commit'lendi |
 | 21.2 | `SEC-15` | 🟢 | Kayıt ucu adresin kayıtlı olduğunu söylüyor | S/M | ✅ | backend · frontend · docs | K266 | be ec850e0 | commit'lendi |
 | 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | K267 | fe ea9d8b1 | commit'lendi |
-| 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | | | bekliyor |
+| 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | K268 | be 26943a9 | commit'lendi |
 | 21.5 | `OPS-07` | 🟢 | PHP-FPM havuzu ve OPcache ayarı depoda yok | S | ✅ | backend (`deploy/`) · docs | | | bekliyor |
 | 21.6 | `ARC-06` | 🟢 | Hiç fırlatılmayan 3 hata kodu | S | ✅ | backend · frontend · docs | | | bekliyor |
 | 21.7 | `FE-08` | 🟢 | Konum araması: backend ucu yok, bayrakla kapalı kod | S | ✅ | frontend · docs | | | bekliyor |
@@ -694,6 +694,15 @@ Değilse maddeyi bloke et (§3 madde 5).
   7 mutant öldü.
 - Gördüm, dokunmadım: başka sekmede ya da yeni oturumda aynı dönüş adresi yine istek atar; tam kapatma için
   `GET /orders/{id}` yanıtına `orders.first_published_at` bilgisi gerekir (backend + sözleşme, ayrı iş).
+
+### 21.4 (`OPS-08`)
+
+- Frontend'e dokunulmadı (§A-1: zarf aynı; hata bildiriminde kimliği göstermek ayrı iş). `npm run e2e` 6/6.
+- Plandaki "≤64 karakter" sınırı ayrı bir kontrol olarak yazıldı, mutant yaşadı (ULID/UUID biçimi uzunluğu zaten
+  sınırlıyor); kontrol kaldırıldı, test vakası kaldı.
+- İki denemede yeşil: 1) PHPStan (`Log::channel()` dönüş tipi), 2) yeşil (1335/1335).
+- İsmail'e kalan sunucu adımı: nginx `log_format` içine `rid=$upstream_http_x_request_id` (backend
+  `docs/rehber/app/Http/Middleware/AssignRequestId.md` §6). Koşulmadı.
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
