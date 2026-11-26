@@ -42,7 +42,7 @@ Sıra:
 | 21.0 | — | — | Hazırlık: ortam eşitleme, dallar, taban kapıları, `FAZ-21.md` açılışı | S | — | backend · frontend · docs | — | be 6ffb824 | commit'lendi |
 | 21.1 | `SEC-16` | 🟢 | Hesap bazlı (IP'den bağımsız) giriş freni | S | ✅ | backend · docs | K265 | be 245a71f | commit'lendi |
 | 21.2 | `SEC-15` | 🟢 | Kayıt ucu adresin kayıtlı olduğunu söylüyor | S/M | ✅ | backend · frontend · docs | K266 | be ec850e0 | commit'lendi |
-| 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | | | bekliyor |
+| 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | K267 | fe ea9d8b1 | commit'lendi |
 | 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | | | bekliyor |
 | 21.5 | `OPS-07` | 🟢 | PHP-FPM havuzu ve OPcache ayarı depoda yok | S | ✅ | backend (`deploy/`) · docs | | | bekliyor |
 | 21.6 | `ARC-06` | 🟢 | Hiç fırlatılmayan 3 hata kodu | S | ✅ | backend · frontend · docs | | | bekliyor |
@@ -681,6 +681,19 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Frontend'e dokunulmadı (B yolu). `npm run check` koşulmadı: frontend değişmedi; `npm run e2e` 6/6.
 - Gördüm, dokunmadım: `Hash::partialMock()` Laravel 13'te kurucusuz `HashManager` üretiyor ve gerçek hash'e geçemiyor
   (`Call to a member function get() on null`); testte `tests/Support/CountingHasher` kullanıldı.
+
+### 21.3 (`FE-58`)
+
+- **Plandan sapma:** plan "otomatik kalıyorsa kod değişmeyebilir" diyordu. "Tekrar ziyaret ikinci istek üretmez" testi
+  bugünkü kodda kırmızı olurdu: bekçi yalnızca `useRef`'teydi, yenilemede sıfırlanıyordu. Panelde "Yayından kaldır"
+  olduğu için yenileme, kullanıcının kaldırdığı davetiyeyi sorulmadan yeniden yayınlayabiliyordu. Karar saf fonksiyona
+  (`src/utils/autoPublish.ts`) taşındı, sekme belleği (`sessionStorage`) eklendi; tekrar ziyarette kart "Ödemeniz
+  onaylandı" diyor (eski hâliyle `idle` → sonsuz "yayına alınıyor" olurdu).
+- `PaymentReturnPage::cardViewFor` → `utils/autoPublish.ts::returnCardView` (test edilebilsin diye), `skipped` kolu eklendi.
+- Kapılar: `npm run check` çıkış 0 (31 kod, i18n 781/65 değişmedi), `npm run e2e` 6/6; `verify:payment` 19 yeni denetim,
+  7 mutant öldü.
+- Gördüm, dokunmadım: başka sekmede ya da yeni oturumda aynı dönüş adresi yine istek atar; tam kapatma için
+  `GET /orders/{id}` yanıtına `orders.first_published_at` bilgisi gerekir (backend + sözleşme, ayrı iş).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
