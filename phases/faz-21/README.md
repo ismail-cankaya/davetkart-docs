@@ -39,7 +39,7 @@ Sıra:
 
 | Sıra | Bulgu | Önem | Konu | Efor | §A | Depolar | K | Commit'ler | Durum |
 |---|---|---|---|---|---|---|---|---|---|
-| 21.0 | — | — | Hazırlık: ortam eşitleme, dallar, taban kapıları, `FAZ-21.md` açılışı | S | — | backend · frontend · docs | — | | bekliyor |
+| 21.0 | — | — | Hazırlık: ortam eşitleme, dallar, taban kapıları, `FAZ-21.md` açılışı | S | — | backend · frontend · docs | — | be 6ffb824 | commit'lendi |
 | 21.1 | `SEC-16` | 🟢 | Hesap bazlı (IP'den bağımsız) giriş freni | S | ✅ | backend · docs | | | bekliyor |
 | 21.2 | `SEC-15` | 🟢 | Kayıt ucu adresin kayıtlı olduğunu söylüyor | S/M | ✅ | backend · frontend · docs | | | bekliyor |
 | 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | | | bekliyor |
@@ -653,6 +653,13 @@ Değilse maddeyi bloke et (§3 madde 5).
 ## 6. Çalışma notları (ajan doldurur)
 
 *Bloke olanların nedeni, "gördüm, dokunmadım", plandan sapmalar, ölçümler.*
+
+### 21.0
+
+- Taban (27 Kasım, `faz-20-critical-fixes` ucu): `composer check` 1306/1306 (4765 assertion, 121,9 sn), `k18: 32 dosya, 0 ihlal`;
+  `composer audit` temiz; `npm run check` çıkış 0 (31 hata kodu, i18n tabanı 781 parça / 65 dosya); `npm run e2e` 6/6.
+- Vite (`npm run dev`) ve `php artisan serve` İsmail'in oturumunda açıktı. Bu yüzden `npm ci` yerine `npm install` koşuldu
+  (§3 madde 2); dev sunucularına dokunulmadı.
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 

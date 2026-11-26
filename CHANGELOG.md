@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 21 (`docs/2026-11-27-faz-21-backlog`)
+
+- 21.0 hazırlık: dallar (`faz-21-backlog`, docs `docs/2026-11-27-faz-21-backlog`), ortam eşitlendi, taban kapıları yeşil (`composer check` 1306/1306, `composer audit` temiz, `npm run check` çıkış 0, e2e 6/6); backend `docs/rehber/fazlar/FAZ-21.md` açıldı. [`phases/faz-21/README.md`](phases/faz-21/README.md) §1.
+
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
 - [`phases/faz-21/README.md`](phases/faz-21/README.md) (eski `phases/faz-22/`): İsmail'in kararıyla 22.n → 21.n. Tek ajan bütün maddeleri tek oturumda, onay beklemeden koşar ve her maddeyi `faz-21-backlog` dalına commit'ler; commit'lerde ajan izi yok, push yok. Durma noktaları wip dalı + "bloke" kaçışına çevrildi; `SEC-18` yalnızca plan, `ARC-08` ve `SEC-17` yalnızca liste ve komut. Eksik kalan `FE-07` eklendi (21.16); `ARC-07` 21.18'e kaydı. Hazırlık (21.0) ve kapanış (21.90) maddeleri, ajana yapıştırılacak metin (§4). `phases/README.md`, `prompts/README.md`, Faz 20 takip tablosu ve `AUD-2026-11-26` raporundaki bağlantılar yeni yola çevrildi.
