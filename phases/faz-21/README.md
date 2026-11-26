@@ -41,7 +41,7 @@ Sıra:
 |---|---|---|---|---|---|---|---|---|---|
 | 21.0 | — | — | Hazırlık: ortam eşitleme, dallar, taban kapıları, `FAZ-21.md` açılışı | S | — | backend · frontend · docs | — | be 6ffb824 | commit'lendi |
 | 21.1 | `SEC-16` | 🟢 | Hesap bazlı (IP'den bağımsız) giriş freni | S | ✅ | backend · docs | K265 | be 245a71f | commit'lendi |
-| 21.2 | `SEC-15` | 🟢 | Kayıt ucu adresin kayıtlı olduğunu söylüyor | S/M | ✅ | backend · frontend · docs | | | bekliyor |
+| 21.2 | `SEC-15` | 🟢 | Kayıt ucu adresin kayıtlı olduğunu söylüyor | S/M | ✅ | backend · frontend · docs | K266 | be ec850e0 | commit'lendi |
 | 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | | | bekliyor |
 | 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | | | bekliyor |
 | 21.5 | `OPS-07` | 🟢 | PHP-FPM havuzu ve OPcache ayarı depoda yok | S | ✅ | backend (`deploy/`) · docs | | | bekliyor |
@@ -672,6 +672,15 @@ Değilse maddeyi bloke et (§3 madde 5).
   2) bellek, 3) yeşil (1318/1318).
 - **Gördüm, dokunmadım:** `config/davetkart.php` `auth.login_rate_limit_per_minute` hiçbir yerde okunmuyor
   (`authLimits()` 5'i sabit yazıyor).
+
+### 21.2 (`SEC-15`)
+
+- **Plandan sapma yok, ama "ekle" adımı boş çıktı:** kayıt rotası zaten `throttle:auth` grubundaydı (adres + IP 5/dk,
+  IP 20/dk; giriş ile ortak `auth` limiter'ı). Kod eklenmedi; kovalar üç testle kilitlendi (backend
+  `RegistrationEnumerationBrakesTest`). Çakışma yolunda `Hash::make` atlanmıyor (`hashed` cast'i INSERT'ten önce).
+- Frontend'e dokunulmadı (B yolu). `npm run check` koşulmadı: frontend değişmedi; `npm run e2e` 6/6.
+- Gördüm, dokunmadım: `Hash::partialMock()` Laravel 13'te kurucusuz `HashManager` üretiyor ve gerçek hash'e geçemiyor
+  (`Call to a member function get() on null`); testte `tests/Support/CountingHasher` kullanıldı.
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
