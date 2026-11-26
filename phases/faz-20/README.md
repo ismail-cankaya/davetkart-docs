@@ -37,7 +37,7 @@ Faz 14'ün hiç koşulmamış 15 adımlık elle doğrulaması başsız Chromium 
 (20.7). `AUD-2026-11-12`'nin 27 düşük/öneri bulgusu kodda yeniden tarandı: `ARC-09`, `FE-09`, `FE-56` kapanmış; düzeltilenler
 20.7–20.10; karar isteyenler aşağıda.
 
-**Karar bekleyen (kod yazılmadı):**
+**Karar bekleyen (kod yazılmadı) → Faz 22'ye taşındı:** [`faz-22/README.md`](../faz-22/README.md) (22.1–22.17, prompt'larıyla).
 
 | Bulgu | Soru |
 |---|---|

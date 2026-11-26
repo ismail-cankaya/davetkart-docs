@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Faz 22 planı (`docs/2026-11-26-faz-22-plan`)
+
+- [`phases/faz-22/README.md`](phases/faz-22/README.md): `AUD-2026-11-12`'nin hâlâ açık düşük/öneri bulguları ve Faz 20 ikinci taramasının karar soruları; 17 madde tek hatta, ortak çalışma biçimi ve her maddenin §A tablosu + prompt'u aynı sayfada. Kapanmış bulunanlar (`SEC-14`, `FE-05`, `ARC-09`, `FE-09`, `FE-56`) dışarıda. `phases/README.md`, `prompts/README.md`, Faz 20 takip tablosu ve `AUD-2026-11-26` raporu bağlantı aldı.
+
 ## 2026-11-26 — Faz 20 ikinci tarama: hesap yazma akışları ve frontend pürüzleri (`docs/2026-11-26-faz-20-critical-fixes`)
 
 - Faz 14 elle doğrulaması ilk kez otomatik koşuldu (16/16); 20.7–20.10 frontend düzeltmeleri; `AUD-2026-11-12` düşük bulguları yeniden tarandı, beş karar sorusu [`phases/faz-20/README.md`](phases/faz-20/README.md) §İkinci tarama, rapor §4b.
