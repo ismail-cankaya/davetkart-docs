@@ -78,3 +78,11 @@ Dallar: backend ve frontend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K270** | `TOKEN_EXPIRED`, `INVITATION_LOCKED` ve `SLUG_TAKEN` hata kataloğundan silindi (31 → 28): `ErrorCode`, `contracts/error-codes.json`, frontend kopyası, tr/en çevirileri, backend `docs/08` §4. Kataloğa kod ancak onu fırlatan kodla birlikte eklenir (`ErrorCodeUsageTest`: her case `app/` içinde kullanılır) | Üçünü de `app/` içinde fırlatan yoktu (grep: 0). `TOKEN_EXPIRED`: Sanctum süresi dolan token'ı `UNAUTHENTICATED` ile reddeder, frontend Faz 20.7'den beri 401'de "Oturumunuz sona erdi" diyor. `INVITATION_LOCKED`: "yayınlanmış davetiye kilitlenir" kuralı gelmedi. `SLUG_TAKEN`: K66, slug yok. Sözleşmede olup hiç gelmeyen kod B4 ihlali | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.6 (27 Kas) |
+
+### 21.7 — `FE-08` (konum araması: backend ucu yok, bayrakla kapalı kod)
+
+Dallar: frontend ve backend (`deploy/`) `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/04-frontend-e2e.md`](../../audits/2026-11-12-full-system-audit/findings/04-frontend-e2e.md) "FE-08".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K271** | Konum önerisi araması kaldırıldı: frontend `services/places.ts`, `hooks/usePlaceSearch.ts`, `PlaceSuggestion`, `VITE_PLACES_SEARCH_ENABLED` (`.env.example`, `vite-env.d.ts`, backend `deploy/deploy-frontend.sh`). "Ulaşım Bilgileri" yalnızca haritadan seçim, koordinat ve harita bağlantısı yapıştırma ile çalışır. Uç gerekirse ayrı faz: Places anahtarı sunucuda, önbellek, `throttle`, KVKK gizlilik metni | `GET /api/public/places/search` backend'de hiç yazılmadı; kod bayrakla kapalı duruyordu (bayrak açılsa 404). Bayrak kapalıyken kanca hep boş döndüğü için ekran değişmedi | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.7 (27 Kas) |
