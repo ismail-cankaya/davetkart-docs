@@ -70,3 +70,11 @@ Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/05-operations.
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K269** | PHP-FPM havuzu depoda (`deploy/php-fpm/davetkart.conf`): `pm = dynamic`, `max_children 4`, `start_servers 2`, `min_spare 1`, `max_spare 3`, `max_requests 500`; soket nginx ile aynı (`/run/php/php8.5-fpm.sock`, dağıtımın `www.conf`'u devre dışı); `request_terminate_timeout 60s`; slowlog 5s; durum sayfası yalnızca soketten. OPcache (`deploy/php/davetkart.ini`): `memory_consumption 128`, `max_accelerated_files 20000`, `validate_timestamps 0`: kod değişikliği ancak FPM reload ile (deploy bakım kipinde reload yapar, K264). Bellek tablosu backend `docs/rehber/deploy/php-fpm/davetkart.md` §3 | Ubuntu varsayılanı `max_children 5` ile tavanlar 5 × 256 + 768 = 2 048 MB: OOM'da çekirdek PostgreSQL'i öldürür. 4 ile tavanlar toplamı ~2 270 MB (OPcache, PostgreSQL ve işletim sistemiyle), 2 048'i ~220 MB aşar; tipik kullanım ~500–1 000 MB. Kalan pay için takas dosyası ya da havuzda `memory_limit 192M` İsmail'e soru | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.5 (27 Kas) · sunucuda kurulmadı |
+
+### 21.6 — `ARC-06` (hiç fırlatılmayan üç hata kodu)
+
+Dallar: backend ve frontend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/01-architecture.md`](../../audits/2026-11-12-full-system-audit/findings/01-architecture.md) "ARC-06".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K270** | `TOKEN_EXPIRED`, `INVITATION_LOCKED` ve `SLUG_TAKEN` hata kataloğundan silindi (31 → 28): `ErrorCode`, `contracts/error-codes.json`, frontend kopyası, tr/en çevirileri, backend `docs/08` §4. Kataloğa kod ancak onu fırlatan kodla birlikte eklenir (`ErrorCodeUsageTest`: her case `app/` içinde kullanılır) | Üçünü de `app/` içinde fırlatan yoktu (grep: 0). `TOKEN_EXPIRED`: Sanctum süresi dolan token'ı `UNAUTHENTICATED` ile reddeder, frontend Faz 20.7'den beri 401'de "Oturumunuz sona erdi" diyor. `INVITATION_LOCKED`: "yayınlanmış davetiye kilitlenir" kuralı gelmedi. `SLUG_TAKEN`: K66, slug yok. Sözleşmede olup hiç gelmeyen kod B4 ihlali | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.6 (27 Kas) |

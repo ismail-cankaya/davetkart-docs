@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K270**
+**Sıradaki boş numara: K271**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -245,6 +245,7 @@
 | **K267** | K67 daraltıldı: ödeme sunucuda yayınlamaz; frontend davetiyeye bağlı ödenmiş siparişin dönüşünde sekme başına bir kez yayın ister (`sessionStorage`), tekrar ziyarette istek yok; paket siparişi yayınlamaz | Faz 21.3 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#213--fe-58-ödeme-dönüşünde-davetiye-kullanıcıya-sorulmadan-yayınlanıyor-k67-ile-çelişki) |
 | **K268** | Her yanıtta `X-Request-Id` (ULID); gelen kimlik yalnızca ULID/UUID ise kalır; Laravel `Context` (`request_id`) ile günlük satırlarına ve kuyruk işlerine; hata zarfı aynı; ara katman global zincirin başında | Faz 21.4 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#214--ops-08-günlüklerde-istek-kimliği-yok) |
 | **K269** | PHP-FPM havuzu depoda: `dynamic`, `max_children 4` (2/1/3), `max_requests 500`, `request_terminate_timeout 60s`, slowlog 5s; OPcache 128 MB, 20000 dosya, `validate_timestamps 0` (reload şart, K264); bellek tablosu kılavuzda | Faz 21.5 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) · sunucuda kurulmadı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#215--ops-07-php-fpm-havuzu-ve-opcache-ayarı-depoda-yok) |
+| **K270** | Hiç fırlatılmayan `TOKEN_EXPIRED`, `INVITATION_LOCKED`, `SLUG_TAKEN` katalogdan silindi (31 → 28); yeni kod ancak fırlatan kodla birlikte (`ErrorCodeUsageTest`) | Faz 21.6 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#216--arc-06-hiç-fırlatılmayan-üç-hata-kodu) |
 
 ## Notlar
 
