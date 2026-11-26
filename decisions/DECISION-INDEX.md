@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K266**
+**Sıradaki boş numara: K267**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -241,6 +241,7 @@
 | **K263** | `GET /api/health` beşinci kontrol `schema`: bekleyen göç (dosya `migrations` tablosunda yok) ya da tablo yoksa 503; fazla kayıt başarısızlık değil; veritabanı yokken `["database","schema"]` | Faz 20.1 (26 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md#a-karar-kaydına-eklenecek-7) |
 | **K264** | Backend deploy'u bakım kipinde: `git pull`'dan önce `artisan down --retry=60` (şablonsuz), göç + FPM + `queue:restart`'tan sonra `artisan up`; hata olursa bakımda kalır, elle `up` yok; `set -Eeuo pipefail`. Frontend `PROVIDER_UNAVAILABLE` metni tarafsız | Faz 20.4 (26 Kas) | geçerli · İsmail'in kararı (seçenek A) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md#204--ops-06--deploy-sırasında-kod-şemanın-önünde) |
 | **K265** | Girişte hesap başına, IP'den bağımsız kova: saatte 30 başarısız deneme (kayıtsız adres de sayılır), dolunca 429 `RATE_LIMITED`, parola denenmez; kalıcı kilit yok, parola sıfırlama kovayı boşaltır; sahibe kuyruklu, IP'siz uyarı postası (saatte en çok 1) | Faz 21.1 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#a-karar-kaydına-eklenecek-7) |
+| **K266** | `SEC-15` kabul edilen risk: kayıt ucu kayıtlı adresi 422 ile söyler, K11 sözleşmesi aynı; frenler `throttle:auth` (adres + IP 5/dk, IP 20/dk), iki yolda da hash, `fields` yok, testle kilitli; tam kapatma (`202 check_email`) ayrı faz | Faz 21.2 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#212--sec-15-kayıt-ucu-adresin-kayıtlı-olduğunu-söylüyor) |
 
 ## Notlar
 

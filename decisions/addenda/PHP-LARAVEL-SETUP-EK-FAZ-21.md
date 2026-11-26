@@ -25,3 +25,14 @@ Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/02-security.md
   kaynağı notu eklendi.
 - Neyi kapatmaz (B6): saldırgan saatte 30 başarısız denemeyle sahibi o saat için girişten alıkoyabilir (sıfırlama yolu
   açık); kayıtlı hesabın 30. denemesinde posta kuyruğa yazılırken birkaç ms fark olabilir.
+
+### 21.2 — `SEC-15` (kayıt ucu adresin kayıtlı olduğunu söylüyor)
+
+Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/02-security.md`](../../audits/2026-11-12-full-system-audit/findings/02-security.md) "SEC-15". §A-1: B.
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K266** | `SEC-15` kabul edilen risk: kayıt ucu kayıtlı adresi `422 REGISTRATION_FAILED` ile söyler (yeni adreste `201`); sözleşme (K11 `{user, token}`, oturum açar) aynı kalır. Frenler: kayıt `throttle:auth` kovalarında (adres + IP 5/dk, IP 20/dk; kayıtlı adresle deneme de sayılır, giriş ile ortak kova), iki yolda da Argon2id hash (`hashed` cast'i INSERT'ten önce), `fields` yok. Frenler testle kilitlendi; yanıt süresi test edilmedi. Tam kapatma = kayıt her zaman `202 {status:"check_email"}`, oturum doğrulamadan sonra, kayıtlı adrese "siz miydiniz?" postası; K11'i ve frontend kayıt akışını değiştirir, ayrı faz | Giriş ve sıfırlama uçları sayım açığını kapattı; kayıtta durum kodu farkı kalıyor. Tam kapatma kullanıcıya bir adım (posta) ekler ve onaysız tek oturumda kimlik akışı değiştirilmez. Kovalar zaten vardı (`throttle:auth`), kod eklenmedi | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.2 (27 Kas) |
+
+- Neyi kapatmaz (B6): çok IP'li saldırgan IP başına dakikada 20 adres tarayabilir; hesap başına kova (K265) taramayı
+  durdurmaz, çünkü her adres bir kez denenir.
