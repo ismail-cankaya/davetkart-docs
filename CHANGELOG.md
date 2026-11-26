@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Faz 20 ikinci tarama: hesap yazma akışları ve frontend pürüzleri (`docs/2026-11-26-faz-20-critical-fixes`)
+
+- Faz 14 elle doğrulaması ilk kez otomatik koşuldu (16/16); 20.7–20.10 frontend düzeltmeleri; `AUD-2026-11-12` düşük bulguları yeniden tarandı, beş karar sorusu [`phases/faz-20/README.md`](phases/faz-20/README.md) §İkinci tarama, rapor §4b.
+
 ## 2026-11-26 — Faz 20.4: deploy bakım kipinde (`docs/2026-11-26-faz-20-critical-fixes`)
 
 - **K264** (İsmail: seçenek A): `deploy.sh` `git pull`'dan önce `artisan down`, göçten sonra `up`; hata olursa bakımda kalır. [`EK-FAZ-20`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md), [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) (sıradaki K265), [`phases/faz-20/README.md`](phases/faz-20/README.md), [`YAYIN-SIRASI.md`](operations/deployment/YAYIN-SIRASI.md) §4.1 ve [`IZLEME.md`](operations/deployment/IZLEME.md) (deploy sırasında beklenen 503).

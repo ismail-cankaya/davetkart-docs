@@ -24,7 +24,31 @@ Yerel ortam koda eşitlendi; bildirilen hata bununla kapandı (rapor §1.5):
 | 20.4 | `OPS-06` ↑ | 🟠 | Deploy bakım kipinde (`artisan down` pull'dan önce, `up` göçten sonra); `set -E`; `PROVIDER_UNAVAILABLE` metni tarafsız | backend (`deploy/`, test) · frontend (`errors.json`) · docs | `fix/2026-11-26-ops-06-deploy-maintenance` · frontend `fix/2026-11-26-ops-06-neutral-unavailable-message` | K264 | birleşti (İsmail: seçenek **A**) |
 | 20.5 | `FE-59` | 🟢 | `/eposta-dogrula` bağlantısız açılınca istek atma | frontend | — | — | **değişiklik yok**: sunucu doğru kodu (`EMAIL_VERIFICATION_INVALID`) veriyor, ekran doğru; frontend'de imza kontrolü kuralın ikinci kopyası olurdu |
 | 20.6 | `OPS-13` | 🟢 | `composer setup` `APP_KEY`'i yerelde sorusuz yeniliyor → yalnızca boşsa üretir | backend · docs | `fix/2026-11-26-ops-13-setup-app-key` | — | birleşti |
+| 20.7 | `FE-57` A + yeni | 🟡 | 401'de ölü token'la `logout` isteği gitmiyor; giriş sayfası "Oturumunuz sona erdi"; başka hesap girince hesap belleği temizlenir | frontend | `fix/2026-11-26-fe-57-expired-session` | — | birleşti |
+| 20.8 | `FE-55`, `FE-57` C | 🟢 | Planlarım ve LCV panelindeki yanıltıcı metinler | frontend | `fix/2026-11-26-fe-55-misleading-copy` | — | birleşti |
+| 20.9 | `FE-57` B | 🟢 | Aynı bildirim üst üste yığılmaz | frontend | `fix/2026-11-26-fe-57-toast-stacking` | — | birleşti |
+| 20.10 | `FE-06` | 🟢 | 404 sayfası (bilinmeyen adres açıklamasız ana sayfaya atılmaz) | frontend | `fix/2026-11-26-fe-06-not-found-page` | — | birleşti |
 | docs | `OPS-12` | 🟡 | Faz 19 satırları "PHPStan #11" diyor; gerçek engel `SEC-51`'di | docs · backend `fazlar/README.md` | bu dal | — | düzeltildi |
+
+## İkinci tarama (26 Kasım, "başka hata var mı")
+
+Faz 14'ün hiç koşulmamış 15 adımlık elle doğrulaması başsız Chromium ile `davetkart_e2e` üzerinde koşuldu (sahte ödeme
+`tinker`'dan imzalı webhook, `refunds:approve` gerçek komut): **16/16**. Tek hata ölü token'la giden `logout` isteğiydi
+(20.7). `AUD-2026-11-12`'nin 27 düşük/öneri bulgusu kodda yeniden tarandı: `ARC-09`, `FE-09`, `FE-56` kapanmış; düzeltilenler
+20.7–20.10; karar isteyenler aşağıda.
+
+**Karar bekleyen (kod yazılmadı):**
+
+| Bulgu | Soru |
+|---|---|
+| `SEC-15` | Kayıt ucu "bu adres kayıtlı" bilgisini 422 ile veriyor. Kapatmak kaydı "postanızı kontrol edin" akışına çevirmek demek (K11 sözleşmesi değişir). Yapılsın mı? |
+| `SEC-16` | Hesap bazlı (IP'den bağımsız) giriş freni: kaç hatalı denemede kaç dakika? |
+| `FE-58` | Ödeme dönüşünde davetiye kullanıcıya sormadan yayınlanıyor (K67 ile çelişki sorusu). Onay adımı eklensin mi? |
+| `ARC-06` | Hiç kullanılmayan 3 hata kodu (`TOKEN_EXPIRED`, `INVITATION_LOCKED`, `SLUG_TAKEN`) silinsin mi? |
+| `ARC-07` | Frontend'e `.gitattributes` + tek seferlik satır sonu normalizasyonu (yüzlerce dosyalık commit) |
+
+Altyapı/iyileştirme olarak bekleyenler (hata değil): `OPS-07`, `OPS-08`, `OPS-09`, `TST-03`, `TST-05`, `TST-06`,
+`FE-03`, `FE-05`, `FE-08`, `ARC-08`, `ARC-10`, `SEC-14`, `SEC-17`, `SEC-18`.
 
 ## 20.4 kararı (`OPS-06`) — İsmail: **A** (26 Kasım), K264
 
@@ -55,6 +79,8 @@ Backend `faz-20-critical-fixes` @ `18fb74e` (kod ucu `6b3b450`) · frontend `faz
 | 20.4 deploy betiği (stub'lı, sunucusuz) | ✅ 5 senaryo: başarı · `migrate` / `config:cache` düşer → bakımda kalır + mesaj · `up` sonrası ping düşer → yalnızca `HATA` · `down` düşer. Eski betikte göç hatası mesajsızdı (`set -E` eksikti) |
 | `MaintenanceModeTest` | ✅ bakımda `503 PROVIDER_UNAVAILABLE` zarfı; mutant (`deactivate`) kırmızı |
 | Hesap sayfaları (başsız Chromium, çalışan Vite + backend, user 2) | ✅ 6 hesap sayfası dahil 17/18 rota temiz; `/eposta-dogrula` sorgusuz 422 (20.5: beklenen) |
+| Hesap yazma akışları (Faz 14 elle doğrulaması, ikinci tarama) | ✅ 16/16 (frontend `f774f1b`) |
+| Frontend `npm run check` + e2e (frontend `f774f1b`, 20.7–20.10 dahil) | ✅ · ✅ 6/6 |
 | İsmail'in tarayıcısı · canlı sunucu | koşmadı |
 
 ## İsmail'e kalan

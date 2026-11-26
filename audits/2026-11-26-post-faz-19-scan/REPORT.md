@@ -120,6 +120,16 @@ Tek ev açık listelerdir; burada yalnızca sayım ve en acil olanlar:
 - **Hat C:** #21 sürüm etiketleri, #28 zayıf parolalı mevcut hesaplar kararı, #29 dal temizliği, #31, §D elle işler ([`HAT-C-ACIK-HATALAR.md`](../../phases/faz-19/HAT-C-ACIK-HATALAR.md)).
 - **Temizlik:** `D:\Projects\davetkart-hat-{a,b,c}` worktree'leri hâlâ kayıtlı (ayrık uçlarda).
 
+## 4b. İkinci tarama (26 Kasım, İsmail: "başka hata var mı")
+
+- **Hesap ayarlarının yazma akışları:** Faz 14 elle doğrulaması (15 adım + satın alma) ilk kez, başsız Chromium ile
+  `davetkart_e2e` üzerinde: **16/16 geçti**. Bulunan tek hata: 401 yakalayıcısı ölü token'la `POST /auth/logout` gönderiyordu
+  (ikinci 401). İnceleme sırasında iki komşu sorun: oturum açıklamasız düşüyordu (`FE-57` A) ve 401 sonrası aynı sekmede
+  başka hesap girerse önceki hesabın hakları bellekte kalıyordu. Üçü de Faz 20.7.
+- **`AUD-2026-11-12` düşük/öneri bulguları (27) kodda yeniden tarandı:** kapanmış `ARC-09`, `FE-09`, `FE-56`; düzeltilen
+  `FE-06` (20.10), `FE-55` + `FE-57` C (20.8), `FE-57` B (20.9); karar isteyen `SEC-15`, `SEC-16`, `FE-58`, `ARC-06`, `ARC-07`
+  ([`phases/faz-20/README.md`](../../phases/faz-20/README.md) §İkinci tarama).
+
 ## 5. Koşmadı (B7)
 
 - Canlı sunucu: OPcache ayarı, `/api/health`, deploy penceresinin gerçekte ölçülmesi.
