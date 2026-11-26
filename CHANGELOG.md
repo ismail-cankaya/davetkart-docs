@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Faz 20.4: deploy bakım kipinde (`docs/2026-11-26-faz-20-critical-fixes`)
+
+- **K264** (İsmail: seçenek A): `deploy.sh` `git pull`'dan önce `artisan down`, göçten sonra `up`; hata olursa bakımda kalır. [`EK-FAZ-20`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md), [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) (sıradaki K265), [`phases/faz-20/README.md`](phases/faz-20/README.md), [`YAYIN-SIRASI.md`](operations/deployment/YAYIN-SIRASI.md) §4.1 ve [`IZLEME.md`](operations/deployment/IZLEME.md) (deploy sırasında beklenen 503).
+
 ## 2026-11-26 — Faz 20: Faz 19 sonrası kritik hatalar (`docs/2026-11-26-faz-20-critical-fixes`)
 
 - [`audits/2026-11-26-post-faz-19-scan/REPORT.md`](audits/2026-11-26-post-faz-19-scan/REPORT.md) (`AUD-2026-11-26`): Hesap Ayarları'nın üç sayfasındaki 500'ün kökü yerel veritabanının 4 göç geride olması (`OPS-10`); tarama 🔴 1 · 🟠 2 (`OPS-06` ↑, `SEC-51`) · 🟡 2 · 🟢 2.

@@ -116,6 +116,11 @@ Günlükte aranacak satırlar:
 `(etiketsiz)` ve `UYARI: … etiketli bir surum degil` görürsen etiket itilmemiştir. Deploy durmaz
 (K149); frontend'e geçmeden önce etiketi it.
 
+**Bakım kipi (Faz 20.4, K264):** `==> Bakim kipi aciliyor` ile `==> Bakim kipi kapaniyor` arasında API 503 döner
+(genelde 30–60 sn; statik site açık). `Site BAKIM KIPINDE kaliyor (503)` satırını görürsen deploy yarıda kalmıştır:
+`artisan up` **yapma** (yarım şema), sebebi düzeltip `bash deploy/deploy.sh`'ı yeniden çalıştır (backend
+`docs/rehber/deploy/deploy.md` §4).
+
 `deploy.sh` sonunda frontend betiğini de çağırır. Frontend `main`'i henüz itilmediği için o adım
 yayındaki siteyi aynı commit'ten yeniden derler; zararsızdır.
 

@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K264**
+**Sıradaki boş numara: K265**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -239,6 +239,7 @@
 | **K261** | Boş taslak temizliği tek seferlik komutla: `invitations:prune-empty-drafts` (`--dry-run`, `--older-than` varsayılan 7 gün); isim/tarih/mekân boş, hiç yayınlanmamış, siparişsiz, medyasız taslak soft delete; zamanlayıcıda yok (K84) | Faz 19 ortak düzeltme, Hat A E2 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
 | **K262** | SEC-10 D2: kartla ödemede alıcının cep telefonu sorulur, yalnızca siparişte (`orders.buyer_phone`) saklanır ve Shopier'e o gider; zorunluluğu sürücü belirler (`RequiresBuyerPhone`); hediye/Fake siparişi telefon tutmaz; hesap silinince anonim siparişten silinir. TCKN/adres yer tutucu kalır | Faz 19 ortak düzeltme, Hat A E5 (25 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#faz-19-ortak-düzeltme--hat-a) |
 | **K263** | `GET /api/health` beşinci kontrol `schema`: bekleyen göç (dosya `migrations` tablosunda yok) ya da tablo yoksa 503; fazla kayıt başarısızlık değil; veritabanı yokken `["database","schema"]` | Faz 20.1 (26 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md#a-karar-kaydına-eklenecek-7) |
+| **K264** | Backend deploy'u bakım kipinde: `git pull`'dan önce `artisan down --retry=60` (şablonsuz), göç + FPM + `queue:restart`'tan sonra `artisan up`; hata olursa bakımda kalır, elle `up` yok; `set -Eeuo pipefail`. Frontend `PROVIDER_UNAVAILABLE` metni tarafsız | Faz 20.4 (26 Kas) | geçerli · İsmail'in kararı (seçenek A) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md#204--ops-06--deploy-sırasında-kod-şemanın-önünde) |
 
 ## Notlar
 

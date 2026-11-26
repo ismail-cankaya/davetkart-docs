@@ -44,6 +44,9 @@ Hangisi seçilirse:
 
 - Monitör 1: `GET https://davetkart.com/api/health`, **1 dakikada bir**, beklenen 200, **2 ardışık hata** sonrası
   alarm (dağıtımda `cache:clear` kalp atışını siler; ilk `schedule:run`'a kadar ≤1 dk `scheduler` düşer).
+  Faz 20.4'ten beri (K264) deploy bakım kipinde: 30–60 sn boyunca her istek 503. Deploy bir dakikayı aşarsa
+  alarm gelir; beklenen bir alarmdır. Deploy'dan önce izleyicide bakım penceresi aç ya da eşiği 3 ardışık hataya çek.
+  Deploy bitip 503 sürüyorsa: `Site BAKIM KIPINDE kaliyor` (yarıda kalan deploy, `YAYIN-SIRASI.md` §4.1).
 - Monitör 2: SSL bitişi `davetkart.com` (14 gün) — `SURE-TAKVIMI.md` satırını ✅ yap.
 - Alarm kime: İsmail'in e-postası (+ telefon uygulaması). Kanal tek kişi; yayın sonrası ikinci kişi eklenecekse buraya yaz.
 
