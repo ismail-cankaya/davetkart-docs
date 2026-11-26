@@ -36,3 +36,18 @@ Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/02-security.md
 
 - Neyi kapatmaz (B6): çok IP'li saldırgan IP başına dakikada 20 adres tarayabilir; hesap başına kova (K265) taramayı
   durdurmaz, çünkü her adres bir kez denenir.
+
+### 21.3 — `FE-58` (ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor; K67 ile çelişki)
+
+Dal: frontend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/04-frontend-e2e.md`](../../audits/2026-11-12-full-system-audit/findings/04-frontend-e2e.md) "FE-58". §A-1: otomatik yayın kalır.
+Açık soru: [`EK-FAZ-12`](PHP-LARAVEL-SETUP-EK-FAZ-12.md) §F-7.
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K267** | K67 daraltıldı: ödeme **sunucuda** yayınlamaz (webhook yalnızca siparişi `paid` yapar). Frontend, yayın niyetiyle başlayan ödemenin (davetiyeye bağlı sipariş) dönüşünde **bir kez** `POST /invitations/{id}/publish` ister; plan kontrolü (402) sunucuda. Sekme başına sipariş başına tek istek (`sessionStorage` `davetkart-auto-published`, en çok 20 kimlik); aynı sekmede yenileme ya da geri gelme yeni istek üretmez, kart "Ödemeniz onaylandı" der. Paket siparişi (`invitationId: null`) yayınlamaz | Kullanıcı ödemeye editörde "Yayınla"dan gelir; dönüşte ikinci bir onay aynı soruyu iki kez sorar. K67'nin gerekçesi (paket alımda davetiye belirsiz, webhook makine bildirimi) sunucu için doğru kalır. Yenilemede istek tekrar giderse kullanıcının panelden kaldırdığı davetiye sorulmadan yeniden yayınlanırdı | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.3 (27 Kas) |
+
+- K67 → "daraltıldı → K267" (silinmedi).
+- Neyi kapatmaz (B6): başka sekmede ya da yeni oturumda aynı dönüş adresi yine istek atar (yayındaysa 409 = başarı;
+  kaldırılmışsa yeniden yayınlanır). Tam kapatma için siparişin "hakkı yayınlandı mı?" bilgisi (`orders.first_published_at`,
+  Faz 18.4) `GET /orders/{id}` yanıtına girmeli (ayrı iş).
+- Kod: `src/utils/autoPublish.ts` (`claimAutoPublish`, `returnCardView`), `verify:payment` 19 yeni denetim.

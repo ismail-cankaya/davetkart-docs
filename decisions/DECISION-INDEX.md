@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K267**
+**Sıradaki boş numara: K268**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -81,7 +81,7 @@
 | **K64** | Checkout iki uç: `/invitations/{id}/checkout` (tekil) · `/payments/checkout` (paket) | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K65** | Webhook ucu `/api/public/` altında | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K66** | `public_slug` üretilmiyor | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
-| **K67** | Ödeme yayınlamaz; yayın ayrı bir kullanıcı eylemidir | Faz 7 | geçerli · ⚠️ frontend 11.6 ile çelişki sorusu açık (EK-FAZ-12 §F-7) | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
+| **K67** | Ödeme yayınlamaz; yayın ayrı bir kullanıcı eylemidir | Faz 7 | daraltıldı → K267 (Faz 21.3: ödeme **sunucuda** yayınlamaz; frontend yayın niyetli ödemenin dönüşünde bir kez yayınlar; EK-FAZ-12 §F-7 kapandı) | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K68** | "Zaten yayında" → 409, sessiz başarı değil | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K69** | İmza hatası → 404 (401/403/400 değil) | Faz 7 | geçerli · K122 tarayıcı callback'i için bilinçli sapma | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
 | **K70** | Sürücü seçimi çözüm anında, sessiz varsayılan yok | Faz 7 | geçerli | [`context/PHP-LARAVEL-SETUP.md` §7](../context/PHP-LARAVEL-SETUP.md#7-karar-kaydı) |
@@ -242,6 +242,7 @@
 | **K264** | Backend deploy'u bakım kipinde: `git pull`'dan önce `artisan down --retry=60` (şablonsuz), göç + FPM + `queue:restart`'tan sonra `artisan up`; hata olursa bakımda kalır, elle `up` yok; `set -Eeuo pipefail`. Frontend `PROVIDER_UNAVAILABLE` metni tarafsız | Faz 20.4 (26 Kas) | geçerli · İsmail'in kararı (seçenek A) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md#204--ops-06--deploy-sırasında-kod-şemanın-önünde) |
 | **K265** | Girişte hesap başına, IP'den bağımsız kova: saatte 30 başarısız deneme (kayıtsız adres de sayılır), dolunca 429 `RATE_LIMITED`, parola denenmez; kalıcı kilit yok, parola sıfırlama kovayı boşaltır; sahibe kuyruklu, IP'siz uyarı postası (saatte en çok 1) | Faz 21.1 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#a-karar-kaydına-eklenecek-7) |
 | **K266** | `SEC-15` kabul edilen risk: kayıt ucu kayıtlı adresi 422 ile söyler, K11 sözleşmesi aynı; frenler `throttle:auth` (adres + IP 5/dk, IP 20/dk), iki yolda da hash, `fields` yok, testle kilitli; tam kapatma (`202 check_email`) ayrı faz | Faz 21.2 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#212--sec-15-kayıt-ucu-adresin-kayıtlı-olduğunu-söylüyor) |
+| **K267** | K67 daraltıldı: ödeme sunucuda yayınlamaz; frontend davetiyeye bağlı ödenmiş siparişin dönüşünde sekme başına bir kez yayın ister (`sessionStorage`), tekrar ziyarette istek yok; paket siparişi yayınlamaz | Faz 21.3 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#213--fe-58-ödeme-dönüşünde-davetiye-kullanıcıya-sorulmadan-yayınlanıyor-k67-ile-çelişki) |
 
 ## Notlar
 
