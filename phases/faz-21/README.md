@@ -45,7 +45,7 @@ Sıra:
 | 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | K267 | fe ea9d8b1 | commit'lendi |
 | 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | K268 | be 26943a9 | commit'lendi |
 | 21.5 | `OPS-07` | 🟢 | PHP-FPM havuzu ve OPcache ayarı depoda yok | S | ✅ | backend (`deploy/`) · docs | K269 | be a803fd3 | commit'lendi |
-| 21.6 | `ARC-06` | 🟢 | Hiç fırlatılmayan 3 hata kodu | S | ✅ | backend · frontend · docs | | | bekliyor |
+| 21.6 | `ARC-06` | 🟢 | Hiç fırlatılmayan 3 hata kodu | S | ✅ | backend · frontend · docs | K270 | be bea73f2 · fe 07b64f4 | commit'lendi |
 | 21.7 | `FE-08` | 🟢 | Konum araması: backend ucu yok, bayrakla kapalı kod | S | ✅ | frontend · docs | | | bekliyor |
 | 21.8 | `FE-03` | 🟢 | TypeScript `strict` kapalı (bugün 20 hata) | S | — | frontend · docs | | | bekliyor |
 | 21.9 | `TST-05` | 🟢 | Node sürümü sabit değil (CI 22, yerel 24) | S | ✅ | frontend · docs | | | bekliyor |
@@ -713,6 +713,16 @@ Değilse maddeyi bloke et (§3 madde 5).
 - İsmail'e kalan sunucu adımları (numaralı): backend `docs/rehber/fazlar/FAZ-21.md` §21.5 "İsmail'e kalan" (1) havuzu
   kur ve `www.conf`'u kapat, (2) deploy sonrası OPcache satırlarını doğrula, (3) bellek payı kararı.
 - Gördüm, dokunmadım: Herd `resources/bin` altında `xdebug` klasörü var (21.11 için not).
+
+### 21.6 (`ARC-06`)
+
+- Kanıt (önce): `app/` içinde `ErrorCode::TokenExpired|InvitationLocked|SlugTaken` (katalog dışı) 0; frontend `src/`,
+  `scripts/`, `e2e/` (çeviri ve sözleşme kopyası dışı) 0.
+- K18: `ErrorCode.php`'nin 9 uzun bloğu 1 satıra indi, metinler backend `ErrorCode.md` E1–E9'a aynen taşındı.
+- Kapılar: `composer check` 1337/1337 (`errors:export --check` temiz), `npm run check` 0 (`verify:errors` 31 → 28),
+  `npm run e2e` 6/6. Mutant: silinen kodu ya da kullanılmayan yeni bir kodu eklemek `ErrorCodeUsageTest`'i kırıyor.
+- Gördüm, dokunmadım: `InvitationController.php:107`, `MediaController.php:22`, `RsvpPolicy.php:52` yorumları hâlâ
+  "INVITATION_LOCKED kuralı geldiğinde" diyor; dosyalara dokunmak K18 cırcırına 10 uzun blok getirirdi.
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 

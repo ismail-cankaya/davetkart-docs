@@ -10,6 +10,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.3 `FE-58`: ödeme dönüşünde otomatik yayın kaldı, K67 daraltıldı → **K267** (varsayılan); karar `src/utils/autoPublish.ts`'e taşındı, sekme başına tek istek, yenilemede istek yok. `EK-FAZ-12` §F-7 kapandı. `npm run check` 0, e2e 6/6, 7 mutant öldü.
 - 21.4 `OPS-08`: her yanıtta `X-Request-Id` (ULID; gelen kimlik yalnızca ULID/UUID ise), Laravel `Context` ile günlük satırlarına ve kuyruk işlerine; zarf aynı — **K268** (varsayılan). `composer check` 1335/1335, e2e 6/6, 6/7 mutant öldü (biri eşdeğer, kod kaldırıldı).
 - 21.5 `OPS-07`: `deploy/php-fpm/davetkart.conf` (dynamic, 4 süreç, `max_requests 500`, 60s, slowlog) ve OPcache (`validate_timestamps=0`) depoda; bellek tablosu backend kılavuzunda (tavanlar ~2 270 MB, İsmail'e soru) — **K269** (varsayılan). Sunucuda kurulmadı; `php-fpm -t` koşmadı (Windows). `composer check` 1335/1335.
+- 21.6 `ARC-06`: `TOKEN_EXPIRED`, `INVITATION_LOCKED`, `SLUG_TAKEN` katalogdan, sözleşmeden ve tr/en çevirilerinden silindi (31 → 28); `ErrorCodeUsageTest` — **K270** (varsayılan). `composer check` 1337/1337, `npm run check` 0, e2e 6/6.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
