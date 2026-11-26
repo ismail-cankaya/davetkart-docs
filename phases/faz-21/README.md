@@ -46,7 +46,7 @@ Sıra:
 | 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | K268 | be 26943a9 | commit'lendi |
 | 21.5 | `OPS-07` | 🟢 | PHP-FPM havuzu ve OPcache ayarı depoda yok | S | ✅ | backend (`deploy/`) · docs | K269 | be a803fd3 | commit'lendi |
 | 21.6 | `ARC-06` | 🟢 | Hiç fırlatılmayan 3 hata kodu | S | ✅ | backend · frontend · docs | K270 | be bea73f2 · fe 07b64f4 | commit'lendi |
-| 21.7 | `FE-08` | 🟢 | Konum araması: backend ucu yok, bayrakla kapalı kod | S | ✅ | frontend · docs | | | bekliyor |
+| 21.7 | `FE-08` | 🟢 | Konum araması: backend ucu yok, bayrakla kapalı kod | S | ✅ | frontend · docs | K271 | fe 8263923 · be 9393dcd | commit'lendi |
 | 21.8 | `FE-03` | 🟢 | TypeScript `strict` kapalı (bugün 20 hata) | S | — | frontend · docs | | | bekliyor |
 | 21.9 | `TST-05` | 🟢 | Node sürümü sabit değil (CI 22, yerel 24) | S | ✅ | frontend · docs | | | bekliyor |
 | 21.10 | `TST-06` | 💡 | Backend testleri paralel koşmuyor | M | — | backend · docs | | | bekliyor |
@@ -723,6 +723,19 @@ Değilse maddeyi bloke et (§3 madde 5).
   `npm run e2e` 6/6. Mutant: silinen kodu ya da kullanılmayan yeni bir kodu eklemek `ErrorCodeUsageTest`'i kırıyor.
 - Gördüm, dokunmadım: `InvitationController.php:107`, `MediaController.php:22`, `RsvpPolicy.php:52` yorumları hâlâ
   "INVITATION_LOCKED kuralı geldiğinde" diyor; dosyalara dokunmak K18 cırcırına 10 uzun blok getirirdi.
+
+### 21.7 (`FE-08`)
+
+- **Plandan sapma:** plan "üç dosyayı sil" diyordu; `LocationSearchField.tsx` silinmedi, yalnızca öneri kısmı çıktı.
+  Dosya "haritadan seç", koordinat ve bağlantı yapıştırma akışının kendisi; yeni adla taşımak 8 gömülü Türkçe metni
+  "yeni dosya" yapıp `verify:i18n`'i kırardı. Gerekçe frontend `docs/rehber/src/components/create/location/LocationSearchField.md` §3.
+- Backend `deploy/deploy-frontend.sh` bayrağı export ediyordu; kullanım yeri olduğu için aynı maddede kaldırıldı (be 9393dcd).
+- Kapılar: `npm run check` 0 (i18n 781 → 780, `--update` yalnızca azalış), `npm run e2e` 6/6, `composer check` 1337/1337.
+  Davranış değişmedi (bayrak kapalıyken kanca hep boş durum döndürüyordu); yeni test yok.
+- Gördüm, dokunmadım: (1) "Yazdığınız konum henüz seçilmedi. Listeden bir öneri seçin ya da haritadan işaretleyin."
+  ipucu artık öneri listesi olmadığı hâlde "öneri" diyor; metni değiştirmek yeni gömülü Türkçe metin olurdu (`t()`'ye
+  taşıma ayrı iş). (2) `use-debounce` hâlâ `MapPickerModal` ve `useInvitationAutoSave`'de kullanılıyor (bağımlılık kalır).
+  (3) `YAYIN-PLANI.md` Y10.1–Y10.3 satırlarında bayrak geçmişin kaydı olarak duruyor.
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
