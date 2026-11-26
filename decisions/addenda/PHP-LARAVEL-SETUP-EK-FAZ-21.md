@@ -62,3 +62,11 @@ Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/05-operations.
 
 - Neyi kapatmaz (B6): Sentry olayına kimlik etiketi yok; zamanlayıcı/komut satırlarında `request_id` yok. Frontend'in
   hata bildiriminde kimliği göstermesi ayrı iş.
+
+### 21.5 — `OPS-07` (PHP-FPM havuzu ve OPcache ayarı depoda yok)
+
+Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/05-operations.md`](../../audits/2026-11-12-full-system-audit/findings/05-operations.md) "OPS-07".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K269** | PHP-FPM havuzu depoda (`deploy/php-fpm/davetkart.conf`): `pm = dynamic`, `max_children 4`, `start_servers 2`, `min_spare 1`, `max_spare 3`, `max_requests 500`; soket nginx ile aynı (`/run/php/php8.5-fpm.sock`, dağıtımın `www.conf`'u devre dışı); `request_terminate_timeout 60s`; slowlog 5s; durum sayfası yalnızca soketten. OPcache (`deploy/php/davetkart.ini`): `memory_consumption 128`, `max_accelerated_files 20000`, `validate_timestamps 0`: kod değişikliği ancak FPM reload ile (deploy bakım kipinde reload yapar, K264). Bellek tablosu backend `docs/rehber/deploy/php-fpm/davetkart.md` §3 | Ubuntu varsayılanı `max_children 5` ile tavanlar 5 × 256 + 768 = 2 048 MB: OOM'da çekirdek PostgreSQL'i öldürür. 4 ile tavanlar toplamı ~2 270 MB (OPcache, PostgreSQL ve işletim sistemiyle), 2 048'i ~220 MB aşar; tipik kullanım ~500–1 000 MB. Kalan pay için takas dosyası ya da havuzda `memory_limit 192M` İsmail'e soru | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.5 (27 Kas) · sunucuda kurulmadı |
