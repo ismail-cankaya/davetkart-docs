@@ -128,7 +128,7 @@ Tek ev açık listelerdir; burada yalnızca sayım ve en acil olanlar:
   başka hesap girerse önceki hesabın hakları bellekte kalıyordu. Üçü de Faz 20.7.
 - **`AUD-2026-11-12` düşük/öneri bulguları (27) kodda yeniden tarandı:** kapanmış `ARC-09`, `FE-09`, `FE-56`; düzeltilen
   `FE-06` (20.10), `FE-55` + `FE-57` C (20.8), `FE-57` B (20.9); karar isteyen `SEC-15`, `SEC-16`, `FE-58`, `ARC-06`, `ARC-07`
-  ([`phases/faz-20/README.md`](../../phases/faz-20/README.md) §İkinci tarama). Hepsi Faz 22'de: [`phases/faz-22/README.md`](../../phases/faz-22/README.md).
+  ([`phases/faz-20/README.md`](../../phases/faz-20/README.md) §İkinci tarama). Hepsi Faz 22'de: [`phases/faz-21/README.md`](../../phases/faz-21/README.md) (26 Kasım'da Faz 21 olarak yeniden numaralandı).
 
 ## 5. Koşmadı (B7)
 

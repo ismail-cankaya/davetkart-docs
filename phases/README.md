@@ -21,7 +21,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | 18 | Denetim düzeltmeleri (`AUD-2026-11-12`, altı 🟠 bulgu) | ⚠️ kod ✅ 6/6 (20 Kasım 2026) · `v1.1.0` etiketi bekliyor: `composer audit` kırmızı (`SEC-07`) · sunucu adımları koşmadı · → 20 Kasım: `SEC-07` Faz 19.1'de ele alındı (lock temiz); `vendor` + kapılar ve `v1.1.0` [`faz-19/FAZ-19-SEC-07-COMMIT-KOMUTLARI.md`](faz-19/FAZ-19-SEC-07-COMMIT-KOMUTLARI.md) §0, §5 | `faz-18-audit-fixes` + `fix/…` dalları | [`faz-18/`](faz-18/README.md) | `FAZ-18.md` (backend) |
 | 19 | Denetimin orta öncelikli bulguları (`AUD-2026-11-12`, 28 🟡) | ⚠️ kod ✅ 28/28, birleşti (25 Kasım 2026) · `v1.2.0` etiketi bekliyor · ~~PHPStan iç hatası (#11)~~ 25 Kasım'da kapandı; 26 Kasım'da engel `composer audit` (`SEC-51`) → Faz 20.2 | `faz-19-audit-fixes` + `fix/…` / `docs/…` dalları | [`faz-19/`](faz-19/README.md) | `FAZ-19.md` (backend; başta kapanış özeti) |
 | 20 | Faz 19 sonrası kritik hatalar (`AUD-2026-11-26`): yerel şema geride → Hesap Ayarları 500; `schema` hazır olma kontrolü, Symfony güvenlik yaması, yerel eşitleme | ⏳ 26 Kasım 2026 · ayrıntı takip tablosunda | `faz-20-critical-fixes` + `fix/2026-11-26-…` · docs `docs/2026-11-26-faz-20-critical-fixes` | [`faz-20/`](faz-20/README.md) | `FAZ-20.md` (backend) |
-| 22 | Ertelenmiş düşük bulgular ve açık kararlar (`AUD-2026-11-12` 🟢/💡 + `AUD-2026-11-26` §4b): 17 madde, tek hat, prompt'lar aynı sayfada | ⏳ plan hazır (26 Kasım 2026) · hiçbiri başlamadı | `faz-22-backlog` (açılacak) | [`faz-22/`](faz-22/README.md) | `FAZ-22.md` (backend, ilk backend maddesi açar) |
+| 21 | Ertelenmiş düşük bulgular ve açık kararlar (`AUD-2026-11-12` 🟢/💡 + `AUD-2026-11-26` §4b): 18 madde, **tek ajan tek oturumda**, madde başına commit (ilk adı Faz 22'ydi, 26 Kasım'da Faz 21'e çevrildi) | ⏳ plan hazır (26 Kasım 2026) · hiçbiri başlamadı | `faz-21-backlog` (21.0'da açılır) · docs `docs/<tarih>-faz-21-backlog` | [`faz-21/`](faz-21/README.md) | `FAZ-21.md` (backend, 21.0 açar) |
 
 ## Klasörler
 
@@ -37,7 +37,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | [`faz-18/`](faz-18/) | Takip tablosu; bulgu başına commit komutları (altı bulgu) | Kod tamam · etiket bekliyor (`SEC-07`) · → `SEC-07` Faz 19.1'de ele alındı (20 Kasım; kapılar bekliyor) |
 | [`faz-19/`](faz-19/) | Takip tablosu; bulgu başına commit komutları; `kayit/` (paralel hat kayıtları, 19.90'da birleşti) | Kod tamam (28/28) · `v1.2.0` bekliyor |
 | [`faz-20/`](faz-20/) | Takip tablosu (`AUD-2026-11-26` düzeltmeleri, 20.4 karar sorusu) | Sürüyor |
-| [`faz-22/`](faz-22/) | Tek sayfa: takip tablosu, ortak çalışma biçimi, 17 maddenin §A tabloları ve prompt'ları | Plan |
+| [`faz-21/`](faz-21/) | Tek sayfa: takip tablosu, ortak çalışma biçimi, ajana yapıştırılacak metin (§4), 18 maddenin §A tabloları | Plan |
 | [`frontend-catch-up/`](frontend-catch-up/) | `FRONTEND-YAKALAMA-PLANI.md` (11 Eylül 2026) | Tamamlandı (tarihsel) |
 
 Commit komutu dosyalarındaki `Claude outputs\f13-ara`, `Claude outputs\f14` yolları eski yerdir;

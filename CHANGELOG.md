@@ -2,9 +2,13 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
+
+- [`phases/faz-21/README.md`](phases/faz-21/README.md) (eski `phases/faz-22/`): İsmail'in kararıyla 22.n → 21.n. Tek ajan bütün maddeleri tek oturumda, onay beklemeden koşar ve her maddeyi `faz-21-backlog` dalına commit'ler; commit'lerde ajan izi yok, push yok. Durma noktaları wip dalı + "bloke" kaçışına çevrildi; `SEC-18` yalnızca plan, `ARC-08` ve `SEC-17` yalnızca liste ve komut. Eksik kalan `FE-07` eklendi (21.16); `ARC-07` 21.18'e kaydı. Hazırlık (21.0) ve kapanış (21.90) maddeleri, ajana yapıştırılacak metin (§4). `phases/README.md`, `prompts/README.md`, Faz 20 takip tablosu ve `AUD-2026-11-26` raporundaki bağlantılar yeni yola çevrildi.
+
 ## 2026-11-26 — Faz 22 planı (`docs/2026-11-26-faz-22-plan`)
 
-- [`phases/faz-22/README.md`](phases/faz-22/README.md): `AUD-2026-11-12`'nin hâlâ açık düşük/öneri bulguları ve Faz 20 ikinci taramasının karar soruları; 17 madde tek hatta, ortak çalışma biçimi ve her maddenin §A tablosu + prompt'u aynı sayfada. Kapanmış bulunanlar (`SEC-14`, `FE-05`, `ARC-09`, `FE-09`, `FE-56`) dışarıda. `phases/README.md`, `prompts/README.md`, Faz 20 takip tablosu ve `AUD-2026-11-26` raporu bağlantı aldı.
+- [`phases/faz-21/README.md`](phases/faz-21/README.md) (yazıldığında `phases/faz-22/`): `AUD-2026-11-12`'nin hâlâ açık düşük/öneri bulguları ve Faz 20 ikinci taramasının karar soruları; 17 madde tek hatta, ortak çalışma biçimi ve her maddenin §A tablosu + prompt'u aynı sayfada. Kapanmış bulunanlar (`SEC-14`, `FE-05`, `ARC-09`, `FE-09`, `FE-56`) dışarıda. `phases/README.md`, `prompts/README.md`, Faz 20 takip tablosu ve `AUD-2026-11-26` raporu bağlantı aldı.
 
 ## 2026-11-26 — Faz 20 ikinci tarama: hesap yazma akışları ve frontend pürüzleri (`docs/2026-11-26-faz-20-critical-fixes`)
 
