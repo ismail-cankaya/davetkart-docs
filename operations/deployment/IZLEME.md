@@ -8,7 +8,7 @@
 
 | Duyarga | Nerede | Ne zaman alarm | Kim fark eder |
 |---|---|---|---|
-| `GET /api/health` | backend | 503: `database` · `queue` (en eski iş >10 dk) · `scheduler` (kalp atışı >5 dk) · `disk` (≥%90) | Dış izleyici (§3) |
+| `GET /api/health` | backend | 503: `database` · `schema` (bekleyen göç, Faz 20.1 K263) · `queue` (en eski iş >10 dk) · `scheduler` (kalp atışı >5 dk) · `disk` (≥%90) | Dış izleyici (§3) |
 | `GET /api/ping` | backend | Dağıtım betiği (`deploy/deploy.sh`); canlılık, alarm değil | Dağıtım |
 | Başarısız kuyruk işi | `ReportFailedJob` → `Log::critical` | Her iş vazgeçildiğinde | Sentry (§2) |
 | Zamanlanmış işler (4) | `sentryMonitor` (K103) | İş koşmazsa / hata verirse | Sentry Crons (§2) |
@@ -16,7 +16,8 @@
 | SSL bitişi | Let's Encrypt (otomatik yenileme) | Bitime 14 gün kala | Dış izleyici (§3) — Let's Encrypt artık e-posta atmıyor |
 
 Yanıt gövdesi yalnızca başarısız kontrolün **adını** taşır; ayrıntı sunucuda: `php artisan tinker` →
-`app(App\Support\Health\ReadinessProbe::class)->failures()`, kuyruk için `php artisan queue:monitor database:default`.
+`app(App\Support\Health\ReadinessProbe::class)->failures()`, kuyruk için `php artisan queue:monitor database:default`,
+`schema` için `php artisan migrate:status --pending` (deploy'da `migrate --force` yarıda kalmış olabilir; `OPS-06`, `AUD-2026-11-26`'da 🟠).
 
 ## 2. Sentry (Y11.3)
 

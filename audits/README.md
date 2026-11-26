@@ -6,6 +6,7 @@ Denetim ve gözden geçirme raporları. Her denetim kendi tarihli klasöründe:
 | Tarih | Denetim | Konu | Sonuç |
 |---|---|---|---|
 | 2026-11-12 | [`AUD-2026-11-12`](2026-11-12-full-system-audit/README.md) | Genel sistem denetimi (mimari, güvenlik, test, frontend/E2E, işletim) | 62 bulgu: 🟠 6 · 🟡 29 · 🟢 22 · 💡 5 · [rapor](2026-11-12-full-system-audit/REPORT.md) |
+| 2026-11-26 | [`AUD-2026-11-26`](2026-11-26-post-faz-19-scan/REPORT.md) | Faz 19 sonrası hata taraması: Hesap Ayarları'nın üç sayfası 500 (yerel şema geride) + kapılar, duman ve tarayıcı taraması | 🔴 1 · 🟠 2 · 🟡 3 · 🟢 3 · düzeltme [`phases/faz-20/`](../phases/faz-20/README.md) |
 
 Önceki raporlar (backend `claude/` klasöründen 2026-11-22'de taşındı, `ARC-05`; eşleme: [`_restructure/2026-11-backend-claude-map.md`](../_restructure/2026-11-backend-claude-map.md)):
 

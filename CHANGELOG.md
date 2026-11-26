@@ -2,6 +2,12 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-26 — Faz 20: Faz 19 sonrası kritik hatalar (`docs/2026-11-26-faz-20-critical-fixes`)
+
+- [`audits/2026-11-26-post-faz-19-scan/REPORT.md`](audits/2026-11-26-post-faz-19-scan/REPORT.md) (`AUD-2026-11-26`): Hesap Ayarları'nın üç sayfasındaki 500'ün kökü yerel veritabanının 4 göç geride olması (`OPS-10`); tarama 🔴 1 · 🟠 2 (`OPS-06` ↑, `SEC-51`) · 🟡 2 · 🟢 2.
+- [`phases/faz-20/README.md`](phases/faz-20/README.md): 20.1 `schema` hazır olma kontrolü (**K263**), 20.2 Symfony 8.1.12, 20.3 `composer sync`, 20.6 `composer setup` anahtarı ezmez; 20.4 (deploy penceresi) karar bekliyor. `composer check` 1304/1304, `composer audit` temiz, e2e 6/6. Sıradaki K264.
+- [`EK-FAZ-20`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md), [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) (K263; K255 notu), [`IZLEME.md`](operations/deployment/IZLEME.md) (`schema`), `phases/README.md` ve `audits/README.md` satırları; Faz 19 satırındaki eski "PHPStan #11" engeli düzeltildi.
+
 ## 2026-11-26 — Hat B: B-D10 ve B-D14 kapandı (`docs/2026-11-26-hat-b-final`)
 
 - [`phases/faz-19/HAT-B-ACIK-KALANLAR.md`](phases/faz-19/HAT-B-ACIK-KALANLAR.md) §9: editörden hemen çıkınca son düzenlemenin kaybolması (B-D10) ve 16 şablonda zarf ipucu kontrastı (B-D14) bulunup düzeltildi; birleşik uçta bütün kapılar yeşil; ajana kalan iş yok.
