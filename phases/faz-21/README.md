@@ -40,7 +40,7 @@ Sıra:
 | Sıra | Bulgu | Önem | Konu | Efor | §A | Depolar | K | Commit'ler | Durum |
 |---|---|---|---|---|---|---|---|---|---|
 | 21.0 | — | — | Hazırlık: ortam eşitleme, dallar, taban kapıları, `FAZ-21.md` açılışı | S | — | backend · frontend · docs | — | be 6ffb824 | commit'lendi |
-| 21.1 | `SEC-16` | 🟢 | Hesap bazlı (IP'den bağımsız) giriş freni | S | ✅ | backend · docs | | | bekliyor |
+| 21.1 | `SEC-16` | 🟢 | Hesap bazlı (IP'den bağımsız) giriş freni | S | ✅ | backend · docs | K265 | be 245a71f | commit'lendi |
 | 21.2 | `SEC-15` | 🟢 | Kayıt ucu adresin kayıtlı olduğunu söylüyor | S/M | ✅ | backend · frontend · docs | | | bekliyor |
 | 21.3 | `FE-58` | 🟢 | Ödeme dönüşünde davetiye kullanıcıya sorulmadan yayınlanıyor (K67) | S | ✅ | frontend · docs | | | bekliyor |
 | 21.4 | `OPS-08` | 🟢 | Günlüklerde istek kimliği yok | S | ✅ | backend · (frontend) · docs | | | bekliyor |
@@ -660,6 +660,18 @@ Değilse maddeyi bloke et (§3 madde 5).
   `composer audit` temiz; `npm run check` çıkış 0 (31 hata kodu, i18n tabanı 781 parça / 65 dosya); `npm run e2e` 6/6.
 - Vite (`npm run dev`) ve `php artisan serve` İsmail'in oturumunda açıktı. Bu yüzden `npm ci` yerine `npm install` koşuldu
   (§3 madde 2); dev sunucularına dokunulmadı.
+
+### 21.1 (`SEC-16`)
+
+- **Plandan sapma (küçük):** §A-2 "hesap kilitlenmez" sözünü gerçek kılmak için başarılı parola sıfırlama hesap kovasını
+  boşaltıyor (`ResetPasswordAction`); planda yazmıyordu. Dolu kovada doğru parola da 429 alıyor; aksi hâlde kova hiçbir
+  şeyi frenlemezdi (gerekçe K265).
+- **Kapı sırasında çıkan:** tam takımda `OptimizeUploadedImageTest` 128 MB `memory_limit`'te düştü (iki dosya ayrı ayrı
+  yeşil). Ölçüldü: süreç görsel testine ~93 MB kalıcı bellekle geliyordu. `phpunit.xml`'e test süreci için
+  `memory_limit=256M` eklendi (backend `docs/rehber/phpunit.md` §5). Üç denemede yeşil: 1) PHPStan jenerik tipi,
+  2) bellek, 3) yeşil (1318/1318).
+- **Gördüm, dokunmadım:** `config/davetkart.php` `auth.login_rate_limit_per_minute` hiçbir yerde okunmuyor
+  (`authLimits()` 5'i sabit yazıyor).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 

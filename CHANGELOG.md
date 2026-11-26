@@ -5,6 +5,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 ## 2026-11-27 — Faz 21 (`docs/2026-11-27-faz-21-backlog`)
 
 - 21.0 hazırlık: dallar (`faz-21-backlog`, docs `docs/2026-11-27-faz-21-backlog`), ortam eşitlendi, taban kapıları yeşil (`composer check` 1306/1306, `composer audit` temiz, `npm run check` çıkış 0, e2e 6/6); backend `docs/rehber/fazlar/FAZ-21.md` açıldı. [`phases/faz-21/README.md`](phases/faz-21/README.md) §1.
+- 21.1 `SEC-16`: girişte hesap başına, IP'den bağımsız kova (saatte 30 başarısız deneme, dolunca 429, sıfırlama boşaltır, sahibe IP'siz uyarı postası) — **K265** (varsayılan), [`EK-FAZ-21`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md) açıldı, [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) (sıradaki K266), `decisions/README.md` satırı. `composer check` 1318/1318, e2e 6/6, 11 mutant öldü.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
