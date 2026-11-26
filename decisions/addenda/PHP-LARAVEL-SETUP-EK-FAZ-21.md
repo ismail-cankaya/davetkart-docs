@@ -51,3 +51,14 @@ Açık soru: [`EK-FAZ-12`](PHP-LARAVEL-SETUP-EK-FAZ-12.md) §F-7.
   kaldırılmışsa yeniden yayınlanır). Tam kapatma için siparişin "hakkı yayınlandı mı?" bilgisi (`orders.first_published_at`,
   Faz 18.4) `GET /orders/{id}` yanıtına girmeli (ayrı iş).
 - Kod: `src/utils/autoPublish.ts` (`claimAutoPublish`, `returnCardView`), `verify:payment` 19 yeni denetim.
+
+### 21.4 — `OPS-08` (günlüklerde istek kimliği yok)
+
+Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/05-operations.md`](../../audits/2026-11-12-full-system-audit/findings/05-operations.md) "OPS-08".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K268** | Her yanıt `X-Request-Id` başlığı taşır (ULID). Gelen `X-Request-Id` yalnızca biçimi ULID ya da UUID ise kullanılır (biçim uzunluğu da sınırlar: 26/36), değilse yenisi üretilir. Kimlik Laravel `Context`'ine `request_id` olarak yazılır: günlük satırının `extra`'sına ve kuyruk işinin yüküne kendiliğinden gider. Hata zarfına **girmez** (K20 aynı). Ara katman (`AssignRequestId`) global zincirin en başında. Nginx'e öneri: erişim günlüğüne `$upstream_http_x_request_id` (nginx `$request_id` 32 hex, kabul edilmez) | Tanı: bir kullanıcı eylemi birden çok günlük satırı ve kuyruk işi üretir. Zarfa alan eklemek sözleşmeyi ve frontend tiplerini değiştirirdi; başlık yeter. Serbest metne güvenmek günlüğe istemcinin metnini sokardı. En başta durmazsa bakım kipi (503) ve 413 gibi erken yanıtlar kimliksiz kalırdı | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.4 (27 Kas) |
+
+- Neyi kapatmaz (B6): Sentry olayına kimlik etiketi yok; zamanlayıcı/komut satırlarında `request_id` yok. Frontend'in
+  hata bildiriminde kimliği göstermesi ayrı iş.

@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K268**
+**Sıradaki boş numara: K269**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -243,6 +243,7 @@
 | **K265** | Girişte hesap başına, IP'den bağımsız kova: saatte 30 başarısız deneme (kayıtsız adres de sayılır), dolunca 429 `RATE_LIMITED`, parola denenmez; kalıcı kilit yok, parola sıfırlama kovayı boşaltır; sahibe kuyruklu, IP'siz uyarı postası (saatte en çok 1) | Faz 21.1 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#a-karar-kaydına-eklenecek-7) |
 | **K266** | `SEC-15` kabul edilen risk: kayıt ucu kayıtlı adresi 422 ile söyler, K11 sözleşmesi aynı; frenler `throttle:auth` (adres + IP 5/dk, IP 20/dk), iki yolda da hash, `fields` yok, testle kilitli; tam kapatma (`202 check_email`) ayrı faz | Faz 21.2 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#212--sec-15-kayıt-ucu-adresin-kayıtlı-olduğunu-söylüyor) |
 | **K267** | K67 daraltıldı: ödeme sunucuda yayınlamaz; frontend davetiyeye bağlı ödenmiş siparişin dönüşünde sekme başına bir kez yayın ister (`sessionStorage`), tekrar ziyarette istek yok; paket siparişi yayınlamaz | Faz 21.3 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#213--fe-58-ödeme-dönüşünde-davetiye-kullanıcıya-sorulmadan-yayınlanıyor-k67-ile-çelişki) |
+| **K268** | Her yanıtta `X-Request-Id` (ULID); gelen kimlik yalnızca ULID/UUID ise kalır; Laravel `Context` (`request_id`) ile günlük satırlarına ve kuyruk işlerine; hata zarfı aynı; ara katman global zincirin başında | Faz 21.4 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#214--ops-08-günlüklerde-istek-kimliği-yok) |
 
 ## Notlar
 
