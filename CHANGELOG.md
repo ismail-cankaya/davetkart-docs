@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 23: yön A kodlandı
+
+- Frontend `faz-23-v1.4-frontend` (`faz-22-release-prep` @ `b0a07dc`'den; Faz 22 = `v1.3` hazırlığı): 23.1 `PhoneFrame`, 23.2 görsel çekim betiği ve 3 görsel, 23.3 vitrin sahnesi (telefon / tablet / masaüstü / sabit modlar, 10 dil), 23.4 e2e. `npm run check` 0, yeni e2e 5/5, axe 0; tüm e2e paketi koşmadı. [`FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md) §0.2, [`phases/faz-23/README.md`](phases/faz-23/README.md), [`phases/README.md`](phases/README.md) Faz 23 satırı.
+
 ## 2026-11-27 — Faz 23 planı: v1.4 frontend vitrin sahnesi (sürüm düzeltmesi)
 
 - Sürüm numaraları düzeltildi: Faz 22'nin sonu `v1.3`, Faz 23 `v1.4` (ilk taslakta `v1.2` / `v1.3`). Kod dalı `faz-23-v1.4-frontend`, `v1.3` sürüm dalından açılacak. Docs dalının adı değişmedi.

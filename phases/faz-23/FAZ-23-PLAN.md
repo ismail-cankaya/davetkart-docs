@@ -1,8 +1,8 @@
 # Faz 23 — v1.4 Frontend: Ana Sayfa Vitrin Sahnesi (Plan)
 
-> **Durum:** 📝 Plan · tasarım yönü seçimi bekliyor (§5, §10) · kod yok.
+> **Durum:** 🔧 Yön A kodlandı (23.1–23.4, §0.2) · kod dalı push edildi · `main`'e birleştirme ve kalan adımlar bekliyor.
 > **Tarih:** 27 Kasım 2026 · **Sürüm:** v1.4 (frontend) · **Sıra:** Faz 22 → `v1.3` yayını → Faz 23.
-> **Kod dalı:** `faz-23-v1.4-frontend`, frontend `v1.3` sürüm dalının ucundan açılacak (o dal henüz GitHub'da yok).
+> **Kod dalı:** `faz-23-v1.4-frontend`, frontend `faz-22-release-prep` (`v1.3` hazırlığı) @ `b0a07dc` ucundan açıldı (27 Kasım). Faz 22'ye gelen yeni commit'ler bu dala `merge` ile alınır.
 > **Sürüm notu:** İlk taslakta sürümler bir eksik yazılmıştı (27 Kasım, İsmail düzeltti): Faz 22'nin sonu `v1.3`, Faz 23 `v1.4`. Docs dalının adındaki `v1.3` değişmedi.
 > **Docs dalı:** `docs/2026-11-27-faz-23-v1.3-frontend-plan` (`docs/2026-11-27-faz-21-backlog` ucundan; `main` Faz 18'de kaldığı için).
 > **Analiz tabanı:** frontend `faz-21-backlog` @ `e28b599` (21.18). Faz 22 ve `v1.3` kodu görülmedi; dal açılınca §2 yeniden ölçülür.
@@ -23,6 +23,27 @@ görsel/video** (§6). Mevcut önizleme bölümü ve stüdyo akışı korunur.
   kullanılabilir (Faz 23 kapsamı dışında, ayrı karar). **B** öne çıkmadı.
 - Kaydırmalı maket (A, B, C; gerçek şablon kapaklarıyla): https://claude.ai/artifact/2ExNJ3W8Rhn1i5MubgWWXk (özel bağlantı,
   yalnızca İsmail açabilir). Kesin seçim (S1) maketten sonra.
+
+## 0.2 Yön A kodlandı (27 Kasım 2026)
+
+- İsmail: A ve B favori; **A** ile devam, gerekirse B'ye geçiş. Telefon, tablet ve bilgisayar uyumu şart.
+- Faz 22 = `v1.3` hazırlığı; Faz 23 dalı `faz-22-release-prep`'ten açıldı (İsmail onayı). Commit'ler:
+
+| Commit | İçerik |
+|---|---|
+| `5843087` 23.1 | `src/components/ui/PhoneFrame.tsx` |
+| `4bd8b83` 23.2 | `scripts/showcase/capture.ts`, `showcaseSlides.ts`, `public/showcase/*.webp` (3 görsel, 50–63 kB), kılavuz |
+| `19a022a` 23.3 | Vitrin sahnesi (`src/components/home/showcase/`), `HomePage`/`Hero`/`useLenis` bağlantısı, 10 dil, kılavuz |
+| `105169f` 23.4 | `e2e/home-showcase.spec.ts`, Playwright `home` projesi |
+
+- Cihaz modları: telefon (< 640 px, 170 svh), tablet (640–1023 px, 200 svh), masaüstü (≥ 1024 px, 220 svh), sabit
+  (hareketi azalt ya da yükseklik < 560 px; sabitleme yok). Orta Düğün "Dilek Fenerleri", yanlar "Kelebek Bahçesi" ve
+  Nişan "Koi Havuzu". Telefon içerikleri gerçek ekran görüntüsü; orta telefon videosu ertelendi.
+- Doğrulama: `npm run check` 0 (ilk yükleme 712,2 → 713,6 kB, bütçe 720; sahne parçası 6 kB); yeni e2e 5/5 (geliştirme
+  sunucusuna karşı, geçici yapılandırma); axe bölümde 0 ihlal. Tüm e2e paketi **koşmadı** (backend + PowerShell ister).
+- Plandan sapmalar: `PhoneFrame` yeni yazıldı, `DeviceSimulator` dokunulmadı (cihazlar arası geçiş yapıyor). Önizleme
+  başlığının kısaltılması (23.5) ve hero (S5) yapılmadı.
+- Açık: orta telefon videosu, S5 hero, önizleme başlığı, final animasyonu (23.8). Karar numarası alınmadı.
 
 ## 1. İstek (İsmail, 27 Kasım 2026)
 

@@ -22,7 +22,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | 19 | Denetimin orta öncelikli bulguları (`AUD-2026-11-12`, 28 🟡) | ⚠️ kod ✅ 28/28, birleşti (25 Kasım 2026) · `v1.2.0` etiketi bekliyor · ~~PHPStan iç hatası (#11)~~ 25 Kasım'da kapandı; 26 Kasım'da engel `composer audit` (`SEC-51`) → Faz 20.2 | `faz-19-audit-fixes` + `fix/…` / `docs/…` dalları | [`faz-19/`](faz-19/README.md) | `FAZ-19.md` (backend; başta kapanış özeti) |
 | 20 | Faz 19 sonrası kritik hatalar (`AUD-2026-11-26`): yerel şema geride → Hesap Ayarları 500; `schema` hazır olma kontrolü, Symfony güvenlik yaması, yerel eşitleme | ⏳ 26 Kasım 2026 · ayrıntı takip tablosunda | `faz-20-critical-fixes` + `fix/2026-11-26-…` · docs `docs/2026-11-26-faz-20-critical-fixes` | [`faz-20/`](faz-20/README.md) | `FAZ-20.md` (backend) |
 | 21 | Ertelenmiş düşük bulgular ve açık kararlar (`AUD-2026-11-12` 🟢/💡 + `AUD-2026-11-26` §4b): 18 madde, **tek ajan tek oturumda**, madde başına commit (ilk adı Faz 22'ydi, 26 Kasım'da Faz 21'e çevrildi). K265–K275 | ✅ 27 Kasım 2026 · 18/18 (bloke yok; 21.13, 21.14 plan · 21.15, 21.17 liste) · `composer check` 1354/1354, `audit` temiz, frontend check/e2e 6/6 · `main`'e birleştirme, sunucu adımları ve CI İsmail'in | backend/frontend `faz-21-backlog` · docs `docs/2026-11-27-faz-21-backlog` | [`faz-21/`](faz-21/README.md) | backend `docs/rehber/fazlar/FAZ-21.md` |
-| 23 | v1.4 frontend: ana sayfa vitrin sahnesi (hero ile önizleme arasında, kaydırmaya bağlı telefon sahnesi) | 📝 Plan (27 Kasım 2026) · tasarım yönü seçimi bekliyor | frontend `faz-23-v1.4-frontend` (`v1.3`'den, açılmadı) · docs `docs/2026-11-27-faz-23-v1.3-frontend-plan` | [`faz-23/`](faz-23/README.md) | — |
+| 23 | v1.4 frontend: ana sayfa vitrin sahnesi (hero ile önizleme arasında, kaydırmaya bağlı telefon sahnesi) | 🔧 Yön A kodlandı (27 Kasım 2026, 23.1–23.4) · birleştirme bekliyor | frontend `faz-23-v1.4-frontend` (`faz-22-release-prep`'ten) · docs `docs/2026-11-27-faz-23-v1.3-frontend-plan` | [`faz-23/`](faz-23/README.md) | — |
 
 ## Klasörler
 
@@ -39,7 +39,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | [`faz-19/`](faz-19/) | Takip tablosu; bulgu başına commit komutları; `kayit/` (paralel hat kayıtları, 19.90'da birleşti) | Kod tamam (28/28) · `v1.2.0` bekliyor |
 | [`faz-20/`](faz-20/) | Takip tablosu (`AUD-2026-11-26` düzeltmeleri, 20.4 karar sorusu) | Sürüyor |
 | [`faz-21/`](faz-21/) | Takip tablosu ve çalışma notları (`README.md`, Ek A SEC-18 planı, Ek B SEC-17 arşiv listesi) · `FAZ-21-ARC-08-KOMUTLARI.md` (dal/worktree/etiket komutları) | Tamamlandı · birleştirme bekliyor |
-| [`faz-23/`](faz-23/) | `FAZ-23-PLAN.md`: vitrin sahnesi planı, üç tasarım yönü, adımlar 23.0–23.9 | Plan · seçim bekliyor |
+| [`faz-23/`](faz-23/) | `FAZ-23-PLAN.md`: vitrin sahnesi planı, üç tasarım yönü, adımlar 23.0–23.9, uygulama kaydı (§0.2) | Yön A kodlandı |
 | [`frontend-catch-up/`](frontend-catch-up/) | `FRONTEND-YAKALAMA-PLANI.md` (11 Eylül 2026) | Tamamlandı (tarihsel) |
 
 Commit komutu dosyalarındaki `Claude outputs\f13-ara`, `Claude outputs\f14` yolları eski yerdir;
