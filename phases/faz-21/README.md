@@ -50,7 +50,7 @@ Sıra:
 | 21.8 | `FE-03` | 🟢 | TypeScript `strict` kapalı (bugün 20 hata) | S | — | frontend · docs | — | fe a739642 | commit'lendi |
 | 21.9 | `TST-05` | 🟢 | Node sürümü sabit değil (CI 22, yerel 24) | S | ✅ | frontend · docs | K272 | fe 4a640dd · be 86445e4 | commit'lendi |
 | 21.10 | `TST-06` | 💡 | Backend testleri paralel koşmuyor | M | — | backend · docs | — | be 0d40881, e307e08 | commit'lendi |
-| 21.11 | `TST-03` | 🟢 | Satır kapsamı ölçülmüyor; eşik yok | S | ✅ | backend · docs | | | bekliyor |
+| 21.11 | `TST-03` | 🟢 | Satır kapsamı ölçülmüyor; eşik yok | S | ✅ | backend · docs | K273 | be 5c68e03 | commit'lendi |
 | 21.12 | `ARC-10` | 💡 | `OptimizeUploadedImage` 664 satır, dört sorumluluk | M | — | backend · docs | | | bekliyor |
 | 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | | | bekliyor |
 | 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | | bekliyor |
@@ -769,6 +769,13 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Kilit testleri paralelde de yeşil; ayrı grup gerekmedi. `composer audit` temiz.
 - Dış ağ: `composer require` Packagist ve GitHub'dan paket indirdi (geliştirme bağımlılığı; proje sistemlerine istek değil).
 - Gözlem: bu maddenin ortasında İsmail'in `php artisan serve` ve Vite süreçleri çalışmıyordu (ajan durdurmadı).
+
+### 21.11 (`TST-03`)
+
+- **Plandan sapma (lehte):** plan "yerelde yoksa kurma, ölçüm yoksa eşik koyma" diyordu. Herd'in diskindeki `xdebug-8.5.dll`
+  kurulmadan, yalnızca bu ölçüm için ortam değişkeniyle yüklendi; ölçüm alındığı için eşik kondu (95,9 − 3 = 92,9).
+- Kapı iki yönde sınandı: `--min=92.9` çıkış 0, `--min=99` çıkış 1. YAML ayrıştırıcı yerelde yok (koşmadı); CI koşmadı.
+- İsmail'e kalan: ilk CI koşusunda pcov yüzdesine bakmak; xdebug ölçümünden farklıysa eşiği K273'e not düşerek düzeltmek.
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 

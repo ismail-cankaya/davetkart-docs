@@ -15,6 +15,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.8 `FE-03`: frontend `tsconfig.json` `strict: true`; 20 hata davranış değişmeden kapandı; `noUncheckedIndexedAccess` denemesi 719 hata (kapalı kaldı). `npm run check` 0, `a11y:envelopes` 0 ihlal, e2e 6/6.
 - 21.9 `TST-05`: frontend `.nvmrc` = 24, `engines`, CI `node-version-file`; `deploy-frontend.sh` Node uyuşmazlığında uyarır — **K272** (varsayılan). `npm run check` 0, `composer check` 1337/1337; CI koşmadı.
 - 21.10 `TST-06`: backend `brianium/paratest` + `composer test:parallel` (sıralı 140 sn → paralel ~33 sn, 3 ardışık yeşil); `composer check` değişmedi, `check`'e alınması İsmail'e soru. `composer audit` temiz.
+- 21.11 `TST-03`: backend satır kapsamı ilk kez ölçüldü (%95,9, geçici xdebug); CI'da pcov ile ayrı kapı `--min=92.9` + clover artefaktı — **K273** (varsayılan). `composer check` 1338/1338; CI koşmadı.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
