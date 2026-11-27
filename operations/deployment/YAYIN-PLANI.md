@@ -256,6 +256,48 @@ Bugün değil, ama işaretleri bilmek mimari vizyonun parçası:
 
 Medya S3'te ve config `.env`'de olduğu için bu geçişlerin hiçbiri kod değişikliği istemiyor.
 
+### 6.1 Ölçülebilir eşikler ve ikinci sunucuda kırılacaklar (Faz 21.14, `OPS-09`, 27 Kasım 2026)
+
+> Yukarıdaki üç madde 4 Ekim'in kaydı; değiştirilmedi. Bu alt bölüm onlara sayı ve sıra ekler. Metriklerin nereden
+> okunacağı: [`IZLEME.md`](IZLEME.md) §6. Bellek bütçesi: backend `docs/rehber/deploy/php-fpm/davetkart.md` §3 (21.5, K269).
+
+**Eşikler** (biri bir haftada iki kez aşılırsa eyleme geç; "eylem" sütunu sırayla denenir):
+
+| Metrik | Uyarı | Eylem eşiği | Eylem |
+|---|---|---|---|
+| FPM havuzu dolu (`max children reached`, durum sayfası) | gün içinde > 0 | günde > 10 ya da `listen queue` 1 dk'dan uzun > 0 | önce bellek tablosuna bak; RAM varsa `pm.max_children` 4 → 6, yoksa 4 GB plan |
+| Kullanılabilir bellek (`free -m`, "available") | < 400 MB, 15 dk | < 250 MB, 15 dk ya da çekirdek günlüğünde OOM (`journalctl -k \| grep -i oom`) | 4 GB plan; OOM'da hemen |
+| p95 yanıt süresi, `/api` (Nginx `$request_time`; yükleme ve asistan hariç) | > 500 ms (günlük) | > 1 s (günlük) | yavaş istek günlüğüne (FPM slowlog) bak; DB kaynaklıysa PostgreSQL'i ayır |
+| FPM slowlog (> 5 sn istek) | günde > 5 | günde > 20 | aynı |
+| PostgreSQL bağlantı (`pg_stat_activity`) | > %70 `max_connections` | > %85 | bağlantı sızıntısı yoksa PostgreSQL'i ayır |
+| PostgreSQL önbellek isabeti (`blks_hit / (blks_hit+blks_read)`) | < %99 | < %97 | `shared_buffers` 128 → 256 MB ancak RAM yükseltmesiyle; ya da ayrı DB |
+| Disk doluluğu (`df -h /`, sağlık ucu `disk`) | ≥ %70 | ≥ %85 (uç %90'da 503 verir) | eski günlük/yedek temizliği, disk büyütme |
+| Kuyruk gecikmesi (en eski iş) | > 2 dk | > 10 dk (sağlık ucu `queue` alarmı) | işçi sayısı 1 → 2 (`davetkart-queue@2`) bellek izin veriyorsa |
+| Lightsail CPU patlama kapasitesi (konsol "Burst capacity") | < %30 | < %10 ya da CPU sürekli %50 üstü | 4 GB plan (2 vCPU sabit) |
+
+**İkinci uygulama sunucusunda kırılacaklar** (bugün tek sunucu için doğru ve bilinçli: K80):
+
+| Paylaşılan durum | Bugün | İki sunucuda ne olur | Çözüm |
+|---|---|---|---|
+| Hız sınırı sayaçları (`throttle:*`, 21.1 hesap kovası, asistan dakika kovası) | `CACHE_STORE=file` | Her sunucu kendi sayacını tutar: sınırlar fiilen ikiye katlanır (giriş freni, LCV, iletişim) | Redis cache |
+| Zamanlayıcı kilitleri (`onOneServer()`, `withoutOverlapping()`; `routes/console.php`'de 5 iş) | dosya cache'i | Kilit sunucu başına: zamanlanmış işler iki sunucuda da koşar (çift posta, çift temizlik) | Redis cache (kilitler cache sürücüsünde) |
+| Kuyruk | `database` | Çalışır (satır kilidi), ama PostgreSQL ortak ve ağdan erişilir olmalı; yük DB'ye biner | Redis kuyruğu |
+| Bakım kipi (`artisan down`, K264) | `APP_MAINTENANCE_DRIVER=file` | Yalnızca komutun koştuğu sunucu bakıma girer; diğeri yarım şemayla cevap verir | `APP_MAINTENANCE_DRIVER=cache` + Redis |
+| Oturum (bugün token, session yok) | `SESSION_DRIVER=file` | Bugün etkisiz; SEC-18 (K274) uygulanırsa oturum sunucu başına olur | `database` ya da Redis session |
+| Günlükler, `storage/` | yerel disk | Her sunucuda ayrı; istek kimliği (K268) iki sunucunun günlüğünü birleştirmeye yarar | merkezi günlük (sonra) |
+| Dağıtım (`deploy.sh`, FPM reload, OPcache `validate_timestamps=0`) | tek sunucu | Her sunucuda ayrı koşmalı; aralarında farklı sürüm penceresi | sırayla deploy + yük dengeleyici sağlık ucu |
+| Sağlık ucu `disk`/`scheduler` | yerel | Sunucu başına anlamlı; zamanlayıcı yalnızca birinde koşmalı | zamanlayıcıyı tek sunucuya sabitle |
+
+Engel olmayanlar: medya S3'te, kimlik token'la (session yok), ayarlar `.env`'de.
+
+**Geçiş sırası:**
+
+1. **PostgreSQL'i ayır** (Lightsail Managed DB ya da RDS): `pg_dump` → geri yükle → `DB_HOST`; uygulama sunucusunda
+   ~200 MB RAM ve disk G/Ç'si boşalır. Yedek (K151–K156) yeni hedefe göre güncellenir.
+2. **Redis** (tek örnek, aynı VPC): `CACHE_STORE=redis` (hız sınırı + kilitler), `QUEUE_CONNECTION=redis`,
+   `APP_MAINTENANCE_DRIVER=cache`. Bu adım ikinci sunucudan **önce** yapılır; tek sunucuda da sorunsuz çalışır.
+3. **İkinci uygulama sunucusu + yük dengeleyici:** zamanlayıcı tek sunucuda, deploy sırayla, sağlık ucu dengeleyiciye.
+
 ---
 
 ## 7. Lansman kapısı (bu planın dışında, ama bağlı)

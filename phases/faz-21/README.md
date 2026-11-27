@@ -53,7 +53,7 @@ Sıra:
 | 21.11 | `TST-03` | 🟢 | Satır kapsamı ölçülmüyor; eşik yok | S | ✅ | backend · docs | K273 | be 5c68e03 | commit'lendi |
 | 21.12 | `ARC-10` | 💡 | `OptimizeUploadedImage` 664 satır, dört sorumluluk | M | — | backend · docs | — | be 05c43be | commit'lendi |
 | 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | K274 | — | plan |
-| 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | | bekliyor |
+| 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | — | plan |
 | 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | | bekliyor |
 | 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | | bekliyor |
 | 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | | bekliyor |
@@ -792,6 +792,16 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Yalnızca plan (Ek A): kod deposu değişmedi. Plan yazılırken iki iddia koda karşı doğrulandı: oturum anahtarı
   `davetkart_auth_session`; sekmeler arası `storage` dinleyicisi **yok** (ilk taslakta "var" yazılmıştı, düzeltildi).
 - Beş karar sorusu Ek A.10'da.
+
+### 21.14 (`OPS-09`)
+
+- Yalnızca docs: `YAYIN-PLANI.md` §6.1 (eşik tablosu, ikinci sunucuda kırılacaklar, geçiş sırası: PostgreSQL → Redis →
+  ikinci sunucu) ve `IZLEME.md` §6 (her metriğin komutu). §6'nın 4 Ekim satırları yeniden yazılmadı.
+- Planda "database kuyruğu kırılır" deniyordu; daha doğrusu: iki sunucuda çalışır (satır kilidi) ama PostgreSQL'in ortak
+  olmasını ister ve yükü DB'ye bindirir. Ek bulgu: `APP_MAINTENANCE_DRIVER=file` ikinci sunucuda bakım kipini tek sunucuya
+  kısıtlar (K264 ile çelişir) → Redis adımında `cache` sürücüsü.
+- Komutlar sunucuda koşmadı. `§6`'daki "`onOneServer` zaten hazır (10.44)" cümlesi dosya cache'inde tek başına yetmiyor;
+  6.1 tablosu bunu söylüyor (eski satır değiştirilmedi).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 

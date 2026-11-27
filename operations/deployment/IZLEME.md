@@ -66,3 +66,22 @@ Adresler sırdır; günlüğe yazılmaz (K156). Doğrulama: [`YEDEK-VE-GERI-YUKL
 | 3 | `sudo systemctl stop davetkart-queue` + bir parola sıfırlama iste, 11 dk bekle | 503 `["queue"]`; sonra `start` |
 | 4 | Sentry'de `sentry:test` olayı ve alarm e-postası | görüldü |
 | 5 | Yedek betiğini elle koş | "başarılı" kalp atışı monitörde |
+
+## 6. Kapasite metrikleri (Faz 21.14, `OPS-09`)
+
+Eşikler ve eylemler: [`YAYIN-PLANI.md`](YAYIN-PLANI.md) §6.1. Bu tablo hangi değerin **nereden** okunacağını söyler. Hepsi
+sunucuda, elle (alarm değil; dış izleyici yalnızca §1'deki sağlık ucunu izler). Haftada bir bakılır.
+
+| Metrik | Komut / yer | Not |
+|---|---|---|
+| FPM havuzu: `max children reached`, `listen queue`, `active processes` | `cgi-fcgi` ile `/fpm-status` (backend `docs/rehber/deploy/php-fpm/davetkart.md` §4) | 21.5 kurulumundan sonra (K269); sayaç FPM yeniden başlayınca sıfırlanır |
+| FPM yavaş istekler | `/var/log/php8.5-fpm-davetkart.slow.log` (satır sayısı/gün: `grep -c '^\[' …`) | > 5 sn istekler, yığınıyla |
+| Kullanılabilir bellek | `free -m` ("available"); OOM: `journalctl -k --since -7d \| grep -i -E 'oom\|killed process'` | |
+| p95 yanıt süresi | Nginx erişim günlüğü `$request_time` (21.4 önerisi `log_format davetkart`): `awk '$0 ~ /"(GET\|POST\|PUT\|DELETE) \/api\// {print $(NF-1)}' davetkart.access.log \| sort -n \| awk '{a[NR]=$1} END {print a[int(NR*0.95)]}'` | yükleme ve asistan uçlarını ayrı değerlendir |
+| PostgreSQL bağlantıları | `sudo -u postgres psql -c "select count(*), (select setting from pg_settings where name='max_connections') from pg_stat_activity;"` | |
+| PostgreSQL önbellek isabeti | `sudo -u postgres psql -d davetkart -c "select round(sum(blks_hit)*100.0/nullif(sum(blks_hit+blks_read),0),2) from pg_stat_database;"` | |
+| Disk | `df -h /`; sağlık ucu `disk` %90'da 503 | |
+| Kuyruk gecikmesi | `php artisan queue:monitor database:default`; sağlık ucu `queue` (>10 dk) | |
+| CPU patlama kapasitesi | Lightsail konsolu → örnek → Metrics → "Burst capacity" | 2 GB plan patlamalı CPU kullanır |
+
+Hiçbiri koşulmadı (sunucuya istek yok); komutlar sunucu kurulumuna göre yazıldı.
