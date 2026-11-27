@@ -2,6 +2,11 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — `main` sonrası durum ve yayın rehberi
+
+- `audits/2026-11-27-main-gap-review/REPORT.md`: canlıdaki `main` (backend `03d3940`, frontend `47aedc8`) ile `faz-21-backlog` arasında yapılan ve yapılmayan işler; yeni gözlemler G1–G5 (eski `deploy.sh` ilk yayında pull'u bakımsız yapar, `2026_11_16` göç çakışması, SES sandbox + `SEC-09`, `validate_timestamps=0` sonrası `config:cache`, silme günlüğünün medya bucket'ında durması). `audits/README.md` satırı.
+- `operations/deployment/YAYIN-REHBERI-v1.3.0.md`: `v1.3.0` yayınının sunucu rehberi. `operations/README.md` satırı.
+
 ## 2026-11-27 — Faz 21 (`docs/2026-11-27-faz-21-backlog`)
 
 - 21.0 hazırlık: dallar (`faz-21-backlog`, docs `docs/2026-11-27-faz-21-backlog`), ortam eşitlendi, taban kapıları yeşil (`composer check` 1306/1306, `composer audit` temiz, `npm run check` çıkış 0, e2e 6/6); backend `docs/rehber/fazlar/FAZ-21.md` açıldı. [`phases/faz-21/README.md`](phases/faz-21/README.md) §1.
