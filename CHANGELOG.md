@@ -17,6 +17,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.10 `TST-06`: backend `brianium/paratest` + `composer test:parallel` (sıralı 140 sn → paralel ~33 sn, 3 ardışık yeşil); `composer check` değişmedi, `check`'e alınması İsmail'e soru. `composer audit` temiz.
 - 21.11 `TST-03`: backend satır kapsamı ilk kez ölçüldü (%95,9, geçici xdebug); CI'da pcov ile ayrı kapı `--min=92.9` + clover artefaktı — **K273** (varsayılan). `composer check` 1338/1338; CI koşmadı.
 - 21.12 `ARC-10`: backend `OptimizeUploadedImage` 664 → 111 satır; çözme, küçültme, EXIF, kodlama, bellek bütçesi `app/Support/Media`'ya, dosya takası `SwapOptimizedMediaFileAction`'a; davranış aynı (91/91 uçtan uca, 15 birim testi, 12 mutant öldü, `composer check` 1354/1354).
+- 21.13 `SEC-18`: token `localStorage` → `httpOnly` çerez geçiş planı (Sanctum SPA çerez kimliği, CSRF, K11 etkisi, iki yollu geçiş, test planı, ön koşul K175, beş karar sorusu) — [`phases/faz-21/README.md`](phases/faz-21/README.md) "Ek A", **K274** (planlandı). Kod yok.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 

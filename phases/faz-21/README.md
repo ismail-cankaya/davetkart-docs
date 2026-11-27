@@ -52,7 +52,7 @@ Sıra:
 | 21.10 | `TST-06` | 💡 | Backend testleri paralel koşmuyor | M | — | backend · docs | — | be 0d40881, e307e08 | commit'lendi |
 | 21.11 | `TST-03` | 🟢 | Satır kapsamı ölçülmüyor; eşik yok | S | ✅ | backend · docs | K273 | be 5c68e03 | commit'lendi |
 | 21.12 | `ARC-10` | 💡 | `OptimizeUploadedImage` 664 satır, dört sorumluluk | M | — | backend · docs | — | be 05c43be | commit'lendi |
-| 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | | | bekliyor |
+| 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | K274 | — | plan |
 | 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | | bekliyor |
 | 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | | bekliyor |
 | 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | | bekliyor |
@@ -787,6 +787,12 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Gördüm, dokunmadım: hedefte, EXIF'siz küçük JPEG kısa yoldan dokunulmadan geçer; sonuna eklenmiş PHP kuyruğu kalır
   (zararsız; kapatmak davranış değişikliği).
 
+### 21.13 (`SEC-18`)
+
+- Yalnızca plan (Ek A): kod deposu değişmedi. Plan yazılırken iki iddia koda karşı doğrulandı: oturum anahtarı
+  `davetkart_auth_session`; sekmeler arası `storage` dinleyicisi **yok** (ilk taslakta "var" yazılmıştı, düzeltildi).
+- Beş karar sorusu Ek A.10'da.
+
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
 | Kapı | Sonuç (görülen çıktı) |
@@ -801,3 +807,105 @@ Değilse maddeyi bloke et (§3 madde 5).
 **Bu klasördeki dosyalar:** `README.md` (bu sayfa) · `FAZ-21-ARC-08-KOMUTLARI.md` (21.17'de açılır).
 
 **İsmail'e kalan:** *(21.90'da numaralı liste)*
+
+## Ek A — SEC-18 geçiş planı (oturum token'ı `localStorage`'dan `httpOnly` çereze)
+
+> 21.13 · `SEC-18` (💡) · **K274** (planlandı; varsayılan, İsmail cevaplamadı). Bu fazda **kod yok**: onaysız tek oturumda
+> kimlik doğrulama mimarisi değiştirilmez. Bulgu: `AUD-2026-11-12` `findings/02-security.md` "SEC-18".
+
+### A.1 Tehdit
+
+Bugün oturum `localStorage['davetkart_auth_session']` içinde `{user, token}` olarak duruyor (`frontend src/services/auth.ts`); `api.ts`
+her isteğe `Authorization: Bearer <token>` ekliyor. Sayfada çalışan **her** betik bu anahtarı okuyabilir. Bir XSS (bugün
+tehlikeli render kalıbı yok, ama 300+ şablon bileşeni, üç boyutlu kütüphaneler ve üçüncü taraf gömmeler büyük bir yüzey)
+token'ı dışarı taşır; token 30 gün geçerli (K143) ve başka cihazdan da kullanılır. `httpOnly` çerezi betik okuyamaz: XSS
+yine istek atabilir (oturum içinden), ama token'ı **çalamaz**; saldırı sayfa açıkken sınırlı kalır.
+
+### A.2 Seçenekler
+
+| Seçenek | Artı | Eksi |
+|---|---|---|
+| **A. Sanctum SPA çerez kimliği** (varsayılan, §A-2) | Laravel'in kendi yolu; `httpOnly` + `SameSite=Lax` oturum çerezi, CSRF çerezi; token saklanmaz | Oturum durumu (session) gerekir: bugün API `web` grubu ve session kullanmıyor; CSRF akışı eklenir |
+| B. Token'ı `httpOnly` çerezde taşıyan özel ara katman | `{user, token}` zarfı ve token modeli (K143 oturum listesi) aynı kalır | Kendi güvenlik kodumuz: CSRF'yi elle çözmek gerekir; Sanctum'un test edilmiş yolundan sapma |
+| C. Bugünkü hâl + sıkı CSP (K175 zorlama) | Kod değişmez | XSS'i zorlaştırır, çalınabilirliği kapatmaz |
+
+C, A ya da B'nin **ön koşulu**dur (A.9); tek başına bulguyu kapatmaz.
+
+### A.3 Sanctum SPA kurulumu (A seçilirse)
+
+- **Aynı site:** SPA `https://davetkart.com`, API `https://davetkart.com/api` (aynı köken; Nginx). `SANCTUM_STATEFUL_DOMAINS=davetkart.com`
+  (yerelde `localhost:3000`, e2e `127.0.0.1:4180`).
+- **Ara katman:** `api` grubuna `EnsureFrontendRequestsAreStateful` (Sanctum'un `statefulApi()`); session sürücüsü `database`
+  ya da `redis` (dosya değil: OPS-09 yatay ölçek). Session çerezi `httpOnly`, `Secure`, `SameSite=Lax`, ömür K143 ile uyumlu.
+- **CSRF:** SPA ilk istekte `GET /sanctum/csrf-cookie` çağırır; `XSRF-TOKEN` çerezi (betikten okunur, sır değil) axios
+  tarafından `X-XSRF-TOKEN` başlığına konur. Durum değiştiren her istek bu başlıkla gelir; webhook ve misafir uçları
+  (`/api/public/*`) CSRF dışında kalır (token'sız, kendi frenleri var).
+- **CORS:** aynı köken olduğu için gerekmiyor; `supports_credentials` `false` kalır. Alt alan adı (ör. `api.davetkart.com`)
+  açılırsa yeniden ele alınır.
+- **Nginx:** `/sanctum/csrf-cookie` yolu Laravel'e (bugün yalnızca `/api/` ve `@share_preview` gidiyor); SPA başlıkları
+  snippet'i (K173) değişmez.
+
+### A.4 Sözleşme etkisi (K11, K20)
+
+- **K11:** giriş/kayıt yanıtı `{user, token}` → `{user}` (token gövdede dönmez). K11 değişir; yeni K ile, eskisi
+  "geçersiz kılındı → K…" olur. C2 (zarf istisnası ad ad) güncellenir.
+- **K20:** hata zarfı aynı. Yeni durum: CSRF uyuşmazlığı Laravel'de `419`; bunu `401 UNAUTHENTICATED`'a mı yoksa yeni bir
+  koda mı (`CSRF_MISMATCH`) eşleyeceğimiz karar sorusu (A.10). Frontend 401'de oturumu düşürür; 419'da sessizce yeni CSRF
+  çerezi alıp isteği bir kez yinelemek daha iyi deneyim.
+- **K143 (oturum listesi, "diğer oturumları kapat"):** çerez kimliğinde oturum = session satırı; `personal_access_tokens`
+  tabanlı liste session tablosuna taşınır ya da geçiş süresince iki kaynak birlikte gösterilir.
+
+### A.5 Frontend değişiklikleri
+
+- `services/auth.ts`: oturum `localStorage`'da **token'sız** kalır (yalnızca `user` önbelleği; görünür ad için), token
+  alanı kalkar. Eski kayıtlar açılışta temizlenir.
+- `services/api.ts`: `Authorization` ekleyen interceptor kalkar, `withCredentials` gerekmez (aynı köken), `xsrfCookieName`/
+  `xsrfHeaderName` varsayılanları kullanılır. 401 mantığı (Faz 10.29: eski token'ın 401'i yeni oturumu düşürmez) "istek
+  hangi oturumla gönderildi" sorusunu artık token'la cevaplayamaz → istek anındaki oturum sürümü (artan sayaç) ile.
+- **Sekme senkronu:** bugün yok (`storage` olayı dinlenmiyor; her sekme kendi kopyasını tutar). Çerez kimliğinde oturum
+  sunucuda ortak olduğu için bir sekmedeki çıkış diğerlerinde ilk istekte 401 olarak görünür; istenirse `storage` olayıyla
+  (token'sız sinyal) anında duyurulur.
+- `verify:state`, `verify:endpoints` yeni akışa göre güncellenir; e2e `support/flows.ts` giriş adımı CSRF çerezini alır.
+
+### A.6 Mobil ve üçüncü taraflar
+
+Yok. Mobil uygulama ve dış API istemcisi yok; Shopier webhook'u ve OSB imzalı, oturumsuz (etkilenmez). İleride mobil
+gelirse Sanctum token yolu (K5) onlar için açık kalır.
+
+### A.7 Geçiş ve geri alma
+
+1. **İki yol birlikte (bir yayın döngüsü):** backend hem `Bearer` hem çerez oturumunu kabul eder (Sanctum ikisini destekler).
+   Yeni frontend çerezle girer; eski sekmeler token'la çalışmaya devam eder.
+2. Gözlem (en az 30 gün = en uzun token ömrü): `personal_access_tokens`'ta yeni token üretimi sıfıra iner.
+3. `Bearer` kabulü kapatılır, kalan token'lar silinir (kullanıcılar bir kez yeniden girer).
+
+Geri alma: 1. adımda yalnızca frontend geri alınır (backend iki yolu da biliyor). 3. adımdan sonra geri dönmek tüm
+kullanıcıları çıkış yaptırır; bu yüzden 3. adım ayrı bir yayın ve ayrı bir karardır.
+
+### A.8 Test planı
+
+- Backend: çerezle giriş → `me` 200; CSRF başlıksız `POST` → 419 (ya da A.10 kararı); çıkış session'ı geçersiz kılar;
+  `Bearer` geçiş süresinde çalışır, 3. adımdan sonra 401; misafir uçları CSRF'siz çalışır; T6 (yokluk): yanıt gövdesinde
+  token yok.
+- Frontend: `verify:state` (token `localStorage`'da yok), `verify:endpoints`.
+- e2e: yayın yolculuğu (kayıt → ödeme → yayın), misafir LCV, iki sekmede çıkış senkronu, sayfa yenileme sonrası oturum,
+  tarayıcıda `document.cookie`'de oturum çerezinin **görünmediği** (httpOnly) denetimi.
+
+### A.9 Ön koşul
+
+**K175 zorlaması:** tam CSP önce rapor kipinden zorlamaya geçmeli (bir hafta gözlem, ayrı K). `httpOnly` token çalınmasını
+kapatır ama XSS'in kendisini değil; CSP XSS'in yüzeyini daraltır. Sıra: CSP zorlama → SEC-18 uygulama fazı.
+
+### A.10 İsmail'e karar soruları
+
+1. Seçenek: A (Sanctum SPA çerez, önerilen) mı, B mi?
+2. Session sürücüsü: `database` (yeni tablo, bugünkü altyapı) mı, Redis (OPS-09 ile birlikte) mi?
+3. CSRF uyuşmazlığı (419): `401 UNAUTHENTICATED` mı, yeni `CSRF_MISMATCH` kodu mu?
+4. Geçiş süresi: 30 gün (token ömrü) yeterli mi? 3. adımda herkesin bir kez yeniden girmesi kabul mü?
+5. Oturum listesi (K143): session tablosuna taşınsın mı?
+
+### A.11 Uygulama fazı önerisi
+
+Ayrı faz, K175 zorlamasından sonra, üç dilim: (1) backend iki yolu birden kabul (ara katman, session, CSRF, yeni K'ler,
+testler); (2) frontend çerez akışı + e2e; (3) gözlemden sonra `Bearer` kapatma. Tahmini efor: L (her dilim ayrı commit ve
+ayrı yayın).
