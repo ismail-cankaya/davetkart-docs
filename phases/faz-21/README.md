@@ -55,7 +55,7 @@ Sıra:
 | 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | K274 | — | plan |
 | 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | — | plan |
 | 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | — | liste |
-| 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | | bekliyor |
+| 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | fe 2cc799f | commit'lendi |
 | 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | | bekliyor |
 | 21.18 | `ARC-07` | 🟢 | Frontend'de `.gitattributes` yok (CRLF/LF) | S | ✅ | frontend · docs | | | bekliyor |
 | 21.90 | — | — | Kapanış: tam kapılar, kayıtlar, rapor | S | — | backend · frontend · docs | — | | bekliyor |
@@ -809,6 +809,17 @@ Değilse maddeyi bloke et (§3 madde 5).
   boş/dolu bilgisi de alınmadı. Liste: Ek B. Silme yok.
 - Denetimdeki "15 arşiv, 3'ünde `.env`" sayısı doğrulandı: 15 arşiv + 1 kilit dosyası (`backend.bundle.lock`), `.env`
   içeren 3 arşiv. `_partial-snapshot.tgz` yarım (gzip sonu eksik).
+
+### 21.16 (`FE-07`)
+
+- Frontend `README.md` (0 bayt → kurulum, komutlar, 15 `verify:*`, ortam değişkenleri, backend ilişkisi, kılavuzlar).
+  README'deki iki iddia koda karşı doğrulandı (`POST /api/assistant/chat`, `src/contracts/plan-rules.json`).
+- `CLAUDE.md`: GenAI satırı → "asistan backend üzerinden"; kurulum komutları (`npm ci`, Node 24, `npm run check`, e2e);
+  `strict` gerçeği. Kural eklenmedi/çıkarılmadı (bulgunun önerdiği "fiyat frontend'de durmaz" kuralı plan gereği eklenmedi;
+  README'de `verify:pricing` satırında bilgi olarak geçiyor).
+- `@google/genai` `package.json`'da yok, `src/`'de kullanılmıyor: kaldırılacak bağımlılık yok.
+- Kapı: `npm run check` 0.
+- Gördüm, dokunmadım: `vite.config.ts:17-20` AI Studio'dan kalma `DISABLE_HMR` yorumu ve bozuk karakter (`modifyâ`).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
