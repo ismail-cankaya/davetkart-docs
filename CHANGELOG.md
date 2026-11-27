@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Yayın öncesi son kontrol (`release-2026-11-28-v1.1`)
+
+- `audits/2026-11-27-release-v1.1-check/REPORT.md`: aday uçta (be `1191a95`, fe `e28b599`) `composer check` 1354/1354, kapsam %96,0 (pcov, eşik 92,9), `composer audit` temiz, `npm run check` çıkış 0, e2e 6/6 (`LOG_LEVEL=debug` ile); bulgu R1 (e2e betiği `LOG_LEVEL`'i sabitlemiyor) ve bilgi notları R2–R5. Üç depoda `release-2026-11-28-v1.1` dalı. `audits/README.md` satırı.
+
 ## 2026-11-27 — `main` sonrası durum ve yayın rehberi
 
 - `audits/2026-11-27-main-gap-review/REPORT.md`: canlıdaki `main` (backend `03d3940`, frontend `47aedc8`) ile `faz-21-backlog` arasında yapılan ve yapılmayan işler; yeni gözlemler G1–G5 (eski `deploy.sh` ilk yayında pull'u bakımsız yapar, `2026_11_16` göç çakışması, SES sandbox + `SEC-09`, `validate_timestamps=0` sonrası `config:cache`, silme günlüğünün medya bucket'ında durması). `audits/README.md` satırı.
