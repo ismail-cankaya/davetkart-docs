@@ -2,6 +2,11 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 23 planı: v1.4 frontend vitrin sahnesi (sürüm düzeltmesi)
+
+- Sürüm numaraları düzeltildi: Faz 22'nin sonu `v1.3`, Faz 23 `v1.4` (ilk taslakta `v1.2` / `v1.3`). Kod dalı `faz-23-v1.4-frontend`, `v1.3` sürüm dalından açılacak. Docs dalının adı değişmedi.
+- İlk geri bildirim [`FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md) §0.1'e: A ve C beğenildi (A vitrin sahnesi için, C ileride sayfanın alt bölümleri için); A/B/C kaydırmalı maketinin bağlantısı.
+
 ## 2026-11-27 — Faz 23 planı: v1.3 frontend vitrin sahnesi (`docs/2026-11-27-faz-23-v1.3-frontend-plan`)
 
 - [`phases/faz-23/FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md): İsmail'in isteği (hero'dan sonra davetiyeler tıklamadan görünsün; ortada büyük, yanlarda kaydırmayla hareket eden telefonlar; Apple tanıtımı hissi; kısa; "AI vibe" yok) gereksinimlere bölündü (G1–G7). Ana sayfa kodu ölçüldü (`faz-21-backlog` @ `e28b599`), üç tasarım yönü (A Üçlü Sahne önerilen, B Akan Sütunlar, C Odak Yayı), telefon içerikleri (yanlar ekran görüntüsü, orta video), teknik tasarım, adımlar 23.0–23.9, riskler ve dokuz karar sorusu (S1–S9). Kod yok, karar yok.

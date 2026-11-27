@@ -1,10 +1,11 @@
-# Faz 23 — v1.3 Frontend: Ana Sayfa Vitrin Sahnesi (Plan)
+# Faz 23 — v1.4 Frontend: Ana Sayfa Vitrin Sahnesi (Plan)
 
 > **Durum:** 📝 Plan · tasarım yönü seçimi bekliyor (§5, §10) · kod yok.
-> **Tarih:** 27 Kasım 2026 · **Sürüm:** v1.3 (frontend) · **Sıra:** Faz 22 → `v1.2` yayını → Faz 23.
-> **Kod dalı:** `faz-23-v1.3-frontend`, frontend `v1.2` sürüm dalının ucundan açılacak (o dal henüz GitHub'da yok).
+> **Tarih:** 27 Kasım 2026 · **Sürüm:** v1.4 (frontend) · **Sıra:** Faz 22 → `v1.3` yayını → Faz 23.
+> **Kod dalı:** `faz-23-v1.4-frontend`, frontend `v1.3` sürüm dalının ucundan açılacak (o dal henüz GitHub'da yok).
+> **Sürüm notu:** İlk taslakta sürümler bir eksik yazılmıştı (27 Kasım, İsmail düzeltti): Faz 22'nin sonu `v1.3`, Faz 23 `v1.4`. Docs dalının adındaki `v1.3` değişmedi.
 > **Docs dalı:** `docs/2026-11-27-faz-23-v1.3-frontend-plan` (`docs/2026-11-27-faz-21-backlog` ucundan; `main` Faz 18'de kaldığı için).
-> **Analiz tabanı:** frontend `faz-21-backlog` @ `e28b599` (21.18). Faz 22 ve `v1.2` kodu görülmedi; dal açılınca §2 yeniden ölçülür.
+> **Analiz tabanı:** frontend `faz-21-backlog` @ `e28b599` (21.18). Faz 22 ve `v1.3` kodu görülmedi; dal açılınca §2 yeniden ölçülür.
 
 ## 0. Özet
 
@@ -15,6 +16,13 @@ telefonlar hareket eder; sahne Apple ürün tanıtımlarındaki gibi **sabitleni
 
 Üç tasarım yönü (§5), önerilen: **A — Üçlü Sahne**. Telefon içerikleri canlı şablon değil, **önceden üretilmiş
 görsel/video** (§6). Mevcut önizleme bölümü ve stüdyo akışı korunur.
+
+## 0.1 İlk geri bildirim (27 Kasım 2026)
+
+- İsmail **A** ve **C**'yi beğendi: **A** vitrin sahnesi için daha mantıklı; **C** ileride ana sayfanın daha alt bölümlerinde
+  kullanılabilir (Faz 23 kapsamı dışında, ayrı karar). **B** öne çıkmadı.
+- Kaydırmalı maket (A, B, C; gerçek şablon kapaklarıyla): https://claude.ai/artifact/2ExNJ3W8Rhn1i5MubgWWXk (özel bağlantı,
+  yalnızca İsmail açabilir). Kesin seçim (S1) maketten sonra.
 
 ## 1. İstek (İsmail, 27 Kasım 2026)
 
@@ -259,13 +267,13 @@ src/hooks/useMediaWhenVisible.ts           ← Hero'daki usePlayWhileVisible + u
 Seçenek 1 (önerilen): telefona tıkla → o şablon seçilir → önizleme bölümüne kayılır, simülatör o şablonla açılır.
 Seçenek 2: doğrudan `/create` (şablon seçili). Seçenek 3: tıklama yok, sahne yalnızca vitrin.
 
-## 8. Uygulama adımları (Faz 23, kod dalı `faz-23-v1.3-frontend`)
+## 8. Uygulama adımları (Faz 23, kod dalı `faz-23-v1.4-frontend`)
 
 Her adım tek commit (`23.N - <tip>(<alan>): <Fiil> ...`), her adımın sonunda `npm run check`.
 
 | Adım | İş | Bitti ölçütü |
 |---|---|---|
-| 23.0 | Dal: `v1.2` ucundan `faz-23-v1.3-frontend`. Taban ölçüm: `npm run check`, e2e, `perf` (ana sayfa LCP/CLS/TBT), 360/390/768/1280/1440 ekran görüntüleri | Taban sayıları bu dosyaya (§11) yazıldı |
+| 23.0 | Dal: `v1.3` ucundan `faz-23-v1.4-frontend`. Taban ölçüm: `npm run check`, e2e, `perf` (ana sayfa LCP/CLS/TBT), 360/390/768/1280/1440 ekran görüntüleri | Taban sayıları bu dosyaya (§11) yazıldı |
 | 23.1 | `ui/PhoneFrame` `DeviceSimulator`'dan çıkarılır; görünüm değişmez | `verify:render` + ekran görüntüsü farkı 0 |
 | 23.2 | Varlık hattı `scripts/showcase/capture.ts` + seçilen şablonların görsel/video çıktıları + bütçe kapısı | Bütçe kapısı yeşil; varlıklar `public/showcase/` |
 | 23.3 | `ShowcaseSection` **statik** yerleşim (hareketsiz), mobil/tablet/masaüstü, i18n 10 dil, RTL | 5 genişlikte ekran görüntüsü; `verify:i18n` yeşil |
@@ -286,7 +294,7 @@ Her adım tek commit (`23.N - <tip>(<alan>): <Fiil> ...`), her adımın sonunda 
 | Düşük güçlü telefonda video + 3 görsel | Pil, takılma | Mobilde video yok (yalnızca orta telefonda poster + ekran içi kaydırma); `saveData` |
 | Ana sayfa uzar | "Çok uzun olmasın" ihlali | Önizleme başlığı kısalır; sahne + önizleme toplamı bugünkü önizlemeden en fazla ~1 ekran uzun |
 | Ekran görüntüleri şablon değişince eskir | Vitrin ile gerçek tasarım farklı | Hat tek komut; şablon değişen commit'te yeniden üretim kontrol listesi |
-| `v1.2` dalına gelen düzeltmeler `HomePage`/`useLenis`'e dokunur | Birleştirme çakışması | `v1.2` → Faz 23 düzenli `merge` (rebase yok); tek yönlü |
+| `v1.3` dalına gelen düzeltmeler `HomePage`/`useLenis`'e dokunur | Birleştirme çakışması | `v1.3` → Faz 23 düzenli `merge` (rebase yok); tek yönlü |
 | Apple'a fazla benzerlik | Marka/ticari görünüm | Yalnızca teknik ilham; Apple cihaz görseli, Dynamic Island kopyası, Apple metni kullanılmaz; çerçeve kendi `PhoneFrame`'imiz |
 
 ## 10. İsmail'e sorular (karar noktaları)

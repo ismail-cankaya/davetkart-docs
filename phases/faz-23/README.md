@@ -1,12 +1,12 @@
-# Faz 23 — v1.3 Frontend
+# Faz 23 — v1.4 Frontend
 
 Ana sayfaya hero ile önizleme arasında, kaydırmaya bağlı bir **vitrin sahnesi** (ortada büyük telefon, yanlarda
-hareket eden telefonlar). Sıra: Faz 22 → `v1.2` yayını → Faz 23.
+hareket eden telefonlar). Sıra: Faz 22 → `v1.3` yayını → Faz 23.
 
 | | |
 |---|---|
 | Durum | 📝 Plan · tasarım yönü seçimi bekliyor |
-| Kod dalı | frontend `faz-23-v1.3-frontend` (`v1.2` sürüm dalının ucundan; henüz açılmadı) |
+| Kod dalı | frontend `faz-23-v1.4-frontend` (`v1.3` sürüm dalının ucundan; henüz açılmadı) |
 | Docs dalı | `docs/2026-11-27-faz-23-v1.3-frontend-plan` |
 | Backend | Değişiklik beklenmiyor |
 
