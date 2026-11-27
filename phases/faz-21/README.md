@@ -48,7 +48,7 @@ Sıra:
 | 21.6 | `ARC-06` | 🟢 | Hiç fırlatılmayan 3 hata kodu | S | ✅ | backend · frontend · docs | K270 | be bea73f2 · fe 07b64f4 | commit'lendi |
 | 21.7 | `FE-08` | 🟢 | Konum araması: backend ucu yok, bayrakla kapalı kod | S | ✅ | frontend · docs | K271 | fe 8263923 · be 9393dcd | commit'lendi |
 | 21.8 | `FE-03` | 🟢 | TypeScript `strict` kapalı (bugün 20 hata) | S | — | frontend · docs | — | fe a739642 | commit'lendi |
-| 21.9 | `TST-05` | 🟢 | Node sürümü sabit değil (CI 22, yerel 24) | S | ✅ | frontend · docs | | | bekliyor |
+| 21.9 | `TST-05` | 🟢 | Node sürümü sabit değil (CI 22, yerel 24) | S | ✅ | frontend · docs | K272 | fe 4a640dd · be 86445e4 | commit'lendi |
 | 21.10 | `TST-06` | 💡 | Backend testleri paralel koşmuyor | M | — | backend · docs | | | bekliyor |
 | 21.11 | `TST-03` | 🟢 | Satır kapsamı ölçülmüyor; eşik yok | S | ✅ | backend · docs | | | bekliyor |
 | 21.12 | `ARC-10` | 💡 | `OptimizeUploadedImage` 664 satır, dört sorumluluk | M | — | backend · docs | | | bekliyor |
@@ -748,6 +748,13 @@ Değilse maddeyi bloke et (§3 madde 5).
   yalnızca `strict`'i kapatmak bugünkü kodu kırmıyor (beklenen: koruyan şey ayarın kendisi).
 - Kapılar: `npm run check` 0, `npm run a11y:envelopes` çıkış 0 (`toplam 373 · ok 342 · IHLAL 0 · belirsiz 11 · ipucu-yok 20 ·
   hata 0`, Hat B B-D14 kaydıyla aynı), `npm run e2e` 6/6.
+
+### 21.9 (`TST-05`)
+
+- `.nvmrc` = `24` (major); `package-lock.json` kökü `engines`'i taşısın diye `npm install --package-lock-only` (3 satır).
+- `deploy-frontend.sh` uyarı parçası yerelde `bash -n` ve sahte `node` ile 9 durumda sınandı; sunucuda koşmadı.
+- Kapılar: `npm run check` 0, `composer check` 1337/1337. CI koşusu **koşmadı** (push İsmail'in).
+- İsmail'e: sunucuda `node --version` (beklenen `v24.x`).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 

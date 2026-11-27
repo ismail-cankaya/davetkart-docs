@@ -13,6 +13,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.6 `ARC-06`: `TOKEN_EXPIRED`, `INVITATION_LOCKED`, `SLUG_TAKEN` katalogdan, sözleşmeden ve tr/en çevirilerinden silindi (31 → 28); `ErrorCodeUsageTest` — **K270** (varsayılan). `composer check` 1337/1337, `npm run check` 0, e2e 6/6.
 - 21.7 `FE-08`: backend ucu olmayan konum önerisi araması ve `VITE_PLACES_SEARCH_ENABLED` kaldırıldı (frontend + `deploy-frontend.sh`); "haritadan seç" tek yol — **K271** (varsayılan). `npm run check` 0, e2e 6/6, `composer check` 1337/1337.
 - 21.8 `FE-03`: frontend `tsconfig.json` `strict: true`; 20 hata davranış değişmeden kapandı; `noUncheckedIndexedAccess` denemesi 719 hata (kapalı kaldı). `npm run check` 0, `a11y:envelopes` 0 ihlal, e2e 6/6.
+- 21.9 `TST-05`: frontend `.nvmrc` = 24, `engines`, CI `node-version-file`; `deploy-frontend.sh` Node uyuşmazlığında uyarır — **K272** (varsayılan). `npm run check` 0, `composer check` 1337/1337; CI koşmadı.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
