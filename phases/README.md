@@ -23,6 +23,8 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | 20 | Faz 19 sonrası kritik hatalar (`AUD-2026-11-26`): yerel şema geride → Hesap Ayarları 500; `schema` hazır olma kontrolü, Symfony güvenlik yaması, yerel eşitleme | ⏳ 26 Kasım 2026 · ayrıntı takip tablosunda | `faz-20-critical-fixes` + `fix/2026-11-26-…` · docs `docs/2026-11-26-faz-20-critical-fixes` | [`faz-20/`](faz-20/README.md) | `FAZ-20.md` (backend) |
 | 21 | Ertelenmiş düşük bulgular ve açık kararlar (`AUD-2026-11-12` 🟢/💡 + `AUD-2026-11-26` §4b): 18 madde, **tek ajan tek oturumda**, madde başına commit (ilk adı Faz 22'ydi, 26 Kasım'da Faz 21'e çevrildi). K265–K275 | ✅ 27 Kasım 2026 · 18/18 (bloke yok; 21.13, 21.14 plan · 21.15, 21.17 liste) · `composer check` 1354/1354, `audit` temiz, frontend check/e2e 6/6 · `main`'e birleştirme, sunucu adımları ve CI İsmail'in | backend/frontend `faz-21-backlog` · docs `docs/2026-11-27-faz-21-backlog` | [`faz-21/`](faz-21/README.md) | backend `docs/rehber/fazlar/FAZ-21.md` |
 | 22 | Yayın öncesi son faz: eksikler ve düzenlemeler (madde listesi açık). 22.1 e-posta doğrulaması satın almayı engellemez, panelde hatırlatma (K276) | ⏳ 27 Kasım 2026 · ayrıntı takip tablosunda | backend/frontend `faz-22-release-prep` · docs `docs/2026-11-27-faz-22-release-prep` | [`faz-22/`](faz-22/README.md) | backend `docs/rehber/fazlar/FAZ-22.md` |
+| 23 | v1.4 frontend: ana sayfa vitrin sahnesi | 📝 Plan (docs dalında, bu dala birleşmedi) | docs `docs/2026-11-27-faz-23-v1.3-frontend-plan` | o dalda `faz-23/` | — |
+| 24 | v2.0: davetiye metin editörü (tıkla-düzenle, sabit metinler dahil; ➕ özellik ekle; çok dilli altyapı yalnızca `tr`; sabit metin özelleştirmesi Elit). Faz 23'e bağlı değil; kod dalları Faz 23 bitince | 📝 Plan · 27 Kasım 2026 · karar numaraları bekliyor (T1–T15, öneri K300–K329) | kod `faz-24-v2.0-editor` (öneri, açılmadı) · docs `claude/brave-edison-dbg3l1` | [`faz-24/`](faz-24/README.md) | — |
 
 ## Klasörler
 
@@ -40,6 +42,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | [`faz-20/`](faz-20/) | Takip tablosu (`AUD-2026-11-26` düzeltmeleri, 20.4 karar sorusu) | Sürüyor |
 | [`faz-21/`](faz-21/) | Takip tablosu ve çalışma notları (`README.md`, Ek A SEC-18 planı, Ek B SEC-17 arşiv listesi) · `FAZ-21-ARC-08-KOMUTLARI.md` (dal/worktree/etiket komutları) | Tamamlandı · birleştirme bekliyor |
 | [`faz-22/`](faz-22/) | Takip tablosu (`README.md`) | Sürüyor |
+| [`faz-24/`](faz-24/) | `FAZ-24-PLAN.md` (v2.0 metin editörü planı), takip tablosu (`README.md`) | Plan |
 | [`frontend-catch-up/`](frontend-catch-up/) | `FRONTEND-YAKALAMA-PLANI.md` (11 Eylül 2026) | Tamamlandı (tarihsel) |
 
 Commit komutu dosyalarındaki `Claude outputs\f13-ara`, `Claude outputs\f14` yolları eski yerdir;

@@ -259,6 +259,7 @@
   K260–K262 ortak düzeltmede (Hat A) kullanıldı, numaralama K263'ten sürer. K233–K237 ortak düzeltmede Hat B'nin
   ayrılmış aralığından alındı (Hat A K260+'ı eşzamanlı kullanırken çakışmasın diye). Başka eksik yok (`--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
+- ⚠️ Faz 24 (v2.0) karar taslakları T1–T15 [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md)'de **numara bekliyor**: Faz 22 ve 23 açıkken sıradan numara çakışır (Faz 23 dalı hâlâ "sıradaki K276" diyor). Öneri: Faz 24'e K300–K329 ayrılsın; İsmail onaylayınca buraya işlenir.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.
 - Backend `claude/` klasörünün kaynakları (EK-FAZ-5…9, `FAZ-10-PLANI.md`) 2026-11-22'de bu depoya taşındı (`ARC-05`, [`_restructure/2026-11-backend-claude-map.md`](../_restructure/2026-11-backend-claude-map.md)). K128–K145'in kaynağı backend `docs/rehber/fazlar/` dosyaları; yol düz metindir.

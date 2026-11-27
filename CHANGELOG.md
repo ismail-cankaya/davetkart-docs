@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 24 planı (`claude/brave-edison-dbg3l1`)
+
+- Faz 24 (v2.0, davetiye metin editörü) planı: [`phases/faz-24/FAZ-24-PLAN.md`](phases/faz-24/FAZ-24-PLAN.md), takip [`phases/faz-24/README.md`](phases/faz-24/README.md); karar taslakları T1–T15 [`EK-FAZ-24`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) (⚠️ numara bekliyor, öneri K300–K329; `DECISION-INDEX.md` notu); `phases/README.md` (Faz 23 ve 24 satırları) ve `decisions/README.md` satırları. Dal `docs/2026-11-27-faz-22-release-prep` ucundan. Kod yok; kod dalları Faz 23 bitince (İsmail).
+
 ## 2026-11-27 — Faz 22 (`docs/2026-11-27-faz-22-release-prep`)
 
 - Faz 22 açıldı (yayın öncesi son faz, eksikler ve düzenlemeler): [`phases/faz-22/README.md`](phases/faz-22/README.md), [`EK-FAZ-22`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md), `phases/README.md` ve `decisions/README.md` satırları.
