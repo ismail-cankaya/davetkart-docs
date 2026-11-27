@@ -102,3 +102,11 @@ Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/03-testing.md`
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K273** | Backend satır kapsamı CI'da ölçülür ve kapıdır: `setup-php` `coverage: pcov`, `composer check`'ten sonra ayrı adım `php artisan test --parallel --coverage --min=92.9` (clover artefaktı). Eşik = ilk ölçüm − 3 puan; ilk ölçüm **%95,9** (27 Kasım, yerel, Herd xdebug 3.5.0 geçici yüklenerek). `composer check` değişmedi. Eşiği düşürmek yeni K ister | "Bu satır hiç koşmadı" bilgisi üretilmiyordu; gerileme fark edilmezdi. Kapsam mutasyonun yerine geçmez, nereye bakılacağını gösterir. Ayrı adım: kapsam sürücüsü yalnızca CI'da; paralel koşu ikinci test turunun bedelini düşürür | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.11 (27 Kas) · CI koşusu koşmadı |
+
+### 21.13 — `SEC-18` (token `localStorage`'da; `httpOnly` çerez — yalnızca plan)
+
+Kod yok. Plan: [`phases/faz-21/README.md`](../../phases/faz-21/README.md) "Ek A". Bulgu: `AUD-2026-11-12` [`findings/02-security.md`](../../audits/2026-11-12-full-system-audit/findings/02-security.md) "SEC-18".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K274** | Oturum token'ının `localStorage`'dan `httpOnly` çereze taşınması **planlandı**, uygulanmadı: varsayılan yol Sanctum SPA çerez kimliği (aynı site `davetkart.com` + `/api`, session + CSRF çerezi, `{user, token}` → `{user}`, K11 değişir), geçiş süresince `Bearer` ve çerez birlikte, sonra `Bearer` kapanır. Ön koşul: K175 tam CSP zorlaması. Uygulama ayrı faz (üç dilim) | XSS bugün token'ı okuyup 30 gün başka cihazdan kullanabilir; `httpOnly` çalınmayı kapatır. Kimlik mimarisi onaysız tek oturumda değiştirilmez; beş karar sorusu İsmail'de (Ek A.10) | planlandı · **varsayılan (İsmail cevaplamadı)** · Faz 21.13 (27 Kas) |
