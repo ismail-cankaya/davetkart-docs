@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K273**
+**Sıradaki boş numara: K274**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -248,6 +248,7 @@
 | **K270** | Hiç fırlatılmayan `TOKEN_EXPIRED`, `INVITATION_LOCKED`, `SLUG_TAKEN` katalogdan silindi (31 → 28); yeni kod ancak fırlatan kodla birlikte (`ErrorCodeUsageTest`) | Faz 21.6 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#216--arc-06-hiç-fırlatılmayan-üç-hata-kodu) |
 | **K271** | Backend ucu olmayan konum önerisi araması ve `VITE_PLACES_SEARCH_ENABLED` kaldırıldı; "haritadan seç" ve bağlantı yapıştırma tek yol; uç gerekirse ayrı faz | Faz 21.7 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#217--fe-08-konum-araması-backend-ucu-yok-bayrakla-kapalı-kod) |
 | **K272** | Frontend Node 24, tek kaynak `.nvmrc`; `engines` `>=24 <25`, CI `node-version-file`, `deploy-frontend.sh` uyuşmazlıkta uyarır (durdurmaz) | Faz 21.9 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#219--tst-05-node-sürümü-sabit-değil) |
+| **K273** | Backend satır kapsamı CI'da kapı: pcov, ayrı adım `php artisan test --parallel --coverage --min=92.9` (ilk ölçüm %95,9 − 3), clover artefaktı; `composer check` değişmedi | Faz 21.11 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2111--tst-03-satır-kapsamı-ölçülmüyor-eşik-yok) |
 
 ## Notlar
 

@@ -94,3 +94,11 @@ Dallar: frontend ve backend (`deploy/`) `faz-21-backlog`. Bulgu: `AUD-2026-11-12
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K272** | Frontend Node sürümü **24** (major), tek kaynak `.nvmrc`. `package.json` `engines.node` `>=24 <25` (uyarır, durdurmaz); CI (`ci.yml`, `e2e.yml`) `node-version-file`; backend `deploy-frontend.sh` sunucudaki `node --version` uyuşmazsa UYARI yazar, durdurmaz | CI 22, yerel 24.18, sunucu derlemesi 24.22.1 (Y6.5c) ile koşuyordu; `verify:*` betikleri Node'da çalıştığı için fark kapı sonucunu değiştirebilirdi. Tam sürüm yerine major: yama sürümlerinde üç yeri birden güncelleme zorunluluğu ve kanıksanan uyarılar olmasın | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.9 (27 Kas) · CI koşusu koşmadı (push yok) |
+
+### 21.11 — `TST-03` (satır kapsamı ölçülmüyor; eşik yok)
+
+Dal: backend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/03-testing.md`](../../audits/2026-11-12-full-system-audit/findings/03-testing.md) "TST-03".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K273** | Backend satır kapsamı CI'da ölçülür ve kapıdır: `setup-php` `coverage: pcov`, `composer check`'ten sonra ayrı adım `php artisan test --parallel --coverage --min=92.9` (clover artefaktı). Eşik = ilk ölçüm − 3 puan; ilk ölçüm **%95,9** (27 Kasım, yerel, Herd xdebug 3.5.0 geçici yüklenerek). `composer check` değişmedi. Eşiği düşürmek yeni K ister | "Bu satır hiç koşmadı" bilgisi üretilmiyordu; gerileme fark edilmezdi. Kapsam mutasyonun yerine geçmez, nereye bakılacağını gösterir. Ayrı adım: kapsam sürücüsü yalnızca CI'da; paralel koşu ikinci test turunun bedelini düşürür | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.11 (27 Kas) · CI koşusu koşmadı |
