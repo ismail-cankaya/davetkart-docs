@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K276**
+**Sıradaki boş numara: K277**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -205,7 +205,7 @@
 | **K188** | `ClaimReleasedOrderAction` kilitli adayları aldıktan sonra koşulları yeni sorguyla yeniden sınar (başka tabloya bakan koşul kilitten sonra yeniden sorulur) | Faz 19.11 (2026-11-22) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K189** | Misafir medya yüklemesi bayrakla kapalı (varsayılan), kapalıyken 404; bayrak public davetiye yanıtında `guestUploads` | Faz 19.12 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K190** | Misafir yükleme bütçesi: iliştirilmiş 1 GB + tür başına adet; iliştirilmemişler ayrı kota (50 dosya / 200 MB); yetim 1 saat, temizlik saatlik | Faz 19.13 (2026-11-23) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
-| **K191** | Kayıt sonrası e-posta doğrulaması: imzalı 24 saatlik bağlantı (EmailChangeLink deseni, sır saklanmaz), checkout ve yayın `403 EMAIL_NOT_VERIFIED`, ilk yayın indirimi yalnızca doğrulanmışa, yeniden gönderme saatte 3 | Faz 19.14 (2026-11-23) | geçerli · "mevcut hesaplara göç yok" maddesi geçersiz kılındı → K260 (ortak düzeltme, A-E1) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
+| **K191** | Kayıt sonrası e-posta doğrulaması: imzalı 24 saatlik bağlantı (EmailChangeLink deseni, sır saklanmaz), checkout ve yayın `403 EMAIL_NOT_VERIFIED`, ilk yayın indirimi yalnızca doğrulanmışa, yeniden gönderme saatte 3 | Faz 19.14 (2026-11-23) | geçerli · "mevcut hesaplara göç yok" maddesi geçersiz kılındı → K260 (ortak düzeltme, A-E1) · checkout ve yayın kapısı geçersiz kılındı → K276 (Faz 22.1); indirim maddesi geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K192** | Taslak yaşam döngüsü: ilk kayıt gerçek içerikte ya da "Davetiyeni Oluştur"da; adres `/create/<id>`; kullanıcı başına 50 yayınlanmamış davetiye, kilitli sayım, `403 DRAFT_LIMIT_REACHED` | Faz 19.26 (2026-11-23) | geçerli · boş taslak temizliği → K261 (ortak düzeltme, A-E2) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K220** | Dil seçici yalnızca tr/en; eski kayıt ve desteklenmeyen dil tr'ye düşer | Faz 19.20 (2026-11-20) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
 | **K221** | `verify:i18n`: çekirdek .tsx gömülü Türkçe metin mandalı (dosya başına tam eşit taban) | Faz 19.20 (2026-11-20) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-19.md#a-karar-kaydına-eklenecek-7) |
@@ -251,6 +251,7 @@
 | **K273** | Backend satır kapsamı CI'da kapı: pcov, ayrı adım `php artisan test --parallel --coverage --min=92.9` (ilk ölçüm %95,9 − 3), clover artefaktı; `composer check` değişmedi | Faz 21.11 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2111--tst-03-satır-kapsamı-ölçülmüyor-eşik-yok) |
 | **K274** | `SEC-18`: token `localStorage` → `httpOnly` çerez **planlandı** (Sanctum SPA çerez kimliği, CSRF, K11 `{user}`, geçişte iki yol); ön koşul K175 CSP zorlaması; uygulama ayrı faz | Faz 21.13 (27 Kas) | planlandı · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2113--sec-18-token-localstorageda-httponly-çerez--yalnızca-plan) |
 | **K275** | Frontend `.gitattributes`: `* text=auto eol=lf` + ikili kalıplar; indeks zaten LF (renormalize 0 dosya), çalışma ağacı dokunulmadı (LF'ye çevirme isteğe bağlı) | Faz 21.18 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2118--arc-07-frontendde-gitattributes-yok) |
+| **K276** | E-posta doğrulaması checkout ve yayını beklemez (`VerifiedEmailGuard` ve `403 EMAIL_NOT_VERIFIED` kalktı, katalog 28 → 27); ilk yayın indirimi doğrulama istemeye devam eder; panelde "hesap erişimini kaybetmemek için doğrula" hatırlatma bandı. K191'in checkout/yayın maddelerini geçersiz kılar | Faz 22.1 (27 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md#221--e-posta-doğrulaması-satın-almayı-engellemez) |
 
 ## Notlar
 

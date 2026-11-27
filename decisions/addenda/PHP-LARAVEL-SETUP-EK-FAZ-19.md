@@ -340,6 +340,7 @@ Girdi: [`phases/faz-19/HAT-A-ACIK-KALANLAR.md`](../../phases/faz-19/HAT-A-ACIK-K
 **Eski kararların durum notları:**
 
 - K191 → geçerli; "mevcut hesaplara göç yok" maddesi geçersiz kılındı → K260.
+  Faz 22.1: checkout ve yayın kapısı geçersiz kılındı → K276 ([`EK-FAZ-22`](PHP-LARAVEL-SETUP-EK-FAZ-22.md)).
 - K192 → geçerli; "boş taslak temizliği yok" → tek seferlik komut K261.
 
 İkinci tur (E5, İsmail'in cevabı: Shopier'i beklemeden "telefonu gerçek al"; dal `fix/2026-11-25-a-e5-buyer-phone`, backend ve frontend):

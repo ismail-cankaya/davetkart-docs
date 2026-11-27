@@ -2,6 +2,12 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 22 (`docs/2026-11-27-faz-22-release-prep`)
+
+- Faz 22 açıldı (yayın öncesi son faz, eksikler ve düzenlemeler): [`phases/faz-22/README.md`](phases/faz-22/README.md), [`EK-FAZ-22`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md), `phases/README.md` ve `decisions/README.md` satırları.
+- Git izinleri (İsmail): docs deposunda asistan her oturumda commit atabilir (`CLAUDE.md` §7, `.claude/settings.json` allow); kod depolarında commit/dal/push soruya tabi, varsayılan engelli.
+- 22.1: e-posta doğrulaması checkout ve yayını engellemez, panelde "hesap erişimini kaybetmemek için doğrula" bandı, ilk yayın indirimi doğrulama ister — **K276** (İsmail'in kararı); K191 durum notu (index + `EK-FAZ-19`), sıradaki K277.
+
 ## 2026-11-27 — Faz 21 (`docs/2026-11-27-faz-21-backlog`)
 
 - 21.0 hazırlık: dallar (`faz-21-backlog`, docs `docs/2026-11-27-faz-21-backlog`), ortam eşitlendi, taban kapıları yeşil (`composer check` 1306/1306, `composer audit` temiz, `npm run check` çıkış 0, e2e 6/6); backend `docs/rehber/fazlar/FAZ-21.md` açıldı. [`phases/faz-21/README.md`](phases/faz-21/README.md) §1.
