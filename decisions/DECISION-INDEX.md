@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K275**
+**Sıradaki boş numara: K276**
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -250,6 +250,7 @@
 | **K272** | Frontend Node 24, tek kaynak `.nvmrc`; `engines` `>=24 <25`, CI `node-version-file`, `deploy-frontend.sh` uyuşmazlıkta uyarır (durdurmaz) | Faz 21.9 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#219--tst-05-node-sürümü-sabit-değil) |
 | **K273** | Backend satır kapsamı CI'da kapı: pcov, ayrı adım `php artisan test --parallel --coverage --min=92.9` (ilk ölçüm %95,9 − 3), clover artefaktı; `composer check` değişmedi | Faz 21.11 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2111--tst-03-satır-kapsamı-ölçülmüyor-eşik-yok) |
 | **K274** | `SEC-18`: token `localStorage` → `httpOnly` çerez **planlandı** (Sanctum SPA çerez kimliği, CSRF, K11 `{user}`, geçişte iki yol); ön koşul K175 CSP zorlaması; uygulama ayrı faz | Faz 21.13 (27 Kas) | planlandı · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2113--sec-18-token-localstorageda-httponly-çerez--yalnızca-plan) |
+| **K275** | Frontend `.gitattributes`: `* text=auto eol=lf` + ikili kalıplar; indeks zaten LF (renormalize 0 dosya), çalışma ağacı dokunulmadı (LF'ye çevirme isteğe bağlı) | Faz 21.18 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2118--arc-07-frontendde-gitattributes-yok) |
 
 ## Notlar
 

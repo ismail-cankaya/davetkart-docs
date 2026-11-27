@@ -110,3 +110,11 @@ Kod yok. Plan: [`phases/faz-21/README.md`](../../phases/faz-21/README.md) "Ek A"
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K274** | Oturum token'ının `localStorage`'dan `httpOnly` çereze taşınması **planlandı**, uygulanmadı: varsayılan yol Sanctum SPA çerez kimliği (aynı site `davetkart.com` + `/api`, session + CSRF çerezi, `{user, token}` → `{user}`, K11 değişir), geçiş süresince `Bearer` ve çerez birlikte, sonra `Bearer` kapanır. Ön koşul: K175 tam CSP zorlaması. Uygulama ayrı faz (üç dilim) | XSS bugün token'ı okuyup 30 gün başka cihazdan kullanabilir; `httpOnly` çalınmayı kapatır. Kimlik mimarisi onaysız tek oturumda değiştirilmez; beş karar sorusu İsmail'de (Ek A.10) | planlandı · **varsayılan (İsmail cevaplamadı)** · Faz 21.13 (27 Kas) |
+
+### 21.18 — `ARC-07` (frontend'de `.gitattributes` yok)
+
+Dal: frontend `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/01-architecture.md`](../../audits/2026-11-12-full-system-audit/findings/01-architecture.md) "ARC-07".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K275** | Frontend `.gitattributes`: `* text=auto eol=lf` + ikili kalıplar (`*.png *.jpg *.webp *.mp4 *.webm *.woff2 *.glb *.ico binary`); backend ve docs ile aynı kural. Çalışma ağacı bu fazda **dokunulmadı**; diskte LF'ye çevirmek isteğe bağlı (`git checkout-index --force --all`, temiz ağaç + Vite kapalı) | Satır sonu kişisel `core.autocrlf`'e bağlıydı: Write ile yazılan dosya bütün dosyayı değişmiş gösteriyor, `git add -A` yüzlerce dosya sürüklüyordu; sözleşme dosyası diskte backend'den bayt bayt farklıydı. Ölçüm: indeks zaten tamamen LF (i/crlf 0, i/mixed 0), `--renormalize` 0 dosya | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.18 (27 Kas) |
