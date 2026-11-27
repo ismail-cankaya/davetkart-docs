@@ -86,3 +86,11 @@ Dallar: frontend ve backend (`deploy/`) `faz-21-backlog`. Bulgu: `AUD-2026-11-12
 | # | Karar | Gerekçe | Durum |
 |---|---|---|---|
 | **K271** | Konum önerisi araması kaldırıldı: frontend `services/places.ts`, `hooks/usePlaceSearch.ts`, `PlaceSuggestion`, `VITE_PLACES_SEARCH_ENABLED` (`.env.example`, `vite-env.d.ts`, backend `deploy/deploy-frontend.sh`). "Ulaşım Bilgileri" yalnızca haritadan seçim, koordinat ve harita bağlantısı yapıştırma ile çalışır. Uç gerekirse ayrı faz: Places anahtarı sunucuda, önbellek, `throttle`, KVKK gizlilik metni | `GET /api/public/places/search` backend'de hiç yazılmadı; kod bayrakla kapalı duruyordu (bayrak açılsa 404). Bayrak kapalıyken kanca hep boş döndüğü için ekran değişmedi | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.7 (27 Kas) |
+
+### 21.9 — `TST-05` (Node sürümü sabit değil)
+
+Dallar: frontend ve backend (`deploy/`) `faz-21-backlog`. Bulgu: `AUD-2026-11-12` [`findings/03-testing.md`](../../audits/2026-11-12-full-system-audit/findings/03-testing.md) "TST-05".
+
+| # | Karar | Gerekçe | Durum |
+|---|---|---|---|
+| **K272** | Frontend Node sürümü **24** (major), tek kaynak `.nvmrc`. `package.json` `engines.node` `>=24 <25` (uyarır, durdurmaz); CI (`ci.yml`, `e2e.yml`) `node-version-file`; backend `deploy-frontend.sh` sunucudaki `node --version` uyuşmazsa UYARI yazar, durdurmaz | CI 22, yerel 24.18, sunucu derlemesi 24.22.1 (Y6.5c) ile koşuyordu; `verify:*` betikleri Node'da çalıştığı için fark kapı sonucunu değiştirebilirdi. Tam sürüm yerine major: yama sürümlerinde üç yeri birden güncelleme zorunluluğu ve kanıksanan uyarılar olmasın | geçerli · **varsayılan (İsmail cevaplamadı)** · Faz 21.9 (27 Kas) · CI koşusu koşmadı (push yok) |
