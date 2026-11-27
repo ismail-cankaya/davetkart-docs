@@ -19,6 +19,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.12 `ARC-10`: backend `OptimizeUploadedImage` 664 → 111 satır; çözme, küçültme, EXIF, kodlama, bellek bütçesi `app/Support/Media`'ya, dosya takası `SwapOptimizedMediaFileAction`'a; davranış aynı (91/91 uçtan uca, 15 birim testi, 12 mutant öldü, `composer check` 1354/1354).
 - 21.13 `SEC-18`: token `localStorage` → `httpOnly` çerez geçiş planı (Sanctum SPA çerez kimliği, CSRF, K11 etkisi, iki yollu geçiş, test planı, ön koşul K175, beş karar sorusu) — [`phases/faz-21/README.md`](phases/faz-21/README.md) "Ek A", **K274** (planlandı). Kod yok.
 - 21.14 `OPS-09`: [`YAYIN-PLANI.md`](operations/deployment/YAYIN-PLANI.md) §6.1 ölçülebilir eşikler (FPM, bellek, p95, PostgreSQL, disk, kuyruk, CPU), ikinci sunucuda kırılacaklar ve geçiş sırası; [`IZLEME.md`](operations/deployment/IZLEME.md) §6 metriklerin komutları. Kod yok.
+- 21.15 `SEC-17`: `archive/local-snapshots/` arşivleri açılmadan listelendi (16 dosya, 148 MB; `.env` içeren 3 arşivin yalnızca anahtar adları, değer yok); silinebilecekler ve döndürülecek anahtarlar İsmail'e — [`phases/faz-21/README.md`](phases/faz-21/README.md) "Ek B".
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 

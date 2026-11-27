@@ -54,7 +54,7 @@ Sıra:
 | 21.12 | `ARC-10` | 💡 | `OptimizeUploadedImage` 664 satır, dört sorumluluk | M | — | backend · docs | — | be 05c43be | commit'lendi |
 | 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | K274 | — | plan |
 | 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | — | plan |
-| 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | | bekliyor |
+| 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | — | liste |
 | 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | | bekliyor |
 | 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | | bekliyor |
 | 21.18 | `ARC-07` | 🟢 | Frontend'de `.gitattributes` yok (CRLF/LF) | S | ✅ | frontend · docs | | | bekliyor |
@@ -803,6 +803,13 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Komutlar sunucuda koşmadı. `§6`'daki "`onOneServer` zaten hazır (10.44)" cümlesi dosya cache'inde tek başına yetmiyor;
   6.1 tablosu bunu söylüyor (eski satır değiştirilmedi).
 
+### 21.15 (`SEC-17`)
+
+- Arşivler açılmadı; yalnızca `tar -tf` ad listesi ve `.env`/`.npmrc`'den `grep -o` ile anahtar adları. Değer okunmadı,
+  boş/dolu bilgisi de alınmadı. Liste: Ek B. Silme yok.
+- Denetimdeki "15 arşiv, 3'ünde `.env`" sayısı doğrulandı: 15 arşiv + 1 kilit dosyası (`backend.bundle.lock`), `.env`
+  içeren 3 arşiv. `_partial-snapshot.tgz` yarım (gzip sonu eksik).
+
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
 | Kapı | Sonuç (görülen çıktı) |
@@ -919,3 +926,63 @@ kapatır ama XSS'in kendisini değil; CSP XSS'in yüzeyini daraltır. Sıra: CSP
 Ayrı faz, K175 zorlamasından sonra, üç dilim: (1) backend iki yolu birden kabul (ara katman, session, CSRF, yeni K'ler,
 testler); (2) frontend çerez akışı + e2e; (3) gözlemden sonra `Bearer` kapatma. Tahmini efor: L (her dilim ayrı commit ve
 ayrı yayın).
+
+## Ek B — SEC-17 arşiv listesi (yalnızca adlar; değer yok)
+
+> 21.15 · `SEC-17` · 27 Kasım 2026. Klasör `davetkart-docs/archive/local-snapshots/` (git dışı, `.gitignore:5`; `git ls-files` → 0).
+> Arşivler **açılmadı**: `tar -tf` ile dosya adı listesi; `.env`'lerden `tar -xOf … | grep -oE '^[A-Z0-9_]+='` ile yalnızca
+> anahtar **adları**. Hiçbir değer okunmadı, yazdırılmadı, bu sayfaya girmedi. Silme ve döndürme İsmail'in işi.
+
+### B.1 Arşivler (16 dosya, 148 MB)
+
+| Dosya | Boyut | Tarih | Girdi | İçerik türü | `.env` | Başka hassas yol (`*.pem`, `*.key`, `id_rsa`, `credentials`, `auth.json`) |
+|---|---|---|---|---|---|---|
+| `_snap/_partial-snapshot.tgz` | 25,4 MB | 23 Eki | 8299 | backend tam ağaç (vendor dahil); **yarım** arşiv (gzip sonu eksik) | **evet** `./.env` | yok (`*Credentials*.php` kaynak dosyaları, sır değil) |
+| `_snap/repo.tgz` | 20,3 MB | 23 Eki | 4160 | backend ağacı | **evet** `./.env` | yok |
+| `_snap/fe.tgz` | 30,6 MB | 23 Eki | 1938 | frontend ağacı | **evet** `./.env`, `./.env.development` | yok |
+| `_snap/f13-backend.tgz` | 1,6 MB | 25 Eki | 763 | backend (Faz 13) | hayır (yalnızca `.env.example`) | yok |
+| `_snap/f13-frontend.tgz` | 30,6 MB | 25 Eki | 1947 | frontend (Faz 13) | hayır (`.env*.example` ×2) | yok |
+| `_snap/v-aws.tgz` | 6,1 MB | 23 Eki | 5409 | `vendor/aws` | hayır | yok (SDK kaynak dosyaları) |
+| `_snap/v-laravel.tgz` | 16,7 MB | 23 Eki | 2427 | `vendor/laravel` | hayır | yok |
+| `_snap/v-phpstan.tgz` | 12,0 MB | 23 Eki | 319 | `vendor/phpstan` | hayır | yok |
+| `_snap/v-rest.tgz` | 8,0 MB | 23 Eki | 8141 | geri kalan `vendor` | hayır | yok |
+| `_snap/f13-ara.tar` | 70 KB | 25 Eki | 8 | ara dosyalar | hayır | yok |
+| `_snap/f13-be.tar` | 530 KB | 25 Eki | 89 | backend parçası | hayır (`.env.example`) | yok |
+| `_snap/f13-fe.tar` | 520 KB | 25 Eki | 51 | frontend parçası | hayır (`.env.example`) | yok |
+| `_snap/faz11-backend.tar` | 580 KB | 23 Eki | 138 | backend (Faz 11) | hayır | yok |
+| `_snap/faz11-frontend.tar` | 280 KB | 23 Eki | 70 | frontend (Faz 11) | hayır | yok |
+| `_to_delete/f14.tar` | 1,3 MB | 25 Eki | 424 | Faz 14 | hayır | yok |
+| `_to_delete/f14-bundle/backend.bundle.lock` | 63 B | 25 Eki | — | git bundle kilidi (bundle'ın kendisi yok) | — | — |
+
+`.npmrc` (`_partial-snapshot`, `repo`, `f13-backend`): anahtarlar yalnızca `ignore-scripts`, `audit`; kayıt defteri belirteci yok.
+
+### B.2 `.env` dosyalarındaki anahtar adları
+
+- `_partial-snapshot.tgz` ve `repo.tgz` `./.env` (aynı 58 ad): `APP_NAME APP_ENV APP_KEY APP_DEBUG APP_URL APP_LOCALE
+  APP_FALLBACK_LOCALE APP_FAKER_LOCALE APP_MAINTENANCE_DRIVER HASH_DRIVER ARGON_MEMORY ARGON_TIME ARGON_THREADS BCRYPT_ROUNDS
+  LOG_CHANNEL LOG_STACK LOG_DEPRECATIONS_CHANNEL LOG_LEVEL DB_CONNECTION DB_HOST DB_PORT DB_DATABASE DB_USERNAME DB_PASSWORD
+  SESSION_DRIVER SESSION_LIFETIME SESSION_ENCRYPT SESSION_PATH SESSION_DOMAIN BROADCAST_CONNECTION FILESYSTEM_DISK
+  QUEUE_CONNECTION CACHE_STORE MEMCACHED_HOST REDIS_CLIENT REDIS_HOST REDIS_PASSWORD REDIS_PORT MAIL_MAILER MAIL_SCHEME
+  MAIL_HOST MAIL_PORT MAIL_USERNAME MAIL_PASSWORD MAIL_FROM_ADDRESS MAIL_FROM_NAME AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY
+  AWS_DEFAULT_REGION AWS_BUCKET AWS_USE_PATH_STYLE_ENDPOINT VITE_APP_NAME AI_PROVIDER GEMINI_API_KEY GEMINI_MODEL`
+- `fe.tgz` `./.env` ve `./.env.development`: yalnızca `VITE_API_BASE_URL` (sır değil).
+- Shopier anahtarları bu arşivlerde **yok** (arşivler 23–25 Ekim; Shopier Faz 12).
+
+Değerlerin dolu mu boş mu olduğu da okunmadı.
+
+### B.3 İsmail'e kalanlar
+
+**Silinebilir:** on altı dosyanın hepsi. İçerikleri 23–25 Ekim'in kod anlık görüntüleri; aynı kod git geçmişinde (backend,
+frontend dalları) duruyor, `vendor` paketleri `composer.lock`'tan yeniden kurulur. Önce `.env` içeren üçü:
+`_snap/_partial-snapshot.tgz`, `_snap/repo.tgz`, `_snap/fe.tgz`. Saklamak istenirse şifreli kasaya (ör. 7-Zip AES-256
+parolalı arşiv ya da BitLocker'lı disk) taşı; bulut eşitlemesi olan klasörde bırakma.
+
+**Döndürülecek anahtarlar** (arşivdeki değer gerçek ve hâlâ geçerliyse; tek satırlık yol):
+
+| Anahtar | Ne zaman döndür | Nasıl |
+|---|---|---|
+| `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY` | dolu idiyse **mutlaka** | IAM → Users → ilgili kullanıcı → Security credentials → anahtarı Deactivate + Delete, yenisini oluştur, sunucu `.env`'ine yaz, `config:cache` |
+| `GEMINI_API_KEY` | dolu idiyse | Google AI Studio → API keys → anahtarı sil, yenisini oluştur, sunucu `.env`'i (`AI_PROVIDER` gemini ise) |
+| `APP_KEY` | yalnızca bu değer canlıda da kullanıldıysa (yerel anahtar ayrıysa gerekmez) | `php artisan key:generate --show` → sunucu `.env`; dikkat: şifreli alanlar ve oturumlar eski anahtarla çözülemez (canlıda planlı yap) |
+| `DB_PASSWORD` | bu parola başka yerde (canlı, başka hesap) kullanıldıysa | `ALTER USER postgres WITH PASSWORD '…';` (yerelde psql) ve `.env`; canlı DB parolası ayrıysa gerekmez |
+| `MAIL_PASSWORD`, `REDIS_PASSWORD` | dolu idiyse | SMTP/SES kimliğini SES konsolunda yenile; Redis yerelde kullanılmıyor |
