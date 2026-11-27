@@ -56,7 +56,7 @@ Sıra:
 | 21.14 | `OPS-09` | 💡 | Yatay ölçek eşikleri yazılı değil | S | — | docs | — | — | plan |
 | 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | — | liste |
 | 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | fe 2cc799f | commit'lendi |
-| 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | | bekliyor |
+| 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | — | liste |
 | 21.18 | `ARC-07` | 🟢 | Frontend'de `.gitattributes` yok (CRLF/LF) | S | ✅ | frontend · docs | | | bekliyor |
 | 21.90 | — | — | Kapanış: tam kapılar, kayıtlar, rapor | S | — | backend · frontend · docs | — | | bekliyor |
 
@@ -821,6 +821,22 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Kapı: `npm run check` 0.
 - Gördüm, dokunmadım: `vite.config.ts:17-20` AI Studio'dan kalma `DISABLE_HMR` yorumu ve bozuk karakter (`modifyâ`).
 
+### 21.17 (`ARC-08`)
+
+- Yalnızca salt okunur git komutları; dal silme, `worktree remove`, `tag` koşulmadı. Dosya: `FAZ-21-ARC-08-KOMUTLARI.md`
+  (Python betiği git çıktısından üretti).
+- Sayılar (27 Kasım): yerel dallar backend 34, frontend 49, docs 9 (plandaki 26 Kasım sayıları 33/48/7; Faz 20–21 dalları
+  eklendi). Etiket üç depoda da yok. Birleşmiş, silinebilir: backend 32, frontend 46, docs 7 (her biri "hemen" ve "`main`
+  birleşmesinden sonra" diye ikiye ayrıldı). Birleşmemiş tek dal: frontend `new-page-desing` (1 commit önde, 25 Eyl).
+- Worktree: 10'u da temiz (backend `.worktrees/` 4 + hat 3, docs hat 3); `davetkart-hat-b/davetkart-frontent` git deposu
+  değil; `davetkart-docs.worktrees/` boş.
+- Etiket: kayıtlara göre `v1.0.0` (sunucudaki commit, doğrulanmalı), `v1.1.0` (backend `44f6022`, frontend
+  `faz-18-audit-fixes` ucu), `v1.2.0` (kayıt: `faz-19-fix` ucu; ama orada `composer audit` kırmızı → öneri
+  `faz-20-critical-fixes` ucu). **İsmail'e soru:** `v1.2.0` hangi uca?
+- Yazım hataları: backend `media-confugration`, `payment-servide`, `faz15-desing/claude-davetiye`, `Enums`; frontend
+  `desing` geçen 6 dal; depo adı `davetkart-frontent` (yeniden adlandırma kapsam dışı).
+- HAT-C-ACIK-HATALAR #21 ve #29'a bağlantı notu eklendi (geçmiş metin değişmedi).
+
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
 | Kapı | Sonuç (görülen çıktı) |
@@ -832,7 +848,7 @@ Değilse maddeyi bloke et (§3 madde 5).
 | Karar indeksi `--check` | |
 | Ajan izi taraması (üç depo) | |
 
-**Bu klasördeki dosyalar:** `README.md` (bu sayfa) · `FAZ-21-ARC-08-KOMUTLARI.md` (21.17'de açılır).
+**Bu klasördeki dosyalar:** `README.md` (bu sayfa) · [`FAZ-21-ARC-08-KOMUTLARI.md`](FAZ-21-ARC-08-KOMUTLARI.md) (21.17: dal, worktree ve etiket listesi + İsmail'in komutları).
 
 **İsmail'e kalan:** *(21.90'da numaralı liste)*
 

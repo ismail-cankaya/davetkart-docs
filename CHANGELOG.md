@@ -21,6 +21,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.14 `OPS-09`: [`YAYIN-PLANI.md`](operations/deployment/YAYIN-PLANI.md) §6.1 ölçülebilir eşikler (FPM, bellek, p95, PostgreSQL, disk, kuyruk, CPU), ikinci sunucuda kırılacaklar ve geçiş sırası; [`IZLEME.md`](operations/deployment/IZLEME.md) §6 metriklerin komutları. Kod yok.
 - 21.15 `SEC-17`: `archive/local-snapshots/` arşivleri açılmadan listelendi (16 dosya, 148 MB; `.env` içeren 3 arşivin yalnızca anahtar adları, değer yok); silinebilecekler ve döndürülecek anahtarlar İsmail'e — [`phases/faz-21/README.md`](phases/faz-21/README.md) "Ek B".
 - 21.16 `FE-07`: frontend `README.md` yazıldı (kurulum, komutlar, `verify:*`, ortam, backend ilişkisi); `CLAUDE.md`'de GenAI satırı ve kurulum komutları koda göre düzeltildi. `npm run check` 0.
+- 21.17 `ARC-08`: [`phases/faz-21/FAZ-21-ARC-08-KOMUTLARI.md`](phases/faz-21/FAZ-21-ARC-08-KOMUTLARI.md): üç deponun dal tablosu (birleşmiş mi, worktree, yazım hataları), 10 temiz worktree, `v1.0.0`/`v1.1.0`/`v1.2.0` etiket önerisi ve İsmail'in komutları (hiçbiri koşulmadı); `HAT-C-ACIK-HATALAR.md` #21/#29 not.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
