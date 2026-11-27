@@ -2,6 +2,11 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-27 — Faz 23 planı: v1.3 frontend vitrin sahnesi (`docs/2026-11-27-faz-23-v1.3-frontend-plan`)
+
+- [`phases/faz-23/FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md): İsmail'in isteği (hero'dan sonra davetiyeler tıklamadan görünsün; ortada büyük, yanlarda kaydırmayla hareket eden telefonlar; Apple tanıtımı hissi; kısa; "AI vibe" yok) gereksinimlere bölündü (G1–G7). Ana sayfa kodu ölçüldü (`faz-21-backlog` @ `e28b599`), üç tasarım yönü (A Üçlü Sahne önerilen, B Akan Sütunlar, C Odak Yayı), telefon içerikleri (yanlar ekran görüntüsü, orta video), teknik tasarım, adımlar 23.0–23.9, riskler ve dokuz karar sorusu (S1–S9). Kod yok, karar yok.
+- [`phases/faz-23/README.md`](phases/faz-23/README.md) açıldı; [`phases/README.md`](phases/README.md) faz tablosuna ve klasör listesine Faz 23 satırı.
+
 ## 2026-11-27 — Faz 21 (`docs/2026-11-27-faz-21-backlog`)
 
 - 21.0 hazırlık: dallar (`faz-21-backlog`, docs `docs/2026-11-27-faz-21-backlog`), ortam eşitlendi, taban kapıları yeşil (`composer check` 1306/1306, `composer audit` temiz, `npm run check` çıkış 0, e2e 6/6); backend `docs/rehber/fazlar/FAZ-21.md` açıldı. [`phases/faz-21/README.md`](phases/faz-21/README.md) §1.
