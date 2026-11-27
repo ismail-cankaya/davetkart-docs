@@ -12,6 +12,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.5 `OPS-07`: `deploy/php-fpm/davetkart.conf` (dynamic, 4 süreç, `max_requests 500`, 60s, slowlog) ve OPcache (`validate_timestamps=0`) depoda; bellek tablosu backend kılavuzunda (tavanlar ~2 270 MB, İsmail'e soru) — **K269** (varsayılan). Sunucuda kurulmadı; `php-fpm -t` koşmadı (Windows). `composer check` 1335/1335.
 - 21.6 `ARC-06`: `TOKEN_EXPIRED`, `INVITATION_LOCKED`, `SLUG_TAKEN` katalogdan, sözleşmeden ve tr/en çevirilerinden silindi (31 → 28); `ErrorCodeUsageTest` — **K270** (varsayılan). `composer check` 1337/1337, `npm run check` 0, e2e 6/6.
 - 21.7 `FE-08`: backend ucu olmayan konum önerisi araması ve `VITE_PLACES_SEARCH_ENABLED` kaldırıldı (frontend + `deploy-frontend.sh`); "haritadan seç" tek yol — **K271** (varsayılan). `npm run check` 0, e2e 6/6, `composer check` 1337/1337.
+- 21.8 `FE-03`: frontend `tsconfig.json` `strict: true`; 20 hata davranış değişmeden kapandı; `noUncheckedIndexedAccess` denemesi 719 hata (kapalı kaldı). `npm run check` 0, `a11y:envelopes` 0 ihlal, e2e 6/6.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 
