@@ -49,7 +49,7 @@ Sıra:
 | 21.7 | `FE-08` | 🟢 | Konum araması: backend ucu yok, bayrakla kapalı kod | S | ✅ | frontend · docs | K271 | fe 8263923 · be 9393dcd | commit'lendi |
 | 21.8 | `FE-03` | 🟢 | TypeScript `strict` kapalı (bugün 20 hata) | S | — | frontend · docs | — | fe a739642 | commit'lendi |
 | 21.9 | `TST-05` | 🟢 | Node sürümü sabit değil (CI 22, yerel 24) | S | ✅ | frontend · docs | K272 | fe 4a640dd · be 86445e4 | commit'lendi |
-| 21.10 | `TST-06` | 💡 | Backend testleri paralel koşmuyor | M | — | backend · docs | | | bekliyor |
+| 21.10 | `TST-06` | 💡 | Backend testleri paralel koşmuyor | M | — | backend · docs | — | be 0d40881, e307e08 | commit'lendi |
 | 21.11 | `TST-03` | 🟢 | Satır kapsamı ölçülmüyor; eşik yok | S | ✅ | backend · docs | | | bekliyor |
 | 21.12 | `ARC-10` | 💡 | `OptimizeUploadedImage` 664 satır, dört sorumluluk | M | — | backend · docs | | | bekliyor |
 | 21.13 | `SEC-18` | 💡 | Token `localStorage`'da; `httpOnly` çerez (bu fazda yalnızca plan) | L | ✅ | docs | | | bekliyor |
@@ -755,6 +755,20 @@ Değilse maddeyi bloke et (§3 madde 5).
 - `deploy-frontend.sh` uyarı parçası yerelde `bash -n` ve sahte `node` ile 9 durumda sınandı; sunucuda koşmadı.
 - Kapılar: `npm run check` 0, `composer check` 1337/1337. CI koşusu **koşmadı** (push İsmail'in).
 - İsmail'e: sunucuda `node --version` (beklenen `v24.x`).
+
+### 21.10 (`TST-06`)
+
+- Süre: sıralı `php artisan test` **140,4 sn** (1337 test); paralel (20 süreç) **30–35 sn**, ~4,2×. Üç ardışık
+  `composer test:parallel`: 33,8 · 34,4 · 34,7 sn, hepsi 1338/1338. Toplam 11 yeşil paralel koşu.
+- `composer check`'in test adımı değişmedi. **İsmail'e soru:** `check`'e alınsın mı? (Kazanç ~105 sn; risk: bir kez görülen
+  300 sn asılma, aşağıda.)
+- İlk `composer test:parallel` denemesi Composer'ın 300 sn süre sınırına takıldı; aynı komut sonraki sekiz koşuda asılmadı,
+  neden bulunamadı.
+- Laravel paralel veritabanı adı `davetkart_test_test_<n>`; yalnızca veritabanı trait'li sınıflar ayrılır.
+  `ParallelTestDatabaseTest` bunu sınar (ilk hâli trait'siz sınıfa yazıldığında paralelde kırmızı yandı).
+- Kilit testleri paralelde de yeşil; ayrı grup gerekmedi. `composer audit` temiz.
+- Dış ağ: `composer require` Packagist ve GitHub'dan paket indirdi (geliştirme bağımlılığı; proje sistemlerine istek değil).
+- Gözlem: bu maddenin ortasında İsmail'in `php artisan serve` ve Vite süreçleri çalışmıyordu (ajan durdurmadı).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
