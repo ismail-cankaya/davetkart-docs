@@ -13,7 +13,7 @@
 
 | Sıra | Konu | Depolar | K | Commit'ler | Durum |
 |---|---|---|---|---|---|
-| 22.1 | E-posta doğrulaması satın almayı ve yayını engellemez; panelde hatırlatma bandı | backend · frontend · docs | K276 | — | kod hazır · commit bekliyor |
+| 22.1 | E-posta doğrulaması satın almayı ve yayını engellemez; panelde hatırlatma bandı | backend · frontend · docs | K276 | be 5d390e2 · fe 6c0ea84 | commit'lendi |
 
 Durum değerleri: `bekliyor` · `commit'lendi` · `birleşti` (İsmail, `main`'e aldıktan sonra).
 
