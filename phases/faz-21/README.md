@@ -57,7 +57,7 @@ Sıra:
 | 21.15 | `SEC-17` | 🟢 | Docs klasöründe git dışı 148 MB eski kod arşivi (`.env` içerenler) | S | ✅ | yerel disk (yalnızca liste) · docs | — | — | liste |
 | 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | fe 2cc799f | commit'lendi |
 | 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | — | liste |
-| 21.18 | `ARC-07` | 🟢 | Frontend'de `.gitattributes` yok (CRLF/LF) | S | ✅ | frontend · docs | | | bekliyor |
+| 21.18 | `ARC-07` | 🟢 | Frontend'de `.gitattributes` yok (CRLF/LF) | S | ✅ | frontend · docs | K275 | fe d3a91d1, e28b599 | commit'lendi |
 | 21.90 | — | — | Kapanış: tam kapılar, kayıtlar, rapor | S | — | backend · frontend · docs | — | | bekliyor |
 
 Durum değerleri:
@@ -836,6 +836,19 @@ Değilse maddeyi bloke et (§3 madde 5).
 - Yazım hataları: backend `media-confugration`, `payment-servide`, `faz15-desing/claude-davetiye`, `Enums`; frontend
   `desing` geçen 6 dal; depo adı `davetkart-frontent` (yeniden adlandırma kapsam dışı).
 - HAT-C-ACIK-HATALAR #21 ve #29'a bağlantı notu eklendi (geçmiş metin değişmedi).
+
+### 21.18 (`ARC-07`)
+
+- Ön koşul sağlandı: frontend ağacı temizdi, 21.3–21.16'nın frontend işleri commit'liydi.
+- Ölçüm: indeks i/lf 1482, i/crlf 0, i/mixed 0, ikili 371; çalışma ağacı w/crlf 1473, w/lf 9. Sözleşme dosyası indekste
+  backend'le bayt bayt aynı (sha256 `b23e9da6…`, 4209 B); diskteki kopya CRLF (4381 B).
+- Commit (a) yalnızca `.gitattributes` (fe d3a91d1). Commit (b) `git add --renormalize .` **0 dosya** sahneledi (indeks
+  zaten LF); `--ignore-all-space --stat` boş; boş commit atılmadı. Kılavuz ayrı commit (fe e28b599).
+- Kapılar: `npm run check` 0, `npm run e2e` 6/6, `git status` temiz.
+- **docs `CLAUDE.md` §7 "CRLF tuzağı" için öneri (CLAUDE.md değiştirilmedi):** "Frontend artık `.gitattributes` taşıyor
+  (`* text=auto eol=lf`, K275): `git add` CRLF'yi girişte LF'ye çevirir, alakasız dosya sürüklenmez. Dosyaları tek tek ekleme
+  kuralı yine de sürer (kapsam disiplini). Çalışma ağacı İsmail `git checkout-index --force --all` koşana kadar CRLF kalabilir."
+- Gördüm, dokunmadım: frontend'de izlenen bir `.pyc` dosyası var (ikili; derleme artığı, `.gitignore` adayı).
 
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
