@@ -60,6 +60,13 @@ Tam liste ve gerekçeler: [`REPORT.md`](REPORT.md) Ek A. Özet:
 
 Bulgu sayıları ve tabloları yeniden üretmek için: `node evidence/scripts/90-report-tools.mjs stats`.
 
+## Düşük ve öneri bulgularının durumu (27 Kasım 2026)
+
+Ertelenen 🟢/💡 bulgular Faz 21'de tek oturumda ele alındı: `SEC-15`, `SEC-16`, `SEC-17` (liste), `SEC-18` (plan), `OPS-07`,
+`OPS-08`, `OPS-09` (plan), `ARC-06`, `ARC-07`, `ARC-08` (liste), `ARC-10`, `FE-03`, `FE-07`, `FE-08`, `FE-58`, `TST-03`, `TST-05`,
+`TST-06`. Durum ve kararlar (K265–K275): [`../../phases/faz-21/README.md`](../../phases/faz-21/README.md) §1. Daha önce
+kapananlar: `ARC-09`, `SEC-14`, `FE-05`, `FE-09`, `FE-56` (Faz 18–19), `OPS-06`, `FE-06`, `FE-55`, `FE-57` (Faz 20).
+
 ## Temizlik (denetim bitince, İsmail)
 
 `D:\Projects\davetkart\_audit-snap\` klasörü ve sekiz `davetkart_aud_*` veritabanı silinebilir; kanıt

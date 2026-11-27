@@ -23,6 +23,7 @@ Bu deponun kendi değişiklikleri. En yeni üstte.
 - 21.16 `FE-07`: frontend `README.md` yazıldı (kurulum, komutlar, `verify:*`, ortam, backend ilişkisi); `CLAUDE.md`'de GenAI satırı ve kurulum komutları koda göre düzeltildi. `npm run check` 0.
 - 21.17 `ARC-08`: [`phases/faz-21/FAZ-21-ARC-08-KOMUTLARI.md`](phases/faz-21/FAZ-21-ARC-08-KOMUTLARI.md): üç deponun dal tablosu (birleşmiş mi, worktree, yazım hataları), 10 temiz worktree, `v1.0.0`/`v1.1.0`/`v1.2.0` etiket önerisi ve İsmail'in komutları (hiçbiri koşulmadı); `HAT-C-ACIK-HATALAR.md` #21/#29 not.
 - 21.18 `ARC-07`: frontend `.gitattributes` (`* text=auto eol=lf` + ikili kalıplar) — **K275** (varsayılan); indeks zaten LF, `--renormalize` 0 dosya, çalışma ağacı dokunulmadı. `npm run check` 0, e2e 6/6.
+- 21.90 kapanış: son uçta `composer check` 1354/1354, `composer audit` temiz, frontend `npm ci` + check + e2e 6/6, karar indeksi temiz (sıradaki K276); [`phases/README.md`](phases/README.md) Faz 21 satırı, `AUD-2026-11-12` README'sine düşük bulguların durumu notu, [`phases/faz-21/README.md`](phases/faz-21/README.md) §7 (doğrulama, İsmail'e kalan 13 madde). Bloke madde yok.
 
 ## 2026-11-27 — Faz 22 planı Faz 21 oldu, tek oturumda koşacak (`docs/2026-11-26-faz-21-plan`)
 

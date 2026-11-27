@@ -58,7 +58,7 @@ Sıra:
 | 21.16 | `FE-07` | 🟢 | Frontend `README.md` boş; `CLAUDE.md` kodla çelişiyor | S | — | frontend · docs | — | fe 2cc799f | commit'lendi |
 | 21.17 | `ARC-08` | 🟢 | Dal hijyeni, sürüm etiketi yok, eski worktree'ler (yalnızca liste ve komut) | M | ✅ | üç depo (salt okuma) · docs | — | — | liste |
 | 21.18 | `ARC-07` | 🟢 | Frontend'de `.gitattributes` yok (CRLF/LF) | S | ✅ | frontend · docs | K275 | fe d3a91d1, e28b599 | commit'lendi |
-| 21.90 | — | — | Kapanış: tam kapılar, kayıtlar, rapor | S | — | backend · frontend · docs | — | | bekliyor |
+| 21.90 | — | — | Kapanış: tam kapılar, kayıtlar, rapor | S | — | backend · frontend · docs | — | be 1191a95 | commit'lendi |
 
 Durum değerleri:
 - `bekliyor`
@@ -850,20 +850,58 @@ Değilse maddeyi bloke et (§3 madde 5).
   kuralı yine de sürer (kapsam disiplini). Çalışma ağacı İsmail `git checkout-index --force --all` koşana kadar CRLF kalabilir."
 - Gördüm, dokunmadım: frontend'de izlenen bir `.pyc` dosyası var (ikili; derleme artığı, `.gitignore` adayı).
 
+### 21.90
+
+- Son uçta kapılar yeşil (§7). Bloke madde yok.
+- **İz taraması sapması (ajanın hatası):** plan deseni frontend ve docs'ta birer eşleşme verdi. İkisi de bir atıf satırı
+  değil, 21.16 commit konularındaki proje kural dosyasının adı (`CLAUDE.md`): fe `2cc799f` "…fix the CLAUDE.md lines…",
+  docs `56a65ca` "…frontend README and CLAUDE.md". `Co-Authored-By`/`Generated with` üç depoda 0. Kural "Claude" kelimesini
+  de yasakladığı için bu bir ihlaldir; commit'ler son commit olmadığından `--amend` istisnası uygulanamadı ve `rebase`
+  yasak. İsmail isterse push'tan önce yeniden adlandırabilir (frontend: `git rebase -i faz-20-critical-fixes`, `2cc799f`
+  satırında `pick` → `reword`, konu ör. "Write the frontend README and fix the assistant rules file"; docs: aynısı
+  `docs/2026-11-26-faz-21-plan` tabanıyla `56a65ca` için). Kalan kapanış commit'lerinde dosya adı mesaja yazılmadı.
+- Üç depoda `git status --short` temiz; commit listeleri ve izler raporda.
+
 ## 7. Doğrulama ve kalanlar (21.90'da doldurulur)
 
 | Kapı | Sonuç (görülen çıktı) |
 |---|---|
-| Backend `composer check` | |
-| Backend `composer audit` | |
-| Frontend `npm run check` | |
-| Frontend `npm run e2e` | |
-| Karar indeksi `--check` | |
-| Ajan izi taraması (üç depo) | |
+| Backend `composer check` | pint passed · phpstan 0 · `errors:export --check` "Katalog guncel" · `plans:export --check` · `env:template` "in sync" · `k18: 47 dosya, 0 ihlal` · phpunit **1354/1354**, 5303 assertion (taban 1306) |
+| Backend `composer audit` | "No security vulnerability advisories found." |
+| Frontend `npm run check` | `npm ci`: "added 160 packages … found 0 vulnerabilities"; check çıkış 0 · `verify:errors` 28 kod · `verify:i18n` 780 parça / 65 dosya |
+| Frontend `npm run e2e` | **6 passed** (1,9 dk) |
+| Karar indeksi `--check` | `indeks 237 · tanım 237 · eksik 0 · tanımsız 0 · bekleyen 0` (sıradaki boş K276) |
+| Ajan izi taraması (üç depo) | Plan deseni `co-authored\|claude\|generated with` (`-ciE`): backend **0**, frontend **1**, docs **1**. İki eşleşme de 21.16 commit konusundaki **`CLAUDE.md` dosya adı** (fe `2cc799f`, docs `56a65ca`); `co-authored\|generated with` üç depoda **0**, `CLAUDE.md` dışında "claude" **0**. Yazar her commit'te `ismail-cankaya`. Son commit olmadıkları için `--amend` istisnası uygulanamadı, `rebase` yasak (§6) |
 
 **Bu klasördeki dosyalar:** `README.md` (bu sayfa) · [`FAZ-21-ARC-08-KOMUTLARI.md`](FAZ-21-ARC-08-KOMUTLARI.md) (21.17: dal, worktree ve etiket listesi + İsmail'in komutları).
 
-**İsmail'e kalan:** *(21.90'da numaralı liste)*
+**İsmail'e kalan:**
+
+1. Üç depoda `faz-21-backlog` (docs: `docs/2026-11-27-faz-21-backlog`) gözden geçirip `main`'e birleştirmek ve itmek
+   (sıra: backend, frontend, docs; `YAYIN-SIRASI.md` §4). Ajan push/merge yapmadı.
+2. Sunucu (21.5, K269): PHP-FPM havuzunu kur, `www.conf`'u kapat, `php-fpm8.5 -t`, reload (backend
+   `docs/rehber/deploy/php-fpm/davetkart.md` §4); deploy sonrası `php-fpm8.5 -i | grep opcache.validate_timestamps` → 0.
+3. Bellek payı kararı (21.5): 1 GB takas dosyası mı, havuzda `php_admin_value[memory_limit] = 192M` mi?
+4. Sunucu (21.4): Nginx `log_format` içine `rid=$upstream_http_x_request_id` (backend `AssignRequestId.md` §6).
+5. Sunucu (21.9): `node --version` (beklenen `v24.x`).
+6. İlk CI koşusunda (21.9, 21.11): frontend Node `.nvmrc`'den kuruldu mu; backend "Satır kapsamı" adımı pcov yüzdesi (eşik
+   92,9; xdebug ölçümünden farklıysa K273'e not düşüp eşiği düzelt).
+7. 21.10: `composer test:parallel` `composer check`'e alınsın mı? (sıralı ~140 sn → paralel ~33 sn; bir kez görülen 300 sn
+   asılma tekrar etmedi.)
+8. 21.13 (K274): SEC-18 geçiş planının beş karar sorusu (Ek A.10); uygulama fazı K175 CSP zorlamasından sonra.
+9. 21.15: `archive/local-snapshots/` arşivlerini sil ya da şifreli kasaya taşı; dolu idiyse AWS ve Gemini anahtarlarını
+   döndür (Ek B.3).
+10. 21.17: `v1.2.0` hangi uca (`faz-19-fix` mi, audit'i yeşil `faz-20-critical-fixes` mi)? `v1.0.0` için sunucudaki commit'leri
+    öğren; sonra `FAZ-21-ARC-08-KOMUTLARI.md` §4 (worktree → dallar → etiketler; push yok).
+11. 21.18 (isteğe bağlı): frontend çalışma ağacını LF'ye çevir (temiz ağaç, Vite kapalı: `git checkout-index --force --all`);
+    docs `CLAUDE.md` §7 "CRLF tuzağı" önerisi §6 21.18'de.
+12. §5 "Cevabın" sütunları boş kaldı: bütün kararlar varsayılanla alındı ve K kayıtlarında "varsayılan (İsmail cevaplamadı)"
+    yazıyor (K265–K275). Farklı bir cevabın varsa yeni K ile değiştirilir.
+13. Gördüm, dokunmadım listesi (§6): `INVITATION_LOCKED` yorumları (3 dosya, K18 temizliği), `vite.config.ts` AI Studio yorumu,
+    frontend'de izlenen `.pyc`, kullanılmayan `auth.login_rate_limit_per_minute` ayarı, kısa yoldan geçen EXIF'siz JPEG'in
+    PHP kuyruğu, başka sekmede ödeme dönüşü (K267 B6).
+
+
 
 ## Ek A — SEC-18 geçiş planı (oturum token'ı `localStorage`'dan `httpOnly` çereze)
 
