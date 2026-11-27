@@ -77,10 +77,13 @@ Arşiv bandı (tek satır, dosyanın en üstü):
 
 ## 7. Çalışma biçimi (mevcut dokümanlardan)
 
-- **Git yazma işlemlerini İsmail yapar.** `add`, `commit`, `push`, `stash`, `reset` çalıştırma;
-  commit komutlarını ver ([`prompts/PROMPT-FAZ-11.md`](prompts/PROMPT-FAZ-11.md) §0 madde 2;
-  `PHP-LARAVEL-SETUP.md` §2 kural 4: *"Komutları o çalıştırıyor."*).
-- Commit komutu: her adım ayrı PowerShell bloğu, dosyalar **tek tek, açık yolla**; joker ve `-A`
+- **Commit serbest (İsmail, 2026-11-27):** asistan bu depoda her oturumda `git add` ve `git commit` çalıştırabilir
+  (dosyalar tek tek, açık yolla; mesaj §6 biçiminde). İzin `.claude/settings.json`'da. `push`, `stash`, `reset` ve dal
+  silme hâlâ İsmail'in; bunlar için komut ver. Eski kural (*"git yazma işlemlerini İsmail yapar"*,
+  [`prompts/PROMPT-FAZ-11.md`](prompts/PROMPT-FAZ-11.md) §0 madde 2) commit için geçersiz.
+- Kod depolarında (backend, frontend) commit, dal ve push **soruya tabidir, varsayılan engelli**: İsmail açıkça
+  istemedikçe yapılmaz (o depoların `CLAUDE.md` "Git" bölümü).
+- İsmail'e verilen commit komutu: her adım ayrı PowerShell bloğu, dosyalar **tek tek, açık yolla**; joker ve `-A`
   yok; blok `git status --short` ile biter ([`prompts/PROMPT-FAZ-12.md`](prompts/PROMPT-FAZ-12.md) §10 madde 3).
 - **B7:** çıktısını görmediğin hiçbir şeye "doğrulandı / geçti" yazma; koşmadıysa "koşmadı" yaz
   ([`prompts/PROMPT-FAZ-11.md`](prompts/PROMPT-FAZ-11.md) §0 madde 5).
