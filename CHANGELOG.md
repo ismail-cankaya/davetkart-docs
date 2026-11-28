@@ -2,9 +2,29 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-28 — Faz 24–25 kodlandı, Faz 26 açıldı (`claude/brave-edison-dbg3l1`)
+
+- Kararlar K300–K317 (aralık K300–K329, İsmail: "çakışma olmasın"): [`EK-FAZ-24`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) taslak T1–T15'ten numaralandı, [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) satırları ve aralık notu, `decisions/README.md` satırı.
+- [`phases/faz-24/README.md`](phases/faz-24/README.md) takip ve kapılar, [`FAZ-24-PLAN.md`](phases/faz-24/FAZ-24-PLAN.md) §10 uygulama kaydı; yeni [`phases/faz-25/`](phases/faz-25/README.md) ve [`phases/faz-26/`](phases/faz-26/README.md); `phases/README.md` Faz 23–26 satırları.
+- `docs/2026-11-27-faz-23-v1.3-frontend-plan` bu dala birleşti (Faz 23 kaydı; `CHANGELOG.md` ve `phases/README.md` çakışmaları elle).
+
 ## 2026-11-27 — Faz 24 planı (`claude/brave-edison-dbg3l1`)
 
 - Faz 24 (v2.0, davetiye metin editörü) planı: [`phases/faz-24/FAZ-24-PLAN.md`](phases/faz-24/FAZ-24-PLAN.md), takip [`phases/faz-24/README.md`](phases/faz-24/README.md); karar taslakları T1–T15 [`EK-FAZ-24`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) (⚠️ numara bekliyor, öneri K300–K329; `DECISION-INDEX.md` notu); `phases/README.md` (Faz 23 ve 24 satırları) ve `decisions/README.md` satırları. Dal `docs/2026-11-27-faz-22-release-prep` ucundan. Kod yok; kod dalları Faz 23 bitince (İsmail).
+
+## 2026-11-27 — Faz 23: yön A kodlandı
+
+- Frontend `faz-23-v1.4-frontend` (`faz-22-release-prep` @ `b0a07dc`'den; Faz 22 = `v1.3` hazırlığı): 23.1 `PhoneFrame`, 23.2 görsel çekim betiği ve 3 görsel, 23.3 vitrin sahnesi (telefon / tablet / masaüstü / sabit modlar, 10 dil), 23.4 e2e. `npm run check` 0, yeni e2e 5/5, axe 0; tüm e2e paketi koşmadı. [`FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md) §0.2, [`phases/faz-23/README.md`](phases/faz-23/README.md), [`phases/README.md`](phases/README.md) Faz 23 satırı.
+
+## 2026-11-27 — Faz 23 planı: v1.4 frontend vitrin sahnesi (sürüm düzeltmesi)
+
+- Sürüm numaraları düzeltildi: Faz 22'nin sonu `v1.3`, Faz 23 `v1.4` (ilk taslakta `v1.2` / `v1.3`). Kod dalı `faz-23-v1.4-frontend`, `v1.3` sürüm dalından açılacak. Docs dalının adı değişmedi.
+- İlk geri bildirim [`FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md) §0.1'e: A ve C beğenildi (A vitrin sahnesi için, C ileride sayfanın alt bölümleri için); A/B/C kaydırmalı maketinin bağlantısı.
+
+## 2026-11-27 — Faz 23 planı: v1.3 frontend vitrin sahnesi (`docs/2026-11-27-faz-23-v1.3-frontend-plan`)
+
+- [`phases/faz-23/FAZ-23-PLAN.md`](phases/faz-23/FAZ-23-PLAN.md): İsmail'in isteği (hero'dan sonra davetiyeler tıklamadan görünsün; ortada büyük, yanlarda kaydırmayla hareket eden telefonlar; Apple tanıtımı hissi; kısa; "AI vibe" yok) gereksinimlere bölündü (G1–G7). Ana sayfa kodu ölçüldü (`faz-21-backlog` @ `e28b599`), üç tasarım yönü (A Üçlü Sahne önerilen, B Akan Sütunlar, C Odak Yayı), telefon içerikleri (yanlar ekran görüntüsü, orta video), teknik tasarım, adımlar 23.0–23.9, riskler ve dokuz karar sorusu (S1–S9). Kod yok, karar yok.
+- [`phases/faz-23/README.md`](phases/faz-23/README.md) açıldı; [`phases/README.md`](phases/README.md) faz tablosuna ve klasör listesine Faz 23 satırı.
 
 ## 2026-11-27 — Faz 22 (`docs/2026-11-27-faz-22-release-prep`)
 

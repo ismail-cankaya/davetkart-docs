@@ -18,7 +18,7 @@ indeks ve bu depodaki ekler durur.
 | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-20.md) | Faz 20 (`AUD-2026-11-26`, Faz 19 sonrası kritik hatalar): 20.1 `OPS-10` → K263 · 20.4 `OPS-06` → K264 | Sürüyor · ana dosyaya işlenmedi |
 | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md) | Faz 21 (ertelenmiş düşük bulgular ve açık kararlar, tek oturum): 21.1 `SEC-16` → K265 · 21.2 `SEC-15` → K266 · 21.3 `FE-58` → K267 · 21.4 `OPS-08` → K268 · 21.5 `OPS-07` → K269 · 21.6 `ARC-06` → K270 · 21.7 `FE-08` → K271 · 21.9 `TST-05` → K272 · 21.11 `TST-03` → K273 · 21.13 `SEC-18` → K274 (plan) · 21.18 `ARC-07` → K275 | Sürüyor · ana dosyaya işlenmedi |
 | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md) | Faz 22 (yayın öncesi son faz, eksikler ve düzenlemeler): 22.1 e-posta doğrulaması satın almayı engellemez → K276 | Sürüyor · ana dosyaya işlenmedi |
-| [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) | Faz 24 (v2.0 davetiye metin editörü): karar taslakları T1–T15; ⚠️ numara bekliyor (öneri K300–K329) | Taslak · indekste yok |
+| [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) | Faz 24–26 (v2.0 davetiye metin editörü): K300–K317 (aralık K300–K329) | Kod tamam (24, 25) · Faz 26 sürüyor · ana dosyaya işlenmedi |
 
 Faz 10'un kararları (K87–K106) [`../phases/faz-10/FAZ-10-PLANI.md`](../phases/faz-10/FAZ-10-PLANI.md) §2'de; `EK-FAZ-10` hiç
 yazılmadı. Eski backend `claude/` yolları: [`_restructure/2026-11-backend-claude-map.md`](../_restructure/2026-11-backend-claude-map.md).

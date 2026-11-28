@@ -1,6 +1,6 @@
 # Faz 24 — v2.0: Davetiye Metin Editörü (Plan)
 
-> **Durum:** 📝 Plan · kod yok · karar numaraları bekliyor (§9 S1).
+> **Durum:** ✅ Faz 24 ve 25 kodlandı (28 Kasım 2026, §10) · Faz 26 sürüyor · kararlar K300–K317.
 > **Tarih:** 27 Kasım 2026 · **Sürüm:** v2.0 · **Sıra:** Faz 22 → `v1.3` → Faz 23 (`v1.4`) → **Faz 24 (`v2.0`)**.
 > **Bağımlılık:** Faz 23'e **bağlı değil** (İsmail, 27 Kasım). Ama kod dalları **Faz 23 bittikten sonra** açılır (İsmail, 27 Kasım).
 > **Docs dalı:** `claude/brave-edison-dbg3l1` (`docs/2026-11-27-faz-22-release-prep` ucundan; `main` Faz 18'de kaldığı için).
@@ -297,3 +297,24 @@ Faz 23 (ana sayfa vitrin sahnesi) `HomePage`, `PreviewSection`, `DeviceSimulator
 | S4 | Kullanıcının kendi içeriği (isimler, mekân, başlık) tıkla-düzenle ile her pakette düzenlenebilsin mi? | Evet; Elit yalnızca **sabit şablon metinleri** için |
 | S5 | Bir sabit metin tamamen **boş** bırakılabilsin mi (ör. "Özel Anlarımız" etiketini kaldırmak)? | Hayır (tasarım boşluğu bozulur); kaldırma bölüm düzeyinde "Gizle" ile |
 | S6 | Kod dal adı | `faz-24-v2.0-editor` (frontend ve backend) |
+
+## 10. Uygulama kaydı (28 Kasım 2026)
+
+İsmail'in cevapları (28 Kasım): S1 *"çakışma olmasın"* → K300–K329 aralığı; S2 önerildiği gibi (anında yansır, yazma
+"Kaydet" ile); S3 *"kota olacak ancak ai kısmını daha sonra ayrıntılı çalışacağız, şu anda altyapısını hazırla"*;
+S4 *"kendi içeriklerde paket değişmesin ve değiştirebilsin"*; S5 önerildiği gibi; S6 *"isim uygundur"*. Kurallar:
+*"main e kesinlikle dokunmuyorsun"*, *"fazları bölebilirsin"*, onaydan sonra soru yok, git işlemleri serbest.
+
+Plandan sapmalar ve eklemeler:
+
+| Plan | Uygulama | Neden |
+|---|---|---|
+| Tek faz, 24.0–24.13 | Üç faz: 24 altyapı, 25 editör, 26 kalan metinler (K316) | Kapsam; İsmail bölmeye izin verdi |
+| 24.3/24.4 ekran görüntüsü karşılaştırması | Belirlenimci HTML anlık görüntüsü (762 çizim; sabit saat ve tohum) | Piksel yerine DOM: daha kesin ve hızlı; taşımadan önce/sonra birebir aynı |
+| `TemplateFlavor`'da metin alanları | Kaldırıldı; `textScopes` + `textDefaults` (çalışma anı: "Bölüm II", "Salon 1") | Metinler tek yerde (`tr.json`); kapsam zinciri şablon ailelerini (kitap, sergi) karşılar |
+| Hero'lar ve özel şablonlar 24.4'te | Faz 26'ya (tavan 511) | Ortak bölümler ve başlıklar şablonların neredeyse hepsini kapsıyor; kalan yüzlerce satır ayrı faz |
+| Paket bütçesi planda yoktu | Metin paketi, editör çevirileri, editör çerçevesi ve bildir penceresi tembel (K315) | İlk sürümde 721,7 / 835,4 kB idi (bütçe 720 / 800) |
+| "bildir" postası | İsteğe bağlı: `DAVETKART_REPORTS_EMAIL` boşsa yalnızca kayıt | Yönetici adresi tanımlı değildi |
+| Faz 22 ucu yeşil varsayıldı | Faz 22 ucunda `ErrorCodeUsageTest`, `errors:export --check` ve `k18:check` kırmızıydı → 24.0'da düzeltildi | Faz 24 yeşil kapıdan başlasın |
+
+Ayrıntı ve commit'ler: [`README.md`](README.md), [`../faz-25/README.md`](../faz-25/README.md), [`../faz-26/README.md`](../faz-26/README.md).

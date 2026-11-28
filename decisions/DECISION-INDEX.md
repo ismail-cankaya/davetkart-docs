@@ -10,7 +10,7 @@
 > **Faz 19 paralel hatları (19.90, 24 Kasım):** K182 ve hat kararları `phases/faz-19/kayit/`'tan buraya işlendi;
 > bekleyen aralık kaldırıldı (K253). K193–K219 (Hat A) ve K238–K249 (Hat B) ayrılmıştı, kullanılmadı; K233–K237 Hat B'nin ortak düzeltmesinde.
 
-**Sıradaki boş numara: K277**
+**Sıradaki boş numara: K277** · Faz 24–26 aralığı: K300–K329 (sıradaki **K318**)
 
 | K# | Başlık | Faz | Durum | Kaynak |
 |---|---|---|---|---|
@@ -252,6 +252,24 @@
 | **K274** | `SEC-18`: token `localStorage` → `httpOnly` çerez **planlandı** (Sanctum SPA çerez kimliği, CSRF, K11 `{user}`, geçişte iki yol); ön koşul K175 CSP zorlaması; uygulama ayrı faz | Faz 21.13 (27 Kas) | planlandı · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2113--sec-18-token-localstorageda-httponly-çerez--yalnızca-plan) |
 | **K275** | Frontend `.gitattributes`: `* text=auto eol=lf` + ikili kalıplar; indeks zaten LF (renormalize 0 dosya), çalışma ağacı dokunulmadı (LF'ye çevirme isteğe bağlı) | Faz 21.18 (27 Kas) | geçerli · varsayılan (İsmail cevaplamadı) | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-21.md#2118--arc-07-frontendde-gitattributes-yok) |
 | **K276** | E-posta doğrulaması checkout ve yayını beklemez (`VerifiedEmailGuard` ve `403 EMAIL_NOT_VERIFIED` kalktı, katalog 28 → 27); ilk yayın indirimi doğrulama istemeye devam eder; panelde "hesap erişimini kaybetmemek için doğrula" hatırlatma bandı. K191'in checkout/yayın maddelerini geçersiz kılar | Faz 22.1 (27 Kas) | geçerli · İsmail'in kararı | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md` §A](addenda/PHP-LARAVEL-SETUP-EK-FAZ-22.md#221--e-posta-doğrulaması-satın-almayı-engellemez) |
+| **K300** | Tasarım kilitli, metin serbest: editör metin ve bölüm düzenler; font/renk/yerleşim yok | Faz 24 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K301** | Sabit metinler anahtarla; düzenlenebilir anahtar sözleşmesi `text-slots.json` frontend'de üretilir, backend'e aynen kopyalanır | Faz 24.3 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K302** | Çok dilli altyapı yalnızca `tr`: `tr.json` varsayılanları, `invitations.locale`; davetiye dili arayüzden bağımsız; diğer diller v2.1 | Faz 24 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K303** | `text_overrides` jsonb: yalnızca değişenler, dile göre gruplu; varsayılana eşit saklanmaz, boş yok, ≤120 anahtar | Faz 24.4 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K304** | Metin düz yazı: HTML yok, `dangerouslySetInnerHTML` yasak, kontrol karakteri yok, URL tıklanamaz | Faz 24 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K305** | Sabit metin özelleştirmesi Elit: `has_custom_texts` mutator'da `fill()` anında; `module_tiers`; kendi içerik paket istemez | Faz 24.4 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K306** | Tıkla-düzenle + Metinler paneli; yazma "Kaydet" ile; yayındaki değişiklik anında (taslak katmanı v2.1) | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K307** | Bölüme tıkla → ayarlar; ➕ "Bölüm ekle" sabit yerinde; Gizle veri silmez | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K308** | Varsayılana dön metin başına ve toplu, ikisi de onaylı | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K309** | Şablon değişince özel metinler silinmez, görünmeyenler işaretlenir ve Elit'i tutar; kategori değişince sorulur | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K310** | Asistanla metin önerisi altyapısı: sunucu istemi, 3 öneri, uymayan atılır, sohbetle aynı kota | Faz 25.1 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K311** | Geri al / yinele oturum içi, 50 adım | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K312** | Paywall'da ikinci yol: özel metinleri sıfırla ve mevcut paketle yayınla | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K313** | "Bu davetiyeyi bildir": `invitation_reports`, IP hash, honeypot, `throttle:contact`, isteğe bağlı kuyruk postası | Faz 25.1 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K314** | LCV metinleri anahtar sisteminde; özel soru v2.1; sabit metin boş bırakılamaz (Gizle ile kaldırılır) | Faz 24–25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K315** | Metin paketi ve editör çevirileri tembel; ilk yükleme 714,2 kB, misafir 799,2 kB (K237 bütçesi) | Faz 25 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K316** | Faz 24/25/26 bölünmesi, dallar (`faz-24-v2.0-editor` → `faz-25-v2.0-editor-ui` → `faz-26-v2.0-texts`), `main`'e dokunulmaz | Faz 24–26 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
+| **K317** | v2.1+'a kalanlar: diller, çeviri, ton setleri, LCV özel soru, bölüm sırası, RTL, taslak katmanı | Faz 24 (28 Kas) | geçerli | [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) |
 
 ## Notlar
 
@@ -259,7 +277,7 @@
   K260–K262 ortak düzeltmede (Hat A) kullanıldı, numaralama K263'ten sürer. K233–K237 ortak düzeltmede Hat B'nin
   ayrılmış aralığından alındı (Hat A K260+'ı eşzamanlı kullanırken çakışmasın diye). Başka eksik yok (`--check` denetler).
 - Çakışma: backend `docs/07` §8'deki ikinci **K18** (Pest/PHPUnit) orada **K24** olarak düzeltilmiş (`docs/07:958`). Bu depoda çakışma yok.
-- ⚠️ Faz 24 (v2.0) karar taslakları T1–T15 [`addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md`](addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md)'de **numara bekliyor**: Faz 22 ve 23 açıkken sıradan numara çakışır (Faz 23 dalı hâlâ "sıradaki K276" diyor). Öneri: Faz 24'e K300–K329 ayrılsın; İsmail onaylayınca buraya işlenir.
+- **K300–K329 Faz 24–26'ya ayrıldı** (28 Kasım 2026, İsmail: "çakışma olmasın"): K300–K317 kullanıldı, K318–K329 boş. Sıradan numaralama (K277…) Faz 22/23 için sürer; K278–K299 sırayla dolar.
 - K94, Faz 10 planında Shopier için ayrıldı, Faz 12'de tanımlandı; bu yüzden sıra dışı görünür.
 - Ana dosyaya (`context/PHP-LARAVEL-SETUP.md` §7) işlenmiş olanlar yalnızca K1–K48 ve K64–K71. Geri kalanı kaynak sütunundaki ek dosyalarda bekliyor.
 - Backend `claude/` klasörünün kaynakları (EK-FAZ-5…9, `FAZ-10-PLANI.md`) 2026-11-22'de bu depoya taşındı (`ARC-05`, [`_restructure/2026-11-backend-claude-map.md`](../_restructure/2026-11-backend-claude-map.md)). K128–K145'in kaynağı backend `docs/rehber/fazlar/` dosyaları; yol düz metindir.
