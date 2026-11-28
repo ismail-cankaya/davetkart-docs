@@ -33,6 +33,23 @@
 - K305 (kendi içerik paket istemez) → K321 ve K324 aynı ilkeyle.
 - K237 / K315 (paket bütçesi 720 / 800 kB) → korunur.
 
+**Uygulamada değişen ayrıntılar (karar numaraları aynı):**
+
+- **K321 → `InvField` yerine DOM eşlemesi (27.2).** Ölçüm: kullanıcı içeriği şablonlarda 127 dosyada 540 yerde çiziliyor,
+  bir kısmı dize konumunda (`.split()`, prop). Bunun yerine tuval, editörde tıklanan öğenin metnini davetiyenin alanlarıyla
+  ve bu tasarımda çizilen şablon metinleriyle eşler (frontend `docs/rehber/src/hooks/useCanvasPicker.md`). Davranış
+  K321'deki gibi; ek kazanç: dize olarak çizilen şablon metinleri de tıklanır. Misafir sayfasına dokunulmaz.
+- **K323 → galeri taslağa girmez (27.3).** Galerinin üyeliği ve sırası medya uçlarında yazılır (`InvitationRequest`'te
+  galeri alanı yok); taslak kolonlar ve program adımlarını tutar.
+- **K328 → imzalı önizleme bağlantısı 29.4'te** (plan §4): 27.3 yalnızca taslak katmanı.
+- **K318 → hızlı önizleme ayrı rota değil, `/dashboard/*` içinde katman (29.1).** Adres yine `/dashboard/preview/:id`;
+  panel arkada kalır, kapatınca kaydırma yeri korunur. Yeni rota nesnesi misafir paketini büyütüyordu (K237).
+- **K328 → reddedilen imza 404 (29.4).** `signed:relative` 403 verir, `ApiExceptionRenderer` 403'ü 404'e çevirir (H7);
+  önizlemenin varlığı sızmaz.
+- **K237 → misafir paketi 799 976 / 800 000 bayt (28.6, 29.4).** Bütçe ince rota kabukları, isteğe bağlı rota parçaları
+  ve store'dan çözücü içe aktarımının kalkmasıyla korundu; pay 24 bayt (risk: [`faz-29`](../../phases/faz-29/README.md)).
+
 ## B. Uygulama kaydı
 
-Ayrıntı ve commit'ler: faz klasörleri ve backend `docs/rehber/fazlar/FAZ-27.md` (yazıldıkça).
+Ayrıntı ve commit'ler: [`faz-27`](../../phases/faz-27/README.md), [`faz-28`](../../phases/faz-28/README.md),
+[`faz-29`](../../phases/faz-29/README.md) ve backend `docs/rehber/fazlar/FAZ-27.md`.

@@ -2,6 +2,11 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-28 — Faz 27–29 (v2.1) kodlandı (`claude/cool-hamilton-q2dnft`)
+
+- [`phases/faz-27/README.md`](phases/faz-27/README.md) takip (27.1–27.4) ve kapılar; yeni [`phases/faz-28/`](phases/faz-28/README.md) ve [`phases/faz-29/`](phases/faz-29/README.md); `phases/README.md` Faz 27–29 satırları.
+- [`EK-FAZ-27`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-27.md) §A "Uygulamada değişen ayrıntılar": K321 DOM eşlemesi, K323 galeri taslak dışı, K318 `/dashboard/*` katmanı, K328 404, K237 misafir paketi payı.
+
 ## 2026-11-28 — Faz 26 tamam: tavan 0 (`claude/cool-hamilton-q2dnft`)
 
 - [`phases/faz-26/README.md`](phases/faz-26/README.md): 26.3 (fe `b53ff20`) ve 26.4 (be `e948a3f`), durum, kapılar, kalan iş yok; `phases/README.md` Faz 26 satırları; `phases/faz-27/README.md` 27.0 ve 26.3 commit'leri.
