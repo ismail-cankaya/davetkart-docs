@@ -27,6 +27,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | 24 | v2.0 altyapı: şablon metinleri koddan çıktı (anahtar + `tr.json`, çok dilli altyapı yalnızca `tr`), sözleşme `text-slots.json` + `verify:text-slots`, backend `locale` / `text_overrides` / `has_custom_texts`, özel metin Elit. K300–K305 | ✅ kod 28 Kasım 2026 · `composer check` 1385/1385, `npm run check` 0, 762 şablon çizimi taşımadan önceyle aynı · birleştirme bekliyor | backend/frontend `faz-24-v2.0-editor` (frontend `faz-23-v1.4-frontend`'ten, backend `faz-22-release-prep`'ten) · docs `claude/brave-edison-dbg3l1` | [`faz-24/`](faz-24/README.md) | backend `docs/rehber/fazlar/FAZ-24.md` |
 | 25 | v2.0 editör: tıkla-düzenle, Metinler paneli, ➕ bölüm ekle / gizle, varsayılana dön (onaylı), geri al/yinele, kategori sorusu, paywall'da "metinleri sıfırla ve yayınla", asistan önerisi altyapısı, "bu davetiyeyi bildir". K306–K313, K315 | ✅ kod 28 Kasım 2026 · `composer check` 1398/1398, `npm run check` 0, e2e `text-editor` 3/3 (geliştirme sunucusu) · birleştirme bekliyor | backend/frontend `faz-25-v2.0-editor-ui` (`faz-24-v2.0-editor`'dan) | [`faz-25/`](faz-25/README.md) | backend `docs/rehber/fazlar/FAZ-25.md` |
 | 26 | v2.0 kalan metinler: hero'larda ve şablona özel parçalarda koda gömülü metinler (`verify:text-slots` tavanı) | ⏳ tavan 511 → **243** (26.1 hero'lar, 26.2 şablona özel parçalar; 28 Kasım 2026) · kalan 243 dize konumunda, elle `useInvText` | frontend/backend `faz-26-v2.0-texts` (`faz-25-v2.0-editor-ui`'dan) | [`faz-26/`](faz-26/README.md) | — |
+| 27 | v2.1 altyapı (Faz 27–29: Önizleme ve Tasarım Stüdyosu): `iframe` cihaz tuvali, kullanıcı içeriğinde tıkla-düzenle (`InvField`), yayındaki davetiye için taslak katmanı. K318–K329 | ⏳ plan onaylandı (28 Kasım 2026) · önce 26.3 | frontend/backend `faz-27-v2.1-studio` (`faz-26-v2.0-texts`'ten) · docs `claude/cool-hamilton-q2dnft` | [`faz-27/`](faz-27/README.md) | backend `docs/rehber/fazlar/FAZ-27.md` |
 
 ## Klasörler
 
@@ -48,6 +49,7 @@ Durum sütunu backend `docs/rehber/fazlar/README.md`'den alındı (orada yazan t
 | [`faz-24/`](faz-24/) | `FAZ-24-PLAN.md` (v2.0 metin editörü planı; Faz 24–26'nın ortak planı), takip tablosu (`README.md`) | Kod tamam · birleştirme bekliyor |
 | [`faz-25/`](faz-25/) | Takip tablosu (`README.md`): editör | Kod tamam · birleştirme bekliyor |
 | [`faz-26/`](faz-26/) | Takip tablosu (`README.md`): kalan gömülü metinler | Sürüyor |
+| [`faz-27/`](faz-27/) | `FAZ-27-PLAN.md` (v2.1 Önizleme ve Tasarım Stüdyosu; Faz 27–29'un ortak planı), takip tablosu (`README.md`) | Sürüyor |
 | [`frontend-catch-up/`](frontend-catch-up/) | `FRONTEND-YAKALAMA-PLANI.md` (11 Eylül 2026) | Tamamlandı (tarihsel) |
 
 Commit komutu dosyalarındaki `Claude outputs\f13-ara`, `Claude outputs\f14` yolları eski yerdir;

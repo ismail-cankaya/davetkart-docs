@@ -2,6 +2,12 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-28 — Faz 27–29 planı: v2.1 Önizleme ve Tasarım Stüdyosu (`claude/cool-hamilton-q2dnft`)
+
+- Dal `claude/brave-edison-dbg3l1` ucuna ileri sarıldı (Faz 24–26 kayıtları).
+- [`phases/faz-27/FAZ-27-PLAN.md`](phases/faz-27/FAZ-27-PLAN.md) (Faz 27–29 ortak planı, İsmail onayı) ve [`phases/faz-27/README.md`](phases/faz-27/README.md) takip; `phases/README.md` Faz 27 satırları.
+- Kararlar K318–K329: [`EK-FAZ-27`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-27.md), [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) (K300–K329 aralığı doldu), `decisions/README.md` satırı. K306 ve K317 durumları: kısmen geçersiz kılındı → K323 / K329 (`EK-FAZ-24` ve indeks).
+
 ## 2026-11-28 — Faz 26: tavan 511 → 243 (`claude/brave-edison-dbg3l1`)
 
 - [`phases/faz-26/README.md`](phases/faz-26/README.md): 26.1 hero metinleri, 26.2 şablona özel metinler (commit'ler, kapılar, kalan 243 metnin yöntemi ve dosya listesi); `phases/README.md` Faz 26 satırı.
