@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-28 — Faz 26: tavan 511 → 243 (`claude/brave-edison-dbg3l1`)
+
+- [`phases/faz-26/README.md`](phases/faz-26/README.md): 26.1 hero metinleri, 26.2 şablona özel metinler (commit'ler, kapılar, kalan 243 metnin yöntemi ve dosya listesi); `phases/README.md` Faz 26 satırı.
+
 ## 2026-11-28 — Faz 24–25 kodlandı, Faz 26 açıldı (`claude/brave-edison-dbg3l1`)
 
 - Kararlar K300–K317 (aralık K300–K329, İsmail: "çakışma olmasın"): [`EK-FAZ-24`](decisions/addenda/PHP-LARAVEL-SETUP-EK-FAZ-24.md) taslak T1–T15'ten numaralandı, [`DECISION-INDEX.md`](decisions/DECISION-INDEX.md) satırları ve aralık notu, `decisions/README.md` satırı.
