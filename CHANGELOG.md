@@ -2,6 +2,10 @@
 
 Bu deponun kendi değişiklikleri. En yeni üstte.
 
+## 2026-11-28 — Faz 26 tamam: tavan 0 (`claude/cool-hamilton-q2dnft`)
+
+- [`phases/faz-26/README.md`](phases/faz-26/README.md): 26.3 (fe `b53ff20`) ve 26.4 (be `e948a3f`), durum, kapılar, kalan iş yok; `phases/README.md` Faz 26 satırları; `phases/faz-27/README.md` 27.0 ve 26.3 commit'leri.
+
 ## 2026-11-28 — Faz 27–29 planı: v2.1 Önizleme ve Tasarım Stüdyosu (`claude/cool-hamilton-q2dnft`)
 
 - Dal `claude/brave-edison-dbg3l1` ucuna ileri sarıldı (Faz 24–26 kayıtları).

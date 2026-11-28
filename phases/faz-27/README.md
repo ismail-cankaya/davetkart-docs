@@ -23,8 +23,8 @@ planı). Stüdyo arayüzü Faz 28, önizleme ve paylaşım Faz 29.
 
 | Sıra | Konu | Depo | K | Commit | Durum |
 |---|---|---|---|---|---|
-| 27.0 | Plan ve kararlar | docs | K318–K329 | — | bekliyor |
-| 26.3 | Kalan 243 gömülü metin (Faz 26 dalında; kayıt [`faz-26`](../faz-26/README.md)) | fe · be | — | — | bekliyor |
+| 27.0 | Plan ve kararlar | docs | K318–K329 | `96739bc` | commit'lendi |
+| 26.3 | Kalan 243 gömülü metin (Faz 26 dalında; kayıt [`faz-26`](../faz-26/README.md)) | fe · be | — | fe `b53ff20` · be `e948a3f` | commit'lendi |
 | 27.1 | `iframe` cihaz tuvali | fe | K320 | — | bekliyor |
 | 27.2 | `InvField`: kullanıcı içeriğinde tıkla-düzenle | fe | K321 | — | bekliyor |
 | 27.3 | Taslak katmanı (backend) | be | K323, K324 | — | bekliyor |
